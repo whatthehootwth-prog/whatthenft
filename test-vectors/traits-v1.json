@@ -1,0 +1,2686 @@
+{
+ "version": "WTN-TRAITS-v1",
+ "config": "see packages/domain/test/traits.test.ts VECTOR_CONFIG",
+ "vectors": [
+  {
+   "randomSeed": "3281b7a1db4911aaa57b29acea01fd99e4203ac353d061a7491f8a2dd5116193",
+   "orderId": "1",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "7563659bc34dc6a5c87c6a9e2a45954d3dc93bd800a51495a2285cb8951ea24f",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "shitzu",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     5600
+    ],
+    [
+     "shitzu",
+     4400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "50400000000000000000000"
+    ],
+    [
+     "shitzu",
+     "39600000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "e0192cf9591ac5fdaf5cc8f31d8b7100364ff48b137983764654ca1cae33b2fd",
+   "orderId": "7920",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "daa650ff720634a7656a29de0eef90d6bba0c2b7b9a0a16c34f03cc31591f591",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     5600
+    ],
+    [
+     "shitzu",
+     4400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "504000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "396000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "637edbd91d4e683669bb6184da5865ce45634d8ef44cebe7d34201e5433a8308",
+   "orderId": "15839",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "9ca40b75c07477fb00b0e6c6b3508767ce1891078c110d5aab7111192b4ca991",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     7200
+    ],
+    [
+     "shitzu",
+     2800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "648000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "252000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "dafeb65937e2eb7b03b480ecd61b7a1e9eece53c41f7da726910d7e59bc38021",
+   "orderId": "23758",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "ff5fa297817c9d4d0973b4f9acd639c704831a1f31ca8c80e07e72772b91bb10",
+   "rarity": "EPIC",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "71ed6e3908816b1e287672de390d21d6629985d195c8450c2993a9bd72a3afaf",
+   "orderId": "31677",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "57c63f0936ecde3351561f9a75905c16a4016336a81367547f8f5938dbd13dbd",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6800
+    ],
+    [
+     "shitzu",
+     3200
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "61200000000000000000000"
+    ],
+    [
+     "shitzu",
+     "28800000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "7379c3e9e1df4873d16719895ee77943488b0cb4517665b81475c0358f8996cd",
+   "orderId": "39596",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "3c27e1826a3e61973dccddbe0375a3205ba645eead153e32a7b05008a28bffa9",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     7600
+    ],
+    [
+     "shitzu",
+     2400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "684000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "216000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "2069900b0cc46a6ac7dcd760a287c920f73b755731d2ffc36e2b58fa40a58e90",
+   "orderId": "47515",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "c54a3096cc2c2100a1446cb11f5fbf6dd23228c0a0c291541835110d138b4e28",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "jambo",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6800
+    ],
+    [
+     "jambo",
+     1600
+    ],
+    [
+     "blackdragon",
+     1600
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "612000000000000000000000"
+    ],
+    [
+     "jambo",
+     "144000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "144000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "7cec4c550598d63dfab7269db4573e5e8a5c956c3370f8bdf46a2922fed565ae",
+   "orderId": "55434",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "e25fda6a9e19a7a2a3c19b0f1e0d959eef771bad3d3e9323537ebb6a41594c8b",
+   "rarity": "RARE",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "4c3513b73d16e805f8a397c666d350d85b9f35bd7f3dec008f25ef4e57a5399d",
+   "orderId": "63353",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "29363f7d1d4cec75ca7d6287efe4d7c110db5e711d0077b8d97c3f5232bf407c",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4800
+    ],
+    [
+     "blackdragon",
+     5200
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "43200000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "46800000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "b2410d7b85f09162b1a372f0ee6256f2f6553a86fae61e6df605abaf5f7d127c",
+   "orderId": "71272",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "af635bba5a23c462c000ce331e5bb14dd81094f0a005663c0a89ac8326391b00",
+   "rarity": "EPIC",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     7200
+    ],
+    [
+     "jambo",
+     2800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "648000000000000000000000"
+    ],
+    [
+     "jambo",
+     "252000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "34d07495063a2e298a54bd64cf438768715719fdf2d6fb4f6778431609320aff",
+   "orderId": "79191",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "e2605d811ba35f2a6e8aa3ac1763eb5b00c24b403ab34ca5f0152917d0a7e76d",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     3600
+    ],
+    [
+     "shitzu",
+     3600
+    ],
+    [
+     "blackdragon",
+     2800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "324000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "324000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "252000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "5ac02e64bae2ea3934bfc8ef9f818a2e0db984be72bb522b7d861b4ebc1a0a31",
+   "orderId": "87110",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "b88d740dfa8ea380ce7a3e77de35efbd7f330644ee37d80f47596ddbfce70ad9",
+   "rarity": "COMMON",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "d2131ed7d403951bf3ee4cf3dd799b611aeb1e043e5224118800259e9a36f163",
+   "orderId": "95029",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "bce07c93b0150bcfd105838973dcdfa47a116f9d8b5c20c18709831a21bd4724",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     3600
+    ],
+    [
+     "blackdragon",
+     6400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "32400000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "57600000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "4e8e094f6a30aec6fd3ff6fee7e9f8efa389180672caf156d2ebd5e7d2b27b81",
+   "orderId": "102948",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "80d3910b97a517d9a2ae67a24c5b4986fc5661f051069ca070baea426903c733",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     5600
+    ],
+    [
+     "shitzu",
+     4400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "504000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "396000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "152df84e7eb4fd0929152480d98823afbaec12158dc944cece1630edaa14ce84",
+   "orderId": "110867",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "78bb0c7e0d2696fa6dc64462f8a1e6177ad638c1641d8771f75d849fcd32515b",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6400
+    ],
+    [
+     "shitzu",
+     2000
+    ],
+    [
+     "blackdragon",
+     1600
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "576000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "180000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "144000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "e8d58da3864001dbe3981b51ec22bff6acd723c9a9c5cc6ef2dfe0f6c66b6e75",
+   "orderId": "118786",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "5769b77657be71348c824e0cbb2cfb9d3692f09a7296719483dfda4735d21e5c",
+   "rarity": "COMMON",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "4c456e9a0e4c652a983e10a571751979687eb1320bb2834ff86eb55deb1de21a",
+   "orderId": "126705",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "ab02f8a75c7b74d27d1e3e8588ff6c772546d5321791703785e02674ff308e60",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "jambo",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6000
+    ],
+    [
+     "jambo",
+     4000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "54000000000000000000000"
+    ],
+    [
+     "jambo",
+     "36000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "4de47d4b49babefdf03122af3ed86207c8f35bd6ecb5590f0e814d3fa0d55bfd",
+   "orderId": "134624",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "c2d12d268dae7ed81fe3bb6296ac670c81c90436b3d46ad7a56137a20ff11e97",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4400
+    ],
+    [
+     "shitzu",
+     5600
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "396000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "504000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "08e90291cea7b0cf0d92ee4a92eadbab6963457c2616ad6ac3d2daf5e0209eae",
+   "orderId": "142543",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "0e57da6736cc3b8a43e9dcaad2b5e41f6421dbe14ddee810458e70998dcef6c4",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "jambo",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4800
+    ],
+    [
+     "jambo",
+     4400
+    ],
+    [
+     "shitzu",
+     800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "432000000000000000000000"
+    ],
+    [
+     "jambo",
+     "396000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "72000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "a73dd6c8f8e00dca5533d01ff909d0b15d79876c64dda5eac2e738702f0dfc47",
+   "orderId": "150462",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "6b36cc9f1b671a3602de81cf31214e9e6dcfe99679f2b557c8d26dbacc030617",
+   "rarity": "COMMON",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "bfbbb44702d87562427aca0daa5801da5eefb68c145924eb077fbaba27b784c5",
+   "orderId": "158381",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "6af741616bb608a8ad1ab8665da6ad5633820ad1ef3273596ccde13c42786e38",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     2000
+    ],
+    [
+     "blackdragon",
+     8000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "18000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "72000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "b5e029248b00978249bcd0161e98d7af077441bc727ded13782821c802921af9",
+   "orderId": "166300",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "6515252dc8b9f6c529209181d3617b1cee2c204609e5958575913aed9f506fa1",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     5600
+    ],
+    [
+     "jambo",
+     4400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "504000000000000000000000"
+    ],
+    [
+     "jambo",
+     "396000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "4929bdc65db0a433bbad3ad4955adee9737b851a419a4834796e76d04a9779cc",
+   "orderId": "174219",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "0ddc624b0c705ba68b808c2b559f07aa9aa6f11d2e3b770b99d1d2860689fe3a",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     5200
+    ],
+    [
+     "jambo",
+     2000
+    ],
+    [
+     "shitzu",
+     2800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "468000000000000000000000"
+    ],
+    [
+     "jambo",
+     "180000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "252000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "a0028fab370c3d2492cca055a58d491750079cc225c4d7f37cb588c581780d08",
+   "orderId": "182138",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "6c18bf43a7cc08a3d45e64a18b5f2c99cd1de4da2d569cc3d371f375084d48b8",
+   "rarity": "COMMON",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "d393b098ec4e2bbc6c119085f9458521f818a7e78cddafd70e1987e62c7a4cf6",
+   "orderId": "190057",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "1b60fa9984b0e0593331b9c59a773d679b3748c68327a3306a457efe2ee678d9",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6000
+    ],
+    [
+     "blackdragon",
+     4000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "54000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "36000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "462b940bfe83d5fa72dd6ce377996729054baa06821ef259bfa9763e1cb4a2e9",
+   "orderId": "197976",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "41e3e4c4f0c0702764e9648b047ea327bab39500962f6e2424609543dc9f045c",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     1
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     7600
+    ],
+    [
+     "blackdragon",
+     2400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "684000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "216000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "b60bbdf00d017f6960f2767551e9c1441c377f6ac440fd492b11d4304586e7b3",
+   "orderId": "205895",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "a691c335854bb3a443b84aa1cdfb6e71e3ec3eaa7f6130e94a6f44916101436c",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     1
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6400
+    ],
+    [
+     "blackdragon",
+     1600
+    ],
+    [
+     "shitzu",
+     2000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "576000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "144000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "180000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "d0d602d88500291e66dd84b6f47a000caca98ce98dcde2cc6ce09c8eafb75856",
+   "orderId": "213814",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "bf3faa44463b50bda5af9446c506647fc6eb70c5d3af4e89b778507aef9df003",
+   "rarity": "RARE",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "2b29b971707bdf80e72715d3fd4d54f4283c63546a142a2b64597b6905ce3dad",
+   "orderId": "221733",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "b5134bbea1a21916018f25c8e9ef4281845fab20b4f23b19f41fb8051b655960",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4400
+    ],
+    [
+     "shitzu",
+     5600
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "39600000000000000000000"
+    ],
+    [
+     "shitzu",
+     "50400000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "aa55a76d5f883eaec955c9b808d8de93e70c35872b7166151f3c8a76fa4c64a1",
+   "orderId": "229652",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "5c89eb551606c19bde7363fe7d971bdbb60196dd6681621ded3af8672775ea96",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     7600
+    ],
+    [
+     "blackdragon",
+     2400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "684000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "216000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "8a87a8c55f7d90aa5d00c9d7e87f3409a6279839d0496a3dccff295e2b69934b",
+   "orderId": "237571",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "47ed2b5f5295d8d0d546a00c76b4ec040cf3de30d1c406ff5eb8b1d20a4c502a",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6400
+    ],
+    [
+     "jambo",
+     2800
+    ],
+    [
+     "blackdragon",
+     800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "576000000000000000000000"
+    ],
+    [
+     "jambo",
+     "252000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "72000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "47636ff06027f494e80746dc639e1483caf24063770f4ba3eba7a8274e7e1f4f",
+   "orderId": "245490",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "c133670c24f5e3d9bf29921c29791093f11440046560f575dadf1170bd8f79ba",
+   "rarity": "COMMON",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "0a9a7a5d2d7e219cd6167c70472d27e8ef47c9de615da9b0182852b22a60d9b3",
+   "orderId": "253409",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "3ad630173b85f328553d19491a899aca080504106d0425b9650ed1377302344a",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     5600
+    ],
+    [
+     "shitzu",
+     4400
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "50400000000000000000000"
+    ],
+    [
+     "shitzu",
+     "39600000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "1bcf8c64ac40cbf71a3c1515f41f8bbca7d5222393df6306501f01a865d7da9d",
+   "orderId": "261328",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "3a6d7ef84b8084c2bbae2c078a816768d492f874ab9c20b92d7f60fb5a2a9739",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4800
+    ],
+    [
+     "shitzu",
+     5200
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "432000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "468000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "a8a33b26897b1692f8f9e16fac3e562ebae82a72c5c5349d7d5a4ac0d35006b1",
+   "orderId": "269247",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "479e515d000b725fe8346f76c6b979a69c841c372e3bbfbb03910cf3afbeadbb",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     2
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     3600
+    ],
+    [
+     "blackdragon",
+     1600
+    ],
+    [
+     "jambo",
+     4800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "324000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "144000000000000000000000"
+    ],
+    [
+     "jambo",
+     "432000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "01a8ec6c7f6b2a51a7fc2e4a820bf07c2ebb0529d6a991fb09f1c3662d4ff990",
+   "orderId": "277166",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "8415b9c6463a6c6cbb3c67a0c78a5e46b1596159c5e4b7b5a78a17f431d8958a",
+   "rarity": "RARE",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "7a888af19f26ca1b362b94fe9e33fcaf2b592efb27cafc592321be36b1e956a0",
+   "orderId": "285085",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "376388fa0a2cdaf0f45653f83a9b19bda8d827c6adeba81b9ad5f819f1e6838b",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     7200
+    ],
+    [
+     "shitzu",
+     2800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "64800000000000000000000"
+    ],
+    [
+     "shitzu",
+     "25200000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "df4e0fa4e1a45fdcfe59644ecd08b9d485da4537349c742325f669abd447e702",
+   "orderId": "293004",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "aa3c7276480d2c9208c13641e48dffd29e300ec172cdd05c5c68e05501cc1f9d",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4000
+    ],
+    [
+     "blackdragon",
+     6000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "360000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "540000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "4922a2308041724817988e7139b502e9d7a49a87edeba0705d80e9642cd8b61f",
+   "orderId": "300923",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "109cfffab54a4b39968640b21e1aba15f226db1eb0074cbdb85547623bc1c5b9",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6000
+    ],
+    [
+     "shitzu",
+     3200
+    ],
+    [
+     "jambo",
+     800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "540000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "288000000000000000000000"
+    ],
+    [
+     "jambo",
+     "72000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "e34fb7f3ae6a13dcbf193b41cab3672c1fee50e950754c0f4c6d7f34100716b7",
+   "orderId": "308842",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "a79a088744063d94f9cb88caf1413b388321f02d26af27c416ef21179217d994",
+   "rarity": "RARE",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "95a5f645e8f6c3de0188a81a4b784ab7215b354e5d5dcd27035d4561ad8f4f4e",
+   "orderId": "316761",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "1e6edc7a7356887933cb03727b66af3bd794f8b847adeb7fa50bf0cae9c0642a",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "blackdragon",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     6400
+    ],
+    [
+     "blackdragon",
+     3600
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "57600000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "32400000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "d29e300d790d5a81c5bc61ad48f2ccfa06dd705d19b8884ee48801e5707eb0f7",
+   "orderId": "324680",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "63280ffdd5a5e69345999e5e738fbf4973425202ea4e9c29968acbb872e0b862",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     1
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4800
+    ],
+    [
+     "shitzu",
+     5200
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "432000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "468000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "e19fa500e44333a95ed209b0b3f62f8fde5194bf99e434319380f06ba8e604c4",
+   "orderId": "332599",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "a8dd94f646647761627ba572a400e7c28d5f1f1aa39d997fa56890dd950b18f1",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "jambo",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     2800
+    ],
+    [
+     "jambo",
+     4400
+    ],
+    [
+     "blackdragon",
+     2800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "252000000000000000000000"
+    ],
+    [
+     "jambo",
+     "396000000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "252000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "ecab4be68dbf5ae962edb0a8d2a36d4353caf63b0c76ce68a5825de1a81409d2",
+   "orderId": "340518",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "4b2d3e8e88e18beada2931001bd6c39780701035b7c2b0dccceffea546afa311",
+   "rarity": "COMMON",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "0f842093e9cfc1514fb7f3c97e5c740c0060601213d5fc457a02138271290eb8",
+   "orderId": "348437",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "febd4129d4148b12ffa34797edd7422d962f0e3ed42d8fb4bfebcf02e1ae37bf",
+   "rarity": "RARE",
+   "attempt": 0,
+   "slots": [
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "blackdragon",
+     0
+    ],
+    [
+     "wth",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     4800
+    ],
+    [
+     "blackdragon",
+     5200
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "43200000000000000000000"
+    ],
+    [
+     "blackdragon",
+     "46800000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "a6c3157fe8eff5c4683ff0a0f3c48b6f5d4ff8d1ad3c69a860be83e8e99ee9e6",
+   "orderId": "356356",
+   "maxPartners": 1,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "ca91e631122bbba13117497348787870e912230ec37ca700e1e599b95a0c3b9d",
+   "rarity": "COMMON",
+   "attempt": 0,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "wth",
+     2
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "shitzu",
+     1
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     5200
+    ],
+    [
+     "shitzu",
+     4800
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "468000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "432000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "89febc5b6aa8c921ac994ab2b29ccf27e5e0e6b5d89e62032bad9b57f8e8449f",
+   "orderId": "364275",
+   "maxPartners": 2,
+   "minLegYocto": "10000000000000000000000",
+   "basketYocto": "900000000000000000000000",
+   "seed": "f33923c0a66a3a89f4864dd021fe328da9fedd07553522a2cbd84509beb5ef92",
+   "rarity": "EPIC",
+   "attempt": 0,
+   "slots": [
+    [
+     "jambo",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ],
+    [
+     "jambo",
+     0
+    ],
+    [
+     "shitzu",
+     0
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     2000
+    ],
+    [
+     "jambo",
+     4400
+    ],
+    [
+     "shitzu",
+     3600
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "180000000000000000000000"
+    ],
+    [
+     "jambo",
+     "396000000000000000000000"
+    ],
+    [
+     "shitzu",
+     "324000000000000000000000"
+    ]
+   ]
+  },
+  {
+   "randomSeed": "45e90d27583c60084b2bca4970e40ab75b74e77be78d6532d2320e23916d0004",
+   "orderId": "372194",
+   "maxPartners": 2,
+   "minLegYocto": "50000000000000000000000",
+   "basketYocto": "90000000000000000000000",
+   "seed": "e19c0726ab54e1f28e2aea6d809305ba7f811a60a43ed8264ecb66e27c5c2539",
+   "rarity": "COMMON",
+   "attempt": 8,
+   "slots": [
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     1
+    ],
+    [
+     "wth",
+     0
+    ],
+    [
+     "wth",
+     2
+    ]
+   ],
+   "weights": [
+    [
+     "wth",
+     10000
+    ]
+   ],
+   "legs": [
+    [
+     "wth",
+     "90000000000000000000000"
+    ]
+   ]
+  }
+ ]
+}

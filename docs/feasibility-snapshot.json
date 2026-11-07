@@ -1,0 +1,840 @@
+{
+ "generatedAt": "2026-11-07T08:10:57.985Z",
+ "network": "mainnet",
+ "gasPriceYocto": "100000000",
+ "minLegYocto": "5000000000000000000000",
+ "maxImpactBps": 300,
+ "assets": [
+  {
+   "memeId": "wth",
+   "symbol": "WTH",
+   "name": "WHAT THE HOOT",
+   "contractId": "wth-0b2227.launchpad.justhoot.near",
+   "decimals": 18,
+   "route": {
+    "kind": "rhea-dcl",
+    "poolId": "wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+   },
+   "isWth": true,
+   "notes": "Not supported by NEAR Intents 1Click (tokenOut is not valid). Rhea DCL 1% fee pool is the only material liquidity.",
+   "verification": {
+    "memeId": "wth",
+    "contractId": "wth-0b2227.launchpad.justhoot.near",
+    "metadataOk": true,
+    "onchainSymbol": "WTH",
+    "onchainDecimals": 18,
+    "storageMinYocto": "1250000000000000000000",
+    "pool": {
+     "ok": true,
+     "tokens": [
+      "wrap.near",
+      "wth-0b2227.launchpad.justhoot.near"
+     ],
+     "feeBps": 100,
+     "detail": "state=Running"
+    },
+    "error": null
+   },
+   "oneClickSupported": false,
+   "oneClickDry": [],
+   "quotes": [
+    {
+     "memeId": "wth",
+     "amountIn": "100000000000000000000",
+     "amountOut": "27190957164199188498",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039059252,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "7200000000000000000000",
+     "amountOut": "1957748915822341571915",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039059291,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "14400000000000000000000",
+     "amountOut": "3915497831644683143832",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039059332,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "18000000000000000000000",
+     "amountOut": "4894372289555853929790",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039059391,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "36000000000000000000000",
+     "amountOut": "9788744579111707859581",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039059433,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "90000000000000000000000",
+     "amountOut": "24471508036544415765929",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039059471,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "450000000000000000000000",
+     "amountOut": "122334626133252024306288",
+     "priceImpactBps": 3,
+     "quotedAt": 1794039059539,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "900000000000000000000000",
+     "amountOut": "244612553347474681596728",
+     "priceImpactBps": 5,
+     "quotedAt": 1794039059584,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "4500000000000000000000000",
+     "amountOut": "1220806964066031033905845",
+     "priceImpactBps": 23,
+     "quotedAt": 1794039059638,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "9000000000000000000000000",
+     "amountOut": "2436103396921740690472045",
+     "priceImpactBps": 46,
+     "quotedAt": 1794039059696,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    },
+    {
+     "memeId": "wth",
+     "amountIn": "45000000000000000000000000",
+     "amountOut": "12030975545941965106056487",
+     "priceImpactBps": 168,
+     "quotedAt": 1794039059751,
+     "provider": "rhea-dcl:wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+    }
+   ]
+  },
+  {
+   "memeId": "shitzu",
+   "symbol": "SHITZU",
+   "name": "Shitzu",
+   "contractId": "token.0xshitzu.near",
+   "decimals": 18,
+   "route": {
+    "kind": "rhea-v2",
+    "poolId": "4369"
+   },
+   "isWth": false,
+   "verification": {
+    "memeId": "shitzu",
+    "contractId": "token.0xshitzu.near",
+    "metadataOk": true,
+    "onchainSymbol": "SHITZU",
+    "onchainDecimals": 18,
+    "storageMinYocto": "1250000000000000000000",
+    "pool": {
+     "ok": true,
+     "tokens": [
+      "token.0xshitzu.near",
+      "wrap.near"
+     ],
+     "feeBps": 30,
+     "detail": "SIMPLE_POOL reserves=16761079970698449007835574/6802925899564122702701714740"
+    },
+    "error": null
+   },
+   "oneClickSupported": true,
+   "oneClickDry": [
+    {
+     "size": "0.0072",
+     "ok": true,
+     "out": "17624272416397164067",
+     "error": null
+    },
+    {
+     "size": "0.045",
+     "ok": true,
+     "out": "110151093613156274879",
+     "error": null
+    }
+   ],
+   "quotes": [
+    {
+     "memeId": "shitzu",
+     "amountIn": "100000000000000000000",
+     "amountOut": "245641312761508390",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039059903,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "7200000000000000000000",
+     "amountOut": "17686156115718926059",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039059964,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "14400000000000000000000",
+     "amountOut": "35372274906899262408",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039060012,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "18000000000000000000000",
+     "amountOut": "44215320305824382400",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039060053,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "36000000000000000000000",
+     "amountOut": "88430407334390264753",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039060091,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "90000000000000000000000",
+     "amountOut": "221074268774998108338",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039060132,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "450000000000000000000000",
+     "amountOut": "1105313028713910805188",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039060167,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "900000000000000000000000",
+     "amountOut": "2210480286829207506139",
+     "priceImpactBps": 2,
+     "quotedAt": 1794039060209,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "4500000000000000000000000",
+     "amountOut": "11046574068783249024719",
+     "priceImpactBps": 7,
+     "quotedAt": 1794039060281,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "9000000000000000000000000",
+     "amountOut": "22078596995428211968004",
+     "priceImpactBps": 14,
+     "quotedAt": 1794039060324,
+     "provider": "rhea-v2:4369"
+    },
+    {
+     "memeId": "shitzu",
+     "amountIn": "45000000000000000000000000",
+     "amountOut": "109814371366574803873219",
+     "priceImpactBps": 66,
+     "quotedAt": 1794039060367,
+     "provider": "rhea-v2:4369"
+    }
+   ]
+  },
+  {
+   "memeId": "blackdragon",
+   "symbol": "BLACKDRAGON",
+   "name": "Black Dragon",
+   "contractId": "blackdragon.tkn.near",
+   "decimals": 24,
+   "route": {
+    "kind": "rhea-v2",
+    "poolId": "4276"
+   },
+   "isWth": false,
+   "verification": {
+    "memeId": "blackdragon",
+    "contractId": "blackdragon.tkn.near",
+    "metadataOk": true,
+    "onchainSymbol": "BLACKDRAGON",
+    "onchainDecimals": 24,
+    "storageMinYocto": "1250000000000000000000",
+    "pool": {
+     "ok": true,
+     "tokens": [
+      "wrap.near",
+      "blackdragon.tkn.near"
+     ],
+     "feeBps": 30,
+     "detail": "SIMPLE_POOL reserves=5532058663436760858420116400/3117520050569287297004538567545513868"
+    },
+    "error": null
+   },
+   "oneClickSupported": true,
+   "oneClickDry": [
+    {
+     "size": "0.0072",
+     "ok": true,
+     "out": "4031134722737227838768285250000",
+     "error": null
+    },
+    {
+     "size": "0.045",
+     "ok": true,
+     "out": "25194420726281792592286680000000",
+     "error": null
+    }
+   ],
+   "quotes": [
+    {
+     "memeId": "blackdragon",
+     "amountIn": "100000000000000000000",
+     "amountOut": "56184643430201047458723468857",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039061949,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "7200000000000000000000",
+     "amountOut": "4045289150711977636151572625617",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039061992,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "14400000000000000000000",
+     "amountOut": "8090567803115804513994449432817",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039062031,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "18000000000000000000000",
+     "amountOut": "10113203192464932570192721192523",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039062101,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "36000000000000000000000",
+     "amountOut": "20226340770887056124494688566015",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039062145,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "90000000000000000000000",
+     "amountOut": "50565359828282028369533419591595",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039062192,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "450000000000000000000000",
+     "amountOut": "252810397067340136701672765153945",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039062232,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "900000000000000000000000",
+     "amountOut": "505579794934471996332916783491602",
+     "priceImpactBps": 2,
+     "quotedAt": 1794039062284,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "4500000000000000000000000",
+     "amountOut": "2526260202706800512246460442592237",
+     "priceImpactBps": 9,
+     "quotedAt": 1794039062327,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "9000000000000000000000000",
+     "amountOut": "5048429446513570398503796538577675",
+     "priceImpactBps": 17,
+     "quotedAt": 1794039062371,
+     "provider": "rhea-v2:4276"
+    },
+    {
+     "memeId": "blackdragon",
+     "amountIn": "45000000000000000000000000",
+     "amountOut": "25079693664409629923659135835766066",
+     "priceImpactBps": 81,
+     "quotedAt": 1794039062412,
+     "provider": "rhea-v2:4276"
+    }
+   ]
+  },
+  {
+   "memeId": "jambo",
+   "symbol": "JAMBO",
+   "name": "Jambo",
+   "contractId": "jambo-1679.meme-cooking.near",
+   "decimals": 18,
+   "route": {
+    "kind": "rhea-v2",
+    "poolId": "6518"
+   },
+   "isWth": false,
+   "verification": {
+    "memeId": "jambo",
+    "contractId": "jambo-1679.meme-cooking.near",
+    "metadataOk": true,
+    "onchainSymbol": "JAMBO",
+    "onchainDecimals": 18,
+    "storageMinYocto": "1250000000000000000000",
+    "pool": {
+     "ok": true,
+     "tokens": [
+      "jambo-1679.meme-cooking.near",
+      "wrap.near"
+     ],
+     "feeBps": 10,
+     "detail": "SIMPLE_POOL reserves=122750203556372874262818125/6583423302999725467788413435"
+    },
+    "error": null
+   },
+   "oneClickSupported": true,
+   "oneClickDry": [
+    {
+     "size": "0.0072",
+     "ok": true,
+     "out": "133642839230137878889",
+     "error": null
+    },
+    {
+     "size": "0.045",
+     "ok": true,
+     "out": "835262963752153771997",
+     "error": null
+    }
+   ],
+   "quotes": [
+    {
+     "memeId": "jambo",
+     "amountIn": "100000000000000000000",
+     "amountOut": "1862670009934408665",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039063901,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "7200000000000000000000",
+     "amountOut": "134112096224542270512",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039063942,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "14400000000000000000000",
+     "amountOut": "268223899398088586641",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039063983,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "18000000000000000000000",
+     "amountOut": "335279691091038426428",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039064028,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "36000000000000000000000",
+     "amountOut": "670557550622357050217",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039064073,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "90000000000000000000000",
+     "amountOut": "1676380140008074036399",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039064110,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "450000000000000000000000",
+     "amountOut": "8381442843876518373112",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039064155,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "900000000000000000000000",
+     "amountOut": "16761741188015676347125",
+     "priceImpactBps": 2,
+     "quotedAt": 1794039064203,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "4500000000000000000000000",
+     "amountOut": "83762954066223219035252",
+     "priceImpactBps": 7,
+     "quotedAt": 1794039064248,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "9000000000000000000000000",
+     "amountOut": "167411668843864904828735",
+     "priceImpactBps": 14,
+     "quotedAt": 1794039064285,
+     "provider": "rhea-v2:6518"
+    },
+    {
+     "memeId": "jambo",
+     "amountIn": "45000000000000000000000000",
+     "amountOut": "832516665257235109733338",
+     "priceImpactBps": 68,
+     "quotedAt": 1794039064336,
+     "provider": "rhea-v2:6518"
+    }
+   ]
+  },
+  {
+   "memeId": "kat",
+   "symbol": "KAT",
+   "name": "NearKat",
+   "contractId": "kat.token0.near",
+   "decimals": 18,
+   "route": {
+    "kind": "rhea-v2",
+    "poolId": "5391"
+   },
+   "isWth": false,
+   "verification": {
+    "memeId": "kat",
+    "contractId": "kat.token0.near",
+    "metadataOk": true,
+    "onchainSymbol": "KAT",
+    "onchainDecimals": 18,
+    "storageMinYocto": "1250000000000000000000",
+    "pool": {
+     "ok": true,
+     "tokens": [
+      "wrap.near",
+      "kat.token0.near"
+     ],
+     "feeBps": 30,
+     "detail": "SIMPLE_POOL reserves=2518619671683230679746994413/98212071314103016177451828"
+    },
+    "error": null
+   },
+   "oneClickSupported": true,
+   "oneClickDry": [
+    {
+     "size": "0.0072",
+     "ok": true,
+     "out": "278937202339880064888",
+     "error": null
+    },
+    {
+     "size": "0.045",
+     "ok": true,
+     "out": "1743331481085171531104",
+     "error": null
+    }
+   ],
+   "quotes": [
+    {
+     "memeId": "kat",
+     "amountIn": "100000000000000000000",
+     "amountOut": "3887741858167986547",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039066013,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "7200000000000000000000",
+     "amountOut": "279916627069174395637",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039066052,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "14400000000000000000000",
+     "amountOut": "559831658548443287272",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039066093,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "18000000000000000000000",
+     "amountOut": "699788575946126553821",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039066138,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "36000000000000000000000",
+     "amountOut": "1399567179583244277527",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039066184,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "90000000000000000000000",
+     "amountOut": "3498843158772148741388",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039066226,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "450000000000000000000000",
+     "amountOut": "17491723196149643564495",
+     "priceImpactBps": 2,
+     "quotedAt": 1794039066261,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "900000000000000000000000",
+     "amountOut": "34977216895375748092526",
+     "priceImpactBps": 4,
+     "quotedAt": 1794039066307,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "4500000000000000000000000",
+     "amountOut": "174637303374660732255918",
+     "priceImpactBps": 18,
+     "quotedAt": 1794039066343,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "9000000000000000000000000",
+     "amountOut": "348654641143020950267340",
+     "priceImpactBps": 36,
+     "quotedAt": 1794039066390,
+     "provider": "rhea-v2:5391"
+    },
+    {
+     "memeId": "kat",
+     "amountIn": "45000000000000000000000000",
+     "amountOut": "1718865194779567451284627",
+     "priceImpactBps": 176,
+     "quotedAt": 1794039066440,
+     "provider": "rhea-v2:5391"
+    }
+   ]
+  },
+  {
+   "memeId": "purge",
+   "symbol": "PURGE",
+   "name": "Purge",
+   "contractId": "purge-558.meme-cooking.near",
+   "decimals": 18,
+   "route": {
+    "kind": "rhea-v2",
+    "poolId": "5650"
+   },
+   "isWth": false,
+   "verification": {
+    "memeId": "purge",
+    "contractId": "purge-558.meme-cooking.near",
+    "metadataOk": true,
+    "onchainSymbol": "PURGE",
+    "onchainDecimals": 18,
+    "storageMinYocto": "1250000000000000000000",
+    "pool": {
+     "ok": true,
+     "tokens": [
+      "purge-558.meme-cooking.near",
+      "wrap.near"
+     ],
+     "feeBps": 10,
+     "detail": "SIMPLE_POOL reserves=73294177422174608026897656/15904220628983050426030086297"
+    },
+    "error": null
+   },
+   "oneClickSupported": true,
+   "oneClickDry": [
+    {
+     "size": "0.0072",
+     "ok": false,
+     "out": null,
+     "error": "No liquidity available"
+    },
+    {
+     "size": "0.045",
+     "ok": false,
+     "out": null,
+     "error": "No liquidity available"
+    }
+   ],
+   "quotes": [
+    {
+     "memeId": "purge",
+     "amountIn": "100000000000000000000",
+     "amountOut": "460386487920019696",
+     "priceImpactBps": 0,
+     "quotedAt": 1794039067943,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "7200000000000000000000",
+     "amountOut": "33147812347114209012",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039067982,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "14400000000000000000000",
+     "amountOut": "66295594711574812653",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039068042,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "18000000000000000000000",
+     "amountOut": "82869474650322724828",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039068082,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "36000000000000000000000",
+     "amountOut": "165738761909441786662",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039068123,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "90000000000000000000000",
+     "amountOut": "414345499345933136359",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039068166,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "450000000000000000000000",
+     "amountOut": "2071680650358848861918",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039068205,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "900000000000000000000000",
+     "amountOut": "4143244190749053889179",
+     "priceImpactBps": 1,
+     "quotedAt": 1794039068241,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "4500000000000000000000000",
+     "amountOut": "20711537746349148029730",
+     "priceImpactBps": 3,
+     "quotedAt": 1794039068283,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "9000000000000000000000000",
+     "amountOut": "41411373427758855195637",
+     "priceImpactBps": 6,
+     "quotedAt": 1794039068319,
+     "provider": "rhea-v2:5650"
+    },
+    {
+     "memeId": "purge",
+     "amountIn": "45000000000000000000000000",
+     "amountOut": "206589971962328380719118",
+     "priceImpactBps": 29,
+     "quotedAt": 1794039068358,
+     "provider": "rhea-v2:5650"
+    }
+   ]
+  }
+ ],
+ "seasonPairEvaluations": [
+  {
+   "pair": "wth+shitzu",
+   "executableMinimum": "100000000000000000000000",
+   "targetFeasible": true,
+   "reasons": []
+  },
+  {
+   "pair": "wth+blackdragon",
+   "executableMinimum": "100000000000000000000000",
+   "targetFeasible": true,
+   "reasons": []
+  },
+  {
+   "pair": "wth+jambo",
+   "executableMinimum": "100000000000000000000000",
+   "targetFeasible": true,
+   "reasons": []
+  },
+  {
+   "pair": "wth+kat",
+   "executableMinimum": "100000000000000000000000",
+   "targetFeasible": true,
+   "reasons": []
+  },
+  {
+   "pair": "wth+purge",
+   "executableMinimum": "100000000000000000000000",
+   "targetFeasible": true,
+   "reasons": []
+  }
+ ],
+ "wthMaxLegWithinImpactYocto": "45000000000000000000000000"
+}

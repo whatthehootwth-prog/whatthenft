@@ -1,0 +1,9 @@
+# Build image for wtn contracts: Rust + wasm target + cargo-near 0.23.0 (built from crates.io).
+# Usage (from repo root):
+#   docker build -t wtn-build -f contracts/Dockerfile.build contracts
+#   docker run --rm -v "$PWD:/work" -w /work/contracts/core wtn-build cargo near build non-reproducible-wasm --no-abi
+FROM rust:1.99
+RUN apt-get update && apt-get install -y --no-install-recommends libudev-dev pkg-config && rm -rf /var/lib/apt/lists/*
+RUN rustup target add wasm32-unknown-unknown
+ENV CARGO_BUILD_JOBS=4
+RUN cargo install cargo-near --version 0.23.0 --locked

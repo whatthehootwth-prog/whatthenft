@@ -1,0 +1,14 @@
+{
+  "name": "what-the-nft",
+  "private": true,
+  "packageManager": "pnpm@10.30.1",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "build": "pnpm -r --if-present build",
+    "feasibility": "pnpm --filter @wtn/chain feasibility",
+    "dev": "pnpm --filter @wtn/web dev"
+  }
+}

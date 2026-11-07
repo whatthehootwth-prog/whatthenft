@@ -1,0 +1,22 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+contracts/target/
+contracts/**/target/
+*.wasm
+!test-vectors/**
+.near-credentials/
+*.pem
+*.key
+neardev/
+.DS_Store
+.turbo/
+
+# local editor/agent config
+.claude/
