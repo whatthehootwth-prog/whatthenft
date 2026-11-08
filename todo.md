@@ -54,4 +54,6 @@
 
 ## My notes
 
-- [ ]
+- [ ] Add "mints left" to the homepage
+- [ ] Improve the entire design and make it more colorful
+- [ ] Prepare the real collection
