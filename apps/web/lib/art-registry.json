@@ -1,0 +1,509 @@
+{
+  "canvas": 1254,
+  "layerOrder": [
+    "behind",
+    "body",
+    "legs",
+    "accessory",
+    "arms",
+    "head",
+    "face"
+  ],
+  "memes": [
+    {
+      "memeId": "wth",
+      "displayName": "WHAT THE HOOT",
+      "color": "#FF7A1A",
+      "verifiedToken": "wth-0b2227.launchpad.justhoot.near",
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Classic WTH",
+          "src": "/art/wth/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        }
+      ],
+      "preview": null,
+      "slots": [
+        "head",
+        "face",
+        "body",
+        "arms",
+        "legs",
+        "accessory"
+      ]
+    },
+    {
+      "memeId": "hoodl",
+      "displayName": "HOODL",
+      "color": "#4A4A55",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Charcoal Fur",
+          "src": "/art/hoodl/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        },
+        {
+          "slot": "head",
+          "variant": 0,
+          "name": "Ear Tips",
+          "src": "/art/hoodl/head-01.webp",
+          "behind": false,
+          "anchor": [
+            595,
+            203
+          ]
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "name": "Wings Holding Token",
+          "src": "/art/hoodl/arms-01.webp",
+          "behind": false,
+          "anchor": [
+            625,
+            957
+          ]
+        }
+      ],
+      "preview": "/art/hoodl/preview.webp",
+      "slots": [
+        "head",
+        "body",
+        "arms"
+      ]
+    },
+    {
+      "memeId": "hooters",
+      "displayName": "HOOTERS",
+      "color": "#FF8A2A",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "name": "Bikini Top",
+          "src": "/art/hooters/accessory-01.webp",
+          "behind": false,
+          "anchor": [
+            642,
+            856
+          ]
+        },
+        {
+          "slot": "legs",
+          "variant": 0,
+          "name": "Bikini Bottom",
+          "src": "/art/hooters/legs-01.webp",
+          "behind": false,
+          "anchor": [
+            640,
+            1051
+          ]
+        }
+      ],
+      "preview": "/art/hooters/preview.webp",
+      "slots": [
+        "legs",
+        "accessory"
+      ]
+    },
+    {
+      "memeId": "oyster",
+      "displayName": "OYSTER",
+      "color": "#F4B08A",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "head",
+          "variant": 0,
+          "name": "Pearl Hat",
+          "src": "/art/oyster/head-01.webp",
+          "behind": false,
+          "anchor": [
+            624,
+            172
+          ]
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "name": "Chest Shells",
+          "src": "/art/oyster/accessory-01.webp",
+          "behind": false,
+          "anchor": [
+            624,
+            925
+          ]
+        }
+      ],
+      "preview": "/art/oyster/preview.webp",
+      "slots": [
+        "head",
+        "accessory"
+      ]
+    },
+    {
+      "memeId": "three",
+      "displayName": "THREE",
+      "color": "#19E6B0",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Mint Fur (Wave)",
+          "src": "/art/three/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        },
+        {
+          "slot": "face",
+          "variant": 0,
+          "name": "Pixel 3 Tattoo",
+          "src": "/art/three/face-01.webp",
+          "behind": false,
+          "anchor": [
+            991,
+            727
+          ]
+        }
+      ],
+      "preview": "/art/three/preview.webp",
+      "slots": [
+        "face",
+        "body"
+      ]
+    },
+    {
+      "memeId": "moonshot",
+      "displayName": "MOONSHOT",
+      "color": "#3E9D6B",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "head",
+          "variant": 0,
+          "name": "Cowboy Hat",
+          "src": "/art/moonshot/head-01.webp",
+          "behind": false,
+          "anchor": [
+            613,
+            199
+          ]
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "name": "Bandana",
+          "src": "/art/moonshot/accessory-01.webp",
+          "behind": false,
+          "anchor": [
+            666,
+            934
+          ]
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "name": "Wing + Revolver",
+          "src": "/art/moonshot/arms-01.webp",
+          "behind": false,
+          "anchor": [
+            166,
+            760
+          ]
+        }
+      ],
+      "preview": "/art/moonshot/preview.webp",
+      "slots": [
+        "head",
+        "arms",
+        "accessory"
+      ]
+    },
+    {
+      "memeId": "raen",
+      "displayName": "RAEN",
+      "color": "#FF5A1F",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Raen Orange",
+          "src": "/art/raen/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        }
+      ],
+      "preview": "/art/raen/preview.webp",
+      "slots": [
+        "body"
+      ]
+    },
+    {
+      "memeId": "mallace",
+      "displayName": "MALLACE",
+      "color": "#E040FB",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Gradient Fur",
+          "src": "/art/mallace/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        }
+      ],
+      "preview": "/art/mallace/preview.webp",
+      "slots": [
+        "body"
+      ]
+    },
+    {
+      "memeId": "idp",
+      "displayName": "IDP",
+      "color": "#E8B46A",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "name": "Cardboard Apron",
+          "src": "/art/idp/accessory-01.webp",
+          "behind": false,
+          "anchor": [
+            628,
+            909
+          ]
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "name": "Flag + Wing",
+          "src": "/art/idp/arms-01.webp",
+          "behind": false,
+          "anchor": [
+            263,
+            405
+          ]
+        }
+      ],
+      "preview": "/art/idp/preview.webp",
+      "slots": [
+        "arms",
+        "accessory"
+      ]
+    },
+    {
+      "memeId": "robinhoot",
+      "displayName": "ROBINHOOT",
+      "color": "#5E7F35",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "head",
+          "variant": 0,
+          "name": "Archer Hat",
+          "src": "/art/robinhoot/head-01.webp",
+          "behind": false,
+          "anchor": [
+            666,
+            211
+          ]
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "name": "Mantle",
+          "src": "/art/robinhoot/accessory-01.webp",
+          "behind": false,
+          "anchor": [
+            624,
+            891
+          ]
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "name": "Quiver",
+          "src": "/art/robinhoot/arms-01.webp",
+          "behind": true,
+          "anchor": [
+            121,
+            551
+          ]
+        }
+      ],
+      "preview": "/art/robinhoot/preview.webp",
+      "slots": [
+        "head",
+        "arms",
+        "accessory"
+      ]
+    },
+    {
+      "memeId": "quantum-cat",
+      "displayName": "QUANTUM CAT",
+      "color": "#7C4DFF",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Alive/Dead Split",
+          "src": "/art/quantum-cat/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        }
+      ],
+      "preview": "/art/quantum-cat/preview.webp",
+      "slots": [
+        "body"
+      ]
+    },
+    {
+      "memeId": "inu",
+      "displayName": "INU",
+      "color": "#D88B3C",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Shiba Fur",
+          "src": "/art/inu/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        }
+      ],
+      "preview": "/art/inu/preview.webp",
+      "slots": [
+        "body"
+      ]
+    },
+    {
+      "memeId": "nearkat",
+      "displayName": "NEARKAT",
+      "color": "#C6FF3D",
+      "verifiedToken": "kat.token0.near",
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Meerkat Fur",
+          "src": "/art/nearkat/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "name": "NEAR Emblem",
+          "src": "/art/nearkat/accessory-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            932
+          ]
+        }
+      ],
+      "preview": "/art/nearkat/preview.webp",
+      "slots": [
+        "body",
+        "accessory"
+      ]
+    },
+    {
+      "memeId": "cybernetic",
+      "displayName": "CYBERNETIC",
+      "color": "#9BD94A",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "name": "Tan Fur",
+          "src": "/art/cybernetic/body-01.webp",
+          "behind": false,
+          "anchor": [
+            627,
+            900
+          ]
+        },
+        {
+          "slot": "head",
+          "variant": 0,
+          "name": "Temple Armour",
+          "src": "/art/cybernetic/head-01.webp",
+          "behind": false,
+          "anchor": [
+            382,
+            618
+          ]
+        },
+        {
+          "slot": "face",
+          "variant": 0,
+          "name": "Cyber Eye",
+          "src": "/art/cybernetic/face-01.webp",
+          "behind": false,
+          "anchor": [
+            431,
+            530
+          ]
+        },
+        {
+          "slot": "legs",
+          "variant": 0,
+          "name": "Robotic Foot",
+          "src": "/art/cybernetic/legs-01.webp",
+          "behind": false,
+          "anchor": [
+            401,
+            1124
+          ]
+        }
+      ],
+      "preview": "/art/cybernetic/preview.webp",
+      "slots": [
+        "head",
+        "face",
+        "body",
+        "legs"
+      ]
+    }
+  ]
+}

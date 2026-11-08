@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "memeId": "raen",
+  "displayName": "RAEN",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [
+    "raen-608.meme-cooking.near"
+  ],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "body"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "body",
+      "variant": 0,
+      "name": "Raen Orange",
+      "file": "slots/body/01-raen-orange.png",
+      "sha256": "1ed894b456361c754feb1812d6a06595c21c2cc3241bf2fde70609b297db4e43",
+      "behind": false
+    }
+  ]
+}

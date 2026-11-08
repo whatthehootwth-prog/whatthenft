@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Mutant } from "@/components/Mutant";
+import { ArtMutant } from "@/components/ArtMutant";
+import { SLOT_LABEL, SLOT_ORDER, layerFor, memeColor, memeLabel, specFromTraits } from "@/lib/art";
 import { assetByContract, tokenAmount } from "@/lib/format";
-import { MEME_STYLE, PART_BY_ID, SLOT_LABEL, SLOT_ORDER, specFromTraits } from "@/lib/mutant-parts";
 import { RARITY, type OrderJ, type SeasonJ } from "@/lib/near";
 
 type Phase = "shake" | "flip" | "shown";
@@ -16,8 +16,7 @@ export function Reveal({ order, season, onClose }: { order: OrderJ; season: Seas
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return setPhase("shown");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setPhase("shown");
     const a = setTimeout(() => setPhase("flip"), 800);
     const b = setTimeout(() => setPhase("shown"), 1450);
     return () => {
@@ -40,7 +39,7 @@ export function Reveal({ order, season, onClose }: { order: OrderJ; season: Seas
   const url = typeof window !== "undefined" && order.token_id ? `${window.location.origin}/nft/${order.token_id}` : "";
 
   const share = async () => {
-    const text = `I just hatched a ${rarity} meme mutant on WHAT THE NFT?! 🦉 #${order.token_id}`;
+    const text = `I just hatched a ${rarity} meme mutant on WHAT THE NFT?! #${order.token_id}`;
     try {
       if (navigator.share) await navigator.share({ title: "WHAT THE NFT?!", text, url });
       else {
@@ -48,54 +47,57 @@ export function Reveal({ order, season, onClose }: { order: OrderJ; season: Seas
         setCopied(true);
       }
     } catch {
-      /* user cancelled share */
+      /* user cancelled */
     }
   };
 
   return (
-    <div role="dialog" aria-modal="true" aria-labelledby="reveal-h" className="fixed inset-0 z-[70] overflow-y-auto bg-night">
-      <div className="sunburst rays-spin pointer-events-none fixed left-1/2 top-1/2 aspect-square w-[240vmax] -translate-x-1/2 -translate-y-1/2 opacity-25" aria-hidden="true" />
+    <div role="dialog" aria-modal="true" aria-labelledby="reveal-h" className="fixed inset-0 z-[70] overflow-y-auto bg-hot">
+      <div className="halftone-white pointer-events-none fixed inset-0" aria-hidden="true" />
+      <div className="spin-slow pointer-events-none fixed left-1/2 top-1/2 aspect-square w-[240vmax] -translate-x-1/2 -translate-y-1/2" aria-hidden="true" style={{ background: "repeating-conic-gradient(from 0deg, rgba(255,225,77,0.55) 0deg 8deg, transparent 8deg 20deg)" }} />
       <div className="relative z-10 mx-auto flex min-h-full max-w-5xl flex-col items-center justify-center px-4 pb-10 pt-20">
-        <button ref={closeRef} type="button" onClick={phase === "shown" ? onClose : () => setPhase("shown")} className="btn btn-sm btn-secondary absolute right-4 top-4">
+        <button ref={closeRef} type="button" onClick={phase === "shown" ? onClose : () => setPhase("shown")} className="btn-pop absolute right-4 top-4 !min-h-11">
           {phase === "shown" ? "CLOSE" : "SKIP"}
         </button>
 
         {phase !== "shown" ? (
           <div className={phase === "shake" ? "shake-card" : "flip-in"} aria-live="polite">
-            <div className="grid h-[420px] w-[300px] place-items-center rounded-[26px] border-[5px] border-ink bg-ink shadow-[10px_10px_0_#ff7a1a]">
-              <span className="font-display text-[9rem] leading-none text-yellow">?</span>
+            <div className="grid h-[420px] w-[300px] place-items-center rounded-[26px] border-[5px] border-ink bg-sun shadow-[12px_12px_0_#16110f]">
+              <span className="mad-title text-[9rem]">?</span>
             </div>
-            <p className="mt-6 text-center font-display text-2xl text-cream">OPENING…</p>
+            <p className="mad-title mt-6 text-center text-4xl">OPENING…</p>
           </div>
         ) : (
           <div className="grid w-full items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
             <div className="flip-in mx-auto w-full max-w-[400px]">
               <div className={`card-frame rar-${rarity}`}>
                 <div className="card-art aspect-square">
-                  <Mutant spec={spec} className="h-full w-full p-3" label={`Your ${rarity} mutant`} />
-                  <span className="absolute left-2 top-2 rounded-lg border-2 border-ink bg-paper px-2 py-0.5 font-display">{rarity}</span>
+                  <ArtMutant spec={spec} priority className="relative h-full w-full" label={`Your ${rarity} mutant`} />
+                  <span className="pixel absolute left-2 top-2 z-10 rounded-md border-2 border-ink bg-white px-2 py-0.5 text-xs font-bold">{rarity}</span>
                 </div>
-                <p className="px-4 pb-4 font-display text-2xl">#{order.token_id}</p>
+                <p className="px-4 pb-4 font-display text-3xl">#{order.token_id}</p>
               </div>
             </div>
-            <div className="pop-in text-cream">
-              <h2 id="reveal-h" className="lettering text-[clamp(2.4rem,6vw,4rem)]">
+            <div className="pop-in">
+              <h2 id="reveal-h" className="mad-title text-[clamp(2.6rem,6.5vw,4.4rem)]">
                 WHAT THE HELL DID YOU JUST MINT?!
               </h2>
-              <ul className="mt-5 grid grid-cols-2 gap-2">
+              <ul className="mt-6 grid grid-cols-2 gap-2">
                 {SLOT_ORDER.map((s) => {
-                  const part = PART_BY_ID.get(spec[s]);
+                  const l = layerFor(s, spec[s]);
+                  const id = l ? spec[s].memeId : "wth";
                   return (
-                    <li key={s} className="rounded-xl border-2 border-cream/30 bg-ink/60 px-3 py-2">
-                      <p className="text-[0.7rem] font-bold tracking-widest text-cream/60">{SLOT_LABEL[s]}</p>
-                      <p className="font-display text-lg leading-tight" style={{ color: MEME_STYLE[part?.memeId ?? "wth"]?.color }}>
-                        {MEME_STYLE[slots[SLOT_ORDER.indexOf(s)]?.memeId ?? "wth"]?.label ?? "WTH"}
+                    <li key={s} className="rounded-xl border-[3px] border-ink bg-white px-3 py-2 shadow-[3px_3px_0_#16110f]">
+                      <p className="pixel text-[0.62rem] font-bold">{SLOT_LABEL[s]}</p>
+                      <p className="font-display text-lg leading-tight">
+                        <span className="rounded border-2 border-ink px-1" style={{ background: memeColor(id) }}>{memeLabel(id)}</span>
                       </p>
+                      <p className="truncate text-xs">{l?.name ?? "bare owl"}</p>
                     </li>
                   );
                 })}
               </ul>
-              <div className="mt-5 rounded-2xl border-[3px] border-ink bg-cream p-4 text-ink">
+              <div className="mt-5 rounded-2xl border-4 border-ink bg-white p-4 shadow-[5px_5px_0_#16110f]">
                 <p className="font-display text-xl">Real tokens inside (locked 30 days)</p>
                 <ul className="mt-2 space-y-1">
                   {order.legs.map((l) => {
@@ -109,15 +111,14 @@ export function Reveal({ order, season, onClose }: { order: OrderJ; season: Seas
                   })}
                 </ul>
               </div>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href={`/nft/${order.token_id}`} className="btn-mega">
+              <div className="mt-7 flex flex-wrap gap-4">
+                <Link href={`/nft/${order.token_id}`} className="btn-mad">
                   VIEW MY NFT
                 </Link>
-                <button type="button" onClick={share} className="btn-ghost-cream">
+                <button type="button" onClick={share} className="btn-pop">
                   {copied ? "LINK COPIED!" : "SHARE MY MUTANT"}
                 </button>
               </div>
-              <p className="mt-4 text-xs text-cream/60">Artwork shown with stand-in parts until the season&apos;s final art is pinned. Traits and holdings are read from the contract.</p>
             </div>
           </div>
         )}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "memeId": "idp",
+  "displayName": "IDP",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [],
+  "notes": [
+    "Artwork includes the ICP infinity logo — check brand permission."
+  ],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "arms",
+    "accessory"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "accessory",
+      "variant": 0,
+      "name": "Cardboard Apron",
+      "file": "slots/accessory/01-cardboard-apron.png",
+      "sha256": "3205f738e34cf64f576b0ee120508d45b72384601db93f1bc08f7014edf19b02",
+      "behind": false
+    },
+    {
+      "slot": "arms",
+      "variant": 0,
+      "name": "Flag + Wing",
+      "file": "slots/arms/01-flag-and-wing.png",
+      "sha256": "5c00989b2b1e069d94534f400041b229f6f4a1ed10d59166aa269cbf123bba2a",
+      "behind": false
+    }
+  ]
+}

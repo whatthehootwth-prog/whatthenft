@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { CollectibleCard } from "@/components/CollectibleCard";
 import { CORE_CONTRACT, MARKET_CONTRACT } from "@/lib/config";
 import { memeLabels, PREVIEW_GALLERY, tokenCard } from "@/lib/cards";
-import { MEME_STYLE } from "@/lib/mutant-parts";
+import { memeLabel } from "@/lib/art";
 import { getSeasons, getTokens, RARITY, type SeasonJ, type TokenViewJ } from "@/lib/near";
 
 type Tab = "all" | "sale";
@@ -59,7 +59,7 @@ export default function MarketplacePage() {
         <div className="relative flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="font-hand text-2xl">buy · sell · stare</p>
-            <h1 className="lettering text-[clamp(2.8rem,9vw,5.6rem)]">THE FREAK MARKET</h1>
+            <h1 className="mad-title text-[clamp(2.8rem,9vw,5.6rem)]">THE FREAK MARKET</h1>
             <p className="mt-2 max-w-lg font-semibold">Every mutant ever hatched. Some are for sale. All of them are weird.</p>
           </div>
           <div className="flex rounded-2xl border-[3px] border-ink bg-cream p-1" role="tablist" aria-label="View">
@@ -70,7 +70,7 @@ export default function MarketplacePage() {
                 role="tab"
                 aria-selected={tab === t}
                 onClick={() => setTab(t)}
-                className={`min-h-11 rounded-xl px-4 font-display text-lg ${tab === t ? "bg-ink text-cream" : ""}`}
+                className={`min-h-11 rounded-xl px-4 font-display text-lg ${tab === t ? "bg-ink text-white" : ""}`}
               >
                 {t === "all" ? "ALL FREAKS" : "FOR SALE"}
               </button>
@@ -87,7 +87,7 @@ export default function MarketplacePage() {
         </label>
         <Select label="SEASON" value={season} onChange={setSeason} options={[{ v: "all", l: "All seasons" }, ...seasons.map((s) => ({ v: String(s.id), l: `S${String(s.id).padStart(2, "0")} ${s.config.name}` }))]} />
         <Select label="RARITY" value={rarity} onChange={setRarity} options={[{ v: "all", l: "Any rarity" }, ...RARITY.map((r) => ({ v: r, l: r }))]} />
-        <Select label="MEME" value={meme} onChange={setMeme} options={[{ v: "all", l: "Any meme" }, ...memeOptions.map((m) => ({ v: m, l: MEME_STYLE[m]?.label ?? m.toUpperCase() }))]} />
+        <Select label="MEME" value={meme} onChange={setMeme} options={[{ v: "all", l: "Any meme" }, ...memeOptions.map((m) => ({ v: m, l: memeLabel(m) }))]} />
         <Select label="BACKING" value={state} onChange={setState} options={STATES} />
       </form>
 
@@ -98,10 +98,10 @@ export default function MarketplacePage() {
           </Empty>
         ) : !CORE_CONTRACT ? (
           <>
-            <Empty title="NO FREAKS HATCHED YET" aside="the vault is empty" action={<Link href="/mint" className="btn-mega">MINT THE FIRST ONE</Link>}>
+            <Empty title="NO FREAKS HATCHED YET" aside="the vault is empty" action={<Link href="/mint" className="btn-mad">MINT THE FIRST ONE</Link>}>
               The collection contract isn&apos;t deployed on this network yet. Real cards will appear here the moment they are minted and funded.
             </Empty>
-            <p className="mt-12 font-display text-2xl text-cream">WHAT THEY MIGHT LOOK LIKE <span className="stamp ml-2 align-middle">preview only</span></p>
+            <p className="mt-12 font-display text-2xl text-ink">WHAT THEY MIGHT LOOK LIKE <span className="stamp ml-2 align-middle">preview only</span></p>
             <div className="scroll-x" role="list">
               {PREVIEW_GALLERY.map((p) => (
                 <div role="listitem" key={p.title}>
@@ -115,18 +115,18 @@ export default function MarketplacePage() {
             {err}
           </Empty>
         ) : tokens === null ? (
-          <p className="dots font-display text-2xl text-cream">Rounding up the freaks</p>
+          <p className="dots font-display text-2xl text-ink">Rounding up the freaks</p>
         ) : tokens.length === 0 ? (
-          <Empty title="NO FREAKS HATCHED YET" aside="be first" action={<Link href="/mint" className="btn-mega">MINT NOW!</Link>}>
+          <Empty title="NO FREAKS HATCHED YET" aside="be first" action={<Link href="/mint" className="btn-mad">MINT NOW!</Link>}>
             Cards show up here only after their meme basket is bought and verified on-chain.
           </Empty>
         ) : (
           <>
-            <p className="mb-4 text-sm text-cream/70" aria-live="polite">
+            <p className="mb-4 text-sm text-ink/70" aria-live="polite">
               {shown.length} of {tokens.length} freaks
             </p>
             {shown.length === 0 ? (
-              <p className="font-display text-xl text-cream">No freak matches that. Try fewer filters.</p>
+              <p className="font-display text-xl text-ink">No freak matches that. Try fewer filters.</p>
             ) : (
               <ul className="grid grid-cols-1 gap-6 min-[460px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
                 {shown.map((t) => (

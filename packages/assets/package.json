@@ -1,0 +1,21 @@
+{
+  "name": "@wtn/assets",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "inspect": "tsx src/inspect.ts",
+    "organize": "tsx src/organize.ts",
+    "validate": "tsx src/validate.ts",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@wtn/domain": "workspace:*",
+    "sharp": "^0.34.0"
+  },
+  "devDependencies": {
+    "@types/node": "24",
+    "tsx": "^4.20.0",
+    "typescript": "5.9.3"
+  }
+}

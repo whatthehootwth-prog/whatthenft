@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { Mutant } from "@/components/Mutant";
+import { ArtMutant } from "@/components/ArtMutant";
 import { Actions } from "@/components/nft/Actions";
 import { AccountLink, Alert, Field, StateChip } from "@/components/ui";
 import { CORE_CONTRACT } from "@/lib/config";
 import { tokenSpec } from "@/lib/cards";
 import { assetByContract, bpsPct, duration, near, nsToDate, tokenAmount, utc } from "@/lib/format";
-import { MEME_STYLE, PART_BY_ID, SLOT_LABEL, SLOT_ORDER } from "@/lib/mutant-parts";
+import { SLOT_LABEL, SLOT_ORDER, layerFor, memeColor, memeLabel } from "@/lib/art";
 import { getSeasons, getToken, RARITY, type SeasonJ, type TokenViewJ } from "@/lib/near";
 
 interface NavRow {
@@ -49,7 +49,7 @@ export function NftDetail({ id }: { id: string }) {
   }, [tok]);
 
   const back = (
-    <Link href="/marketplace" className="font-display text-lg text-cream hover:text-yellow">
+    <Link href="/marketplace" className="font-display text-lg text-ink hover:text-hot">
       ← BACK TO THE FREAK MARKET
     </Link>
   );
@@ -68,14 +68,14 @@ export function NftDetail({ id }: { id: string }) {
                 ? "The collection contract isn't deployed on this network yet, so no cards exist."
                 : "No funded NFT has this number. Orders still buying their memes aren't NFTs yet."}
           </p>
-          <Link href="/marketplace" className="btn-mega mt-6">
+          <Link href="/marketplace" className="btn-mad mt-6">
             BROWSE FREAKS
           </Link>
         </div>
       </>
     );
   }
-  if (tok === undefined) return <p className="dots font-display text-2xl text-cream">Summoning freak #{id}</p>;
+  if (tok === undefined) return <p className="dots font-display text-2xl text-ink">Summoning freak #{id}</p>;
 
   const i = tok.info;
   const rarity = RARITY[i.traits.rarity] ?? "COMMON";
@@ -96,27 +96,27 @@ export function NftDetail({ id }: { id: string }) {
             <div key={flipped ? "back" : "front"} className={`card-frame rar-${rarity} flip-in`}>
               {!flipped ? (
                 <div className="card-art aspect-square">
-                  <Mutant spec={spec} className="h-full w-full p-4" label={`Freak #${tok.token_id}, ${rarity}`} />
+                  <ArtMutant spec={spec} priority className="relative h-full w-full" label={`Freak #${tok.token_id}, ${rarity}`} />
                   <span className="absolute left-3 top-3 rounded-lg border-2 border-ink bg-paper px-2.5 py-0.5 font-display text-lg">{rarity}</span>
                   {empty && <span className="absolute inset-x-0 bottom-5 mx-auto w-fit -rotate-6 rounded-lg border-4 border-ink bg-cream px-4 py-1 font-display text-2xl">EMPTY · REDEEMED</span>}
                 </div>
               ) : (
-                <div className="card-art aspect-square bg-ink p-5 text-cream">
+                <div className="card-art aspect-square bg-sun p-5 text-ink">
                   <p className="font-display text-2xl text-yellow">THE BACK OF THE CARD</p>
                   <ul className="mt-3 space-y-1.5">
                     {SLOT_ORDER.map((s, k) => {
                       const memeId = memes[i.traits.slots[k]?.meme_idx ?? 0]?.meme_id ?? "wth";
                       return (
                         <li key={s} className="flex justify-between gap-3 border-b border-cream/15 pb-1">
-                          <span className="text-sm font-bold tracking-wide text-cream/70">{SLOT_LABEL[s]}</span>
-                          <span className="font-display" style={{ color: MEME_STYLE[memeId]?.color }}>
-                            {MEME_STYLE[memeId]?.label ?? memeId} #{(i.traits.slots[k]?.variant ?? 0) + 1}
+                          <span className="pixel text-xs font-bold">{SLOT_LABEL[s]}</span>
+                          <span className="rounded border-2 border-ink px-1 font-display" style={{ background: memeColor(memeId) }}>
+                            {memeLabel(memeId)} #{(i.traits.slots[k]?.variant ?? 0) + 1}
                           </span>
                         </li>
                       );
                     })}
                   </ul>
-                  <p className="num mt-4 text-xs text-cream/60">season {i.season_id} · serial {i.serial} · reloads {i.reload_count}</p>
+                  <p className="num mt-4 text-xs text-ink/70">season {i.season_id} · serial {i.serial} · reloads {i.reload_count}</p>
                 </div>
               )}
               <div className="flex items-center justify-between px-4 pb-4 pt-1">
@@ -126,7 +126,7 @@ export function NftDetail({ id }: { id: string }) {
                 </button>
               </div>
             </div>
-            <p className="mt-3 text-center text-xs text-cream/60">
+            <p className="mt-3 text-center text-xs text-ink/70">
               {i.media_cid ? "Final render pinned." : "Rendered from stand-in parts until the season art is pinned."}
               {missing.length > 0 && ` (${missing.length} trait${missing.length > 1 ? "s" : ""} shown as WTH fallback)`}
             </p>
@@ -135,8 +135,8 @@ export function NftDetail({ id }: { id: string }) {
 
         {/* Identity + actions */}
         <div className="min-w-0">
-          <p className="num text-sm font-bold tracking-widest text-yellow">SEASON {String(i.season_id).padStart(2, "0")} · {season?.config.name.toUpperCase() ?? ""}</p>
-          <h1 className="lettering mt-1 text-[clamp(3rem,9vw,5.5rem)]">FREAK #{tok.token_id}</h1>
+          <p className="pixel text-sm font-bold text-hot">SEASON {String(i.season_id).padStart(2, "0")} · {season?.config.name.toUpperCase() ?? ""}</p>
+          <h1 className="mad-title mt-1 text-[clamp(3rem,9vw,5.5rem)]">FREAK #{tok.token_id}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <StateChip state={tok.effective_state} />
             <span className="chip chip-ink">{rarity}</span>
@@ -145,26 +145,26 @@ export function NftDetail({ id }: { id: string }) {
 
           <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
             {SLOT_ORDER.map((s) => {
-              const part = PART_BY_ID.get(spec[s]);
+              const part = layerFor(s, spec[s]);
               const memeId = memes[i.traits.slots[SLOT_ORDER.indexOf(s)]?.meme_idx ?? 0]?.meme_id ?? "wth";
               return (
                 <li key={s} className="rounded-xl border-[3px] border-ink bg-cream px-3 py-2 text-ink">
                   <p className="text-[0.68rem] font-bold tracking-widest text-ink/60">{SLOT_LABEL[s]}</p>
-                  <p className="font-display text-lg leading-tight">{MEME_STYLE[memeId]?.label ?? memeId.toUpperCase()}</p>
-                  <p className="truncate text-xs text-ink/70">{part?.name}</p>
+                  <p className="font-display text-lg leading-tight">{memeLabel(memeId)}</p>
+                  <p className="truncate text-xs text-ink/70">{part?.name ?? "bare owl"}</p>
                 </li>
               );
             })}
           </ul>
 
-          <div className="mt-6 flex flex-wrap items-baseline justify-between gap-3 rounded-2xl border-[3px] border-ink bg-ink px-4 py-3">
+          <div className="mt-6 flex flex-wrap items-baseline justify-between gap-3 rounded-2xl border-4 border-ink bg-white px-4 py-3 shadow-[5px_5px_0_#16110f]">
             <div>
-              <p className="text-xs font-bold tracking-widest text-cream/60">SALE PRICE</p>
-              <p className="font-display text-2xl text-cream">Not listed</p>
+              <p className="text-xs font-bold tracking-widest text-ink/70">SALE PRICE</p>
+              <p className="font-display text-2xl text-ink">Not listed</p>
             </div>
             <div className="text-right">
-              <p className="text-xs font-bold tracking-widest text-cream/60">TOKENS INSIDE (EST.)</p>
-              <p className="num text-xl font-bold text-yellow">{empty ? "0 — empty" : navTotal !== null ? `${near(navTotal, 4)} NEAR` : nav || navErr ? "UNAVAILABLE" : "…"}</p>
+              <p className="text-xs font-bold tracking-widest text-ink/70">TOKENS INSIDE (EST.)</p>
+              <p className="num text-xl font-bold text-hot">{empty ? "0 — empty" : navTotal !== null ? `${near(navTotal, 4)} NEAR` : nav || navErr ? "UNAVAILABLE" : "…"}</p>
             </div>
           </div>
 

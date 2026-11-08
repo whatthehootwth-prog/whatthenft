@@ -9,7 +9,7 @@ export default function RiskPage() {
     <>
       <H1 kicker="the boring, important part">Risk disclosure</H1>
       <Prose>
-        <p className="rounded-lg bg-ink p-4 font-semibold text-cream">
+        <p className="rounded-lg border-[3px] border-ink bg-sun p-4 font-semibold text-ink">
           This NFT owns real, volatile meme assets. They are locked for 30 days after successful funding. NFT ownership and redemption rights transfer to a buyer. Prices can fall to zero.
         </p>
         <h2>Market risk</h2>

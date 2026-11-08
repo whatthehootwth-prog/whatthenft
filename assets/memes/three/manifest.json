@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "memeId": "three",
+  "displayName": "THREE",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "face",
+    "body"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "body",
+      "variant": 0,
+      "name": "Mint Fur (Wave)",
+      "file": "slots/body/01-mint-fur-wave.png",
+      "sha256": "cf3a25390d540e8e4f53292ce916b85c05c597239e7fc1a637e0b8f803f54903",
+      "behind": false
+    },
+    {
+      "slot": "face",
+      "variant": 0,
+      "name": "Pixel 3 Tattoo",
+      "file": "slots/face/01-pixel-3-tattoo.png",
+      "sha256": "e1fb953b28510b4560f9508cf4a14020548447acecca06e3bcf5cb3ad2ddf4ab",
+      "behind": false
+    }
+  ]
+}

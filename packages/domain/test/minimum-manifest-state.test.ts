@@ -98,11 +98,15 @@ describe("meme manifest validation", () => {
     slots: ["head", "body"],
     minLiquidityNear: "500",
     maxSlippageBps: 200,
-    canvas: { width: 1024, height: 1024 },
+    canvas: { width: 1254, height: 1254 },
   };
   it("accepts a valid draft", () => expect(memeManifestSchema.safeParse(good).success).toBe(true));
   it("rejects placeholder contract ids", () => expect(memeManifestSchema.safeParse({ ...good, tokenContractId: "replace-with-verified-real-contract.near" }).success).toBe(false));
   it("rejects approval without art rights", () => expect(memeManifestSchema.safeParse({ ...good, approvedForMint: true }).success).toBe(false));
+  it("allows an unverified token as null, but not for approved memes", () => {
+    expect(memeManifestSchema.safeParse({ ...good, tokenContractId: null, tokenSymbol: null, tokenDecimals: null }).success).toBe(true);
+    expect(memeManifestSchema.safeParse({ ...good, tokenContractId: null, approvedForMint: true, commercialArtworkRightsConfirmed: true, artLicenseReference: "agreement-1" }).success).toBe(false);
+  });
   it("rejects approval of NOT FOR PRODUCTION art", () =>
     expect(memeManifestSchema.safeParse({ ...good, approvedForMint: true, commercialArtworkRightsConfirmed: true, artLicenseReference: "partner-agreement-2026-01", notForProduction: true }).success).toBe(false));
   it("rejects unknown keys and non-NEAR chains", () => {

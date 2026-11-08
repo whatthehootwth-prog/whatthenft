@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "memeId": "hoodl",
+  "displayName": "HOODL",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "head",
+    "body",
+    "arms"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "body",
+      "variant": 0,
+      "name": "Charcoal Fur",
+      "file": "slots/body/01-charcoal-fur.png",
+      "sha256": "1432e7593d935d2b9dd4863850b01b607a612290d9d74152183914e93324bdac",
+      "behind": false
+    },
+    {
+      "slot": "head",
+      "variant": 0,
+      "name": "Ear Tips",
+      "file": "slots/head/01-ear-tips.png",
+      "sha256": "f7d69789076c79d65c4fda9785a54c50065e138f1cb957819caa8dffce86f787",
+      "behind": false
+    },
+    {
+      "slot": "arms",
+      "variant": 0,
+      "name": "Wings Holding Token",
+      "file": "slots/arms/01-wings-holding-token.png",
+      "sha256": "d93ed651add72ebf29b8f382cb27588c7ebfcdb594cc2635ec811aee08cb708d",
+      "behind": false
+    }
+  ]
+}

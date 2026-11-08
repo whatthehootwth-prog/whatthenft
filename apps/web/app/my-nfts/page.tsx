@@ -57,10 +57,10 @@ export default function MyNftsPage() {
     <>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="font-hand text-2xl text-yellow">your weird little family</p>
-          <h1 className="lettering text-[clamp(2.8rem,9vw,5.6rem)]">MY FREAK BINDER</h1>
+          <p className="font-hand text-2xl text-hot">your weird little family</p>
+          <h1 className="mad-title text-[clamp(2.8rem,9vw,5.6rem)]">MY FREAK BINDER</h1>
         </div>
-        <Link href="/mint" className="btn-mega">
+        <Link href="/mint" className="btn-mad">
           MINT ANOTHER
         </Link>
       </div>
@@ -69,7 +69,7 @@ export default function MyNftsPage() {
         {/* binder rings */}
         <div className="absolute bottom-6 left-3 top-6 flex flex-col justify-around sm:left-6" aria-hidden="true">
           {[0, 1, 2, 3].map((k) => (
-            <span key={k} className="block size-6 rounded-full border-4 border-ink bg-night shadow-[inset_2px_2px_0_rgba(255,255,255,0.2)] sm:size-8" />
+            <span key={k} className="block size-6 rounded-full border-4 border-ink bg-violet shadow-[inset_2px_2px_0_rgba(255,255,255,0.2)] sm:size-8" />
           ))}
         </div>
 
@@ -78,7 +78,7 @@ export default function MyNftsPage() {
             The collection isn&apos;t deployed on this network yet. Once it is, every mutant you own appears here.
           </BinderEmpty>
         ) : !accountId ? (
-          <BinderEmpty title="WHOSE BINDER IS THIS?" aside="connect to open it" action={<button type="button" className="btn-mega" onClick={connect}>CONNECT WALLET</button>}>
+          <BinderEmpty title="WHOSE BINDER IS THIS?" aside="connect to open it" action={<button type="button" className="btn-mad" onClick={connect}>CONNECT WALLET</button>}>
             We read your cards and open orders straight from the contract.
           </BinderEmpty>
         ) : err ? (
@@ -107,7 +107,7 @@ export default function MyNftsPage() {
               {tokens === null ? (
                 <p className="dots mt-4 font-display text-xl">Flipping pages</p>
               ) : tokens.length === 0 ? (
-                <BinderEmpty title="ZERO FREAKS" aside="tragic" action={<Link href="/mint" className="btn-mega">MINT YOUR FIRST</Link>}>
+                <BinderEmpty title="ZERO FREAKS" aside="tragic" action={<Link href="/mint" className="btn-mad">MINT YOUR FIRST</Link>}>
                   Cards you mint, buy or receive show up here as soon as the transfer is final.
                 </BinderEmpty>
               ) : (

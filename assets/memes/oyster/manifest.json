@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "memeId": "oyster",
+  "displayName": "OYSTER",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "head",
+    "accessory"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "head",
+      "variant": 0,
+      "name": "Pearl Hat",
+      "file": "slots/head/01-pearl-hat.png",
+      "sha256": "bb2f2f3a0297c4fef91a69f8be759c065d7a5809e8133ba5a7cce29a53033a0b",
+      "behind": false
+    },
+    {
+      "slot": "accessory",
+      "variant": 0,
+      "name": "Chest Shells",
+      "file": "slots/accessory/01-chest-shells.png",
+      "sha256": "a0e771dc60d5a364c124bfb53fffd8eea4a45c1aa3aea5c5410d1b704d50f302",
+      "behind": false
+    }
+  ]
+}

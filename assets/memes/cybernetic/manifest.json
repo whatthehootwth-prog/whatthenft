@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "memeId": "cybernetic",
+  "displayName": "CYBERNETIC",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [],
+  "notes": [
+    "Previews also show white/graphite/lavender/copper fur, but only the tan fur file was supplied."
+  ],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "head",
+    "face",
+    "body",
+    "legs"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "body",
+      "variant": 0,
+      "name": "Tan Fur",
+      "file": "slots/body/01-tan-fur.png",
+      "sha256": "c0ef358b9e9ca41d6a2616df96a0d5c3dad1f7b6e09a0f7c78ad823189a25255",
+      "behind": false
+    },
+    {
+      "slot": "head",
+      "variant": 0,
+      "name": "Temple Armour",
+      "file": "slots/head/01-temple-armour.png",
+      "sha256": "511d4e76b53884450704f4a3d3d11b1ad7b8b87730ad24c17cb2fa97c80abde7",
+      "behind": false
+    },
+    {
+      "slot": "face",
+      "variant": 0,
+      "name": "Cyber Eye",
+      "file": "slots/face/01-cyber-eye.png",
+      "sha256": "7cbe94eb689f42fce2b1626072fdf6df21aa8becd2d6d1f5675b00178f842f4c",
+      "behind": false
+    },
+    {
+      "slot": "legs",
+      "variant": 0,
+      "name": "Robotic Foot",
+      "file": "slots/legs/01-robotic-foot.png",
+      "sha256": "36b0eaec9b73ee007b158e46e4a7b75c5306e582271db98b43dca9465b8fb91f",
+      "behind": false
+    }
+  ]
+}

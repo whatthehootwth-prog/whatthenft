@@ -14,6 +14,13 @@
   --color-green: #1f9d55;
   --color-muted: #6b5e55;
   --color-night: #0b0a0c;
+  --color-hot: #ff3ea5;
+  --color-lime: #b8ff3d;
+  --color-aqua: #2ee6ff;
+  --color-sun: #ffe14d;
+  --color-violet: #8b5cff;
+  --color-lilac: #c9b6ff;
+  --color-page: #fff3d6;
   --color-night-2: #17141a;
   --color-fog: #b9ad9f;
   --color-line: #16110f;
@@ -21,6 +28,7 @@
   --font-display: var(--font-lilita), "Lilita One", Impact, system-ui, sans-serif;
   --font-hand: var(--font-gochi), "Gochi Hand", "Comic Sans MS", cursive;
   --font-mono: var(--font-spacemono), "Space Mono", ui-monospace, monospace;
+  --font-pixel: var(--font-silkscreen), "Silkscreen", ui-monospace, monospace;
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --shadow-hard: 5px 5px 0 #16110f;
@@ -31,13 +39,13 @@
 
 @layer base {
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 html {
-  background: var(--color-night);
-  color: var(--color-cream);
+  background: var(--color-page);
+  color: var(--color-ink);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -45,7 +53,7 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.55;
-  background: var(--color-night);
+  background: var(--color-page);
   min-height: 100dvh;
 }
 

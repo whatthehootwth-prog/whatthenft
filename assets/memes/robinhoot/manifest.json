@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "memeId": "robinhoot",
+  "displayName": "ROBINHOOT",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "head",
+    "arms",
+    "accessory"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "head",
+      "variant": 0,
+      "name": "Archer Hat",
+      "file": "slots/head/01-archer-hat.png",
+      "sha256": "c9ce75d14abba3f8e2d72ff0cd84473991489730fb62dcaeaeaae4b619e49835",
+      "behind": false
+    },
+    {
+      "slot": "accessory",
+      "variant": 0,
+      "name": "Mantle",
+      "file": "slots/accessory/01-mantle.png",
+      "sha256": "4f830d1190b79dc0314844fead4ef1064d561a83d4226b864bf6e7d816f2168d",
+      "behind": false
+    },
+    {
+      "slot": "arms",
+      "variant": 0,
+      "name": "Quiver",
+      "file": "slots/arms/01-quiver.png",
+      "sha256": "b7636dae89636e3b55f68a1a28486be07e567e7c57d4559b74ca4c6267ef298c",
+      "behind": true
+    }
+  ]
+}

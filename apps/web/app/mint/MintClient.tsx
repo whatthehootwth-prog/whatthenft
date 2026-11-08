@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { parseNear } from "@wtn/domain";
 import { Reveal } from "@/components/mint/Reveal";
-import { Mutant } from "@/components/Mutant";
+import { ArtMutant } from "@/components/ArtMutant";
 import { OrderTracker } from "@/components/OrderTracker";
 import { Alert } from "@/components/ui";
 import { CORE_CONTRACT, NETWORK } from "@/lib/config";
@@ -116,12 +116,12 @@ export function MintClient() {
       {/* Mystery pack */}
       <div className="min-w-0 lg:sticky lg:top-28">
         <div className="relative mx-auto w-full max-w-[440px]">
-          <div className={`relative aspect-[3/4] overflow-hidden rounded-[28px] border-[5px] border-ink bg-ink shadow-[12px_12px_0_#ff7a1a] ${order && !settled ? "shake-card [animation-iteration-count:infinite] [animation-duration:1.4s]" : "wiggle"}`}>
+          <div className={`relative aspect-[3/4] overflow-hidden rounded-[28px] border-[5px] border-ink bg-violet shadow-[12px_12px_0_#16110f] ${order && !settled ? "shake-card [animation-iteration-count:infinite] [animation-duration:1.4s]" : "wiggle"}`}>
             <div className="sunburst absolute left-1/2 top-1/2 aspect-square w-[220%] -translate-x-1/2 -translate-y-1/2 opacity-30" aria-hidden="true" />
             <div className="absolute inset-x-6 top-10 bottom-24" aria-hidden="true">
               <div className="h-full w-full" style={{ filter: "brightness(0) drop-shadow(6px 6px 0 #ff7a1a)" }}>
                 <div key={teaser} className="glitch-in h-full w-full">
-                  <Mutant spec={PRESETS[teaser]!.spec} className="h-full w-full" label="Mystery silhouette" />
+                  <ArtMutant spec={PRESETS[teaser]!.spec} priority className="h-full w-full" label="Mystery silhouette" />
                 </div>
               </div>
             </div>
@@ -139,14 +139,14 @@ export function MintClient() {
 
       {/* Mint panel */}
       <div className="min-w-0">
-        <h1 className="lettering text-[clamp(2.8rem,8vw,5rem)]">MINT THE MADNESS</h1>
-        <p className="mt-2 font-hand text-2xl text-cream/85">One mutant. Real memes inside. Zero idea what you&apos;ll get.</p>
+        <h1 className="mad-title text-[clamp(2.8rem,8vw,5rem)]">MINT THE MADNESS</h1>
+        <p className="mt-2 font-hand text-2xl text-ink/70">One mutant. Real memes inside. Zero idea what you&apos;ll get.</p>
 
         {order ? (
           <div className="mt-8 space-y-4">
             <OrderTracker orderId={order.id} txHash={order.tx} season={season} onUpdate={onOrderUpdate} />
             {settled && !revealOpen && (
-              <button type="button" className="btn-mega" onClick={() => setRevealOpen(true)}>
+              <button type="button" className="btn-mad" onClick={() => setRevealOpen(true)}>
                 SHOW ME AGAIN
               </button>
             )}
@@ -199,24 +199,24 @@ export function MintClient() {
             </fieldset>
 
             {/* the essentials */}
-            <div className="mt-6 rounded-2xl border-[3px] border-ink bg-ink p-4 text-cream">
+            <div className="mt-6 rounded-2xl border-4 border-ink bg-sun p-4 text-ink shadow-[5px_5px_0_#16110f]">
               <div className="flex items-baseline justify-between gap-3">
                 <span className="font-display text-lg">YOU PAY</span>
-                <span className="num text-2xl font-bold text-yellow">{attach !== null ? `${near(attach, 4)} NEAR` : "—"}</span>
+                <span className="num text-2xl font-bold text-ink">{attach !== null ? `${near(attach, 4)} NEAR` : "—"}</span>
               </div>
               <ul className="mt-3 grid gap-2 text-sm sm:grid-cols-3">
-                <li className="rounded-lg bg-cream/10 px-3 py-2">
-                  <span className="font-display text-base text-orange">90%</span> of the base buys real memes
+                <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
+                  <span className="font-display text-base text-hot">90%</span> of the base buys real memes
                 </li>
-                <li className="rounded-lg bg-cream/10 px-3 py-2">
-                  <span className="font-display text-base text-orange">30 days</span> locked after funding
+                <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
+                  <span className="font-display text-base text-hot">30 days</span> locked after funding
                 </li>
-                <li className="rounded-lg bg-cream/10 px-3 py-2">
-                  <span className="font-display text-base text-orange">WTH + {q.state === "ok" ? q.data.tier.maxPartners : "1"}</span> meme{q.state === "ok" && q.data.tier.maxPartners > 1 ? "s" : ""} max
+                <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
+                  <span className="font-display text-base text-hot">WTH + {q.state === "ok" ? q.data.tier.maxPartners : "1"}</span> meme{q.state === "ok" && q.data.tier.maxPartners > 1 ? "s" : ""} max
                 </li>
               </ul>
-              {q.state === "ok" && <p className="mt-2 text-xs text-cream/60">Includes a refundable reserve. Prices live from Rhea · {Math.round(q.ageMs / 1000)}s ago.</p>}
-              {q.state === "loading" && <p className="mt-2 text-xs text-cream/60 dots">Checking live prices</p>}
+              {q.state === "ok" && <p className="mt-2 text-xs text-ink/70">Includes a refundable reserve. Prices live from Rhea · {Math.round(q.ageMs / 1000)}s ago.</p>}
+              {q.state === "loading" && <p className="mt-2 text-xs text-ink/70 dots">Checking live prices</p>}
             </div>
 
             <details className="drawer mt-4 rounded-2xl border-[3px] border-ink bg-cream">
@@ -278,11 +278,11 @@ export function MintClient() {
 
             <div className="mt-6">
               {!accountId ? (
-                <button type="button" className="btn-mega w-full" onClick={connect}>
+                <button type="button" className="btn-mad w-full" onClick={connect}>
                   CONNECT WALLET
                 </button>
               ) : (
-                <button type="button" className="btn-mega w-full" disabled={!canMint || submitting} aria-disabled={!canMint || submitting} aria-describedby="mint-why" onClick={mint}>
+                <button type="button" className="btn-mad w-full" disabled={!canMint || submitting} aria-disabled={!canMint || submitting} aria-describedby="mint-why" onClick={mint}>
                   {submitting ? "CHECK YOUR WALLET…" : "MINT NOW!"}
                 </button>
               )}

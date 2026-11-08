@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "memeId": "moonshot",
+  "displayName": "MOONSHOT",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [
+    "moon.token0.near",
+    "nmoon.tkn.near"
+  ],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "head",
+    "arms",
+    "accessory"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "head",
+      "variant": 0,
+      "name": "Cowboy Hat",
+      "file": "slots/head/01-cowboy-hat.png",
+      "sha256": "afff305183414027cd349a3793af3354c786cc3f78ef6622d30780870c7bb7d5",
+      "behind": false
+    },
+    {
+      "slot": "accessory",
+      "variant": 0,
+      "name": "Bandana",
+      "file": "slots/accessory/01-bandana.png",
+      "sha256": "b209a9f1aff827febe1b3a8a42bb71f54dedf9df0978770f7e1070b975c447b5",
+      "behind": false
+    },
+    {
+      "slot": "arms",
+      "variant": 0,
+      "name": "Wing + Revolver",
+      "file": "slots/arms/01-wing-and-revolver.png",
+      "sha256": "96518def4b243201e29c085fd7e858fa0def236a55ac6d7fefa647ea6e67339a",
+      "behind": false
+    }
+  ]
+}

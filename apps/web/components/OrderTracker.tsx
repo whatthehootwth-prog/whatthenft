@@ -93,7 +93,7 @@ export function OrderTracker({ orderId, txHash, season, onUpdate }: { orderId: s
           <li key={i} className="flex gap-3">
             <span
               aria-hidden="true"
-              className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border-2 border-ink text-xs font-bold ${s.state === "done" ? "bg-green text-cream" : s.state === "current" ? "bg-yellow" : s.state === "failed" ? "bg-red" : "bg-paper"}`}
+              className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border-2 border-ink text-xs font-bold ${s.state === "done" ? "bg-green text-ink" : s.state === "current" ? "bg-yellow" : s.state === "failed" ? "bg-red" : "bg-paper"}`}
             >
               {s.state === "done" ? "✓" : s.state === "failed" ? "!" : i + 1}
             </span>

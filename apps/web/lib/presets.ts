@@ -1,10 +1,9 @@
-import { tokenWeights, type SlotProviders } from "@wtn/domain";
-import { MEME_STYLE, PART_BY_ID, SLOT_ORDER, type MutantSpec, type Slot } from "./mutant-parts";
+import { mixFor as mix, pick as P, spec, type MutantSpec, type Slot } from "./art";
 
 export interface Annotation {
   slot: Slot;
   text: string;
-  /** Label position in owl coordinates (outside the character). */
+  /** Label position in canvas coordinates (0–1254, may sit outside the art). */
   at: [number, number];
 }
 
@@ -13,59 +12,67 @@ export interface PresetMutant {
   nickname: string;
   spec: MutantSpec;
   notes: Annotation[];
+  /** Hero backdrop colour for this mutant. */
+  bg: string;
 }
 
-/** ILLUSTRATIVE previews only — not minted NFTs, not guaranteed mint outcomes. */
+/** ILLUSTRATIVE previews mixed from the real Season 01 parts — not minted NFTs, not guaranteed outcomes. */
 export const PRESETS: PresetMutant[] = [
   {
-    key: "doggo",
-    nickname: "DOGGO.EXE",
-    spec: { head: "shitzu-ears", face: "wth-shades", body: "wth-yellow", arms: "wth-wings", legs: "wth-feet", accessory: "shitzu-bone" },
+    key: "cowboy-shiba",
+    nickname: "YEEHAW INU",
+    bg: "#FF3EA5",
+    spec: spec({ body: P("inu"), head: P("moonshot"), face: P("three"), arms: P("moonshot"), accessory: P("hooters") }),
     notes: [
-      { slot: "head", text: "WHO GAVE ME DOG EARS?!", at: [-130, 120] },
-      { slot: "face", text: "TOO COOL TO HOOT", at: [1340, 250] },
-      { slot: "accessory", text: "IS THAT… A BONE?!", at: [-140, 1180] },
+      { slot: "head", text: "YEEHAW?!", at: [1060, 60] },
+      { slot: "arms", text: "IS THAT LOADED?!", at: [-40, 340] },
+      { slot: "accessory", text: "WHO DRESSED ME?!", at: [1180, 980] },
     ],
   },
   {
-    key: "dragon",
-    nickname: "DRAGON TAX",
-    spec: { head: "dragon-horns", face: "dragon-eyes", body: "wth-white", arms: "dragon-wings", legs: "wth-sneakers", accessory: "wth-cape" },
+    key: "quantum-pirate",
+    nickname: "SCHRÖDINGER'S ARCHER",
+    bg: "#2EE6FF",
+    spec: spec({ body: P("quantum-cat"), head: P("robinhoot"), face: P("cybernetic"), arms: P("robinhoot"), accessory: P("oyster") }),
     notes: [
-      { slot: "head", text: "HORNS?! SINCE WHEN?!", at: [-120, -60] },
-      { slot: "arms", text: "BLACKDRAGON WINGS?!", at: [1360, 240] },
-      { slot: "legs", text: "DRIP CHECK", at: [-110, 1200] },
+      { slot: "face", text: "CYBER EYE?!", at: [-60, 420] },
+      { slot: "head", text: "ROBIN WHO?!", at: [1140, 60] },
+      { slot: "accessory", text: "SHELLS. WHY.", at: [1180, 1000] },
     ],
   },
   {
-    key: "kat",
-    nickname: "CAT-ASTROPHE",
-    spec: { head: "wth-crown", face: "kat-whiskers", body: "kat-stripes", arms: "wth-wings", legs: "kat-beans", accessory: "kat-tail" },
+    key: "rave",
+    nickname: "RAVE MALLACE",
+    bg: "#B8FF3D",
+    spec: spec({ body: P("mallace"), head: P("oyster"), arms: P("idp"), legs: P("hooters"), accessory: P("nearkat") }),
     notes: [
-      { slot: "head", text: "KING OF NOTHING", at: [-120, 40] },
-      { slot: "body", text: "KAT BODY?!", at: [-140, 860] },
-      { slot: "legs", text: "TOE BEANS?!", at: [1350, 1200] },
+      { slot: "head", text: "PEARL HAT?!", at: [1120, 40] },
+      { slot: "arms", text: "WHAT FLAG IS THAT?!", at: [-80, 760] },
+      { slot: "legs", text: "PANTS OPTIONAL", at: [1180, 1160] },
     ],
   },
   {
-    key: "meltdown",
-    nickname: "FULL MELTDOWN",
-    spec: { head: "wth-cone", face: "shitzu-snout", body: "dragon-scales", arms: "kat-paws", legs: "dragon-claws", accessory: "wth-sign" },
+    key: "hodl-bot",
+    nickname: "HODL.EXE",
+    bg: "#FFE14D",
+    spec: spec({ body: P("hoodl"), head: P("cybernetic"), face: P("cybernetic"), arms: P("hoodl"), legs: P("cybernetic"), accessory: P("robinhoot") }),
     notes: [
-      { slot: "head", text: "WHAT IS THAT THING?!", at: [-120, -40] },
-      { slot: "body", text: "SCALES?! ON AN OWL?!", at: [-140, 900] },
-      { slot: "legs", text: "CLAWS. WHY.", at: [1340, 1210] },
+      { slot: "head", text: "UPGRADED?!", at: [-70, 160] },
+      { slot: "arms", text: "HODLING SOMETHING", at: [1180, 840] },
+      { slot: "legs", text: "ROBO TOES?!", at: [-60, 1180] },
+    ],
+  },
+  {
+    key: "orange-alert",
+    nickname: "ORANGE ALERT",
+    bg: "#8B5CFF",
+    spec: spec({ body: P("raen"), head: P("hoodl"), face: P("three"), arms: P("moonshot"), accessory: P("idp") }),
+    notes: [
+      { slot: "accessory", text: "INDERNED KEPUTER?!", at: [1190, 1010] },
+      { slot: "face", text: "3?!", at: [1220, 480] },
+      { slot: "arms", text: "PEW?!", at: [-60, 360] },
     ],
   },
 ];
 
-export function providers(spec: MutantSpec): SlotProviders {
-  const out = {} as SlotProviders;
-  for (const s of SLOT_ORDER) out[s] = PART_BY_ID.get(spec[s])?.memeId ?? "wth";
-  return out;
-}
-
-/** Allocation computed with the production formula (packages/domain tokenWeights). */
-export function mixFor(spec: MutantSpec): { memeId: string; label: string; color: string; bps: number }[] {
-  return tokenWeights(providers(spec), "wth").map((w) => ({ memeId: w.memeId, bps: w.bps, label: MEME_STYLE[w.memeId]?.label ?? w.memeId.toUpperCase(), color: MEME_STYLE[w.memeId]?.color ?? "#FFF4DC" }));
-}
+export const mixFor = mix;

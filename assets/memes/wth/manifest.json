@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "memeId": "wth",
+  "displayName": "WHAT THE HOOT",
+  "chain": "near",
+  "tokenContractId": "wth-0b2227.launchpad.justhoot.near",
+  "tokenSymbol": "WTH",
+  "tokenDecimals": 18,
+  "tokenCandidates": [],
+  "notes": [
+    "Base owl. Every other slot uses the bare owl (no overlay) when WTH provides it.",
+    "WTH supplies the base owl; for head/face/arms/legs/accessory the WTH variant is the bare owl (no overlay file)."
+  ],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "head",
+    "face",
+    "body",
+    "arms",
+    "legs",
+    "accessory"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "body",
+      "variant": 0,
+      "name": "Classic WTH",
+      "file": "slots/body/01-classic-wth.png",
+      "sha256": "9fe861a55332f842c97571ee0a68822de9e48c6c976d7af689bda1862e0b6edd",
+      "behind": false
+    }
+  ]
+}

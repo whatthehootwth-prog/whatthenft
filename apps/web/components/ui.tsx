@@ -53,8 +53,8 @@ export function Panel({ children, className = "", as: As = "section" }: { childr
 export function H1({ children, kicker }: { children: ReactNode; kicker?: ReactNode }) {
   return (
     <header className="mb-6 sm:mb-8">
-      {kicker && <p className="font-hand text-2xl text-yellow">{kicker}</p>}
-      <h1 className="lettering text-[2.6rem] sm:text-[3.6rem]">{children}</h1>
+      {kicker && <p className="font-hand text-2xl text-hot">{kicker}</p>}
+      <h1 className="mad-title text-[2.6rem] sm:text-[3.6rem]">{children}</h1>
     </header>
   );
 }

@@ -7,6 +7,9 @@ import { hex } from "./rng";
 export const NEAR_ACCOUNT_RE = /^(?=.{2,64}$)(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/;
 export const nearAccountId = z.string().regex(NEAR_ACCOUNT_RE, "Invalid NEAR account id");
 
+/** Native WTH owl canvas (whatthehoot.lol owl geometry): every layer is 1254×1254. */
+export const ART_CANVAS = 1254;
+
 const PLACEHOLDER_RE = /REPLACE|PLACEHOLDER|TODO|EXAMPLE/i;
 const slotEnum = z.enum(SLOTS);
 
@@ -16,9 +19,13 @@ export const memeManifestSchema = z
     memeId: z.string().regex(/^[a-z0-9][a-z0-9-]{1,31}$/, "memeId: lowercase a-z0-9 and dashes, 2..32 chars"),
     displayName: z.string().min(1).max(40),
     chain: z.literal("near"), // other chains are rejected until Milestone C adapters exist
-    tokenContractId: nearAccountId.refine((v) => !PLACEHOLDER_RE.test(v), "tokenContractId is a placeholder"),
-    tokenSymbol: z.string().min(1).max(16),
-    tokenDecimals: z.number().int().min(0).max(32),
+    /** Verified full NEP-141 contract id, or null until verified. Never a ticker guess. */
+    tokenContractId: nearAccountId.refine((v) => !PLACEHOLDER_RE.test(v), "tokenContractId is a placeholder").nullable(),
+    tokenSymbol: z.string().min(1).max(16).nullable(),
+    tokenDecimals: z.number().int().min(0).max(32).nullable(),
+    /** Unverified leads for the founder to confirm; never used for minting. */
+    tokenCandidates: z.array(nearAccountId).default([]),
+    notes: z.array(z.string().max(300)).default([]),
     activeInSeasons: z.array(z.number().int().positive()),
     approvedForMint: z.boolean(),
     commercialArtworkRightsConfirmed: z.boolean(),
@@ -26,7 +33,21 @@ export const memeManifestSchema = z
     slots: z.array(slotEnum).min(1),
     minLiquidityNear: z.string().regex(/^\d+(\.\d+)?$/),
     maxSlippageBps: z.number().int().min(1).max(1000),
-    canvas: z.object({ width: z.literal(1024), height: z.literal(1024) }),
+    canvas: z.object({ width: z.literal(ART_CANVAS), height: z.literal(ART_CANVAS) }),
+    layers: z
+      .array(
+        z
+          .object({
+            slot: slotEnum,
+            variant: z.number().int().min(0),
+            name: z.string().min(1).max(60),
+            file: z.string().regex(/^slots\/(head|face|body|arms|legs|accessory)\/[a-z0-9-]+\.png$/),
+            sha256: z.string().regex(/^[0-9a-f]{64}$/),
+            behind: z.boolean().default(false),
+          })
+          .strict(),
+      )
+      .default([]),
     anchors: z.record(z.string(), z.object({ x: z.number().int(), y: z.number().int() })).default({}),
     layeringOverrides: z.record(z.string(), z.number().int().min(0).max(99)).default({}),
     /** Marks dev-only placeholder art. Production publishing rejects any manifest with this set. */
@@ -40,6 +61,12 @@ export const memeManifestSchema = z
     }
     if (m.approvedForMint && !m.artLicenseReference) {
       ctx.addIssue({ code: "custom", path: ["artLicenseReference"], message: "Approved memes need a license/partner-permission reference" });
+    }
+    if (m.approvedForMint && !m.tokenContractId) {
+      ctx.addIssue({ code: "custom", path: ["tokenContractId"], message: "Approved memes need a verified token contract" });
+    }
+    for (const l of m.layers) {
+      if (!m.slots.includes(l.slot)) ctx.addIssue({ code: "custom", path: ["layers"], message: `layer ${l.file} uses slot ${l.slot} not listed in slots` });
     }
     if (m.approvedForMint && m.notForProduction) {
       ctx.addIssue({ code: "custom", path: ["notForProduction"], message: "Placeholder art cannot be approved for mint" });
@@ -55,8 +82,8 @@ export const layerRecordSchema = z
     variant: z.number().int().min(0),
     file: z.string(),
     sha256: z.string().regex(/^[0-9a-f]{64}$/),
-    width: z.literal(1024),
-    height: z.literal(1024),
+    width: z.literal(ART_CANVAS),
+    height: z.literal(ART_CANVAS),
     hasAlpha: z.literal(true),
   })
   .strict();

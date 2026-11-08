@@ -8,7 +8,8 @@ const config: NextConfig = {
       { source: "/hatch", destination: "/mint", permanent: false },
       { source: "/market", destination: "/marketplace", permanent: false },
       { source: "/collection", destination: "/marketplace", permanent: false },
-      { source: "/faq", destination: "/wtf", permanent: false },
+      { source: "/faq", destination: "/wth", permanent: false },
+      { source: "/wtf", destination: "/wth", permanent: false },
     ];
   },
   async headers() {

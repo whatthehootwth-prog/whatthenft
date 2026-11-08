@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "memeId": "nearkat",
+  "displayName": "NEARKAT",
+  "chain": "near",
+  "tokenContractId": "kat.token0.near",
+  "tokenSymbol": "KAT",
+  "tokenDecimals": 18,
+  "tokenCandidates": [],
+  "notes": [
+    "Token verified on-chain 2026-11-07 (ft_metadata KAT/18, Rhea v2 pool 5391)."
+  ],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "body",
+    "accessory"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "body",
+      "variant": 0,
+      "name": "Meerkat Fur",
+      "file": "slots/body/01-meerkat-fur.png",
+      "sha256": "c78d0d0d95d602dde858a37dda94fb0a7f41e0cdded0b77f5a7aed0b4deffdd7",
+      "behind": false
+    },
+    {
+      "slot": "accessory",
+      "variant": 0,
+      "name": "NEAR Emblem",
+      "file": "slots/accessory/01-near-emblem.png",
+      "sha256": "027a8ce5f097671581b21f01dbcca9c695adfb793eee415fce806ace656a2240",
+      "behind": false
+    }
+  ]
+}

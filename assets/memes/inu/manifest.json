@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "memeId": "inu",
+  "displayName": "INU",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [
+    "sinu-8.smithii.near"
+  ],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "body"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "body",
+      "variant": 0,
+      "name": "Shiba Fur",
+      "file": "slots/body/01-shiba-fur.png",
+      "sha256": "99e60d0979cdf871f727b2516189c98a870f8d970875e8f3b06ffb0a25149fe5",
+      "behind": false
+    }
+  ]
+}
