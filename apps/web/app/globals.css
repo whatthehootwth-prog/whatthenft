@@ -13,6 +13,9 @@
   --color-purple: #7c64a8;
   --color-green: #1f9d55;
   --color-muted: #6b5e55;
+  --color-night: #0b0a0c;
+  --color-night-2: #17141a;
+  --color-fog: #b9ad9f;
   --color-line: #16110f;
 
   --font-display: var(--font-lilita), "Lilita One", Impact, system-ui, sans-serif;
@@ -28,13 +31,13 @@
 
 @layer base {
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 html {
-  background: var(--color-cream);
-  color: var(--color-ink);
+  background: var(--color-night);
+  color: var(--color-cream);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -42,7 +45,7 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.55;
-  background: var(--color-cream);
+  background: var(--color-night);
   min-height: 100dvh;
 }
 
@@ -96,6 +99,7 @@ body {
 
 /* CLEAR panel */
 .panel {
+  color: var(--color-ink);
   background: var(--color-paper);
   border: 3px solid var(--color-ink);
   border-radius: var(--radius-panel);
@@ -103,6 +107,7 @@ body {
 }
 
 .sticker {
+  color: var(--color-ink);
   background: var(--color-paper);
   border: 3px solid var(--color-ink);
   border-radius: 14px 10px 16px 9px;

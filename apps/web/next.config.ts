@@ -3,6 +3,14 @@ import type { NextConfig } from "next";
 const config: NextConfig = {
   transpilePackages: ["@wtn/domain", "@wtn/chain"],
   poweredByHeader: false,
+  async redirects() {
+    return [
+      { source: "/hatch", destination: "/mint", permanent: false },
+      { source: "/market", destination: "/marketplace", permanent: false },
+      { source: "/collection", destination: "/marketplace", permanent: false },
+      { source: "/faq", destination: "/wtf", permanent: false },
+    ];
+  },
   async headers() {
     return [
       {

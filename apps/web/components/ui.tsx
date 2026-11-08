@@ -53,8 +53,8 @@ export function Panel({ children, className = "", as: As = "section" }: { childr
 export function H1({ children, kicker }: { children: ReactNode; kicker?: ReactNode }) {
   return (
     <header className="mb-6 sm:mb-8">
-      {kicker && <p className="font-hand text-xl text-muted">{kicker}</p>}
-      <h1 className="font-display text-[2rem] leading-tight sm:text-[2.75rem]">{children}</h1>
+      {kicker && <p className="font-hand text-2xl text-yellow">{kicker}</p>}
+      <h1 className="lettering text-[2.6rem] sm:text-[3.6rem]">{children}</h1>
     </header>
   );
 }
@@ -63,7 +63,7 @@ export function Alert({ tone = "info", title, children }: { tone?: "info" | "war
   const c = { info: "#3ec6e0", warn: "#ffd23f", error: "#e8402a", ok: "#1f9d55" }[tone];
   const icon = { info: "i", warn: "!", error: "×", ok: "✓" }[tone];
   return (
-    <div role={tone === "error" ? "alert" : "status"} className="flex gap-3 rounded-xl border-[3px] border-ink bg-paper p-4" style={{ boxShadow: `inset 8px 0 0 ${c}` }}>
+    <div role={tone === "error" ? "alert" : "status"} className="flex gap-3 rounded-xl border-[3px] border-ink bg-paper p-4 text-ink" style={{ boxShadow: `inset 8px 0 0 ${c}` }}>
       <span aria-hidden="true" className="ml-2 grid size-7 shrink-0 place-items-center rounded-full border-2 border-ink font-display text-sm" style={{ background: c }}>
         {icon}
       </span>

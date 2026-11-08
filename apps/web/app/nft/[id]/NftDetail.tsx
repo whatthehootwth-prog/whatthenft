@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { Alert, AccountLink, ArtSlot, EmptyState, Field, H1, NotDeployed, Panel, RarityChip, StateChip } from "@/components/ui";
-import { CORE_CONTRACT, MARKET_CONTRACT } from "@/lib/config";
+import { Mutant } from "@/components/Mutant";
+import { Actions } from "@/components/nft/Actions";
+import { AccountLink, Alert, Field, StateChip } from "@/components/ui";
+import { CORE_CONTRACT } from "@/lib/config";
+import { tokenSpec } from "@/lib/cards";
 import { assetByContract, bpsPct, duration, near, nsToDate, tokenAmount, utc } from "@/lib/format";
-import { ftStorageRegistered, getSeasons, getToken, RARITY, type SeasonJ, type TokenViewJ } from "@/lib/near";
-import { useWallet } from "@/lib/wallet";
-
-const SLOT_NAMES = ["head", "face", "body", "arms", "legs", "accessory"];
+import { MEME_STYLE, PART_BY_ID, SLOT_LABEL, SLOT_ORDER } from "@/lib/mutant-parts";
+import { getSeasons, getToken, RARITY, type SeasonJ, type TokenViewJ } from "@/lib/near";
 
 interface NavRow {
   contract: string;
@@ -25,6 +26,7 @@ export function NftDetail({ id }: { id: string }) {
   const [err, setErr] = useState<string | null>(null);
   const [nav, setNav] = useState<{ rows: NavRow[]; at: string } | null>(null);
   const [navErr, setNavErr] = useState<string | null>(null);
+  const [flipped, setFlipped] = useState(false);
 
   const load = useCallback(() => {
     if (!CORE_CONTRACT) return;
@@ -35,10 +37,7 @@ export function NftDetail({ id }: { id: string }) {
       })
       .catch((e) => setErr(e instanceof Error ? e.message : String(e)));
   }, [id]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
+  useEffect(load, [load]);
 
   useEffect(() => {
     if (!tok) return;
@@ -49,21 +48,39 @@ export function NftDetail({ id }: { id: string }) {
       .catch((e) => setNavErr(String(e)));
   }, [tok]);
 
-  if (!CORE_CONTRACT) {
+  const back = (
+    <Link href="/marketplace" className="font-display text-lg text-cream hover:text-yellow">
+      ← BACK TO THE FREAK MARKET
+    </Link>
+  );
+
+  if (!CORE_CONTRACT || tok === null || err) {
     return (
       <>
-        <H1>Card #{id}</H1>
-        <NotDeployed />
+        {back}
+        <div className="sticker mx-auto mt-10 max-w-xl -rotate-1 p-8 text-center">
+          <p className="font-hand text-2xl text-orange">{err ? "the chain said no" : "hoot?"}</p>
+          <h1 className="font-display text-4xl">{err ? "COULDN'T LOAD THIS FREAK" : `FREAK #${id} DOESN'T EXIST`}</h1>
+          <p className="mt-3">
+            {err
+              ? err
+              : !CORE_CONTRACT
+                ? "The collection contract isn't deployed on this network yet, so no cards exist."
+                : "No funded NFT has this number. Orders still buying their memes aren't NFTs yet."}
+          </p>
+          <Link href="/marketplace" className="btn-mega mt-6">
+            BROWSE FREAKS
+          </Link>
+        </div>
       </>
     );
   }
-  if (err) return <Alert tone="error" title="Could not read this card">{err}</Alert>;
-  if (tok === undefined) return <p className="dots">Reading card #{id} from chain</p>;
-  if (tok === null) return <EmptyState aside="hoot?" title={`Card #${id} does not exist`} action={<Link href="/collection" className="btn btn-secondary">Browse the collection</Link>}>No funded NFT has this id. Pending orders are not NFTs until their basket is verified.</EmptyState>;
+  if (tok === undefined) return <p className="dots font-display text-2xl text-cream">Summoning freak #{id}</p>;
 
   const i = tok.info;
-  const rarity = RARITY[i.traits.rarity];
-  const memes = season?.config.memes;
+  const rarity = RARITY[i.traits.rarity] ?? "COMMON";
+  const { spec, missing } = tokenSpec(tok, season);
+  const memes = season?.config.memes ?? [];
   const lockUntil = nsToDate(i.lock_until_ns);
   const lockedMs = lockUntil.getTime() - Date.now();
   const empty = tok.effective_state === "RedeemedEmpty";
@@ -71,33 +88,114 @@ export function NftDetail({ id }: { id: string }) {
 
   return (
     <>
-      <H1 kicker={`Season ${String(i.season_id).padStart(2, "0")} · serial #${i.serial}`}>
-        Card #{tok.token_id}
-      </H1>
-      <div className="grid gap-6 lg:grid-cols-[5fr_7fr] lg:items-start">
-        <div className="min-w-0 space-y-4">
-          <ArtSlot rarity={rarity} label={i.media_cid ? "render pinned — viewer pending" : "render not pinned yet"} traits={i.traits.slots.map((s, k) => ({ slot: SLOT_NAMES[k]!, meme: memes?.[s.meme_idx]?.meme_id.toUpperCase() ?? `#${s.meme_idx}`, variant: s.variant }))} />
-          <div className="flex flex-wrap items-center gap-2">
-            <StateChip state={tok.effective_state} />
-            <RarityChip rarity={rarity} />
+      {back}
+      <div className="mt-6 grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start">
+        {/* Card */}
+        <div className="lg:sticky lg:top-28">
+          <div className="mx-auto w-full max-w-[520px]">
+            <div key={flipped ? "back" : "front"} className={`card-frame rar-${rarity} flip-in`}>
+              {!flipped ? (
+                <div className="card-art aspect-square">
+                  <Mutant spec={spec} className="h-full w-full p-4" label={`Freak #${tok.token_id}, ${rarity}`} />
+                  <span className="absolute left-3 top-3 rounded-lg border-2 border-ink bg-paper px-2.5 py-0.5 font-display text-lg">{rarity}</span>
+                  {empty && <span className="absolute inset-x-0 bottom-5 mx-auto w-fit -rotate-6 rounded-lg border-4 border-ink bg-cream px-4 py-1 font-display text-2xl">EMPTY · REDEEMED</span>}
+                </div>
+              ) : (
+                <div className="card-art aspect-square bg-ink p-5 text-cream">
+                  <p className="font-display text-2xl text-yellow">THE BACK OF THE CARD</p>
+                  <ul className="mt-3 space-y-1.5">
+                    {SLOT_ORDER.map((s, k) => {
+                      const memeId = memes[i.traits.slots[k]?.meme_idx ?? 0]?.meme_id ?? "wth";
+                      return (
+                        <li key={s} className="flex justify-between gap-3 border-b border-cream/15 pb-1">
+                          <span className="text-sm font-bold tracking-wide text-cream/70">{SLOT_LABEL[s]}</span>
+                          <span className="font-display" style={{ color: MEME_STYLE[memeId]?.color }}>
+                            {MEME_STYLE[memeId]?.label ?? memeId} #{(i.traits.slots[k]?.variant ?? 0) + 1}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <p className="num mt-4 text-xs text-cream/60">season {i.season_id} · serial {i.serial} · reloads {i.reload_count}</p>
+                </div>
+              )}
+              <div className="flex items-center justify-between px-4 pb-4 pt-1">
+                <p className="font-display text-2xl">#{tok.token_id}</p>
+                <button type="button" onClick={() => setFlipped((f) => !f)} className="btn btn-sm btn-secondary">
+                  {flipped ? "FRONT" : "FLIP CARD"}
+                </button>
+              </div>
+            </div>
+            <p className="mt-3 text-center text-xs text-cream/60">
+              {i.media_cid ? "Final render pinned." : "Rendered from stand-in parts until the season art is pinned."}
+              {missing.length > 0 && ` (${missing.length} trait${missing.length > 1 ? "s" : ""} shown as WTH fallback)`}
+            </p>
           </div>
-          <p className="text-sm text-muted">Rarity changes the artwork only. It does not change the basket.</p>
         </div>
 
-        <div className="min-w-0 space-y-6">
-          <Panel>
-            <h2 className="font-display text-2xl">Underlying basket</h2>
+        {/* Identity + actions */}
+        <div className="min-w-0">
+          <p className="num text-sm font-bold tracking-widest text-yellow">SEASON {String(i.season_id).padStart(2, "0")} · {season?.config.name.toUpperCase() ?? ""}</p>
+          <h1 className="lettering mt-1 text-[clamp(3rem,9vw,5.5rem)]">FREAK #{tok.token_id}</h1>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <StateChip state={tok.effective_state} />
+            <span className="chip chip-ink">{rarity}</span>
+            {!empty && tok.effective_state === "FullyBackedLocked" && <span className="chip chip-pending">unlocks in {duration(lockedMs)}</span>}
+          </div>
+
+          <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {SLOT_ORDER.map((s) => {
+              const part = PART_BY_ID.get(spec[s]);
+              const memeId = memes[i.traits.slots[SLOT_ORDER.indexOf(s)]?.meme_idx ?? 0]?.meme_id ?? "wth";
+              return (
+                <li key={s} className="rounded-xl border-[3px] border-ink bg-cream px-3 py-2 text-ink">
+                  <p className="text-[0.68rem] font-bold tracking-widest text-ink/60">{SLOT_LABEL[s]}</p>
+                  <p className="font-display text-lg leading-tight">{MEME_STYLE[memeId]?.label ?? memeId.toUpperCase()}</p>
+                  <p className="truncate text-xs text-ink/70">{part?.name}</p>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-6 flex flex-wrap items-baseline justify-between gap-3 rounded-2xl border-[3px] border-ink bg-ink px-4 py-3">
+            <div>
+              <p className="text-xs font-bold tracking-widest text-cream/60">SALE PRICE</p>
+              <p className="font-display text-2xl text-cream">Not listed</p>
+            </div>
+            <div className="text-right">
+              <p className="text-xs font-bold tracking-widest text-cream/60">TOKENS INSIDE (EST.)</p>
+              <p className="num text-xl font-bold text-yellow">{empty ? "0 — empty" : navTotal !== null ? `${near(navTotal, 4)} NEAR` : nav || navErr ? "UNAVAILABLE" : "…"}</p>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <Actions tok={tok} season={season} reload={load} />
+          </div>
+        </div>
+      </div>
+
+      {/* Vault */}
+      <details open className="drawer mt-12 rounded-[24px] border-4 border-ink bg-paper text-ink shadow-[0_8px_0_#16110f]">
+        <summary className="flex min-h-16 items-center justify-between px-5 sm:px-7">
+          <span className="font-display text-2xl sm:text-3xl">WHAT&apos;S INSIDE THE VAULT</span>
+          <span className="drawer-chev text-2xl transition-transform">▾</span>
+        </summary>
+        <div className="grid gap-8 border-t-[3px] border-ink px-5 pb-7 pt-5 sm:px-7 lg:grid-cols-[1.3fr_1fr]">
+          <div className="min-w-0">
+            <h2 className="font-display text-xl">Underlying meme tokens</h2>
             {empty ? (
-              <p className="mt-2 rounded-lg border-2 border-dashed border-ink p-3 font-semibold">This card is EMPTY: it holds 0 redeemable tokens. It remains a collectible{season?.config.reload_enabled ? " and may be reloaded with its original composition in an eligible season" : ""}.</p>
+              <p className="mt-2 rounded-lg border-2 border-dashed border-ink p-3 font-semibold">
+                This card is EMPTY: its tokens were redeemed and it holds 0 redeemable assets. It&apos;s still a collectible{season?.config.reload_enabled ? ", and can be reloaded with its original mix in an eligible season" : ""}.
+              </p>
             ) : (
-              <div className="mt-3 overflow-x-auto">
-                <table className="ledger min-w-[34rem]">
+              <div className="mt-2 overflow-x-auto">
+                <table className="ledger min-w-[32rem]">
                   <thead>
                     <tr>
-                      <th>Token (verified contract)</th>
+                      <th>Token</th>
                       <th className="amt">Share</th>
                       <th className="amt">Balance held</th>
-                      <th className="amt">Sell quote (wNEAR)</th>
+                      <th className="amt">Sell value (wNEAR)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -118,188 +216,46 @@ export function NftDetail({ id }: { id: string }) {
                       );
                     })}
                     <tr className="total">
-                      <td colSpan={3}>Estimated NAV (executable sell quotes)</td>
-                      <td className="amt">{navTotal !== null ? `${near(navTotal, 6)}` : "UNAVAILABLE"}</td>
+                      <td colSpan={3}>Estimated value (live sell quotes)</td>
+                      <td className="amt">{navTotal !== null ? near(navTotal, 6) : "UNAVAILABLE"}</td>
                     </tr>
                   </tbody>
                 </table>
                 <p className="mt-2 text-xs text-muted">
-                  NAV = what Rhea pools would pay right now for each full balance{nav ? ` (${utc(new Date(nav.at))})` : ""}. Not a guarantee: liquidity and prices move. Any missing
-                  quote makes the total UNAVAILABLE rather than understated. This is separate from any marketplace price, which can include a speculative art premium.
+                  What Rhea pools would pay right now for each full balance{nav ? ` (${utc(new Date(nav.at))})` : ""}. Not a guarantee — prices and liquidity move, and any missing quote makes the total UNAVAILABLE. This is separate from any sale price, which can include a speculative art premium.
                 </p>
               </div>
             )}
-          </Panel>
-
-          <Actions tok={tok} season={season} reload={load} />
-
-          <Panel>
-            <h2 className="font-display text-2xl">Provenance</h2>
-            <dl className="mt-3">
-              <Field label="Owner">{tok.owner_id ? <AccountLink id={tok.owner_id} full /> : "—"}</Field>
-              <Field label="Funded">{utc(nsToDate(i.funded_at_ns))}</Field>
-              <Field label="Unlocks" hint={lockedMs > 0 ? `in ${duration(lockedMs)}` : "unlocked"}>
-                {utc(lockUntil)}
-              </Field>
-              <Field label="Origin order">#{i.origin_order_id}</Field>
-              <Field label="Reloads">{i.reload_count}</Field>
-              <Field label="Randomness" hint={`${i.reveal.version}; anyone can recompute the traits from this seed and the order id`}>
-                <span className="num text-xs">
-                  block {i.reveal.block_height} · seed {i.reveal.random_seed_hex}
-                </span>
-              </Field>
-              <Field label="Season manifest">
-                <span className="num text-xs">{i.season_manifest_hash}</span>
-              </Field>
-              <Field label="Media">{i.media_cid ?? "not pinned yet"}</Field>
-            </dl>
-          </Panel>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function Actions({ tok, season, reload }: { tok: TokenViewJ; season: SeasonJ | null; reload: () => void }) {
-  const { accountId, call, connect } = useWallet();
-  const [receiver, setReceiver] = useState("");
-  const [transferTo, setTransferTo] = useState("");
-  const [busy, setBusy] = useState<string | null>(null);
-  const [msg, setMsg] = useState<{ tone: "ok" | "error" | "warn"; text: string } | null>(null);
-  const [unregistered, setUnregistered] = useState<string[] | null>(null);
-  const isOwner = !!accountId && accountId === tok.owner_id;
-  const st = tok.effective_state;
-  const target = (receiver.trim() || accountId) ?? "";
-
-  useEffect(() => {
-    if (!isOwner || st !== "Unlocked" || !target) return setUnregistered(null);
-    Promise.all(tok.info.holdings.filter((h) => BigInt(h.amount) > 0n).map(async (h) => ((await ftStorageRegistered(h.token, target).catch(() => false)) ? null : h.token)))
-      .then((r) => setUnregistered(r.filter((x): x is string => !!x)))
-      .catch(() => setUnregistered(null));
-  }, [isOwner, st, target, tok]);
-
-  const run = async (label: string, p: Parameters<typeof call>[0], ok: string) => {
-    setBusy(label);
-    setMsg(null);
-    try {
-      const r = await call(p);
-      setMsg({ tone: "ok", text: `${ok}${r.txHash ? ` (tx ${r.txHash.slice(0, 10)}…)` : ""}` });
-      setTimeout(reload, 2500);
-    } catch (e) {
-      const m = e instanceof Error ? e.message : String(e);
-      setMsg({ tone: "error", text: /reject|cancel|denied/i.test(m) ? "Signature rejected. Nothing was sent." : m });
-    } finally {
-      setBusy(null);
-    }
-  };
-
-  if (!accountId)
-    return (
-      <Panel>
-        <h2 className="font-display text-2xl">Actions</h2>
-        <p className="mt-2">Connect the owner wallet to redeem, transfer or reload.</p>
-        <button type="button" className="btn btn-yellow mt-3" onClick={connect}>
-          Connect wallet
-        </button>
-      </Panel>
-    );
-  if (!isOwner)
-    return (
-      <Panel>
-        <h2 className="font-display text-2xl">Actions</h2>
-        <p className="mt-2">Only the current owner can act on this card. Redemption rights belong to whoever holds the NFT.</p>
-        <p className="mt-2 text-sm text-muted">Buying: {MARKET_CONTRACT ? "see the market." : "the native marketplace is not deployed yet (Milestone B)."}</p>
-      </Panel>
-    );
-
-  return (
-    <Panel>
-      <h2 className="font-display text-2xl">Actions</h2>
-      {st === "FullyBackedLocked" && (
-        <p className="mt-2">
-          Locked until {utc(nsToDate(tok.info.lock_until_ns))}. You can transfer or sell it now — the whole basket claim moves with the NFT. Redemption opens after the lock.
-        </p>
-      )}
-      {st === "Unlocked" && (
-        <div className="mt-3 rounded-xl border-2 border-ink bg-cream p-4">
-          <h3 className="font-display text-xl">Redeem the exact tokens</h3>
-          <p className="mt-1 text-sm">Sends every held token to the receiver and marks the card EMPTY. Any marketplace approvals are revoked first.</p>
-          <label htmlFor="rcv" className="mt-3 block text-sm font-semibold">
-            Receiver (defaults to you)
-          </label>
-          <input id="rcv" value={receiver} onChange={(e) => setReceiver(e.target.value.trim().toLowerCase())} placeholder={accountId} className="num mt-1 w-full rounded-lg border-[3px] border-ink bg-paper px-3 py-2" />
-          {unregistered && unregistered.length > 0 && (
-            <div className="mt-3">
-              <Alert tone="warn" title="Receiver not registered on some tokens">
-                {target} must register storage (≈0.00125 NEAR each) on: {unregistered.map((t) => assetByContract(t)?.symbol ?? t).join(", ")}. Otherwise that transfer fails and the tokens stay safely on the card.
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {unregistered.map((t) => (
-                    <button
-                      key={t}
-                      type="button"
-                      className="btn btn-sm btn-secondary"
-                      disabled={!!busy}
-                      onClick={() => run(`reg-${t}`, { receiverId: t, method: "storage_deposit", args: { account_id: target, registration_only: true }, deposit: 1_250_000_000_000_000_000_000n, tgas: 30 }, `Registered ${target} on ${t}`)}
-                    >
-                      Register on {assetByContract(t)?.symbol ?? t}
-                    </button>
-                  ))}
-                </div>
-              </Alert>
-            </div>
-          )}
-          <button
-            type="button"
-            className="btn btn-primary mt-4"
-            disabled={!!busy || !CORE_CONTRACT}
-            onClick={() => run("redeem", { receiverId: CORE_CONTRACT!, method: "redeem", args: { token_id: tok.token_id, receiver_id: receiver || null, tokens: null }, deposit: 1n, tgas: 150 }, "Redemption submitted")}
-          >
-            {busy === "redeem" ? "Waiting for wallet…" : "Redeem all tokens"}
-          </button>
-        </div>
-      )}
-      {st === "RedeemedEmpty" && (
-        <div className="mt-3 rounded-xl border-2 border-dashed border-ink p-4">
-          <h3 className="font-display text-xl">Reload</h3>
-          {season?.status === "Open" && season.config.reload_enabled ? (
-            <p className="mt-1 text-sm">Reloading rebuys the original composition at current prices with a new payment and a new 30-day lock. Start it from the hatch flow once reload checkout ships.</p>
-          ) : (
-            <p className="mt-1 text-sm">Reload is unavailable: there is no open season that accepts reloads right now.</p>
-          )}
-        </div>
-      )}
-      {(st === "Redeeming" || st === "Reloading") && <p className="mt-2 dots">Settlement in progress. Transfers are blocked until it finishes</p>}
-      {st !== "Redeeming" && st !== "Reloading" && (
-        <div className="mt-4 border-t-2 border-ink/15 pt-4">
-          <h3 className="font-display text-xl">Transfer</h3>
-          <p className="mt-1 text-sm">Direct transfers move the NFT and its full basket claim. They pay no royalty.</p>
-          <div className="mt-2 flex flex-col gap-2 sm:flex-row">
-            <label htmlFor="to" className="sr-only">
-              Recipient account
-            </label>
-            <input id="to" value={transferTo} onChange={(e) => setTransferTo(e.target.value.trim().toLowerCase())} placeholder="recipient.near" className="num min-w-0 flex-1 rounded-lg border-[3px] border-ink bg-paper px-3 py-2" />
-            <button
-              type="button"
-              className="btn btn-secondary"
-              disabled={!!busy || !/^[a-z0-9._-]{2,64}$/.test(transferTo) || transferTo === accountId}
-              onClick={() => run("transfer", { receiverId: CORE_CONTRACT!, method: "nft_transfer", args: { receiver_id: transferTo, token_id: tok.token_id }, deposit: 1n, tgas: 50 }, `Transferred to ${transferTo}`)}
-            >
-              {busy === "transfer" ? "Waiting for wallet…" : "Transfer"}
-            </button>
           </div>
+          <dl className="min-w-0">
+            <Field label="Owner">{tok.owner_id ? <AccountLink id={tok.owner_id} full /> : "—"}</Field>
+            <Field label="Funded">{utc(nsToDate(i.funded_at_ns))}</Field>
+            <Field label="Unlocks" hint={lockedMs > 0 ? `in ${duration(lockedMs)}` : "unlocked"}>
+              {utc(lockUntil)}
+            </Field>
+            <Field label="Redemption">{empty ? "Redeemed" : tok.effective_state === "Unlocked" ? "Available to the owner" : tok.effective_state === "FullyBackedLocked" ? "Locked" : "In progress"}</Field>
+            <Field label="Vault check" hint="Live balance vs. all claims, per token">
+              <Link href="/status" className="underline">
+                Conservation status ↗
+              </Link>
+            </Field>
+            <Field label="Origin order">#{i.origin_order_id}</Field>
+            <Field label="Randomness" hint={`${i.reveal.version}; anyone can recompute the traits`}>
+              <span className="num text-xs break-anywhere">block {i.reveal.block_height} · seed {i.reveal.random_seed_hex}</span>
+            </Field>
+            <Field label="Season manifest">
+              <span className="num text-xs break-anywhere">{i.season_manifest_hash}</span>
+            </Field>
+          </dl>
         </div>
-      )}
-      <div className="mt-4 border-t-2 border-ink/15 pt-4">
-        <h3 className="font-display text-xl">List for sale</h3>
-        <p className="mt-1 text-sm text-muted">{MARKET_CONTRACT ? "Listing UI ships with the marketplace contract." : "Disabled: the native marketplace contract is not deployed yet (Milestone B)."}</p>
-      </div>
-      {msg && (
-        <div className="mt-4">
-          <Alert tone={msg.tone} title={msg.tone === "ok" ? "Submitted" : "Not done"}>
-            {msg.text}
+      </details>
+      {!empty && tok.effective_state === "FullyBackedLocked" && (
+        <div className="mt-6">
+          <Alert tone="info" title="Locked tokens move with the NFT">
+            If this card is sold or transferred before {utc(lockUntil).slice(0, 10)}, the new owner gets the full redemption right. The lock does not restart.
           </Alert>
         </div>
       )}
-    </Panel>
+    </>
   );
 }

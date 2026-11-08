@@ -23,7 +23,7 @@ pnpm install
 pnpm test            # TS unit tests
 pnpm typecheck
 pnpm feasibility     # live mainnet quotes, read-only
-pnpm dev             # web on http://localhost:3100 (copy apps/web/.env.example → .env.local)
+pnpm dev             # web on http://localhost:3110 (copy apps/web/.env.example → .env.local)
 ```
 Contracts: see `docs/RUNBOOK.md` (Docker build; Windows hosts lack a C toolchain for near-sdk unit tests).
 

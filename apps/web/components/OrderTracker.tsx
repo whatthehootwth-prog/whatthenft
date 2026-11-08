@@ -29,7 +29,7 @@ function stepStates(o: OrderJ): { label: string; state: StepState; detail?: stri
   ];
 }
 
-export function OrderTracker({ orderId, txHash, season }: { orderId: string; txHash?: string | null; season?: SeasonJ | null }) {
+export function OrderTracker({ orderId, txHash, season, onUpdate }: { orderId: string; txHash?: string | null; season?: SeasonJ | null; onUpdate?: (o: OrderJ) => void }) {
   const [o, setO] = useState<OrderJ | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
@@ -40,8 +40,10 @@ export function OrderTracker({ orderId, txHash, season }: { orderId: string; txH
       .then((x) => {
         setO(x);
         setErr(null);
+        if (x) onUpdate?.(x);
       })
       .catch((e) => setErr(e instanceof Error ? e.message : String(e)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
 
   useEffect(() => {
