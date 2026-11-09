@@ -4,6 +4,7 @@
  * before the marketplace contract exists. Replace with on-chain data once it's deployed.
  */
 import { memesIn, previewSpec, type MutantSpec } from "./art";
+import { funnyName } from "./names";
 import { TIERS, type RarityName } from "./rarity";
 
 export interface DemoItem {
@@ -71,7 +72,7 @@ export const DEMO_ITEMS: DemoItem[] = Array.from({ length: 111 }, (_, i) => {
   const listed = r() < 0.5;
   return {
     id: i + 1,
-    name: `Freak #${String(i + 1).padStart(3, "0")}`,
+    name: funnyName(spec, i),
     spec,
     rarity,
     memes: memesIn(spec),

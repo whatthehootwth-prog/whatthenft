@@ -7,6 +7,7 @@ import { BARE, MEMES, SLOT_LABEL, SLOT_ORDER, layerFor, memeColor, memeLabel, mi
 import { PRESETS } from "@/lib/presets";
 import { PartCallouts } from "@/components/home/PartCallouts";
 import { TIERS, rollShowcaseTier } from "@/lib/rarity";
+import { funnyName } from "@/lib/names";
 import { near } from "@/lib/format";
 import { useSeasonLive, type SeasonLive } from "@/lib/useSeason";
 
@@ -69,9 +70,13 @@ export function HeroClone() {
     return () => ro.disconnect();
   }, []);
   const [rarity, setRarity] = useState<(typeof TIERS)[number]>(TIERS[3]);
+  const [name, setName] = useState(() => funnyName(PRESETS[0]!.spec));
   // Every 4th swap (~2s) jump to a different tier (showcase weights: top tiers appear more often).
   useEffect(() => {
-    if (changed.tick > 0 && changed.tick % 4 === 0) setRarity((cur) => rollShowcaseTier(cur.name));
+    if (changed.tick > 0 && changed.tick % 4 === 0) {
+      setRarity((cur) => rollShowcaseTier(cur.name));
+      setName(funnyName(spec, changed.tick));
+    }
   }, [changed]);
 
   // Preload every layer so swaps never flash an empty part.
@@ -148,7 +153,7 @@ export function HeroClone() {
               <header className="flex items-center gap-2 px-3 pb-1.5 pt-2">
                 <div className="min-w-0 flex-1">
                   <p className="text-[0.6rem] font-extrabold uppercase tracking-[0.14em] text-ink/60">Season 01 · Meme Genesis</p>
-                  <h2 className="truncate font-display text-[1.45rem] leading-none">{memeLabel(prov.body)} OWL</h2>
+                  <h2 className="truncate font-display text-[1.45rem] leading-none">{name}</h2>
                   <div className="mt-1 flex items-center gap-1.5">
                     <span className="flex" aria-hidden="true">
                       {[0, 1, 2, 3, 4].map((i) => (

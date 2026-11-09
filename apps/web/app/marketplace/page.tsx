@@ -88,16 +88,16 @@ function Card({ d, i, onBuy }: { d: DemoItem; i: number; onBuy: (d: DemoItem) =>
         <span className="absolute right-2 top-2 z-10 rounded-lg bg-ink/80 px-1.5 py-0.5 text-[0.62rem] font-bold text-white">#{d.id}</span>
       </div>
       <div className="px-1 pb-1 pt-2">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="truncate font-display text-[1.15rem] leading-none">{d.name}</h3>
-          <Stars n={t.stars} />
-        </div>
-        <p className="mt-1.5 flex flex-wrap gap-1" aria-label="Meme crews">
+        <h3 className="line-clamp-2 min-h-[2.1em] font-display text-[1.05rem] leading-[1.05]">{d.name}</h3>
+        <div className="mt-1.5 flex items-center justify-between gap-2">
+        <p className="flex flex-wrap gap-1" aria-label="Meme crews">
           {d.memes.slice(0, 4).map((m) => (
             <span key={m} className="size-3 rounded-full border-[1.5px] border-ink" style={{ background: crewColor(m) }} title={m} />
           ))}
           {d.memes.length > 4 && <span className="text-[0.62rem] font-bold text-ink/50">+{d.memes.length - 4}</span>}
         </p>
+          <Stars n={t.stars} />
+        </div>
         {d.price !== null ? (
           <button type="button" onClick={() => onBuy(d)} className="mt-2.5 flex w-full items-center justify-between rounded-xl border-[2.5px] border-ink bg-orange px-3 py-1.5 font-display text-[1.05rem] shadow-[0_3px_0_#16110f] transition hover:-translate-y-0.5 hover:bg-sun active:translate-y-0.5 active:shadow-none">
             <span className="flex items-center gap-1">
@@ -244,7 +244,7 @@ export default function MarketplacePage() {
   };
 
   return (
-    <div className="band market-sky relative -mb-24 -mt-[108px] overflow-hidden !border-t-0 pb-24 pt-[124px]">
+    <div className="band market-sky relative -mb-24 -mt-[108px] overflow-clip !border-t-0 pb-24 pt-[124px]">
       {/* Abstract background */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="mk-blob absolute -left-24 top-10 size-[420px] rounded-full bg-[#ff9ed1] opacity-50 blur-3xl" />
@@ -304,7 +304,7 @@ export default function MarketplacePage() {
                 <input
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="Search freaks, #id or meme…"
+                  placeholder="Search names, #id or meme…"
                   className="h-12 w-full rounded-2xl border-[2.5px] border-ink bg-white pl-11 pr-4 font-semibold shadow-[3px_3px_0_#16110f] outline-none placeholder:text-ink/40 focus:shadow-[3px_3px_0_#ff7a1a]"
                 />
               </label>

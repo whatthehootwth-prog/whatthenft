@@ -15,35 +15,27 @@ type Stop = { title: string; kicker: string; color: string; bubble: string; body
 
 const STOPS: Stop[] = [
   {
-    kicker: "Start here",
-    title: "MINT",
+    kicker: "01 — MINT",
+    title: "HATCH YOUR FREAK!",
     color: "#ff7a1a",
-    bubble: "who made me?!",
+    bubble: "WHO MADE ME?!",
     body: (
       <>
-        <p>
-          Pay NEAR and hatch a mutant WTH owl. Its <strong>six parts</strong> — head, face, body, arms, legs and outfit — each come from a different meme crew.
-        </p>
-        <p>
-          NEAR&apos;s on-chain randomness picks the mix in a block <strong>after</strong> you pay, so nobody (not you, not us) can choose or re-roll it. Rarity runs from Common to Mythic and is pure art.
-        </p>
+        <p>Pay NEAR to mint a mutant owl made from <strong>six random body parts</strong>, each inspired by different meme communities.</p>
+        <p>Every mutant is a surprise, with rarity from Common to Mythic.</p>
       </>
     ),
     art: <ArtMutant spec={PRESETS[2]!.spec} className={`w-52 ${DROP}`} label="A freshly minted mutant owl" />,
   },
   {
-    kicker: "Real stuff inside",
-    title: "REAL TOKEN BAG",
+    kicker: "02 — REAL TOKEN BAG",
+    title: "REAL MEMES. REAL TOKENS.",
     color: "#2ee6ff",
-    bubble: "I'm loaded!",
+    bubble: "I'M LOADED!",
     body: (
       <>
-        <p>
-          The parts decide the bag. WTH always gets a <strong>20% core</strong>, and the other 80% follows whichever memes your parts came from.
-        </p>
-        <p>
-          The contract <strong>buys those real tokens on Rhea</strong>, checks they actually arrived, and only then mints your NFT. No bag, no NFT.
-        </p>
+        <p>Your mutant&apos;s body parts determine which meme tokens go into its bag.</p>
+        <p><strong>90% of your base mint price buys real tokens</strong>, including a guaranteed 20% WTH allocation.</p>
       </>
     ),
     art: (
@@ -59,18 +51,14 @@ const STOPS: Stop[] = [
     ),
   },
   {
-    kicker: "Any time",
-    title: "TRADE",
+    kicker: "03 — TRADE",
+    title: "SELL YOUR FREAK!",
     color: "#ff3ea5",
-    bubble: "bag included?!",
+    bubble: "BAG INCLUDED?!",
     body: (
       <>
-        <p>
-          Sell your freak whenever you like — even while it&apos;s locked. The buyer gets the card <strong>and the whole token bag</strong>, and the lock timer doesn&apos;t restart.
-        </p>
-        <p>
-          Marketplace sales pay a <strong>2.5% royalty</strong>: 10% of it to the WTH creator, 90% to the WTH buyback treasury.
-        </p>
+        <p>Keep your mutant or sell it anytime, even while its tokens are locked.</p>
+        <p>The buyer gets the NFT <strong>and its entire token bag</strong>.</p>
       </>
     ),
     art: (
@@ -84,18 +72,14 @@ const STOPS: Stop[] = [
     ),
   },
   {
-    kicker: "After 30 days",
-    title: "WITHDRAW",
+    kicker: "04 — WITHDRAW",
+    title: "LOCKED FOR 30 DAYS.",
     color: "#b8ff3d",
-    bubble: "tick… tock…",
+    bubble: "FREE AT LAST!",
     body: (
       <>
-        <p>
-          The bag is locked for <strong>30 days from funding</strong>. After that, whoever owns the card can pull the exact tokens out to their wallet.
-        </p>
-        <p>
-          The card stays as an <strong>EMPTY</strong> collectible — the art is yours forever. An empty card can be <strong>reloaded</strong> in an eligible season: same token mix, a new payment and a new 30-day lock.
-        </p>
+        <p>Your tokens stay locked for <strong>30 days</strong>. After that, you can withdraw them.</p>
+        <p>Your NFT remains as a collectible, even after its bag is emptied. Eligible NFTs can be <strong>reloaded</strong>.</p>
       </>
     ),
     art: (
@@ -117,22 +101,18 @@ const STOPS: Stop[] = [
     ),
   },
   {
-    kicker: "No funny business",
-    title: "WHERE THE MONEY GOES",
+    kicker: "05 — WHERE THE MONEY GOES",
+    title: "EVERY MINT SUPPORTS MEMES.",
     color: "#ffe14d",
-    bubble: "90% is yours!",
+    bubble: "MORE MEMES, MORE MADNESS!",
     body: (
       <>
-        <p>
-          <strong>90% of the base price buys your tokens.</strong> 5% goes to the WTH creator and 5% to the WTH buyback treasury — both paid only after your card is fully funded.
-        </p>
-        <p>
-          A small storage fee, a refundable retry reserve and normal network gas are shown separately and <strong>never come out of your 90%</strong>. More on the{" "}
-          <Link href="/treasury" className="underline decoration-2 underline-offset-2">
-            treasury page
-          </Link>
-          .
-        </p>
+        <ul className="space-y-1.5">
+          <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-lime text-center font-display">90%</span>Your meme-token bag</li>
+          <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-sun text-center font-display">5%</span>WTH creator</li>
+          <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-aqua text-center font-display">5%</span>WTH buyback treasury</li>
+        </ul>
+        <p>Marketplace sales also contribute royalties to the WTH ecosystem.</p>
       </>
     ),
     art: (
@@ -149,16 +129,15 @@ const STOPS: Stop[] = [
     ),
   },
   {
-    kicker: "Keep it coming",
-    title: "SEASONS",
+    kicker: "06 — SEASONS",
+    title: "NEW SEASON. NEW FREAKS.",
     color: "#b48cff",
-    bubble: "more freaks!",
+    bubble: "THE MADNESS NEVER ENDS!",
     body: (
       <>
-        <p>
-          Each season is a capped drop — <strong>Season 01 &ldquo;Meme Genesis&rdquo; has 111 mutants</strong> — with its own meme lineup and art. Rules, fees and odds are frozen on-chain when it opens.
-        </p>
-        <p>Old seasons stay tradable forever. New memes arrive in new seasons, never by inflating old ones.</p>
+        <p>Every season brings new meme combinations and limited collectibles.</p>
+        <p><strong>Season 01: Meme Genesis — 111 mutants.</strong></p>
+        <p>Old NFTs remain yours to collect and trade.</p>
       </>
     ),
     art: (
@@ -310,7 +289,7 @@ export function WthRoadmap() {
             </span>
           ))}
         </h1>
-        <p className="lead mx-auto mt-4 max-w-xl">The whole trip, from your first mint to the next season. Follow the road — try not to get lost.</p>
+        <p className="lead mx-auto mt-4 max-w-xl">One owl. Too many memes. Here&apos;s how the madness works.</p>
       </header>
 
       {/* Road */}
@@ -398,10 +377,28 @@ export function WthRoadmap() {
                 MINT NOW
               </Link>
               <Link href="/marketplace" className="btn-pop">
-                Browse freaks
+                BROWSE FREAKS
               </Link>
             </div>
           </div>
+          {/* The one serious bit */}
+          <aside className="pop-reveal relative mx-auto mt-10 max-w-2xl rounded-[24px] border-[3px] border-ink bg-white p-6 shadow-[6px_6px_0_#16110f]" style={{ "--r": "0.6deg" } as CSSProperties}>
+            <p className="font-display text-xl">ONE SERIOUS THING...</p>
+            <p className="mt-2 leading-relaxed text-ink/80">
+              Meme tokens are risky and can lose all their value. Tokens cannot be withdrawn during the 30-day lock. Additional transaction costs apply.
+            </p>
+            <p className="mt-2 leading-relaxed text-ink/80">
+              Read our{" "}
+              <Link href="/risk" className="font-bold underline decoration-2 underline-offset-2 hover:text-orange">
+                Risk Disclosure
+              </Link>{" "}
+              and{" "}
+              <Link href="/treasury" className="font-bold underline decoration-2 underline-offset-2 hover:text-orange">
+                Treasury &amp; Fees
+              </Link>{" "}
+              details before minting.
+            </p>
+          </aside>
         </div>
       </div>
     </div>
