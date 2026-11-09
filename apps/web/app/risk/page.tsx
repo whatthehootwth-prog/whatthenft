@@ -17,7 +17,7 @@ export default function RiskPage() {
           <li>Meme tokens are extremely volatile and illiquid. Every token in a basket can lose all of its value, including WTH.</li>
           <li>Your basket is bought at market prices at execution time. You receive whatever the pool returns within the 2% slippage limit. Pool fees (0.1%–1%) apply.</li>
           <li>The estimated NAV shown on a card is a live sell quote, not a guarantee. Selling all tokens at once may return less, especially for thin pools.</li>
-          <li>Nothing here is yield, interest, a fund, a savings product or a promise of returns. WTH buybacks are not guaranteed to happen at any size or to affect any price.</li>
+          <li>Nothing here is yield, interest, a fund, a savings product or a promise of returns. WTH buybacks and any WTH distributions are not guaranteed to happen at any size or time, or to affect any price.</li>
         </ul>
         <h2>Lock and liquidity risk</h2>
         <ul>

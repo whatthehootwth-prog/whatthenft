@@ -8,6 +8,28 @@ importers:
 
   .: {}
 
+  apps/keeper:
+    dependencies:
+      '@wtn/chain':
+        specifier: workspace:*
+        version: link:../../packages/chain
+      near-api-js:
+        specifier: 6.5.1
+        version: 6.5.1(54f71d86ad09ccd0ed0cf4d1972dabc3)
+    devDependencies:
+      '@types/node':
+        specifier: '24'
+        version: 24.19.2
+      tsx:
+        specifier: ^4.20.0
+        version: 4.23.15
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^5.1.0
+        version: 5.1.0(@types/node@24.19.2)(vite@8.3.6(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
+
   apps/web:
     dependencies:
       '@near-wallet-selector/core':

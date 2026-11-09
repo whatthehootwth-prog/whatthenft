@@ -57,3 +57,49 @@ Same as testnet with `wrap.near`, `v2.ref-finance.near`, `dclv2.ref-labs.near`, 
 4. Resolve anomalies with `reconcile_anomaly`; guide payers to `retry_order` / `unwind_order`.
 5. Post status on `/status` and socials with tx links. Never promise outcomes not yet on-chain.
 6. Contract upgrade path: owner multisig redeploy with state migration reviewed by auditor; there is intentionally no admin "rescue funds" function.
+
+## Buyback treasury + $WTH holder distribution
+
+**What it is.** `contracts/buyback` is the buyback treasury account. Point the core contract's
+`treasury_account` at it (`set_revenue_accounts`), so it receives the 5% mint share and the
+treasury half of the 3% royalty as plain NEAR. `apps/keeper` is a small bot that presses its buttons.
+
+**Flow.** When spendable NEAR is worth ≥ $20 (Rhea on-chain NEAR/USDC quote and CoinGecko must
+agree within 10%), the keeper calls `buy(amount)`: the contract wraps NEAR, takes an on-chain
+Rhea quote, swaps with `min_out = quote × (1 − max_slippage)`, credits only the WTH that verifiably
+arrived, and unwraps unused wNEAR. The keeper then snapshots $WTH holders (FastNEAR top list,
+every balance re-read on-chain), splits the WTH pro-rata, writes `apps/keeper/rounds/<net>-round-N.json`,
+and calls `start_round(sha256, total)` → `pay(batch of ≤20)` × N → `close_round()`. Close reconciles
+from the real WTH balance, so failed or unpaid amounts roll over.
+
+**Rules (defaults).** Min holding 1,000 WTH · min payout 1 WTH (smaller amounts roll over) · excluded:
+`dclv2.ref-labs.near`, `v2.ref-finance.near`, `intents.near`, `launchpad.justhoot.near`, the WTH
+token contract, the buyback account and the keeper. Add more with `EXCLUDE=a.near,b.near`.
+
+**Contract limits.** Keeper can only buy (capped per buy, rate limited, slippage ≤ 10% hard cap) and pay
+inside an open round; it can never send NEAR. One operation at a time. Owner (use a multisig) can
+pause, change keeper/limits and — only while paused — `emergency_withdraw` (logged on-chain).
+An unverifiable swap auto-pauses the contract.
+
+**Deploy (testnet first; mainnet only with explicit approval of account names + budget).**
+```bash
+docker run --rm -v "$PWD:/work" -w /work/contracts/buyback wtn-build cargo near build non-reproducible-wasm --no-abi
+near contract deploy <buyback>.testnet use-file contracts/target/near/wtn_buyback/wtn_buyback.wasm \
+  with-init-call new json-args '{"owner":"<owner>","keeper":"<keeper>","wrap_near":"wrap.testnet",
+  "rhea_dcl":"dclv2.ref-dev.testnet","wth":"<test-wth>.testnet","pool_id":"wrap.testnet|<test-wth>.testnet|10000",
+  "limits":{"max_slippage_bps":300,"max_spend_per_buy":"10000000000000000000000000",
+  "min_buy_interval_ns":"3600000000000","reserve":"1000000000000000000000000"}}' \
+  prepaid-gas '100 Tgas' attached-deposit '0 NEAR' network-config testnet
+```
+
+**Run the keeper.** Secrets come from the environment only — never commit them.
+```bash
+# read-only preview of how 1,000 WTH would be split across today's holders (mainnet data)
+pnpm --filter @wtn/keeper preview 1000
+# dry run against a deployed buyback contract (sends nothing)
+NETWORK=testnet BUYBACK_CONTRACT=<buyback>.testnet WTH_TOKEN=<test-wth>.testnet TEST_NEAR_USD=3.6 pnpm --filter @wtn/keeper buyback --distribute
+# live, every 5 minutes
+NETWORK=testnet BUYBACK_CONTRACT=... WTH_TOKEN=... KEEPER_ACCOUNT=<keeper>.testnet KEEPER_PRIVATE_KEY=ed25519:... \
+  pnpm --filter @wtn/keeper buyback --send --watch 5
+```
+`TEST_NEAR_USD` is refused on mainnet. Publish every `rounds/*-round-N.json` (its sha256 is on-chain).

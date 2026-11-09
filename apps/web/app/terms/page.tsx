@@ -18,7 +18,7 @@ export default function TermsPage() {
         <h2>1. What the service is</h2>
         <p>Software that lets you interact with public NEAR smart contracts to mint collectible NFTs whose contract-held token baskets are attributed to each NFT.</p>
         <h2>2. No advice, no promises</h2>
-        <p>Nothing on this site is financial, investment, legal or tax advice. No returns, yield, liquidity or buyback effect is promised.</p>
+        <p>Nothing on this site is financial, investment, legal or tax advice. No returns, yield, liquidity, buyback, distribution or price effect is promised.</p>
         <h2>3. Your responsibilities</h2>
         <ul>
           <li>You are legally allowed to use this service where you live, and you are not a sanctioned person.</li>
