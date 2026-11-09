@@ -56,7 +56,8 @@ describe("executable minimum engine", () => {
     expect(r.targetFeasible).toBe(false);
     expect(r.executableMinimum).not.toBeNull();
     expect(r.executableMinimum! > parseNear("0.1")).toBe(true);
-    expect(r.executableMinimum).toBe(138_888_888_888_888_888_888_889n);
+    // required basket 0.125 NEAR / 85% basket share, rounded up
+    expect(r.executableMinimum).toBe(147_058_823_529_411_764_705_883n);
     expect(r.check(parseNear("0.1")).ok).toBe(false);
     expect(r.check(parseNear("0.1")).reason).toMatch(/minimum/i);
   });

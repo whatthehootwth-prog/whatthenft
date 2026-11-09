@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { ArtMutant } from "@/components/ArtMutant";
+import { Decor } from "@/components/Decor";
 import { BARE, MEMES, SLOT_LABEL, SLOT_ORDER, layerFor, memeColor, memeLabel, mixFor, providers, type MutantSpec, type Pick, type Slot } from "@/lib/art";
 import { PRESETS } from "@/lib/presets";
 import { PartCallouts } from "@/components/home/PartCallouts";
@@ -27,6 +28,36 @@ const OPTIONS: Record<Slot, Pick[]> = Object.fromEntries(
   ]),
 ) as Record<Slot, Pick[]>;
 
+
+/** Floating hero stickers: [top %, left %, kind, colour, size, idle animation, intro delay ms]. */
+const HERO_DECOR: [number, number, string, string, number, string, number][] = [
+  [14, 4, "star", "#ffe14d", 42, "spin-slow", 1100],
+  [74, 3, "squiggle", "#ff3ea5", 84, "float-y", 1200],
+  [10, 46, "ring", "#2ee6ff", 40, "float-y", 1300],
+  [86, 44, "plus", "#b8ff3d", 36, "spin-slow", 1400],
+  [16, 93, "zigzag", "#b48cff", 74, "wiggle", 1500],
+  [78, 92, "bang", "#ff7a1a", 56, "wiggle", 1600],
+];
+
+/** Static cards stacked behind the live one. */
+function BackCard({ spec, frame, name, rot, x, y }: { spec: MutantSpec; frame: string; name: string; rot: number; x: number; y: number }) {
+  return (
+    <div className="absolute inset-0" style={{ transform: `translate(${x}px, ${y}px) rotate(${rot}deg)` }} aria-hidden="true">
+      <div className={`game-card ${frame} h-full w-full rounded-[26px] border-[4px] border-ink p-[9px] shadow-[8px_10px_0_#16110f]`}>
+        <div className="flex h-full flex-col overflow-hidden rounded-[18px] border-[3px] border-ink bg-[#fff8e7]">
+          <p className="truncate px-3 pt-2 font-display text-[1.3rem] leading-none">{name}</p>
+          <div className="relative mx-2.5 mt-2 aspect-square overflow-hidden rounded-[14px] border-[3px] border-ink bg-white/70">
+            <ArtMutant spec={spec} className="h-full w-full" label="" />
+          </div>
+          <div className="mx-3 mt-3 space-y-1.5">
+            <div className="h-2.5 w-3/4 rounded-full bg-ink/15" />
+            <div className="h-2.5 w-1/2 rounded-full bg-ink/15" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const tint = (c: string, pct: number, base = "#ffffff") => `color-mix(in srgb, ${c} ${pct}%, ${base})`;
 
@@ -113,38 +144,64 @@ export function HeroClone() {
     >
       {/* Background: rays + dots in the card's colour */}
       <div
-        className="spin-slow pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[max(180vw,1800px)] -translate-x-1/2 -translate-y-1/2 lg:left-[70%]"
+        className="intro-rays pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[max(180vw,1800px)] -translate-x-1/2 -translate-y-1/2 lg:left-[70%]"
         aria-hidden="true"
-        style={{ background: "repeating-conic-gradient(from 0deg, rgba(255,255,255,0.4) 0deg 8deg, transparent 8deg 20deg)" }}
-      />
+      >
+        <div className="spin-slow h-full w-full" style={{ background: "repeating-conic-gradient(from 0deg, rgba(255,255,255,0.4) 0deg 8deg, transparent 8deg 20deg)" }} />
+      </div>
       <div className="halftone-white pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
+
+      {/* Abstract layer: soft blobs + floating stickers */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="mk-blob absolute -bottom-40 left-[35%] size-[480px] rounded-full bg-[#ff9ed1]/40 blur-3xl" style={{ animationDelay: "-6s" }} />
+        {HERO_DECOR.map(([top, left, kind, color, size, anim, d], i) => (
+          <div key={i} className={`absolute ${i % 2 ? "hidden md:block" : ""}`} style={{ top: `${top}%`, left: `${left}%` }}>
+            <div className="intro-pop" style={{ "--d": `${d}ms` } as CSSProperties}>
+              <div className={anim} style={{ animationDelay: `${i * -0.7}s` }}>
+                <Decor kind={kind} color={color} size={size} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <div className="relative grid w-full items-center gap-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10">
       {/* Copy */}
       <div className="text-center lg:text-left">
-        <SeasonStats live={live} />
+        <div className="intro-down" style={{ "--d": "150ms" } as CSSProperties}>
+          <SeasonStats live={live} />
+        </div>
         <h1 className="mad-title mt-7 text-[clamp(2.8rem,6.8vw,5.4rem)] [--ts:#fff]">
-          ONE OWL.
-          <br />
-          TOO MANY
-          <br />
-          <span className="text-orange [--ts:#16110f]">MEMES.</span>
+          <span className="intro-drop block" style={{ "--d": "300ms" } as CSSProperties}>ONE OWL.</span>
+          <span className="intro-drop block" style={{ "--d": "450ms" } as CSSProperties}>TOO MANY</span>
+          <span className="intro-drop block text-orange [--ts:#16110f]" style={{ "--d": "600ms" } as CSSProperties}>
+            <span className="intro-wobble inline-block" style={{ "--d": "1300ms" } as CSSProperties}>MEMES.</span>
+          </span>
         </h1>
-        <p className="mx-auto mt-6 max-w-xl text-[clamp(1.1rem,1.6vw,1.3rem)] font-semibold leading-relaxed text-ink lg:mx-0">
+        <p style={{ "--d": "800ms" } as CSSProperties} className="intro-up mx-auto mt-6 max-w-xl text-[clamp(1.1rem,1.6vw,1.3rem)] font-semibold leading-relaxed text-ink lg:mx-0">
           A ridiculous mix of meme characters, backed by real tokens. Collect, trade, or redeem.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
-          <Link href="/mint" className="btn-mad !min-h-[66px] !px-10 !text-[1.6rem]">
-            MINT NOW
-          </Link>
-          <Link href="/wth" className="btn-pop !min-h-[66px] !px-9 !text-[1.2rem]">
-            HOW IT WORKS
-          </Link>
+          <span className="intro-pop" style={{ "--d": "950ms" } as CSSProperties}>
+            <Link href="/mint" className="btn-mad !min-h-[66px] !px-10 !text-[1.6rem]">
+              MINT NOW
+            </Link>
+          </span>
+          <span className="intro-pop" style={{ "--d": "1050ms" } as CSSProperties}>
+            <Link href="/wth" className="btn-pop !min-h-[66px] !px-9 !text-[1.2rem]">
+              HOW IT WORKS
+            </Link>
+          </span>
         </div>
       </div>
 
       {/* The card */}
-      <div className="relative mx-auto" style={{ transform: `rotate(${TILT}deg)` }}>
+      <div className="intro-card relative mx-auto" style={{ "--d": "350ms" } as CSSProperties}>
+      <div className="relative" style={{ transform: `rotate(${TILT}deg)` }}>
+        <div className="intro-fan absolute inset-0" style={{ "--d": "900ms" } as CSSProperties}>
+          <BackCard spec={PRESETS[3]!.spec} frame="frame-EPIC" name="HODLER.EXE" rot={-16} x={-58} y={18} />
+          <BackCard spec={PRESETS[1]!.spec} frame="frame-RARE" name="SIR PIXEL THE COOL" rot={-7} x={-26} y={6} />
+        </div>
         <div className="float-y">
           <div ref={wrapRef} className="jelly relative">
           <article className={`game-card ${rarity.frame} relative w-[min(80vw,360px)] rounded-[26px] border-[4px] border-ink p-[9px] shadow-[12px_14px_0_#16110f]`}>
@@ -213,6 +270,7 @@ export function HeroClone() {
           )}
           </div>
         </div>
+      </div>
       </div>
       </div>
     </section>

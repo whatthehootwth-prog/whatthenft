@@ -474,3 +474,100 @@
   .mk-blob, .mk-slide, .mk-bar { animation: none !important; }
   .mk-card, .mk-card:hover { transition: none; transform: none; }
 }
+
+/* ===== Homepage hero: on-load intro + orbits ===== */
+.intro-down, .intro-drop, .intro-up, .intro-pop, .intro-card, .intro-rays, .intro-fan { animation-delay: var(--d, 0ms); animation-fill-mode: both; }
+.intro-down { animation: intro-down 650ms cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: var(--d, 0ms); }
+.intro-drop { animation: intro-drop 750ms cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: var(--d, 0ms); }
+.intro-up { animation: intro-up 700ms ease-out both; animation-delay: var(--d, 0ms); }
+.intro-pop { display: inline-block; animation: intro-pop 600ms cubic-bezier(0.34, 1.7, 0.64, 1) both; animation-delay: var(--d, 0ms); }
+.intro-card { animation: intro-card 1100ms cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: var(--d, 0ms); }
+.intro-rays { animation: intro-rays 1400ms ease-out both; }
+.intro-fan { animation: intro-fan 800ms cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: var(--d, 0ms); transform-origin: 50% 90%; }
+.intro-wobble { animation: intro-wobble 900ms ease-in-out both; animation-delay: var(--d, 0ms); }
+@keyframes intro-down { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: none; } }
+@keyframes intro-drop { 0% { opacity: 0; transform: translateY(-80px) rotate(-6deg) scale(1.15); } 100% { opacity: 1; transform: none; } }
+@keyframes intro-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes intro-pop { 0% { opacity: 0; transform: scale(0.3) rotate(-12deg); } 100% { opacity: 1; transform: none; } }
+@keyframes intro-card {
+  0% { opacity: 0; transform: translate(60vw, -30vh) rotate(60deg) scale(0.6); }
+  70% { opacity: 1; transform: translate(0, 0) rotate(-4deg) scale(1.04); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes intro-rays { from { opacity: 0; scale: 0.4; } to { opacity: 1; scale: 1; } }
+@keyframes intro-fan { from { opacity: 0; transform: rotate(14deg) translate(40px, 0); } to { opacity: 1; transform: none; } }
+@keyframes intro-wobble {
+  0%, 100% { transform: none; }
+  20% { transform: rotate(-6deg) scale(1.12); }
+  45% { transform: rotate(5deg) scale(1.08); }
+  70% { transform: rotate(-3deg); }
+}
+.orbit { position: relative; animation: spin-slow 60s linear infinite; }
+.orbit-rev { position: relative; animation: spin-slow 45s linear infinite reverse; }
+@media (prefers-reduced-motion: reduce) {
+  .intro-down, .intro-drop, .intro-up, .intro-pop, .intro-card, .intro-rays, .intro-fan, .intro-wobble, .orbit, .orbit-rev { animation: none !important; }
+}
+
+/* ===== My NFTs: collection binder ===== */
+.album-desk {
+  background:
+    repeating-linear-gradient(90deg, rgba(120, 72, 30, 0.06) 0 2px, transparent 2px 46px),
+    linear-gradient(180deg, #ffe7c2 0%, #ffd9a8 100%);
+}
+.binder-cover {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.22), transparent 40%),
+    linear-gradient(135deg, #8b5cff 0%, #6d3ee6 100%);
+  outline: 2px dashed rgba(255, 255, 255, 0.45);
+  outline-offset: -12px;
+}
+.binder-page {
+  background:
+    radial-gradient(circle, rgba(22, 17, 15, 0.05) 1px, transparent 1.4px) 0 0 / 16px 16px,
+    #fffaf0;
+}
+.page-left { box-shadow: inset -18px 0 24px -18px rgba(22, 17, 15, 0.25); }
+.page-right { box-shadow: inset 18px 0 24px -18px rgba(22, 17, 15, 0.25); }
+.binder-spine { background: linear-gradient(90deg, #e9dcc2, #fffaf0 45%, #fffaf0 55%, #e9dcc2); }
+.binder-ring {
+  width: 30px;
+  height: 14px;
+  border-radius: 999px;
+  border: 3px solid #16110f;
+  background: linear-gradient(180deg, #ffffff, #b9b9c9 55%, #8e8ea3);
+  box-shadow: 0 3px 0 rgba(22, 17, 15, 0.35);
+}
+.sleeve-sheen {
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 0.35) 80%, rgba(255, 255, 255, 0) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+}
+.pocket { animation: reveal-pop 450ms var(--ease) both; }
+.sticky-note {
+  min-width: 150px;
+  padding: 0.7rem 0.9rem;
+  border: 3px solid #16110f;
+  border-radius: 6px 6px 14px 6px;
+  box-shadow: 4px 4px 0 #16110f;
+}
+.page-turn-next { animation: page-turn-next 520ms cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: left center; }
+.page-turn-prev { animation: page-turn-prev 520ms cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: right center; }
+@keyframes page-turn-next { from { opacity: 0.2; transform: rotateY(-70deg); } to { opacity: 1; transform: none; } }
+@keyframes page-turn-prev { from { opacity: 0.2; transform: rotateY(70deg); } to { opacity: 1; transform: none; } }
+.card-pull { animation: card-pull 520ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes card-pull { from { opacity: 0; transform: translateY(60px) scale(0.85) rotate(4deg); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .pocket, .page-turn-next, .page-turn-prev, .card-pull { animation: none !important; }
+}
+
+/* WTH page: the owl walks along the road while you scroll */
+.rider-face { transition: transform 200ms ease; }
+[data-face="left"] > .rider-face { transform: scaleX(-1); }
+.rider-body { animation: rider-idle 1.4s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.walking .rider-body { animation: rider-walk 0.34s ease-in-out infinite alternate; }
+@keyframes rider-idle { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(-4px) rotate(3deg); } }
+@keyframes rider-walk {
+  0% { transform: translateY(0) rotate(-12deg) scaleY(0.94); }
+  50% { transform: translateY(-9px) rotate(0deg) scaleY(1.04); }
+  100% { transform: translateY(0) rotate(12deg) scaleY(0.94); }
+}
+@media (prefers-reduced-motion: reduce) { .rider-body, .walking .rider-body { animation: none; } }

@@ -10,7 +10,7 @@ import { useWallet } from "@/lib/wallet";
 const NAV = [
   { href: "/", label: "Home", match: (p: string) => p === "/" },
   { href: "/marketplace", label: "Marketplace", match: (p: string) => p.startsWith("/marketplace") || p.startsWith("/nft") },
-  { href: "/my-nfts", label: "My NFTs", match: (p: string) => p.startsWith("/my-nfts") },
+  { href: "/my-nfts", label: "My Collection", match: (p: string) => p.startsWith("/my-nfts") },
   { href: "/wth", label: "WTH is this?!", match: (p: string) => p.startsWith("/wth") },
 ];
 

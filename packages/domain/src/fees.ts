@@ -1,18 +1,18 @@
 import { BPS, assertBps } from "./units";
 
 export interface MintFeeSchedule {
-  basketBps: number; // default 9000
-  creatorBps: number; // default 500
+  basketBps: number; // default 8500
+  creatorBps: number; // default 1000
   treasuryBps: number; // default 500
 }
 
 export interface RoyaltySchedule {
-  royaltyBps: number; // default 250 (2.5% of sale price)
-  creatorShareOfRoyaltyBps: number; // default 1000 (10% of royalty)
+  royaltyBps: number; // default 300 (3% of sale price)
+  creatorShareOfRoyaltyBps: number; // default 5000 (50% of royalty)
 }
 
-export const DEFAULT_MINT_FEES: MintFeeSchedule = { basketBps: 9000, creatorBps: 500, treasuryBps: 500 };
-export const DEFAULT_ROYALTY: RoyaltySchedule = { royaltyBps: 250, creatorShareOfRoyaltyBps: 1000 };
+export const DEFAULT_MINT_FEES: MintFeeSchedule = { basketBps: 8500, creatorBps: 1000, treasuryBps: 500 };
+export const DEFAULT_ROYALTY: RoyaltySchedule = { royaltyBps: 300, creatorShareOfRoyaltyBps: 5000 };
 
 export function validateMintFees(s: MintFeeSchedule): void {
   assertBps("basketBps", s.basketBps);

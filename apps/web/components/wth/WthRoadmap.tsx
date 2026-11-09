@@ -35,7 +35,7 @@ const STOPS: Stop[] = [
     body: (
       <>
         <p>Your mutant&apos;s body parts determine which meme tokens go into its bag.</p>
-        <p><strong>90% of your base mint price buys real tokens</strong>, including a guaranteed 20% WTH allocation.</p>
+        <p><strong>85% of your base mint price buys real tokens</strong>, including a guaranteed 20% WTH allocation.</p>
       </>
     ),
     art: (
@@ -108,8 +108,8 @@ const STOPS: Stop[] = [
     body: (
       <>
         <ul className="space-y-1.5">
-          <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-lime text-center font-display">90%</span>Your meme-token bag</li>
-          <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-sun text-center font-display">5%</span>WTH creator</li>
+          <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-lime text-center font-display">85%</span>Your meme-token bag</li>
+          <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-sun text-center font-display">10%</span>WTH creator</li>
           <li className="flex items-center gap-2"><span className="w-12 shrink-0 rounded-md border-2 border-ink bg-aqua text-center font-display">5%</span>WTH buyback treasury</li>
         </ul>
         <p>Marketplace sales also contribute royalties to the WTH ecosystem.</p>
@@ -117,13 +117,13 @@ const STOPS: Stop[] = [
     ),
     art: (
       <div className="relative">
-        <svg width="190" height="190" viewBox="-1 -1 2 2" className="-rotate-90 drop-shadow-[5px_6px_0_rgba(22,17,15,0.9)]" aria-label="90% bag, 5% creator, 5% treasury">
+        <svg width="190" height="190" viewBox="-1 -1 2 2" className="-rotate-90 drop-shadow-[5px_6px_0_rgba(22,17,15,0.9)]" aria-label="85% bag, 10% creator, 5% buyback treasury">
           <circle r="0.95" fill="#b8ff3d" stroke="#16110f" strokeWidth="0.06" />
-          <path d="M0 0 L1 0 A1 1 0 0 1 0.951 0.309 Z" transform="scale(0.95)" fill="#ffe14d" stroke="#16110f" strokeWidth="0.06" />
-          <path d="M0 0 L0.951 0.309 A1 1 0 0 1 0.809 0.588 Z" transform="scale(0.95)" fill="#2ee6ff" stroke="#16110f" strokeWidth="0.06" />
+          <path d="M0 0 L1 0 A1 1 0 0 1 0.809 0.588 Z" transform="scale(0.95)" fill="#ffe14d" stroke="#16110f" strokeWidth="0.06" />
+          <path d="M0 0 L0.809 0.588 A1 1 0 0 1 0.588 0.809 Z" transform="scale(0.95)" fill="#2ee6ff" stroke="#16110f" strokeWidth="0.06" />
         </svg>
-        <span className="absolute inset-0 grid place-items-center font-display text-4xl">90%</span>
-        <span className="absolute -right-10 top-2 rounded-lg border-2 border-ink bg-sun px-1.5 text-xs font-extrabold">5% creator</span>
+        <span className="absolute inset-0 grid place-items-center font-display text-4xl">85%</span>
+        <span className="absolute -right-10 top-2 rounded-lg border-2 border-ink bg-sun px-1.5 text-xs font-extrabold">10% creator</span>
         <span className="absolute -right-12 top-10 rounded-lg border-2 border-ink bg-aqua px-1.5 text-xs font-extrabold">5% treasury</span>
       </div>
     ),
@@ -218,6 +218,8 @@ export function WthRoadmap() {
     if (!geo || !path || !wrap) return;
     const L = path.getTotalLength();
     setLen(L);
+    let stopT: ReturnType<typeof setTimeout> | undefined;
+    let lastX = 0;
     const onScroll = () => {
       const r = wrap.getBoundingClientRect();
       const targetY = window.innerHeight * 0.5 - r.top;
@@ -230,7 +232,16 @@ export function WthRoadmap() {
       }
       const at = Math.max(0, Math.min(L, lo));
       const p = path.getPointAtLength(at);
-      if (travRef.current) travRef.current.style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%, -60%)`;
+      const rider = travRef.current;
+      if (rider) {
+        rider.style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%, -60%)`;
+        // Walk while scrolling; face the way the road is heading; idle once scrolling stops.
+        if (Math.abs(p.x - lastX) > 0.5) rider.dataset.face = p.x < lastX ? "left" : "right";
+        lastX = p.x;
+        rider.classList.add("walking");
+        clearTimeout(stopT);
+        stopT = setTimeout(() => rider.classList.remove("walking"), 220);
+      }
       setDone(at);
     };
     onScroll();
@@ -238,6 +249,7 @@ export function WthRoadmap() {
     window.addEventListener("resize", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(stopT);
       window.removeEventListener("resize", onScroll);
     };
   }, [geo]);
@@ -304,8 +316,10 @@ export function WthRoadmap() {
 
         {/* Rider */}
         <div ref={travRef} className="pointer-events-none absolute left-0 top-0 z-20" aria-hidden="true">
-          <div className="hop-slow">
+          <div className="rider-face">
+          <div className="rider-body">
             <Image src="/logo.webp" alt="" width={64} height={64} className="size-14 drop-shadow-[3px_4px_0_rgba(22,17,15,0.85)] md:size-16" />
+          </div>
           </div>
         </div>
 

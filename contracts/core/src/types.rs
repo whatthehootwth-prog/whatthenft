@@ -56,9 +56,9 @@ pub struct MintFees {
 #[near(serializers = [borsh, json])]
 #[derive(Clone, Debug, PartialEq)]
 pub struct RoyaltyConfig {
-    /// Share of a completed sale price. Default 250 (2.5%).
+    /// Share of a completed sale price. Default 300 (3%).
     pub royalty_bps: u16,
-    /// Share of the royalty paid to the creator; rest to treasury. Default 1000 (10%).
+    /// Share of the royalty paid to the creator; rest to treasury. Default 5000 (50%).
     pub creator_share_bps: u16,
 }
 

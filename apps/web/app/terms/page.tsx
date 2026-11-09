@@ -26,7 +26,7 @@ export default function TermsPage() {
           <li>You understand the risks in the risk disclosure.</li>
         </ul>
         <h2>4. Fees</h2>
-        <p>As shown before every signature: 5% creator and 5% treasury of the base mint price, 2.5% royalty on native marketplace sales, storage and network costs.</p>
+        <p>As shown before every signature: 10% creator and 5% buyback treasury of the base mint price, 3% royalty on native marketplace sales, storage and network costs.</p>
         <h2>5. Artwork</h2>
         <p>Partner meme artwork is used only with confirmed permission. Owning an NFT grants personal display rights to its artwork, not commercial or trademark rights. [To be finalised by counsel.]</p>
         <h2>6. Availability</h2>

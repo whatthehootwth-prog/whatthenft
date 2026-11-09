@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { DEFAULT_ALLOCATION_RULE, SLOTS, formatNear, legAmounts, parseNear, splitMint, splitRoyalty, tokenWeights, type SlotProviders } from "../src";
 
-describe("mint split 90/5/5", () => {
-  it("0.1 NEAR -> 0.09 / 0.005 / 0.005 exactly", () => {
+describe("mint split 85/10/5", () => {
+  it("0.1 NEAR -> 0.085 / 0.01 / 0.005 exactly", () => {
     const s = splitMint(parseNear("0.1"));
-    expect(s.basket).toBe(parseNear("0.09"));
-    expect(s.creator).toBe(parseNear("0.005"));
+    expect(s.basket).toBe(parseNear("0.085"));
+    expect(s.creator).toBe(parseNear("0.01"));
     expect(s.treasury).toBe(parseNear("0.005"));
   });
 
@@ -14,8 +14,8 @@ describe("mint split 90/5/5", () => {
     for (const base of samples) {
       const s = splitMint(base);
       expect(s.basket + s.creator + s.treasury).toBe(base);
-      expect(s.basket * 10_000n).toBeGreaterThanOrEqual(base * 9_000n);
-      expect(s.creator).toBe((base * 500n) / 10_000n);
+      expect(s.basket * 10_000n).toBeGreaterThanOrEqual(base * 8_500n);
+      expect(s.creator).toBe((base * 1_000n) / 10_000n);
     }
   });
 
@@ -24,13 +24,13 @@ describe("mint split 90/5/5", () => {
   });
 });
 
-describe("royalty 2.5% with 10/90 split", () => {
-  it("10 NEAR sale -> 9.75 seller, 0.025 creator, 0.225 treasury", () => {
+describe("royalty 3% with 50/50 split", () => {
+  it("10 NEAR sale -> 9.7 seller, 0.15 creator, 0.15 treasury", () => {
     const r = splitRoyalty(parseNear("10"));
-    expect(r.sellerProceeds).toBe(parseNear("9.75"));
-    expect(r.creator).toBe(parseNear("0.025"));
-    expect(r.treasury).toBe(parseNear("0.225"));
-    expect(r.royalty).toBe(parseNear("0.25"));
+    expect(r.sellerProceeds).toBe(parseNear("9.7"));
+    expect(r.creator).toBe(parseNear("0.15"));
+    expect(r.treasury).toBe(parseNear("0.15"));
+    expect(r.royalty).toBe(parseNear("0.3"));
   });
 
   it("conserves price for small and large inputs", () => {

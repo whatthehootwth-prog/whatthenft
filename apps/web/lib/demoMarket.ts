@@ -135,3 +135,44 @@ export function ago(mins: number) {
   if (mins < 1440) return `${Math.floor(mins / 60)}h ago`;
   return `${Math.floor(mins / 1440)}d ago`;
 }
+
+/* ---------- My NFTs demo ---------- */
+
+export type MineState = "locked" | "unlocked" | "empty" | "listed";
+
+export interface DemoMine {
+  item: DemoItem;
+  state: MineState;
+  /** Estimated bag value in NEAR (0 when empty). */
+  bag: number;
+  /** Days until unlock (locked/listed). */
+  unlockInDays: number;
+  /** Listing price when listed. */
+  listPrice: number | null;
+  mintedDaysAgo: number;
+}
+
+export const DEMO_WALLET = "you.demo.near";
+
+const MINE_PLAN: [number, MineState, number, number][] = [
+  // [DEMO_ITEMS index, state, bag NEAR, unlock days]
+  [8, "locked", 0.43, 21],
+  [41, "locked", 0.18, 9],
+  [77, "listed", 0.92, 14],
+  [23, "unlocked", 0.27, 0],
+  [96, "unlocked", 1.35, 0],
+  [55, "empty", 0, 0],
+  [12, "locked", 0.09, 28],
+];
+
+export const DEMO_MINE: DemoMine[] = MINE_PLAN.map(([idx, state, bag, days], i) => ({
+  item: DEMO_ITEMS[idx]!,
+  state,
+  bag,
+  unlockInDays: days,
+  listPrice: state === "listed" ? 1.6 : null,
+  mintedDaysAgo: 30 - days + i,
+}));
+
+/** One order still being processed, to show the hatching tracker. */
+export const DEMO_HATCHING = { item: DEMO_ITEMS[64]!, paid: 0.1, step: 2 };

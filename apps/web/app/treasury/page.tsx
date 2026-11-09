@@ -26,13 +26,13 @@ export default function TreasuryPage() {
 
   return (
     <>
-      <H1 kicker="where the 5% goes">Treasury & revenue</H1>
+      <H1 kicker="where the money goes">Treasury & revenue</H1>
       <div className="space-y-6">
         <Panel>
           <h2 className="font-display text-2xl">The rules</h2>
           <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[0.95rem]">
-            <li>Each mint: 5% of the base price to the WTH creator account, 5% to the WTH buyback treasury — paid only after the card is fully funded. The 90% basket belongs to the card, never to the project.</li>
-            <li>Each native marketplace sale: 2.5% royalty, split 10% creator / 90% treasury.</li>
+            <li>Each mint: 10% of the base price to the WTH creator account, 5% to the WTH buyback treasury — paid only after the card is fully funded. The 85% basket belongs to the card, never to the project.</li>
+            <li>Each native marketplace sale: 3% royalty, split 50% creator / 50% treasury.</li>
             <li>Treasury funds are kept separate from creator revenue and from customer baskets. The vault contract has no function that can move basket tokens to either account.</li>
             <li>Buybacks: whitelisted route, max slippage, size limits, pause switch, keeper without withdrawal rights. Bought WTH is held, not burned, unless separately authorised.</li>
             <li>No buyback is promised to move any price.</li>

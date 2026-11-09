@@ -91,7 +91,7 @@ export function MintClient() {
     try {
       const r = await call({ receiverId: CORE_CONTRACT, method: "mint", args: { season_id: season.id, base: parsed.toString() }, deposit: attach, tgas: 300 });
       const id = typeof r.value === "string" ? r.value : null;
-      if (!id) throw new Error(`Sent${r.txHash ? ` (tx ${r.txHash})` : ""}, but no order id came back. Check My NFTs for the open order.`);
+      if (!id) throw new Error(`Sent${r.txHash ? ` (tx ${r.txHash})` : ""}, but no order id came back. Check My Collection for the open order.`);
       setOrder({ id, tx: r.txHash });
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
@@ -206,7 +206,7 @@ export function MintClient() {
               </div>
               <ul className="mt-3 grid gap-2 text-sm sm:grid-cols-3">
                 <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
-                  <span className="font-display text-base text-ink underline decoration-orange decoration-[3px] underline-offset-2">90%</span> of the base buys real memes
+                  <span className="font-display text-base text-ink underline decoration-orange decoration-[3px] underline-offset-2">85%</span> of the base buys real memes
                 </li>
                 <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
                   <span className="font-display text-base text-ink underline decoration-orange decoration-[3px] underline-offset-2">30 days</span> locked after funding

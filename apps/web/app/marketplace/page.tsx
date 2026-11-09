@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { ArtMutant } from "@/components/ArtMutant";
 import { Decor } from "@/components/Decor";
+import { N, Stars, Stat } from "@/components/MarketBits";
 import { PARTNERS, memeColor, providers } from "@/lib/art";
 import { DEMO_ACTIVITY, DEMO_HOLDERS, DEMO_ITEMS, DEMO_STATS, ago, randomActivity, type DemoActivity, type DemoItem } from "@/lib/demoMarket";
 import { TIERS, tierOf, type RarityName } from "@/lib/rarity";
@@ -21,57 +22,9 @@ const CREWS = ["WTH", ...PARTNERS.map((p) => p.displayName)];
 const crewColor = (label: string) => memeColor(PARTNERS.find((p) => p.displayName === label)?.memeId ?? "wth");
 const PAGE = 24;
 
-/** NEAR "Ⓝ" mark. */
-function N({ className = "size-[0.8em]" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={`inline-block shrink-0 ${className}`} aria-label="NEAR">
-      <path d="M5 20V4l14 16V4" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
-function useCountUp(target: number, ms = 1100) {
-  const [v, setV] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setV(target);
-    const t0 = performance.now();
-    let raf = 0;
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - t0) / ms);
-      setV(target * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, ms]);
-  return v;
-}
 
-function Stat({ label, value, near = false, decimals = 2, color }: { label: string; value: number; near?: boolean; decimals?: number; color: string }) {
-  const v = useCountUp(value);
-  return (
-    <div className="relative min-w-0 rounded-2xl border-[2.5px] border-ink bg-white px-3.5 py-2.5 shadow-[3px_3px_0_#16110f]">
-      <span className="absolute right-2.5 top-2.5 size-2.5 rounded-full border-2 border-ink" style={{ background: color }} aria-hidden="true" />
-      <p className="text-[0.66rem] font-extrabold uppercase tracking-[0.14em] text-ink/55">{label}</p>
-      <p className="mt-0.5 flex items-center gap-1 font-display text-[1.45rem] leading-none">
-        {near && <N />}
-        {v.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
-      </p>
-    </div>
-  );
-}
 
-function Stars({ n }: { n: number }) {
-  return (
-    <span className="flex" aria-label={`${n} of 5 stars`}>
-      {[0, 1, 2, 3, 4].map((i) => (
-        <svg key={i} width="10" height="10" viewBox="0 0 24 24" className="-mr-px">
-          <path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5-4.9-4.5 6.6-.8z" fill={i < n ? "#ffd23f" : "#ffffff"} stroke="#16110f" strokeWidth="2.6" strokeLinejoin="round" opacity={i < n ? 1 : 0.4} />
-        </svg>
-      ))}
-    </span>
-  );
-}
 
 function Card({ d, i, onBuy }: { d: DemoItem; i: number; onBuy: (d: DemoItem) => void }) {
   const t = tierOf(d.rarity);
@@ -172,7 +125,6 @@ const SHAPES: [number, number, string, string, number, string][] = [
 export default function MarketplacePage() {
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<Sort>("price-asc");
-  const [buyNow, setBuyNow] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [rar, setRar] = useState<Set<RarityName>>(new Set());
   const [crews, setCrews] = useState<Set<string>>(new Set());
@@ -202,7 +154,6 @@ export default function MarketplacePage() {
     const needle = q.trim().toLowerCase();
     const out = DEMO_ITEMS.filter(
       (d) =>
-        (!buyNow || d.price !== null) &&
         (rar.size === 0 || rar.has(d.rarity)) &&
         (crews.size === 0 || d.memes.some((m) => crews.has(m))) &&
         (isNaN(lo) || (d.price !== null && d.price >= lo)) &&
@@ -218,9 +169,9 @@ export default function MarketplacePage() {
       return a.id - b.id;
     });
     return out;
-  }, [q, sort, buyNow, rar, crews, min, max]);
+  }, [q, sort, rar, crews, min, max]);
 
-  useEffect(() => setLimit(PAGE), [q, sort, buyNow, rar, crews, min, max]);
+  useEffect(() => setLimit(PAGE), [q, sort, rar, crews, min, max]);
 
   const activeFilters = rar.size + crews.size + (min ? 1 : 0) + (max ? 1 : 0);
   const toggle = <T,>(s: Set<T>, v: T) => {
@@ -235,7 +186,6 @@ export default function MarketplacePage() {
     setMin("");
     setMax("");
     setQ("");
-    setBuyNow(false);
   };
   const onBuy = (d: DemoItem) => {
     setToast(`Demo only — ${d.name} isn't really for sale yet. The marketplace contract isn't live.`);
@@ -274,7 +224,7 @@ export default function MarketplacePage() {
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1.5 text-[0.78rem] font-bold">
                   <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">{DEMO_STATS.supply} items</span>
-                  <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">2.5% royalty</span>
+                  <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">3% royalty</span>
                   <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">NEAR</span>
                 </div>
               </div>
@@ -336,17 +286,6 @@ export default function MarketplacePage() {
                 </svg>
                 Filters
                 {activeFilters > 0 && <span className="grid size-5 place-items-center rounded-full bg-hot text-[0.7rem] text-white">{activeFilters}</span>}
-              </button>
-              <button
-                type="button"
-                onClick={() => setBuyNow((b) => !b)}
-                aria-pressed={buyNow}
-                className="flex h-12 items-center gap-2 rounded-2xl border-[2.5px] border-ink bg-white px-3.5 font-bold shadow-[3px_3px_0_#16110f]"
-              >
-                <span className={`relative h-6 w-10 rounded-full border-2 border-ink transition-colors ${buyNow ? "bg-lime" : "bg-page"}`}>
-                  <span className={`absolute top-0.5 size-4 rounded-full border-2 border-ink bg-white transition-all ${buyNow ? "left-[18px]" : "left-0.5"}`} />
-                </span>
-                Buy now
               </button>
             </div>
 

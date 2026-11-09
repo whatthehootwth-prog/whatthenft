@@ -145,8 +145,8 @@ fn season_cfg(now: u64, max_supply: u32) -> SeasonConfig {
         min_leg: U128(5 * MILLI),
         tiers: vec![Tier { min_base: U128(0), max_partners: 1 }, Tier { min_base: U128(NEAR), max_partners: 2 }],
         lock_ns: U64(30 * DAY_NS),
-        fees: MintFees { basket_bps: 9000, creator_bps: 500, treasury_bps: 500 },
-        royalty: RoyaltyConfig { royalty_bps: 250, creator_share_bps: 1000 },
+        fees: MintFees { basket_bps: 8500, creator_bps: 1000, treasury_bps: 500 },
+        royalty: RoyaltyConfig { royalty_bps: 300, creator_share_bps: 5000 },
         allocation: AllocationConfig { core_wth_bps: 2000, slot_weights_bps: [2000, 1000, 2500, 1000, 1000, 2500] },
         rarity_bps: [6000, 2500, 1000, 400, 100],
         wth_slot_bps: 3000,
@@ -166,8 +166,8 @@ fn season_cfg(now: u64, max_supply: u32) -> SeasonConfig {
 
 #[test]
 fn mint_split_is_exact() {
-    let f = MintFees { basket_bps: 9000, creator_bps: 500, treasury_bps: 500 };
-    assert_eq!(split_mint(100 * MILLI, &f), (90 * MILLI, 5 * MILLI, 5 * MILLI));
+    let f = MintFees { basket_bps: 8500, creator_bps: 1000, treasury_bps: 500 };
+    assert_eq!(split_mint(100 * MILLI, &f), (85 * MILLI, 10 * MILLI, 5 * MILLI));
     for base in [0u128, 1, 7, 19, 10_001, 123_456_789_012_345_678_901_234, u128::MAX / 10_000] {
         let (b, c, t) = split_mint(base, &f);
         assert_eq!(b + c + t, base);
@@ -232,9 +232,9 @@ fn royalty_payout_10_near() {
     let (_, tid) = h.mint_funded(ALICE, 100 * MILLI);
     h.env(ALICE, 0, 300, vec![]);
     let p = h.c.nft_payout(tid, U128(10 * NEAR), Some(5)).payout;
-    assert_eq!(p[&acc(ALICE)].0, 9_750 * MILLI);
-    assert_eq!(p[&acc(CREATOR)].0, 25 * MILLI);
-    assert_eq!(p[&acc(TREASURY)].0, 225 * MILLI);
+    assert_eq!(p[&acc(ALICE)].0, 9_700 * MILLI);
+    assert_eq!(p[&acc(CREATOR)].0, 150 * MILLI);
+    assert_eq!(p[&acc(TREASURY)].0, 150 * MILLI);
 }
 
 // ───────────────────────── mint lifecycle ─────────────────────────
@@ -254,9 +254,9 @@ fn full_mint_mints_only_after_all_legs_verified() {
     h.reveal_and_wrap(id);
     let o = h.c.get_order(U64(id)).unwrap();
     assert!(o.legs.len() <= 2, "low tier is WTH + at most one partner");
-    assert_eq!(o.legs.iter().map(|l| l.amount_in.0).sum::<u128>(), 90 * MILLI);
+    assert_eq!(o.legs.iter().map(|l| l.amount_in.0).sum::<u128>(), 85 * MILLI);
     assert_eq!(o.legs.iter().map(|l| l.bps as u32).sum::<u32>(), 10_000);
-    assert_eq!(h.c.wnear_accounted, 90 * MILLI);
+    assert_eq!(h.c.wnear_accounted, 85 * MILLI);
     for i in 0..o.legs.len() {
         assert_eq!(h.c.nft_total_supply().0, 0, "no tradable NFT while underfunded");
         h.run_leg_ok(id, i, 777 + i as u128);
@@ -475,7 +475,7 @@ fn sold_while_locked_buyer_inherits_full_claim_seller_cannot_redeem() {
     let appr = *h.c.nft_token(tid.clone()).unwrap().approved_account_ids.unwrap().get(&acc(MARKET)).unwrap();
     h.env(MARKET, 1, 300, vec![]);
     let payout = h.c.nft_transfer_payout(acc(BOB), tid.clone(), Some(appr), None, U128(10 * NEAR), Some(10)).payout;
-    assert_eq!(payout[&acc(ALICE)].0, 9_750 * MILLI);
+    assert_eq!(payout[&acc(ALICE)].0, 9_700 * MILLI);
     assert_eq!(h.c.nft_token(tid.clone()).unwrap().owner_id, acc(BOB));
     // stale approval cannot be reused
     h.env(MARKET, 1, 300, vec![]);
