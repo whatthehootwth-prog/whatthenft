@@ -1,170 +1,480 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { CollectibleCard } from "@/components/CollectibleCard";
-import { CORE_CONTRACT, MARKET_CONTRACT } from "@/lib/config";
-import { memeLabels, PREVIEW_GALLERY, tokenCard } from "@/lib/cards";
-import { memeLabel } from "@/lib/art";
-import { getSeasons, getTokens, RARITY, type SeasonJ, type TokenViewJ } from "@/lib/near";
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { ArtMutant } from "@/components/ArtMutant";
+import { Decor } from "@/components/Decor";
+import { PARTNERS, memeColor, providers } from "@/lib/art";
+import { DEMO_ACTIVITY, DEMO_HOLDERS, DEMO_ITEMS, DEMO_STATS, ago, randomActivity, type DemoActivity, type DemoItem } from "@/lib/demoMarket";
+import { TIERS, tierOf, type RarityName } from "@/lib/rarity";
 
-type Tab = "all" | "sale";
-const STATES = [
-  { v: "all", l: "Any state" },
-  { v: "FullyBackedLocked", l: "Locked · funded" },
-  { v: "Unlocked", l: "Unlocked · funded" },
-  { v: "RedeemedEmpty", l: "Empty (redeemed)" },
+type Sort = "price-asc" | "price-desc" | "rarity" | "recent" | "id";
+const SORTS: { v: Sort; l: string }[] = [
+  { v: "price-asc", l: "Price: low to high" },
+  { v: "price-desc", l: "Price: high to low" },
+  { v: "rarity", l: "Rarity: rarest first" },
+  { v: "recent", l: "Recently listed" },
+  { v: "id", l: "Token ID" },
+];
+const RANK: Record<RarityName, number> = { COMMON: 0, RARE: 1, EPIC: 2, LEGENDARY: 3, MYTHIC: 4 };
+const CREWS = ["WTH", ...PARTNERS.map((p) => p.displayName)];
+const crewColor = (label: string) => memeColor(PARTNERS.find((p) => p.displayName === label)?.memeId ?? "wth");
+const PAGE = 24;
+
+/** NEAR "Ⓝ" mark. */
+function N({ className = "size-[0.8em]" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={`inline-block shrink-0 ${className}`} aria-label="NEAR">
+      <path d="M5 20V4l14 16V4" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function useCountUp(target: number, ms = 1100) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setV(target);
+    const t0 = performance.now();
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - t0) / ms);
+      setV(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, ms]);
+  return v;
+}
+
+function Stat({ label, value, near = false, decimals = 2, color }: { label: string; value: number; near?: boolean; decimals?: number; color: string }) {
+  const v = useCountUp(value);
+  return (
+    <div className="relative min-w-0 rounded-2xl border-[2.5px] border-ink bg-white px-3.5 py-2.5 shadow-[3px_3px_0_#16110f]">
+      <span className="absolute right-2.5 top-2.5 size-2.5 rounded-full border-2 border-ink" style={{ background: color }} aria-hidden="true" />
+      <p className="text-[0.66rem] font-extrabold uppercase tracking-[0.14em] text-ink/55">{label}</p>
+      <p className="mt-0.5 flex items-center gap-1 font-display text-[1.45rem] leading-none">
+        {near && <N />}
+        {v.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
+      </p>
+    </div>
+  );
+}
+
+function Stars({ n }: { n: number }) {
+  return (
+    <span className="flex" aria-label={`${n} of 5 stars`}>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} width="10" height="10" viewBox="0 0 24 24" className="-mr-px">
+          <path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5-4.9-4.5 6.6-.8z" fill={i < n ? "#ffd23f" : "#ffffff"} stroke="#16110f" strokeWidth="2.6" strokeLinejoin="round" opacity={i < n ? 1 : 0.4} />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+function Card({ d, i, onBuy }: { d: DemoItem; i: number; onBuy: (d: DemoItem) => void }) {
+  const t = tierOf(d.rarity);
+  return (
+    <div className="pop-in" style={{ animationDelay: `${(i % PAGE) * 35}ms` }}>
+    <article className="mk-card group relative rounded-[22px] border-[3px] border-ink bg-white p-2 shadow-[5px_5px_0_#16110f]">
+      <div className="relative aspect-square overflow-hidden rounded-[15px] border-[2.5px] border-ink" style={{ background: `color-mix(in srgb, ${memeColor(providers(d.spec).body)} 50%, #ffffff)` }}>
+        <div className="mk-dots absolute inset-0" aria-hidden="true" />
+        {d.rarity === "MYTHIC" && <div className="holo-sweep absolute inset-0 z-10" aria-hidden="true" />}
+        <ArtMutant spec={d.spec} className="relative h-full w-full transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3" label={`${d.name}, ${d.rarity}`} />
+        <span className={`absolute left-2 top-2 z-10 flex items-center gap-1 rounded-lg border-2 border-ink px-1.5 py-0.5 text-[0.6rem] font-extrabold tracking-wider ${t.badge}`}>
+          {d.rarity}
+        </span>
+        <span className="absolute right-2 top-2 z-10 rounded-lg bg-ink/80 px-1.5 py-0.5 text-[0.62rem] font-bold text-white">#{d.id}</span>
+      </div>
+      <div className="px-1 pb-1 pt-2">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="truncate font-display text-[1.15rem] leading-none">{d.name}</h3>
+          <Stars n={t.stars} />
+        </div>
+        <p className="mt-1.5 flex flex-wrap gap-1" aria-label="Meme crews">
+          {d.memes.slice(0, 4).map((m) => (
+            <span key={m} className="size-3 rounded-full border-[1.5px] border-ink" style={{ background: crewColor(m) }} title={m} />
+          ))}
+          {d.memes.length > 4 && <span className="text-[0.62rem] font-bold text-ink/50">+{d.memes.length - 4}</span>}
+        </p>
+        {d.price !== null ? (
+          <button type="button" onClick={() => onBuy(d)} className="mt-2.5 flex w-full items-center justify-between rounded-xl border-[2.5px] border-ink bg-orange px-3 py-1.5 font-display text-[1.05rem] shadow-[0_3px_0_#16110f] transition hover:-translate-y-0.5 hover:bg-sun active:translate-y-0.5 active:shadow-none">
+            <span className="flex items-center gap-1">
+              <N /> {d.price.toFixed(2)}
+            </span>
+            <span className="text-sm">BUY</span>
+          </button>
+        ) : (
+          <div className="mt-2.5 flex items-center justify-between rounded-xl border-[2.5px] border-dashed border-ink/30 px-3 py-1.5 text-[0.8rem] font-bold text-ink/50">
+            <span>Not listed</span>
+            {d.lastSale !== null && (
+              <span className="flex items-center gap-0.5">
+                last <N className="size-3" /> {d.lastSale.toFixed(2)}
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+    </article>
+    </div>
+  );
+}
+
+const KIND: Record<DemoActivity["kind"], { l: string; c: string }> = {
+  sale: { l: "Sold", c: "#b8ff3d" },
+  list: { l: "Listed", c: "#ffe14d" },
+  mint: { l: "Minted", c: "#2ee6ff" },
+  transfer: { l: "Transferred", c: "#c9b6ff" },
+  delist: { l: "Delisted", c: "#ffd0e6" },
+};
+
+function ActivityRow({ a, fresh }: { a: DemoActivity; fresh: boolean }) {
+  return (
+    <li className={`flex items-center gap-3 rounded-2xl px-2 py-2.5 transition-colors hover:bg-page ${fresh ? "mk-slide" : ""}`}>
+      <div className="relative size-12 shrink-0 overflow-hidden rounded-xl border-2 border-ink" style={{ background: `color-mix(in srgb, ${tierOf(a.item.rarity).color} 55%, #fff)` }}>
+        <ArtMutant spec={a.item.spec} className="h-full w-full" label="" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="flex items-center gap-1.5 text-[0.7rem] font-extrabold uppercase tracking-wider">
+          <span className="rounded-md border-[1.5px] border-ink px-1 py-px" style={{ background: KIND[a.kind].c }}>
+            {KIND[a.kind].l}
+          </span>
+          <span className="text-ink/45">{ago(a.minsAgo)}</span>
+        </p>
+        <p className="mt-0.5 truncate font-display text-[1.02rem] leading-tight">{a.item.name}</p>
+        <p className="truncate text-[0.72rem] font-semibold text-ink/55">
+          {a.from}
+          {a.to ? ` → ${a.to}` : ""}
+        </p>
+      </div>
+      {a.price !== null && (
+        <span className="flex shrink-0 items-center gap-0.5 font-display text-[1.05rem]">
+          <N /> {a.price.toFixed(2)}
+        </span>
+      )}
+    </li>
+  );
+}
+
+const HOLDER_COLORS = ["#ff7a1a", "#2ee6ff", "#ff3ea5", "#b8ff3d", "#ffe14d", "#b48cff"];
+
+/** Abstract floating background shapes. */
+const SHAPES: [number, number, string, string, number, string][] = [
+  [6, 4, "star", "#ffe14d", 40, "spin-slow"],
+  [12, 94, "squiggle", "#ff3ea5", 80, "float-y"],
+  [34, 2, "ring", "#2ee6ff", 44, "float-y"],
+  [48, 96, "plus", "#b8ff3d", 34, "spin-slow"],
+  [66, 3, "zigzag", "#b48cff", 72, "wiggle"],
+  [82, 95, "bang", "#ff7a1a", 52, "wiggle"],
 ];
 
 export default function MarketplacePage() {
-  const [tab, setTab] = useState<Tab>("all");
-  const [tokens, setTokens] = useState<TokenViewJ[] | null>(null);
-  const [seasons, setSeasons] = useState<SeasonJ[]>([]);
-  const [err, setErr] = useState<string | null>(null);
   const [q, setQ] = useState("");
-  const [season, setSeason] = useState("all");
-  const [rarity, setRarity] = useState("all");
-  const [meme, setMeme] = useState("all");
-  const [state, setState] = useState("all");
+  const [sort, setSort] = useState<Sort>("price-asc");
+  const [buyNow, setBuyNow] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [rar, setRar] = useState<Set<RarityName>>(new Set());
+  const [crews, setCrews] = useState<Set<string>>(new Set());
+  const [min, setMin] = useState("");
+  const [max, setMax] = useState("");
+  const [limit, setLimit] = useState(PAGE);
+  const [tab, setTab] = useState<"activity" | "holders">("activity");
+  const [feed, setFeed] = useState<{ a: DemoActivity; fresh: boolean }[]>(DEMO_ACTIVITY.map((a) => ({ a, fresh: false })));
+  const [toast, setToast] = useState<string | null>(null);
+  const toastT = useRef<ReturnType<typeof setTimeout>>(undefined);
 
+  // Demo "live" feed: a new event slides in every few seconds; older ones age.
   useEffect(() => {
-    if (!CORE_CONTRACT) return;
-    (async () => {
-      const out: TokenViewJ[] = [];
-      for (let from = 1; from < 100_000; from += 50) {
-        const page = await getTokens(from, 50);
-        out.push(...page);
-        if (page.length < 50) break;
-      }
-      const ss = await getSeasons();
-      setSeasons(ss);
-      setTokens(out.reverse());
-    })().catch((e) => setErr(e instanceof Error ? e.message : String(e)));
+    let n = 1;
+    const t = setInterval(() => {
+      if (document.hidden) return;
+      setFeed((f) => [{ a: randomActivity(9000 + n++), fresh: true }, ...f.map((x) => ({ a: { ...x.a, minsAgo: x.a.minsAgo + 1 }, fresh: false }))].slice(0, 40));
+    }, 5000);
+    return () => clearInterval(t);
   }, []);
 
-  const memeOptions = useMemo(() => Array.from(new Set((tokens ?? []).flatMap((t) => t.info.holdings.map((h) => h.meme_id)))), [tokens]);
-  const shown = (tokens ?? []).filter(
-    (t) =>
-      (q === "" || t.token_id === q.replace(/^#/, "")) &&
-      (season === "all" || String(t.info.season_id) === season) &&
-      (rarity === "all" || RARITY[t.info.traits.rarity] === rarity) &&
-      (meme === "all" || t.info.holdings.some((h) => h.meme_id === meme)) &&
-      (state === "all" || t.effective_state === state),
-  );
+  const rarityCount = useMemo(() => Object.fromEntries(TIERS.map((t) => [t.name, DEMO_ITEMS.filter((d) => d.rarity === t.name).length])), []);
+
+  const items = useMemo(() => {
+    const lo = parseFloat(min);
+    const hi = parseFloat(max);
+    const needle = q.trim().toLowerCase();
+    const out = DEMO_ITEMS.filter(
+      (d) =>
+        (!buyNow || d.price !== null) &&
+        (rar.size === 0 || rar.has(d.rarity)) &&
+        (crews.size === 0 || d.memes.some((m) => crews.has(m))) &&
+        (isNaN(lo) || (d.price !== null && d.price >= lo)) &&
+        (isNaN(hi) || (d.price !== null && d.price <= hi)) &&
+        (!needle || d.name.toLowerCase().includes(needle) || String(d.id) === needle.replace("#", "") || d.memes.some((m) => m.toLowerCase().includes(needle))),
+    );
+    const priceKey = (d: DemoItem, dir: 1 | -1) => (d.price === null ? Infinity : d.price * dir);
+    out.sort((a, b) => {
+      if (sort === "price-asc") return priceKey(a, 1) - priceKey(b, 1);
+      if (sort === "price-desc") return priceKey(a, -1) - priceKey(b, -1);
+      if (sort === "rarity") return RANK[b.rarity] - RANK[a.rarity] || a.id - b.id;
+      if (sort === "recent") return (a.price === null ? 1 : 0) - (b.price === null ? 1 : 0) || a.listedAgo - b.listedAgo;
+      return a.id - b.id;
+    });
+    return out;
+  }, [q, sort, buyNow, rar, crews, min, max]);
+
+  useEffect(() => setLimit(PAGE), [q, sort, buyNow, rar, crews, min, max]);
+
+  const activeFilters = rar.size + crews.size + (min ? 1 : 0) + (max ? 1 : 0);
+  const toggle = <T,>(s: Set<T>, v: T) => {
+    const n = new Set(s);
+    if (n.has(v)) n.delete(v);
+    else n.add(v);
+    return n;
+  };
+  const clearAll = () => {
+    setRar(new Set());
+    setCrews(new Set());
+    setMin("");
+    setMax("");
+    setQ("");
+    setBuyNow(false);
+  };
+  const onBuy = (d: DemoItem) => {
+    setToast(`Demo only — ${d.name} isn't really for sale yet. The marketplace contract isn't live.`);
+    clearTimeout(toastT.current);
+    toastT.current = setTimeout(() => setToast(null), 3200);
+  };
 
   return (
-    <>
-      <header className="relative overflow-hidden rounded-[28px] border-4 border-ink bg-pink px-5 py-8 text-ink shadow-[0_8px_0_#16110f] sm:px-10 sm:py-10">
-        <div className="halftone absolute inset-0 opacity-[0.08]" aria-hidden="true" />
-        <div className="relative flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="font-hand text-2xl">buy · sell · stare</p>
-            <h1 className="mad-title text-[clamp(2.8rem,9vw,5.6rem)]">THE FREAK MARKET</h1>
-            <p className="mt-2 max-w-lg font-semibold">Every mutant ever hatched. Some are for sale. All of them are weird.</p>
-          </div>
-          <div className="flex rounded-2xl border-[3px] border-ink bg-cream p-1" role="tablist" aria-label="View">
-            {(["all", "sale"] as Tab[]).map((t) => (
-              <button
-                key={t}
-                type="button"
-                role="tab"
-                aria-selected={tab === t}
-                onClick={() => setTab(t)}
-                className={`min-h-11 rounded-xl px-4 font-display text-lg ${tab === t ? "bg-ink text-white" : ""}`}
-              >
-                {t === "all" ? "ALL FREAKS" : "FOR SALE"}
-              </button>
-            ))}
-          </div>
-        </div>
-      </header>
-
-      {/* filters */}
-      <form className="mt-6 grid gap-3 rounded-2xl border-[3px] border-ink bg-cream p-3 text-ink sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr]" onSubmit={(e) => e.preventDefault()} aria-label="Filters">
-        <label className="text-xs font-bold tracking-wide">
-          SEARCH
-          <input value={q} onChange={(e) => setQ(e.target.value.trim())} placeholder="#123" inputMode="numeric" className="num mt-1 block min-h-11 w-full rounded-lg border-[3px] border-ink bg-paper px-3 text-base" />
-        </label>
-        <Select label="SEASON" value={season} onChange={setSeason} options={[{ v: "all", l: "All seasons" }, ...seasons.map((s) => ({ v: String(s.id), l: `S${String(s.id).padStart(2, "0")} ${s.config.name}` }))]} />
-        <Select label="RARITY" value={rarity} onChange={setRarity} options={[{ v: "all", l: "Any rarity" }, ...RARITY.map((r) => ({ v: r, l: r }))]} />
-        <Select label="MEME" value={meme} onChange={setMeme} options={[{ v: "all", l: "Any meme" }, ...memeOptions.map((m) => ({ v: m, l: memeLabel(m) }))]} />
-        <Select label="BACKING" value={state} onChange={setState} options={STATES} />
-      </form>
-
-      <div className="mt-8">
-        {tab === "sale" && !MARKET_CONTRACT ? (
-          <Empty title="NOTHING FOR SALE (YET)" aside="the shop's still being built">
-            The trading contract isn&apos;t live yet, so there are no listings — and we won&apos;t fake any. When it launches, every sale pays a 2.5% royalty (10% creator, 90% WTH buyback treasury). You can still transfer cards directly.
-          </Empty>
-        ) : !CORE_CONTRACT ? (
-          <>
-            <Empty title="NO FREAKS HATCHED YET" aside="the vault is empty" action={<Link href="/mint" className="btn-mad">MINT THE FIRST ONE</Link>}>
-              The collection contract isn&apos;t deployed on this network yet. Real cards will appear here the moment they are minted and funded.
-            </Empty>
-            <p className="mt-12 font-display text-2xl text-ink">WHAT THEY MIGHT LOOK LIKE <span className="stamp ml-2 align-middle">preview only</span></p>
-            <div className="scroll-x" role="list">
-              {PREVIEW_GALLERY.map((p) => (
-                <div role="listitem" key={p.title}>
-                  <CollectibleCard spec={p.spec} title={p.title} rarity={p.rarity} memes={memeLabels(p.spec)} preview />
-                </div>
-              ))}
+    <div className="band market-sky relative -mb-24 -mt-[108px] overflow-hidden !border-t-0 pb-24 pt-[124px]">
+      {/* Abstract background */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="mk-blob absolute -left-24 top-10 size-[420px] rounded-full bg-[#ff9ed1] opacity-50 blur-3xl" />
+        <div className="mk-blob absolute right-[-120px] top-[30%] size-[460px] rounded-full bg-[#8ae9ff] opacity-50 blur-3xl" style={{ animationDelay: "-4s" }} />
+        <div className="mk-blob absolute bottom-[-80px] left-[30%] size-[420px] rounded-full bg-[#d6ff8a] opacity-50 blur-3xl" style={{ animationDelay: "-8s" }} />
+        {SHAPES.map(([top, left, kind, color, size, anim], i) => (
+          <div key={i} className="absolute hidden md:block" style={{ top: `${top}%`, left: `${left}%` }}>
+            <div className={anim} style={{ animationDelay: `${i * -0.8}s` }}>
+              <Decor kind={kind} color={color} size={size} />
             </div>
-          </>
-        ) : err ? (
-          <Empty title="THE MARKET IS NAPPING" aside="couldn't reach the chain">
-            {err}
-          </Empty>
-        ) : tokens === null ? (
-          <p className="dots font-display text-2xl text-ink">Rounding up the freaks</p>
-        ) : tokens.length === 0 ? (
-          <Empty title="NO FREAKS HATCHED YET" aside="be first" action={<Link href="/mint" className="btn-mad">MINT NOW!</Link>}>
-            Cards show up here only after their meme basket is bought and verified on-chain.
-          </Empty>
-        ) : (
-          <>
-            <p className="mb-4 text-sm text-ink/70" aria-live="polite">
-              {shown.length} of {tokens.length} freaks
-            </p>
-            {shown.length === 0 ? (
-              <p className="font-display text-xl text-ink">No freak matches that. Try fewer filters.</p>
-            ) : (
-              <ul className="grid grid-cols-1 gap-6 min-[460px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-                {shown.map((t) => (
-                  <li key={t.token_id}>
-                    <CollectibleCard {...tokenCard(t, seasons.find((s) => s.id === t.info.season_id))} href={`/nft/${t.token_id}`} />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
-      </div>
-    </>
-  );
-}
-
-function Select({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: { v: string; l: string }[] }) {
-  return (
-    <label className="text-xs font-bold tracking-wide">
-      {label}
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 block min-h-11 w-full rounded-lg border-[3px] border-ink bg-paper px-3 font-sans text-base">
-        {options.map((o) => (
-          <option key={o.v} value={o.v}>
-            {o.l}
-          </option>
+          </div>
         ))}
-      </select>
-    </label>
-  );
-}
+      </div>
 
-function Empty({ title, aside, children, action }: { title: string; aside: string; children: React.ReactNode; action?: React.ReactNode }) {
-  return (
-    <div className="sticker mx-auto max-w-2xl -rotate-1 p-6 text-center sm:p-10">
-      <p className="font-hand text-2xl text-orange">{aside}</p>
-      <p className="font-display text-4xl leading-none">{title}</p>
-      <p className="mx-auto mt-3 max-w-lg">{children}</p>
-      {action && <div className="mt-6 flex justify-center">{action}</div>}
+      <div className="relative">
+        {/* Collection header */}
+        <section className="pop-in rounded-[28px] border-[3px] border-ink bg-white/85 p-4 shadow-[8px_8px_0_#16110f] backdrop-blur-sm sm:p-5">
+          <div className="flex flex-col gap-4">
+            <div className="flex min-w-0 items-center gap-4">
+              <div className="wiggle grid size-[72px] shrink-0 place-items-center rounded-2xl border-[3px] border-ink bg-orange shadow-[3px_3px_0_#16110f]">
+                <Image src="/logo.webp" alt="" width={64} height={64} className="size-14" />
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="font-display text-[clamp(1.7rem,3.4vw,2.4rem)] leading-none">WHAT THE NFT?!</h1>
+                  <span className="rounded-md border-2 border-ink bg-hot px-1.5 py-px text-[0.62rem] font-extrabold uppercase tracking-wider text-white">Demo data</span>
+                </div>
+                <div className="mt-2 flex flex-wrap gap-1.5 text-[0.78rem] font-bold">
+                  <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">{DEMO_STATS.supply} items</span>
+                  <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">2.5% royalty</span>
+                  <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">NEAR</span>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+              <Stat label="Floor" value={DEMO_STATS.floor} near color="#ff7a1a" />
+              <Stat label="24h volume" value={DEMO_STATS.volume24h} near decimals={1} color="#ff3ea5" />
+              <Stat label="Total volume" value={DEMO_STATS.totalVolume} near decimals={1} color="#2ee6ff" />
+              <Stat label="Top sale" value={DEMO_STATS.topSale} near decimals={1} color="#ffe14d" />
+              <Stat label="Listed" value={DEMO_STATS.listed} decimals={0} color="#b8ff3d" />
+              <Stat label="Owners" value={DEMO_STATS.owners} decimals={0} color="#b48cff" />
+            </div>
+          </div>
+        </section>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+          {/* Items */}
+          <section aria-label="Items">
+            {/* Toolbar */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <label className="relative min-w-[200px] flex-1">
+                <span className="sr-only">Search</span>
+                <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="6.5" fill="none" stroke="#16110f" strokeWidth="2.6" />
+                  <path d="M16 16l4.5 4.5" stroke="#16110f" strokeWidth="2.6" strokeLinecap="round" />
+                </svg>
+                <input
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="Search freaks, #id or meme…"
+                  className="h-12 w-full rounded-2xl border-[2.5px] border-ink bg-white pl-11 pr-4 font-semibold shadow-[3px_3px_0_#16110f] outline-none placeholder:text-ink/40 focus:shadow-[3px_3px_0_#ff7a1a]"
+                />
+              </label>
+              <label className="relative">
+                <span className="sr-only">Sort by</span>
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value as Sort)}
+                  className="h-12 appearance-none rounded-2xl border-[2.5px] border-ink bg-white pl-4 pr-10 font-bold shadow-[3px_3px_0_#16110f] outline-none focus:shadow-[3px_3px_0_#ff7a1a]"
+                >
+                  {SORTS.map((s) => (
+                    <option key={s.v} value={s.v}>
+                      {s.l}
+                    </option>
+                  ))}
+                </select>
+                <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="#16110f" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </label>
+              <button
+                type="button"
+                onClick={() => setShowFilters((s) => !s)}
+                aria-expanded={showFilters}
+                className={`relative flex h-12 items-center gap-2 rounded-2xl border-[2.5px] border-ink px-4 font-bold shadow-[3px_3px_0_#16110f] transition ${showFilters ? "bg-sun" : "bg-white hover:bg-page"}`}
+              >
+                <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true">
+                  <path d="M4 6h16M7 12h10M10 18h4" stroke="#16110f" strokeWidth="2.8" strokeLinecap="round" />
+                </svg>
+                Filters
+                {activeFilters > 0 && <span className="grid size-5 place-items-center rounded-full bg-hot text-[0.7rem] text-white">{activeFilters}</span>}
+              </button>
+              <button
+                type="button"
+                onClick={() => setBuyNow((b) => !b)}
+                aria-pressed={buyNow}
+                className="flex h-12 items-center gap-2 rounded-2xl border-[2.5px] border-ink bg-white px-3.5 font-bold shadow-[3px_3px_0_#16110f]"
+              >
+                <span className={`relative h-6 w-10 rounded-full border-2 border-ink transition-colors ${buyNow ? "bg-lime" : "bg-page"}`}>
+                  <span className={`absolute top-0.5 size-4 rounded-full border-2 border-ink bg-white transition-all ${buyNow ? "left-[18px]" : "left-0.5"}`} />
+                </span>
+                Buy now
+              </button>
+            </div>
+
+            {/* Filter panel */}
+            {showFilters && (
+              <div className="pop-in mt-3 grid gap-5 rounded-[22px] border-[2.5px] border-ink bg-white/90 p-4 shadow-[4px_4px_0_#16110f] backdrop-blur-sm md:grid-cols-[1.1fr_1.4fr_0.8fr]">
+                <fieldset className="min-w-0">
+                  <legend className="mb-2 text-xs font-extrabold uppercase tracking-[0.14em] text-ink/55">Rarity</legend>
+                  <div className="flex flex-wrap gap-1.5">
+                    {TIERS.map((t) => {
+                      const on = rar.has(t.name);
+                      return (
+                        <button key={t.name} type="button" aria-pressed={on} onClick={() => setRar((s) => toggle(s, t.name))} className={`flex items-center gap-1.5 rounded-xl border-2 border-ink px-2 py-1 text-[0.72rem] font-extrabold tracking-wide transition ${on ? `${t.badge} -translate-y-0.5 shadow-[0_3px_0_#16110f]` : "bg-white hover:bg-page"}`}>
+                          {t.name}
+                          <span className="opacity-60">{rarityCount[t.name]}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+                <fieldset className="min-w-0">
+                  <legend className="mb-2 text-xs font-extrabold uppercase tracking-[0.14em] text-ink/55">Meme crew</legend>
+                  <div className="flex flex-wrap gap-1.5">
+                    {CREWS.map((c) => {
+                      const on = crews.has(c);
+                      return (
+                        <button key={c} type="button" aria-pressed={on} onClick={() => setCrews((s) => toggle(s, c))} className={`flex items-center gap-1.5 rounded-xl border-2 border-ink px-2 py-1 text-[0.72rem] font-extrabold transition ${on ? "-translate-y-0.5 bg-sun shadow-[0_3px_0_#16110f]" : "bg-white hover:bg-page"}`}>
+                          <span className="size-2.5 rounded-full border-[1.5px] border-ink" style={{ background: crewColor(c) }} />
+                          {c}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+                <fieldset className="min-w-0">
+                  <legend className="mb-2 text-xs font-extrabold uppercase tracking-[0.14em] text-ink/55">Price (NEAR)</legend>
+                  <div className="flex items-center gap-2">
+                    <input inputMode="decimal" value={min} onChange={(e) => setMin(e.target.value)} placeholder="Min" aria-label="Minimum price" className="h-10 w-full min-w-0 rounded-xl border-2 border-ink bg-white px-3 font-semibold outline-none focus:shadow-[2px_2px_0_#ff7a1a]" />
+                    <span className="font-bold">–</span>
+                    <input inputMode="decimal" value={max} onChange={(e) => setMax(e.target.value)} placeholder="Max" aria-label="Maximum price" className="h-10 w-full min-w-0 rounded-xl border-2 border-ink bg-white px-3 font-semibold outline-none focus:shadow-[2px_2px_0_#ff7a1a]" />
+                  </div>
+                  <button type="button" onClick={clearAll} className="mt-3 text-sm font-bold underline decoration-2 underline-offset-2 hover:text-orange">
+                    Clear all
+                  </button>
+                </fieldset>
+              </div>
+            )}
+
+            <p className="mt-4 text-sm font-bold text-ink/60" aria-live="polite">
+              {items.length} freak{items.length === 1 ? "" : "s"}
+            </p>
+
+            {items.length === 0 ? (
+              <div className="mt-4 rounded-[22px] border-[3px] border-dashed border-ink/40 bg-white/70 p-10 text-center">
+                <p className="font-display text-2xl">No freaks match that.</p>
+                <button type="button" onClick={clearAll} className="btn-pop mt-4">
+                  Clear filters
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="mt-3 grid grid-cols-2 gap-3.5 sm:grid-cols-3 xl:grid-cols-4">
+                  {items.slice(0, limit).map((d, i) => (
+                    <Card key={d.id} d={d} i={i} onBuy={onBuy} />
+                  ))}
+                </div>
+                {limit < items.length && (
+                  <div className="mt-8 text-center">
+                    <button type="button" onClick={() => setLimit((l) => l + PAGE)} className="btn-pop">
+                      Load more freaks
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </section>
+
+          {/* Activity / Holders */}
+          <aside className="lg:sticky lg:top-[96px] lg:self-start">
+            <div className="overflow-hidden rounded-[24px] border-[3px] border-ink bg-white shadow-[6px_6px_0_#16110f]">
+              <div className="grid grid-cols-2 border-b-[3px] border-ink" role="tablist">
+                {(["activity", "holders"] as const).map((t) => (
+                  <button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`relative py-3 font-display text-lg uppercase tracking-wide transition-colors ${tab === t ? "bg-sun" : "bg-white text-ink/50 hover:text-ink"} ${t === "holders" ? "border-l-[3px] border-ink" : ""}`}>
+                    {t}
+                    {t === "activity" && <span className="absolute right-4 top-1/2 size-2 -translate-y-1/2 animate-pulse rounded-full bg-green" aria-hidden="true" />}
+                  </button>
+                ))}
+              </div>
+              <div className="max-h-[70vh] overflow-y-auto p-2">
+                {tab === "activity" ? (
+                  <ul>
+                    {feed.map(({ a, fresh }) => (
+                      <ActivityRow key={a.id} a={a} fresh={fresh} />
+                    ))}
+                  </ul>
+                ) : (
+                  <ol>
+                    {DEMO_HOLDERS.map((h, i) => (
+                      <li key={h.account} className="flex items-center gap-3 rounded-2xl px-2 py-2.5 hover:bg-page">
+                        <span className="w-6 text-center font-display text-lg text-ink/45">{i + 1}</span>
+                        <span className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-ink font-display text-lg" style={{ background: HOLDER_COLORS[i % HOLDER_COLORS.length] }}>
+                          {h.account[0]!.toUpperCase()}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="truncate font-bold">{h.account}</p>
+                          <div className="mt-1 h-2 overflow-hidden rounded-full border-[1.5px] border-ink bg-page">
+                            <div className="mk-bar h-full rounded-full" style={{ width: `${(h.count / DEMO_HOLDERS[0]!.count) * 100}%`, background: HOLDER_COLORS[i % HOLDER_COLORS.length], "--d": `${i * 60}ms` } as CSSProperties} />
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-display text-lg leading-none">{h.count}</p>
+                          <p className="text-[0.68rem] font-bold text-ink/50">{h.pct.toFixed(1)}%</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      {toast && (
+        <div role="status" className="pop-in fixed bottom-6 left-1/2 z-50 w-[min(92vw,440px)] -translate-x-1/2 rounded-2xl border-[3px] border-ink bg-ink px-5 py-3 text-center font-bold text-cream shadow-[5px_5px_0_#ff7a1a]">
+          {toast}
+        </div>
+      )}
     </div>
   );
 }

@@ -156,7 +156,7 @@ export interface CoreConfigJ {
   storage_byte_cost: U128;
 }
 
-export const RARITY = ["COMMON", "RARE", "EPIC", "LEGENDARY"] as const;
+export { RARITY_NAMES as RARITY } from "./rarity";
 
 export class NotDeployedError extends Error {
   constructor() {

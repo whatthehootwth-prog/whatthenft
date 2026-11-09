@@ -3,7 +3,8 @@ use near_sdk::{near, AccountId};
 
 pub const SLOT_COUNT: usize = 6;
 pub const SLOT_NAMES: [&str; SLOT_COUNT] = ["head", "face", "body", "arms", "legs", "accessory"];
-pub const RARITY_NAMES: [&str; 4] = ["COMMON", "RARE", "EPIC", "LEGENDARY"];
+pub const RARITY_TIERS: usize = 5;
+pub const RARITY_NAMES: [&str; RARITY_TIERS] = ["COMMON", "RARE", "EPIC", "LEGENDARY", "MYTHIC"];
 pub const BPS: u128 = 10_000;
 
 #[near(serializers = [borsh, json])]
@@ -100,7 +101,7 @@ pub struct SeasonConfig {
     pub fees: MintFees,
     pub royalty: RoyaltyConfig,
     pub allocation: AllocationConfig,
-    pub rarity_bps: [u16; 4],
+    pub rarity_bps: [u16; RARITY_TIERS],
     pub wth_slot_bps: u16,
     /// memes[0] MUST be WTH with art for every slot.
     pub memes: Vec<SeasonMeme>,

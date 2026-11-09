@@ -3,7 +3,7 @@ export function Ribbon({ items, bg = "#ffe14d", color = "#16110f", tilt = 0, rev
   const dots = ["#ff3ea5", "#2ee6ff", "#16110f", "#8b5cff"];
   return (
     <div className="ribbon py-3" style={{ background: bg, color, transform: tilt ? `rotate(${tilt}deg) scale(1.04)` : undefined }} aria-hidden="true">
-      <div className={`marquee font-display text-2xl tracking-wide sm:text-3xl ${reverse ? "marquee-rev" : ""}`}>
+      <div className={`marquee font-display text-xl tracking-wide sm:text-2xl ${reverse ? "marquee-rev" : ""}`}>
         {[0, 1].map((k) => (
           <span key={k} className="flex items-center gap-10">
             {items.map((t, i) => (

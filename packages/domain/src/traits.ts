@@ -1,9 +1,11 @@
 import { DEFAULT_ALLOCATION_RULE, SLOTS, legAmounts, tokenWeights, type AllocationRule, type LegAmount, type Slot, type SlotProviders, type TokenWeight } from "./allocation";
 import { Drawer } from "./rng";
 
-export const RARITIES = ["COMMON", "RARE", "EPIC", "LEGENDARY"] as const;
+export const RARITIES = ["COMMON", "RARE", "EPIC", "LEGENDARY", "MYTHIC"] as const;
 export type Rarity = (typeof RARITIES)[number];
-export const DEFAULT_RARITY_BPS: [number, number, number, number] = [7000, 2200, 700, 100];
+export type RarityBps = [number, number, number, number, number];
+/** 60 / 25 / 10 / 4 / 1 percent — COMMON → MYTHIC. */
+export const DEFAULT_RARITY_BPS: RarityBps = [6000, 2500, 1000, 400, 100];
 
 export const MAX_ATTEMPTS = 8;
 const LABELS_PER_ATTEMPT = 32;
@@ -19,7 +21,7 @@ export interface DerivationMeme {
 export interface DerivationConfig {
   /** memes[0] MUST be WTH and must have >=1 variant for every slot. */
   memes: DerivationMeme[];
-  rarityBps: [number, number, number, number];
+  rarityBps: RarityBps;
   /** Chance (bps) that a slot stays WTH even when a chosen partner has art for it. */
   wthSlotBps: number;
   /** Max partner memes for this price tier (1 => WTH + one partner). */
@@ -56,7 +58,7 @@ export function validateDerivationConfig(c: DerivationConfig): void {
     if (m.slotVariants.length !== 6 || m.slotVariants.some((v) => !Number.isInteger(v) || v < 0 || v > 65535)) throw new Error(`bad slotVariants for ${m.memeId}`);
     if (!Number.isInteger(m.weight) || m.weight < 0) throw new Error(`bad weight for ${m.memeId}`);
   }
-  if (c.rarityBps.reduce((a, b) => a + b, 0) !== 10_000 || c.rarityBps.some((b) => !Number.isInteger(b) || b < 0)) {
+  if (c.rarityBps.length !== RARITIES.length || c.rarityBps.reduce((a, b) => a + b, 0) !== 10_000 || c.rarityBps.some((b) => !Number.isInteger(b) || b < 0)) {
     throw new Error("rarity bps must be non-negative integers summing to 10000");
   }
   if (!Number.isInteger(c.wthSlotBps) || c.wthSlotBps < 0 || c.wthSlotBps > 10_000) throw new Error("wthSlotBps out of range");

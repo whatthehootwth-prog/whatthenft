@@ -49,7 +49,7 @@ export function NftDetail({ id }: { id: string }) {
   }, [tok]);
 
   const back = (
-    <Link href="/marketplace" className="font-display text-lg text-ink hover:text-hot">
+    <Link href="/marketplace" className="font-display text-lg text-ink hover:text-orange">
       ← BACK TO THE FREAK MARKET
     </Link>
   );
@@ -58,8 +58,8 @@ export function NftDetail({ id }: { id: string }) {
     return (
       <>
         {back}
-        <div className="sticker mx-auto mt-10 max-w-xl -rotate-1 p-8 text-center">
-          <p className="font-hand text-2xl text-orange">{err ? "the chain said no" : "hoot?"}</p>
+        <div className="sticker mx-auto mt-10 max-w-xl p-8 text-center">
+          <p className="eyebrow mb-1">{err ? "the chain said no" : "hoot?"}</p>
           <h1 className="font-display text-4xl">{err ? "COULDN'T LOAD THIS FREAK" : `FREAK #${id} DOESN'T EXIST`}</h1>
           <p className="mt-3">
             {err
@@ -135,7 +135,7 @@ export function NftDetail({ id }: { id: string }) {
 
         {/* Identity + actions */}
         <div className="min-w-0">
-          <p className="pixel text-sm font-bold text-hot">SEASON {String(i.season_id).padStart(2, "0")} · {season?.config.name.toUpperCase() ?? ""}</p>
+          <p className="eyebrow">SEASON {String(i.season_id).padStart(2, "0")} · {season?.config.name.toUpperCase() ?? ""}</p>
           <h1 className="mad-title mt-1 text-[clamp(3rem,9vw,5.5rem)]">FREAK #{tok.token_id}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <StateChip state={tok.effective_state} />
@@ -164,7 +164,7 @@ export function NftDetail({ id }: { id: string }) {
             </div>
             <div className="text-right">
               <p className="text-xs font-bold tracking-widest text-ink/70">TOKENS INSIDE (EST.)</p>
-              <p className="num text-xl font-bold text-hot">{empty ? "0 — empty" : navTotal !== null ? `${near(navTotal, 4)} NEAR` : nav || navErr ? "UNAVAILABLE" : "…"}</p>
+              <p className="num text-xl font-bold text-ink">{empty ? "0 — empty" : navTotal !== null ? `${near(navTotal, 4)} NEAR` : nav || navErr ? "UNAVAILABLE" : "…"}</p>
             </div>
           </div>
 

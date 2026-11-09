@@ -36,7 +36,7 @@ export const MEMES: ArtMeme[] = registry.memes as ArtMeme[];
 export const MEME = new Map(MEMES.map((m) => [m.memeId, m]));
 export const PARTNERS = MEMES.filter((m) => m.memeId !== "wth");
 
-export const memeLabel = (id: string) => MEME.get(id)?.displayName ?? id.toUpperCase();
+export const memeLabel = (id: string) => (id === "wth" ? "WTH" : MEME.get(id)?.displayName ?? id.toUpperCase());
 export const memeColor = (id: string) => MEME.get(id)?.color ?? "#FFF4DC";
 
 /** One pick per slot. `wth` on a non-body slot means the bare owl (no overlay). */
@@ -57,8 +57,14 @@ export function layerFor(slot: Slot, pick: Pick): ArtLayer | null {
 export function stackOf(spec: MutantSpec): ArtLayer[] {
   const body = layerFor("body", spec.body) ?? layerFor("body", BARE)!;
   const over = STACK.map((s) => layerFor(s, spec[s])).filter((l): l is ArtLayer => !!l);
-  return [...over.filter((l) => l.behind), body, ...over.filter((l) => !l.behind)];
+  const top = over.filter((l) => !l.behind);
+  // Skin markings (logos/tattoos) sit directly on the body, under every other part.
+  return [...over.filter((l) => l.behind), body, ...top.filter(isSkin), ...top.filter((l) => !isSkin(l))];
 }
+
+/** Parts that sit on the owl itself, under every other part: NEAR emblem, pixel-3 tattoo, cybernetic temple shell + cyber eye. */
+const SKIN = new Set(["/art/nearkat/accessory-01.webp", "/art/three/face-01.webp", "/art/cybernetic/head-01.webp", "/art/cybernetic/face-01.webp"]);
+const isSkin = (l: ArtLayer) => SKIN.has(l.src);
 
 /** Which meme actually provides each slot (a pick without art for that slot falls back to WTH). */
 export function providers(spec: MutantSpec): SlotProviders {

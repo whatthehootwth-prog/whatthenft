@@ -9,7 +9,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "90000000000000000000000",
    "seed": "7563659bc34dc6a5c87c6a9e2a45954d3dc93bd800a51495a2285cb8951ea24f",
-   "rarity": "COMMON",
+   "rarity": "RARE",
    "attempt": 0,
    "slots": [
     [
@@ -177,7 +177,7 @@
    "minLegYocto": "50000000000000000000000",
    "basketYocto": "90000000000000000000000",
    "seed": "ff5fa297817c9d4d0973b4f9acd639c704831a1f31ca8c80e07e72772b91bb10",
-   "rarity": "EPIC",
+   "rarity": "LEGENDARY",
    "attempt": 8,
    "slots": [
     [
@@ -225,7 +225,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "90000000000000000000000",
    "seed": "57c63f0936ecde3351561f9a75905c16a4016336a81367547f8f5938dbd13dbd",
-   "rarity": "COMMON",
+   "rarity": "RARE",
    "attempt": 0,
    "slots": [
     [
@@ -337,7 +337,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "c54a3096cc2c2100a1446cb11f5fbf6dd23228c0a0c291541835110d138b4e28",
-   "rarity": "RARE",
+   "rarity": "EPIC",
    "attempt": 0,
    "slots": [
     [
@@ -505,7 +505,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "af635bba5a23c462c000ce331e5bb14dd81094f0a005663c0a89ac8326391b00",
-   "rarity": "EPIC",
+   "rarity": "LEGENDARY",
    "attempt": 0,
    "slots": [
     [
@@ -953,7 +953,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "c2d12d268dae7ed81fe3bb6296ac670c81c90436b3d46ad7a56137a20ff11e97",
-   "rarity": "RARE",
+   "rarity": "EPIC",
    "attempt": 0,
    "slots": [
     [
@@ -1177,7 +1177,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "6515252dc8b9f6c529209181d3617b1cee2c204609e5958575913aed9f506fa1",
-   "rarity": "COMMON",
+   "rarity": "RARE",
    "attempt": 0,
    "slots": [
     [
@@ -1457,7 +1457,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "a691c335854bb3a443b84aa1cdfb6e71e3ec3eaa7f6130e94a6f44916101436c",
-   "rarity": "COMMON",
+   "rarity": "RARE",
    "attempt": 0,
    "slots": [
     [
@@ -1521,7 +1521,7 @@
    "minLegYocto": "50000000000000000000000",
    "basketYocto": "90000000000000000000000",
    "seed": "bf3faa44463b50bda5af9446c506647fc6eb70c5d3af4e89b778507aef9df003",
-   "rarity": "RARE",
+   "rarity": "EPIC",
    "attempt": 8,
    "slots": [
     [
@@ -1625,7 +1625,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "5c89eb551606c19bde7363fe7d971bdbb60196dd6681621ded3af8672775ea96",
-   "rarity": "COMMON",
+   "rarity": "RARE",
    "attempt": 0,
    "slots": [
     [
@@ -1681,7 +1681,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "47ed2b5f5295d8d0d546a00c76b4ec040cf3de30d1c406ff5eb8b1d20a4c502a",
-   "rarity": "COMMON",
+   "rarity": "RARE",
    "attempt": 0,
    "slots": [
     [
@@ -2129,7 +2129,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "109cfffab54a4b39968640b21e1aba15f226db1eb0074cbdb85547623bc1c5b9",
-   "rarity": "RARE",
+   "rarity": "EPIC",
    "attempt": 0,
    "slots": [
     [
@@ -2241,7 +2241,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "90000000000000000000000",
    "seed": "1e6edc7a7356887933cb03727b66af3bd794f8b847adeb7fa50bf0cae9c0642a",
-   "rarity": "COMMON",
+   "rarity": "RARE",
    "attempt": 0,
    "slots": [
     [
@@ -2577,7 +2577,7 @@
    "minLegYocto": "10000000000000000000000",
    "basketYocto": "900000000000000000000000",
    "seed": "f33923c0a66a3a89f4864dd021fe328da9fedd07553522a2cbd84509beb5ef92",
-   "rarity": "EPIC",
+   "rarity": "LEGENDARY",
    "attempt": 0,
    "slots": [
     [

@@ -11,7 +11,7 @@ export const VECTOR_CONFIG = (maxPartners: number, minLeg: string): DerivationCo
     { memeId: "blackdragon", weight: 30, slotVariants: [1, 1, 1, 1, 1, 1] },
     { memeId: "jambo", weight: 20, slotVariants: [1, 0, 1, 0, 1, 1] },
   ],
-  rarityBps: [7000, 2200, 700, 100],
+  rarityBps: [6000, 2500, 1000, 400, 100],
   wthSlotBps: 3000,
   maxPartners,
   minLegAmount: parseNear(minLeg),
@@ -88,15 +88,15 @@ describe("trait derivation", () => {
     }
   });
 
-  it("rarity frequencies match the disclosed 70/22/7/1 distribution", () => {
+  it("rarity frequencies match the disclosed 60/25/10/4/1 distribution", () => {
     const n = 100_000;
-    const counts: Record<string, number> = { COMMON: 0, RARE: 0, EPIC: 0, LEGENDARY: 0 };
+    const counts: Record<string, number> = { COMMON: 0, RARE: 0, EPIC: 0, LEGENDARY: 0, MYTHIC: 0 };
     const cfg = VECTOR_CONFIG(1, "0");
     for (let i = 0; i < n; i++) {
       const seed = sha256(new TextEncoder().encode(`r${i}`));
       counts[deriveTraits(seed, cfg, 1_000_000n).rarity]! += 1;
     }
-    const expected = { COMMON: 0.7, RARE: 0.22, EPIC: 0.07, LEGENDARY: 0.01 };
+    const expected = { COMMON: 0.6, RARE: 0.25, EPIC: 0.1, LEGENDARY: 0.04, MYTHIC: 0.01 };
     for (const [k, p] of Object.entries(expected)) {
       const sd = Math.sqrt(n * p * (1 - p));
       expect(Math.abs(counts[k]! - n * p)).toBeLessThan(5 * sd);

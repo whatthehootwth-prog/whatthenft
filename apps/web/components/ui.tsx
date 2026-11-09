@@ -38,9 +38,9 @@ export function LockIcon({ closed = false }: { closed?: boolean }) {
 }
 
 export function RarityChip({ rarity }: { rarity: string }) {
-  const bg: Record<string, string> = { COMMON: "#efe5cc", RARE: "#3ec6e0", EPIC: "#ff5fa2", LEGENDARY: "#7c64a8" };
+  const bg: Record<string, string> = { COMMON: "#ffffff", RARE: "#7ee3ff", EPIC: "#b48cff", LEGENDARY: "#ffd23f", MYTHIC: "#ff8cc6" };
   return (
-    <span className="chip" style={{ background: bg[rarity] ?? "#efe5cc", color: rarity === "LEGENDARY" ? "#fff4dc" : undefined }}>
+    <span className="chip" style={{ background: bg[rarity] ?? "#efe5cc", color: undefined }}>
       {rarity}
     </span>
   );
@@ -53,7 +53,7 @@ export function Panel({ children, className = "", as: As = "section" }: { childr
 export function H1({ children, kicker }: { children: ReactNode; kicker?: ReactNode }) {
   return (
     <header className="mb-6 sm:mb-8">
-      {kicker && <p className="font-hand text-2xl text-hot">{kicker}</p>}
+      {kicker && <p className="eyebrow mb-1">{kicker}</p>}
       <h1 className="mad-title text-[2.6rem] sm:text-[3.6rem]">{children}</h1>
     </header>
   );
@@ -105,8 +105,8 @@ export function Field({ label, children, hint }: { label: string; children: Reac
 
 export function EmptyState({ title, aside, children, action }: { title: string; aside?: string; children?: ReactNode; action?: ReactNode }) {
   return (
-    <div className="sticker relative mx-auto max-w-xl -rotate-1 p-6 text-center sm:p-8">
-      {aside && <p className="font-hand text-2xl text-orange">{aside}</p>}
+    <div className="sticker relative mx-auto max-w-xl p-6 text-center sm:p-8">
+      {aside && <p className="eyebrow mb-1">{aside}</p>}
       <p className="font-display text-2xl">{title}</p>
       {children && <div className="mt-2 text-ink/80">{children}</div>}
       {action && <div className="mt-5 flex flex-wrap justify-center gap-3">{action}</div>}

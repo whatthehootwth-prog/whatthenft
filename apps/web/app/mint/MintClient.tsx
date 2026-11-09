@@ -140,7 +140,7 @@ export function MintClient() {
       {/* Mint panel */}
       <div className="min-w-0">
         <h1 className="mad-title text-[clamp(2.8rem,8vw,5rem)]">MINT THE MADNESS</h1>
-        <p className="mt-2 font-hand text-2xl text-ink/70">One mutant. Real memes inside. Zero idea what you&apos;ll get.</p>
+        <p className="mt-2 lead">One mutant. Real memes inside. Zero idea what you&apos;ll get.</p>
 
         {order ? (
           <div className="mt-8 space-y-4">
@@ -182,7 +182,7 @@ export function MintClient() {
                     type="button"
                     aria-pressed={amount === p}
                     onClick={() => setAmount(p)}
-                    className={`min-h-14 rounded-xl border-[3px] border-ink font-display text-lg transition ${amount === p ? "-rotate-2 bg-orange shadow-[0_4px_0_#16110f]" : "bg-cream hover:-translate-y-0.5"}`}
+                    className={`min-h-14 rounded-xl border-[3px] border-ink font-display text-lg transition ${amount === p ? "bg-orange shadow-[0_4px_0_#16110f]" : "bg-cream hover:-translate-y-0.5"}`}
                   >
                     {p}
                     <span className="block text-[0.65rem] leading-none">NEAR</span>
@@ -206,13 +206,13 @@ export function MintClient() {
               </div>
               <ul className="mt-3 grid gap-2 text-sm sm:grid-cols-3">
                 <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
-                  <span className="font-display text-base text-hot">90%</span> of the base buys real memes
+                  <span className="font-display text-base text-ink underline decoration-orange decoration-[3px] underline-offset-2">90%</span> of the base buys real memes
                 </li>
                 <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
-                  <span className="font-display text-base text-hot">30 days</span> locked after funding
+                  <span className="font-display text-base text-ink underline decoration-orange decoration-[3px] underline-offset-2">30 days</span> locked after funding
                 </li>
                 <li className="rounded-lg border-2 border-ink bg-white px-3 py-2">
-                  <span className="font-display text-base text-hot">WTH + {q.state === "ok" ? q.data.tier.maxPartners : "1"}</span> meme{q.state === "ok" && q.data.tier.maxPartners > 1 ? "s" : ""} max
+                  <span className="font-display text-base text-ink underline decoration-orange decoration-[3px] underline-offset-2">WTH + {q.state === "ok" ? q.data.tier.maxPartners : "1"}</span> meme{q.state === "ok" && q.data.tier.maxPartners > 1 ? "s" : ""} max
                 </li>
               </ul>
               {q.state === "ok" && <p className="mt-2 text-xs text-ink/70">Includes a refundable reserve. Prices live from Rhea · {Math.round(q.ageMs / 1000)}s ago.</p>}

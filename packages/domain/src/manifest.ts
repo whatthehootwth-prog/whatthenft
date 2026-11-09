@@ -109,7 +109,7 @@ export const seasonManifestSchema = z
     fees: z.object({ basketBps: z.number().int(), creatorBps: z.number().int(), treasuryBps: z.number().int() }),
     royalty: z.object({ royaltyBps: z.number().int(), creatorShareOfRoyaltyBps: z.number().int() }),
     allocation: z.object({ coreWthBps: z.number().int(), slotWeightsBps: z.record(slotEnum, z.number().int()) }),
-    rarityBps: z.tuple([z.number().int(), z.number().int(), z.number().int(), z.number().int()]),
+    rarityBps: z.tuple([z.number().int(), z.number().int(), z.number().int(), z.number().int(), z.number().int()]),
     wthSlotBps: z.number().int().min(0).max(10_000),
     randomness: z.object({ version: z.literal("WTN-TRAITS-v1"), source: z.literal("near-block-random-seed-next-block") }),
     memes: z

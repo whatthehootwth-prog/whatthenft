@@ -148,7 +148,7 @@ fn season_cfg(now: u64, max_supply: u32) -> SeasonConfig {
         fees: MintFees { basket_bps: 9000, creator_bps: 500, treasury_bps: 500 },
         royalty: RoyaltyConfig { royalty_bps: 250, creator_share_bps: 1000 },
         allocation: AllocationConfig { core_wth_bps: 2000, slot_weights_bps: [2000, 1000, 2500, 1000, 1000, 2500] },
-        rarity_bps: [7000, 2200, 700, 100],
+        rarity_bps: [6000, 2500, 1000, 400, 100],
         wth_slot_bps: 3000,
         memes: vec![
             meme("wth", WTH, 0, [3; 6], RouteKind::RheaDcl, "wrap.near|wth-0b2227.launchpad.justhoot.near|10000"),

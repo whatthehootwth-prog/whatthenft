@@ -57,7 +57,7 @@ export default function MyNftsPage() {
     <>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="font-hand text-2xl text-hot">your weird little family</p>
+          <p className="eyebrow mb-1">your weird little family</p>
           <h1 className="mad-title text-[clamp(2.8rem,9vw,5.6rem)]">MY FREAK BINDER</h1>
         </div>
         <Link href="/mint" className="btn-mad">
@@ -141,7 +141,7 @@ export default function MyNftsPage() {
 function BinderEmpty({ title, aside, children, action }: { title: string; aside: string; children: React.ReactNode; action?: React.ReactNode }) {
   return (
     <div className="py-10 text-center">
-      <p className="font-hand text-2xl text-orange">{aside}</p>
+      <p className="eyebrow mb-1">{aside}</p>
       <p className="font-display text-4xl leading-none">{title}</p>
       <p className="mx-auto mt-3 max-w-md">{children}</p>
       {action && <div className="mt-6 flex justify-center">{action}</div>}

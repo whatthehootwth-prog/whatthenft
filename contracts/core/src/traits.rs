@@ -84,7 +84,7 @@ pub fn leg_amounts(basket: u128, weights: &[(u8, u16)]) -> Vec<(u8, u16, u128)> 
     legs
 }
 
-pub fn roll_rarity(d: &Drawer, bps: &[u16; 4]) -> u8 {
+pub fn roll_rarity(d: &Drawer, bps: &[u16; crate::types::RARITY_TIERS]) -> u8 {
     let r = d.pick(0, 10_000);
     let mut acc = 0u64;
     for (i, b) in bps.iter().enumerate() {

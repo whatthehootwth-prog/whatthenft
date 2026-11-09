@@ -21,7 +21,7 @@ export function tokenCard(t: TokenViewJ, season: SeasonJ | null | undefined) {
   };
 }
 
-const RARITIES = ["COMMON", "RARE", "COMMON", "EPIC", "COMMON", "RARE", "LEGENDARY", "COMMON"];
+const RARITIES = ["COMMON", "RARE", "COMMON", "EPIC", "MYTHIC", "RARE", "LEGENDARY", "COMMON"];
 
 /** Clearly-labelled preview mutants mixed from the real part library. */
 export const PREVIEW_GALLERY: { title: string; rarity: string; spec: MutantSpec }[] = Array.from({ length: 8 }, (_, i) => ({

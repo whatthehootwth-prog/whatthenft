@@ -20,21 +20,21 @@
   --color-sun: #ffe14d;
   --color-violet: #8b5cff;
   --color-lilac: #c9b6ff;
-  --color-page: #fff3d6;
+  --color-page: #fff8e7;
   --color-night-2: #17141a;
   --color-fog: #b9ad9f;
   --color-line: #16110f;
 
   --font-display: var(--font-lilita), "Lilita One", Impact, system-ui, sans-serif;
-  --font-hand: var(--font-gochi), "Gochi Hand", "Comic Sans MS", cursive;
+  --font-hand: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-spacemono), "Space Mono", ui-monospace, monospace;
-  --font-pixel: var(--font-silkscreen), "Silkscreen", ui-monospace, monospace;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-pixel: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  --shadow-hard: 5px 5px 0 #16110f;
+  --shadow-hard: 6px 6px 0 #16110f;
   --shadow-hard-sm: 3px 3px 0 #16110f;
   --shadow-hard-lg: 8px 8px 0 #16110f;
-  --radius-panel: 14px;
+  --radius-panel: 22px;
 }
 
 @layer base {
@@ -51,8 +51,9 @@ html {
 
 body {
   font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 500;
   background: var(--color-page);
   min-height: 100dvh;
 }
@@ -118,7 +119,7 @@ body {
   color: var(--color-ink);
   background: var(--color-paper);
   border: 3px solid var(--color-ink);
-  border-radius: 14px 10px 16px 9px;
+  border-radius: 22px;
   box-shadow: var(--shadow-hard);
 }
 
@@ -135,8 +136,8 @@ body {
   letter-spacing: 0.02em;
   color: var(--color-ink);
   border: 3px solid var(--color-ink);
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 var(--color-ink);
+  border-radius: 999px;
+  box-shadow: 0 4px 0 var(--color-ink);
   transition: transform 120ms var(--ease), box-shadow 120ms var(--ease), background-color 200ms var(--ease);
   cursor: pointer;
   text-decoration: none;
@@ -144,11 +145,11 @@ body {
   user-select: none;
 }
 .btn:hover:not([aria-disabled="true"]):not(:disabled) {
-  transform: translate(-1px, -1px);
-  box-shadow: 6px 6px 0 var(--color-ink);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--color-ink);
 }
 .btn:active:not([aria-disabled="true"]):not(:disabled) {
-  transform: translate(3px, 3px);
+  transform: translateY(3px);
   box-shadow: 0 0 0 var(--color-ink);
 }
 .btn-primary { background: var(--color-orange); }
@@ -156,7 +157,7 @@ body {
 .btn-yellow { background: var(--color-yellow); }
 .btn-ink { background: var(--color-ink); color: var(--color-cream); }
 .btn-danger { background: var(--color-red); }
-.btn-sm { min-height: 40px; padding: 0 0.9rem; font-size: 0.95rem; box-shadow: 3px 3px 0 var(--color-ink); }
+.btn-sm { min-height: 40px; padding: 0 1rem; font-size: 0.95rem; box-shadow: 0 3px 0 var(--color-ink); }
 .btn[aria-disabled="true"], .btn:disabled {
   cursor: not-allowed;
   color: var(--color-muted);
@@ -269,3 +270,6 @@ body {
   border: 3px solid var(--color-ink) !important;
   box-shadow: var(--shadow-hard-lg) !important;
 }
+
+/* full-bleed bands use 100vw, which includes the scrollbar */
+html, body { overflow-x: clip; }
