@@ -5,7 +5,11 @@ import { ArtMutant } from "@/components/ArtMutant";
 import { N } from "@/components/MarketBits";
 import { mixFor } from "@/lib/art";
 import { DEMO_ITEMS, DEMO_MINE, DEMO_WALLET, type DemoMine, type MineState } from "@/lib/demoMarket";
-import { tierOf } from "@/lib/rarity";
+import { MARKET_LIVE, delistCall, listCall, loadMyCollection, parseNearToYocto } from "@/lib/market";
+import { TIERS, tierOf } from "@/lib/rarity";
+import { useWallet } from "@/lib/wallet";
+
+type ActKind = "withdraw" | "reload" | "sell" | "cancel";
 
 const TOTAL = DEMO_ITEMS.length;
 const PER_PAGE = 9;
@@ -27,7 +31,6 @@ const STATE_UI: Record<MineState, { label: string; bg: string }> = {
   empty: { label: "Empty", bg: "#ffffff" },
 };
 
-const OWNED = new Map(DEMO_MINE.map((m) => [m.item.id, m]));
 
 /** A trading card as it sits in a sleeve. */
 function MiniCard({ m }: { m: DemoMine }) {
@@ -77,12 +80,12 @@ function Pocket({ id, m, onOpen, i }: { id: number; m?: DemoMine; onOpen: (m: De
   );
 }
 
-function Page({ ids, side, pageNo, onOpen }: { ids: (number | null)[]; side: "left" | "right"; pageNo: number; onOpen: (m: DemoMine) => void }) {
+function Page({ ids, side, pageNo, onOpen, owned }: { ids: (number | null)[]; side: "left" | "right"; pageNo: number; onOpen: (m: DemoMine) => void; owned: Map<number, DemoMine> }) {
   return (
     <div className={`binder-page relative flex-1 p-3 sm:p-5 ${side === "left" ? "page-left" : "page-right"}`}>
       <div className="grid grid-cols-3 gap-2 sm:gap-3">
         {ids.map((id, i) =>
-          id === null ? <div key={`blank-${i}`} className="aspect-[63/88]" /> : <Pocket key={id} id={id} m={OWNED.get(id)} onOpen={onOpen} i={i} />,
+          id === null ? <div key={`blank-${i}`} className="aspect-[63/88]" /> : <Pocket key={id} id={id} m={owned.get(id)} onOpen={onOpen} i={i} />,
         )}
       </div>
       <p className={`mt-3 text-[0.7rem] font-extrabold text-ink/40 ${side === "left" ? "text-left" : "text-right"}`}>— {pageNo} —</p>
@@ -90,7 +93,7 @@ function Page({ ids, side, pageNo, onOpen }: { ids: (number | null)[]; side: "le
   );
 }
 
-function Detail({ m, onClose, onAction }: { m: DemoMine; onClose: () => void; onAction: (msg: string) => void }) {
+function Detail({ m, onClose, onAct }: { m: DemoMine; onClose: () => void; onAct: (kind: ActKind, m: DemoMine) => void }) {
   const t = tierOf(m.item.rarity);
   const mix = mixFor(m.item.spec);
   useEffect(() => {
@@ -173,22 +176,22 @@ function Detail({ m, onClose, onAction }: { m: DemoMine; onClose: () => void; on
 
           <div className="mt-4 flex flex-wrap gap-3">
             {m.state === "unlocked" && (
-              <button type="button" className="btn-mad" onClick={() => onAction("Demo only — withdrawing needs the live contract.")}>
+              <button type="button" className="btn-mad" onClick={() => onAct("withdraw", m)}>
                 WITHDRAW BAG
               </button>
             )}
             {m.state === "empty" && (
-              <button type="button" className="btn-mad" onClick={() => onAction("Demo only — reloading needs an open season.")}>
+              <button type="button" className="btn-mad" onClick={() => onAct("reload", m)}>
                 RELOAD BAG
               </button>
             )}
             {(m.state === "locked" || m.state === "unlocked") && (
-              <button type="button" className="btn-pop" onClick={() => onAction("Demo only — listing needs the marketplace contract.")}>
+              <button type="button" className="btn-pop" onClick={() => onAct("sell", m)}>
                 SELL
               </button>
             )}
             {m.state === "listed" && (
-              <button type="button" className="btn-pop" onClick={() => onAction("Demo only — cancelling needs the marketplace contract.")}>
+              <button type="button" className="btn-pop" onClick={() => onAct("cancel", m)}>
                 CANCEL LISTING
               </button>
             )}
@@ -200,6 +203,21 @@ function Detail({ m, onClose, onAction }: { m: DemoMine; onClose: () => void; on
 }
 
 export default function MyNftsPage() {
+  const { accountId, connect, call } = useWallet();
+  const [mine, setMine] = useState<DemoMine[]>(DEMO_MINE);
+  const [live, setLive] = useState(false);
+  const load = (acc: string) =>
+    loadMyCollection(acc)
+      .then((m) => {
+        setMine(m);
+        setLive(true);
+      })
+      .catch((e) => console.error("collection: live data unavailable, showing demo", e));
+  useEffect(() => {
+    if (MARKET_LIVE && accountId) load(accountId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountId]);
+  const owned = useMemo(() => new Map(mine.map((m) => [m.item.id, m])), [mine]);
   const [tab, setTab] = useState<Tab>("album");
   const [spread, setSpread] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
@@ -219,9 +237,9 @@ export default function MyNftsPage() {
 
   const ids = useMemo<number[]>(() => {
     if (tab === "album") return DEMO_ITEMS.map((d) => d.id);
-    const mine = DEMO_MINE.filter((m) => tab === "mine" || m.state === tab).map((m) => m.item.id);
-    return mine.sort((a, b) => a - b);
-  }, [tab]);
+    const ids = mine.filter((m) => tab === "mine" || m.state === tab).map((m) => m.item.id);
+    return ids.sort((a, b) => a - b);
+  }, [tab, mine]);
 
   const spreads = Math.max(1, Math.ceil(ids.length / perSpread));
   useEffect(() => setSpread(0), [tab, perSpread]);
@@ -239,11 +257,40 @@ export default function MyNftsPage() {
   const onAction = (msg: string) => {
     setToast(msg);
     clearTimeout(toastT.current);
-    toastT.current = setTimeout(() => setToast(null), 3200);
+    toastT.current = setTimeout(() => setToast(null), 4200);
   };
 
-  const collected = DEMO_MINE.length;
-  const bagTotal = DEMO_MINE.reduce((a, m) => a + m.bag, 0);
+  const DEMO_MSG: Record<ActKind, string> = {
+    withdraw: "Demo only — withdrawing needs the live contract.",
+    reload: "Demo only — reloading needs an open season.",
+    sell: "Demo only — listing needs the marketplace contract.",
+    cancel: "Demo only — cancelling needs the marketplace contract.",
+  };
+  const onAct = (kind: ActKind, m: DemoMine) => {
+    if (!live) return onAction(DEMO_MSG[kind]);
+    // Withdraw / reload have their own guided flow on the NFT page.
+    if (kind === "withdraw" || kind === "reload") return void (window.location.href = `/nft/${m.item.id}`);
+    const run = (p: Parameters<typeof call>[0], ok: string) =>
+      call(p)
+        .then(() => {
+          onAction(ok);
+          setOpen(null);
+          if (accountId) load(accountId);
+        })
+        .catch((e) => onAction(`Failed: ${e instanceof Error ? e.message : String(e)}`));
+    if (kind === "cancel") return run(delistCall(m.item.id), `${m.item.name} is no longer listed.`);
+    const input = window.prompt(`List ${m.item.name} for how many NEAR? (3% royalty applies on sale)`, "2");
+    if (!input) return;
+    try {
+      run(listCall(m.item.id, parseNearToYocto(input)), `${m.item.name} is listed for ${input} NEAR!`);
+    } catch (e) {
+      onAction(e instanceof Error ? e.message : String(e));
+    }
+  };
+
+  const collected = mine.length;
+  const bagTotal = mine.reduce((a, m) => a + m.bag, 0);
+  const rarest = [...TIERS].reverse().find((t) => mine.some((m) => m.item.rarity === t.name));
 
   return (
     <div className="band album-desk relative -mb-24 -mt-[108px] overflow-clip !border-t-0 pb-24 pt-[124px]">
@@ -251,8 +298,17 @@ export default function MyNftsPage() {
       <header className="pop-in relative mx-auto flex max-w-[1000px] flex-wrap items-end justify-between gap-4">
         <div>
           <p className="flex flex-wrap items-center gap-2 text-[0.72rem] font-extrabold uppercase tracking-[0.14em] text-ink/60">
-            {DEMO_WALLET}
-            <span className="rounded-md border-2 border-ink bg-hot px-1.5 py-px text-[0.6rem] tracking-wider text-white">Demo data</span>
+            {live ? accountId : DEMO_WALLET}
+            {live ? (
+              <span className="rounded-md border-2 border-ink bg-lime px-1.5 py-px text-[0.6rem] tracking-wider">Live</span>
+            ) : (
+              <span className="rounded-md border-2 border-ink bg-hot px-1.5 py-px text-[0.6rem] tracking-wider text-white">Demo data</span>
+            )}
+            {MARKET_LIVE && !accountId && (
+              <button type="button" onClick={connect} className="rounded-md border-2 border-ink bg-white px-1.5 py-px text-[0.6rem] tracking-wider hover:bg-sun">
+                Connect wallet to see yours
+              </button>
+            )}
           </p>
           <h1 className="mad-title mt-1 text-[clamp(2.4rem,6vw,4.4rem)] [--ts:#fff]">MY COLLECTION BOOK</h1>
         </div>
@@ -281,11 +337,11 @@ export default function MyNftsPage() {
         </div>
         <div className="sticky-note pop-in rotate-2 bg-lime" style={{ animationDelay: "240ms" }}>
           <p className="text-[0.65rem] font-extrabold uppercase tracking-wider">Ready to withdraw</p>
-          <p className="font-display text-2xl leading-none">{DEMO_MINE.filter((m) => m.state === "unlocked").length}</p>
+          <p className="font-display text-2xl leading-none">{mine.filter((m) => m.state === "unlocked").length}</p>
         </div>
         <div className="sticky-note pop-in -rotate-1 bg-[#ff8cc6]" style={{ animationDelay: "320ms" }}>
           <p className="text-[0.65rem] font-extrabold uppercase tracking-wider">Rarest</p>
-          <p className="font-display text-xl leading-none">EPIC ★★★</p>
+          <p className="font-display text-xl leading-none">{rarest ? `${rarest.name} ${"★".repeat(rarest.stars)}` : "—"}</p>
         </div>
       </div>
 
@@ -323,7 +379,7 @@ export default function MyNftsPage() {
                 </div>
               ) : (
                 <>
-                  <Page ids={left} side="left" pageNo={spread * (perSpread / PER_PAGE) + 1} onOpen={setOpen} />
+                  <Page ids={left} side="left" pageNo={spread * (perSpread / PER_PAGE) + 1} onOpen={setOpen} owned={owned} />
                   {perSpread > PER_PAGE && (
                     <>
                       <div className="binder-spine relative w-10 shrink-0" aria-hidden="true">
@@ -331,7 +387,7 @@ export default function MyNftsPage() {
                           <span key={top} className="binder-ring absolute left-1/2 -translate-x-1/2" style={{ top: `${top}%` }} />
                         ))}
                       </div>
-                      <Page ids={right} side="right" pageNo={spread * 2 + 2} onOpen={setOpen} />
+                      <Page ids={right} side="right" pageNo={spread * 2 + 2} onOpen={setOpen} owned={owned} />
                     </>
                   )}
                 </>
@@ -357,7 +413,7 @@ export default function MyNftsPage() {
         </div>
       </div>
 
-      {open && <Detail m={open} onClose={() => setOpen(null)} onAction={onAction} />}
+      {open && <Detail m={open} onClose={() => setOpen(null)} onAct={onAct} />}
 
       {toast && (
         <div role="status" className="pop-in fixed bottom-6 left-1/2 z-[70] w-[min(92vw,440px)] -translate-x-1/2 rounded-2xl border-[3px] border-ink bg-ink px-5 py-3 text-center font-bold text-cream shadow-[5px_5px_0_#ff7a1a]">

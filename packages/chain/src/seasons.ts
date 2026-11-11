@@ -19,10 +19,12 @@ export const SEASON_01_DRAFT = {
   name: "MEME GENESIS",
   status: "DRAFT" as const,
   maxSupply: 111,
-  mintWindowDays: 7,
+  /** Open until sold out: the window just has to be far in the future (contract requires an end). */
+  mintWindowDays: 3650,
   lockDays: 30,
-  targetBase: parseNear("0.1"),
-  maxBase: parseNear("50"),
+  /** Fixed price: every mint is exactly 1 NEAR. */
+  targetBase: parseNear("1"),
+  maxBase: parseNear("1"),
   minLeg: parseNear("0.005"),
   maxPriceImpactBps: 300,
   tiers: [

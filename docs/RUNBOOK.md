@@ -103,3 +103,22 @@ NETWORK=testnet BUYBACK_CONTRACT=... WTH_TOKEN=... KEEPER_ACCOUNT=<keeper>.testn
   pnpm --filter @wtn/keeper buyback --send --watch 5
 ```
 `TEST_NEAR_USD` is refused on mainnet. Publish every `rounds/*-round-N.json` (its sha256 is on-chain).
+
+## Marketplace (`contracts/market`)
+
+Fixed-price listings for the WHAT THE NFT?! collection only.
+- **List:** owner calls core `nft_approve(token_id, <market>, msg = {"price":"<yocto>"})` (site attaches 0.01 NEAR for approval storage) → `nft_on_approve` stores the listing.
+- **Buy:** `buy(token_id)` with deposit ≥ price, ~150 Tgas. Listing is removed first (no double sale) → core `nft_transfer_payout` → `on_bought` pays seller / creator / buyback treasury (3% royalty, 50/50) and refunds any excess. Transfer failure → full refund.
+- **Delist / update_price:** seller, 1 yoctoNEAR. **remove_stale:** anyone (owner changed or approval gone).
+- **Views:** `get_listings`, `get_listings_by_owner`, `get_recent_sales` (last 100, used by the Activity tab), `get_stats`.
+- Only the core contract can create listings (max 111 tokens → bounded storage; fund the account with ~1 NEAR).
+
+```bash
+docker run --rm -v "$PWD:/work" -w /work/contracts/market wtn-build cargo near build non-reproducible-wasm --no-abi
+near contract deploy <market>.near use-file contracts/target/near/wtn_market/wtn_market.wasm \
+  with-init-call new json-args '{"owner":"<owner>","nft_contract":"<core>.near"}' \
+  prepaid-gas '30 Tgas' attached-deposit '0 NEAR' network-config mainnet
+```
+Then set `NEXT_PUBLIC_MARKET_CONTRACT=<market>.near` — the Marketplace and My Collection pages switch from demo data to live data automatically (both env vars required).
+
+**Season 01 pricing:** fixed 1 NEAR per mint (`targetBase = maxBase = 1 NEAR`), so every owl is WTH + up to 2 partner memes. The season stays open until all 111 are minted (`mintWindowDays = 3650`; the contract requires an end date); the owner can still pause minting.

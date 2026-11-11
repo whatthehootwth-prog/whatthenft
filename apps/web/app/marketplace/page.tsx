@@ -7,7 +7,11 @@ import { Decor } from "@/components/Decor";
 import { N, Stars, Stat } from "@/components/MarketBits";
 import { PARTNERS, memeColor, providers } from "@/lib/art";
 import { DEMO_ACTIVITY, DEMO_HOLDERS, DEMO_ITEMS, DEMO_STATS, ago, randomActivity, type DemoActivity, type DemoItem } from "@/lib/demoMarket";
+import { MARKET_LIVE, buyCall, loadLiveMarket, type LiveItem, type LiveMarket } from "@/lib/market";
 import { TIERS, tierOf, type RarityName } from "@/lib/rarity";
+import { useWallet } from "@/lib/wallet";
+
+const DEMO_DATA: LiveMarket = { items: DEMO_ITEMS.map((d) => ({ ...d, priceYocto: null })), activity: DEMO_ACTIVITY, holders: DEMO_HOLDERS, stats: DEMO_STATS };
 
 type Sort = "price-asc" | "price-desc" | "rarity" | "recent" | "id";
 const SORTS: { v: Sort; l: string }[] = [
@@ -123,6 +127,23 @@ const SHAPES: [number, number, string, string, number, string][] = [
 ];
 
 export default function MarketplacePage() {
+  const { accountId, connect, call } = useWallet();
+  const [data, setData] = useState<LiveMarket>(DEMO_DATA);
+  const [live, setLive] = useState(false);
+  const liveRef = useRef(false);
+  const reload = () =>
+    loadLiveMarket()
+      .then((d) => {
+        setData(d);
+        setLive(true);
+        liveRef.current = true;
+        setFeed(d.activity.map((a) => ({ a, fresh: false })));
+      })
+      .catch((e) => console.error("marketplace: live data unavailable, showing demo", e));
+  useEffect(() => {
+    if (MARKET_LIVE) reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<Sort>("price-asc");
   const [showFilters, setShowFilters] = useState(false);
@@ -140,19 +161,19 @@ export default function MarketplacePage() {
   useEffect(() => {
     let n = 1;
     const t = setInterval(() => {
-      if (document.hidden) return;
+      if (document.hidden || liveRef.current) return;
       setFeed((f) => [{ a: randomActivity(9000 + n++), fresh: true }, ...f.map((x) => ({ a: { ...x.a, minsAgo: x.a.minsAgo + 1 }, fresh: false }))].slice(0, 40));
     }, 5000);
     return () => clearInterval(t);
   }, []);
 
-  const rarityCount = useMemo(() => Object.fromEntries(TIERS.map((t) => [t.name, DEMO_ITEMS.filter((d) => d.rarity === t.name).length])), []);
+  const rarityCount = useMemo(() => Object.fromEntries(TIERS.map((t) => [t.name, data.items.filter((d) => d.rarity === t.name).length])), [data]);
 
   const items = useMemo(() => {
     const lo = parseFloat(min);
     const hi = parseFloat(max);
     const needle = q.trim().toLowerCase();
-    const out = DEMO_ITEMS.filter(
+    const out = data.items.filter(
       (d) =>
         (rar.size === 0 || rar.has(d.rarity)) &&
         (crews.size === 0 || d.memes.some((m) => crews.has(m))) &&
@@ -169,7 +190,7 @@ export default function MarketplacePage() {
       return a.id - b.id;
     });
     return out;
-  }, [q, sort, rar, crews, min, max]);
+  }, [q, sort, rar, crews, min, max, data]);
 
   useEffect(() => setLimit(PAGE), [q, sort, rar, crews, min, max]);
 
@@ -187,7 +208,24 @@ export default function MarketplacePage() {
     setMax("");
     setQ("");
   };
+  const say = (msg: string) => {
+    setToast(msg);
+    clearTimeout(toastT.current);
+    toastT.current = setTimeout(() => setToast(null), 4200);
+  };
   const onBuy = (d: DemoItem) => {
+    const li = d as LiveItem;
+    if (live && li.priceYocto) {
+      if (!accountId) return connect();
+      say(`Confirm the purchase of ${d.name} in your wallet…`);
+      call(buyCall(d.id, li.priceYocto))
+        .then(() => {
+          say(`🎉 ${d.name} is yours — bag included!`);
+          reload();
+        })
+        .catch((e) => say(`Purchase failed: ${e instanceof Error ? e.message : String(e)}`));
+      return;
+    }
     setToast(`Demo only — ${d.name} isn't really for sale yet. The marketplace contract isn't live.`);
     clearTimeout(toastT.current);
     toastT.current = setTimeout(() => setToast(null), 3200);
@@ -220,22 +258,26 @@ export default function MarketplacePage() {
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
                   <h1 className="font-display text-[clamp(1.7rem,3.4vw,2.4rem)] leading-none">WHAT THE NFT?!</h1>
-                  <span className="rounded-md border-2 border-ink bg-hot px-1.5 py-px text-[0.62rem] font-extrabold uppercase tracking-wider text-white">Demo data</span>
+                  {live ? (
+                    <span className="rounded-md border-2 border-ink bg-lime px-1.5 py-px text-[0.62rem] font-extrabold uppercase tracking-wider">Live</span>
+                  ) : (
+                    <span className="rounded-md border-2 border-ink bg-hot px-1.5 py-px text-[0.62rem] font-extrabold uppercase tracking-wider text-white">Demo data</span>
+                  )}
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1.5 text-[0.78rem] font-bold">
-                  <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">{DEMO_STATS.supply} items</span>
+                  <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">{data.stats.supply} items</span>
                   <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">3% royalty</span>
                   <span className="rounded-full border-2 border-ink/20 bg-page px-2.5 py-0.5">NEAR</span>
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
-              <Stat label="Floor" value={DEMO_STATS.floor} near color="#ff7a1a" />
-              <Stat label="24h volume" value={DEMO_STATS.volume24h} near decimals={1} color="#ff3ea5" />
-              <Stat label="Total volume" value={DEMO_STATS.totalVolume} near decimals={1} color="#2ee6ff" />
-              <Stat label="Top sale" value={DEMO_STATS.topSale} near decimals={1} color="#ffe14d" />
-              <Stat label="Listed" value={DEMO_STATS.listed} decimals={0} color="#b8ff3d" />
-              <Stat label="Owners" value={DEMO_STATS.owners} decimals={0} color="#b48cff" />
+              <Stat label="Floor" value={data.stats.floor} near color="#ff7a1a" />
+              <Stat label="24h volume" value={data.stats.volume24h} near decimals={1} color="#ff3ea5" />
+              <Stat label="Total volume" value={data.stats.totalVolume} near decimals={1} color="#2ee6ff" />
+              <Stat label="Top sale" value={data.stats.topSale} near decimals={1} color="#ffe14d" />
+              <Stat label="Listed" value={data.stats.listed} decimals={0} color="#b8ff3d" />
+              <Stat label="Owners" value={data.stats.owners} decimals={0} color="#b48cff" />
             </div>
           </div>
         </section>
@@ -383,7 +425,7 @@ export default function MarketplacePage() {
                   </ul>
                 ) : (
                   <ol>
-                    {DEMO_HOLDERS.map((h, i) => (
+                    {data.holders.map((h, i) => (
                       <li key={h.account} className="flex items-center gap-3 rounded-2xl px-2 py-2.5 hover:bg-page">
                         <span className="w-6 text-center font-display text-lg text-ink/45">{i + 1}</span>
                         <span className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-ink font-display text-lg" style={{ background: HOLDER_COLORS[i % HOLDER_COLORS.length] }}>
@@ -392,7 +434,7 @@ export default function MarketplacePage() {
                         <div className="min-w-0 flex-1">
                           <p className="truncate font-bold">{h.account}</p>
                           <div className="mt-1 h-2 overflow-hidden rounded-full border-[1.5px] border-ink bg-page">
-                            <div className="mk-bar h-full rounded-full" style={{ width: `${(h.count / DEMO_HOLDERS[0]!.count) * 100}%`, background: HOLDER_COLORS[i % HOLDER_COLORS.length], "--d": `${i * 60}ms` } as CSSProperties} />
+                            <div className="mk-bar h-full rounded-full" style={{ width: `${(h.count / data.holders[0]!.count) * 100}%`, background: HOLDER_COLORS[i % HOLDER_COLORS.length], "--d": `${i * 60}ms` } as CSSProperties} />
                           </div>
                         </div>
                         <div className="text-right">

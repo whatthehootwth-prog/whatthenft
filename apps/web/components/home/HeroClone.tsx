@@ -290,7 +290,7 @@ function SeasonStats({ live }: { live: SeasonLive }) {
       ]
     : [
         { k: "Supply", v: "111" },
-        { k: "Price", v: "0.1 NEAR" },
+        { k: "Price", v: "1 NEAR" },
       ];
   const isLive = live.state === "ok" && !live.paused && live.phase === "live";
   return (

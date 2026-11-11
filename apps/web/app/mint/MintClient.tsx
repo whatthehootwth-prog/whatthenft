@@ -15,16 +15,16 @@ import { useQuote } from "@/lib/useQuote";
 import { useSeasonLive } from "@/lib/useSeason";
 import { useWallet } from "@/lib/wallet";
 
-const PRESET_AMOUNTS = ["0.1", "0.5", "1", "5"];
+/** Every mint is exactly 1 NEAR (Season 01 fixed price). */
+const MINT_PRICE = "1";
 const QUOTE_MAX_AGE_MS = 60_000;
-const AMOUNT_RE = /^\d{0,6}(\.\d{0,24})?$/;
 
 export function MintClient() {
   const { accountId, connect, call } = useWallet();
   const live = useSeasonLive();
   const season = live.state === "ok" ? live.season : null;
-  const [amount, setAmount] = useState("0.1");
-  const [debounced, setDebounced] = useState("0.1");
+  const [amount] = useState(MINT_PRICE);
+  const [debounced, setDebounced] = useState(MINT_PRICE);
   const [ack, setAck] = useState(false);
   const [balance, setBalance] = useState<bigint | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -172,31 +172,11 @@ export function MintClient() {
               )}
             </div>
 
-            {/* amount */}
-            <fieldset className="mt-6 min-w-0">
-              <legend className="font-display text-xl">How big is the bag?</legend>
-              <div className="mt-3 grid grid-cols-4 gap-2">
-                {PRESET_AMOUNTS.map((p) => (
-                  <button
-                    key={p}
-                    type="button"
-                    aria-pressed={amount === p}
-                    onClick={() => setAmount(p)}
-                    className={`min-h-14 rounded-xl border-[3px] border-ink font-display text-lg transition ${amount === p ? "bg-orange shadow-[0_4px_0_#16110f]" : "bg-cream hover:-translate-y-0.5"}`}
-                  >
-                    {p}
-                    <span className="block text-[0.65rem] leading-none">NEAR</span>
-                  </button>
-                ))}
-              </div>
-              <label htmlFor="amt" className="mt-3 block text-sm font-semibold">
-                or type your own
-              </label>
-              <div className="mt-1 flex overflow-hidden rounded-xl border-[3px] border-ink bg-paper focus-within:outline focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-cyan">
-                <input id="amt" inputMode="decimal" autoComplete="off" value={amount} onChange={(e) => AMOUNT_RE.test(e.target.value) && setAmount(e.target.value)} className="num min-w-0 flex-1 bg-transparent px-4 py-3 text-xl outline-none" />
-                <span className="grid place-items-center border-l-[3px] border-ink bg-cream px-4 font-display">NEAR</span>
-              </div>
-            </fieldset>
+            {/* price (fixed) */}
+            <div className="mt-6 flex items-center justify-between gap-3 rounded-2xl border-[3px] border-ink bg-cream px-4 py-3">
+              <span className="font-display text-xl">Price per mutant</span>
+              <span className="font-display text-2xl">1 NEAR</span>
+            </div>
 
             {/* the essentials */}
             <div className="mt-6 rounded-2xl border-4 border-ink bg-sun p-4 text-ink shadow-[5px_5px_0_#16110f]">

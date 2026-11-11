@@ -24,7 +24,7 @@ async function verified(memeId: string) {
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
-  const raw = url.searchParams.get("base") ?? "0.1";
+  const raw = url.searchParams.get("base") ?? "1";
   let base: bigint;
   try {
     base = parseNear(raw);
