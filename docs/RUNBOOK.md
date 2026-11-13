@@ -141,3 +141,21 @@ CORE_CONTRACT=<core> PINATA_JWT=... KEEPER_ACCOUNT=... KEEPER_PRIVATE_KEY=... pn
 ```
 Skin markings (NEAR emblem, pixel-3 tattoo, cybernetic shell + eye) are flagged `skin: true` in
 `packages/assets/src/catalog.ts`; both the website and the compositor read that flag from the art registry.
+
+## Order runner + the all-in-one keeper run
+
+Each mint moves one step per permissionless `advance_order` call (reveal → wrap → one swap per
+token → NFT minted). The keeper's order runner scans recent orders and steps each in-progress one
+until it's done (max 6 steps per run; it stops early if nothing moves, e.g. a token busy with
+another order). Orders updated in the last 20 s are left to the minter's page, which polls every
+3 s and offers **Continue my order**. `RefundPending` orders get `refund_order`; orders in
+`PartialExecutionRecovery` / `FailedPreExecution` are reported for a human.
+The keeper is reimbursed `advance_fee` from the order's retry reserve (unused reserve is refunded).
+
+**Railway cron (every 1–2 minutes):**
+```bash
+pnpm --filter @wtn/keeper run-all --send
+```
+Runs, in order: orders → NFT images → WTH buyback; each part is skipped when its env vars are
+missing. Env: `NETWORK`, `CORE_CONTRACT`, `BUYBACK_CONTRACT`, `KEEPER_ACCOUNT`, `KEEPER_PRIVATE_KEY`,
+`PINATA_JWT`, optional `RPC_URL`, plus the buyback settings above.

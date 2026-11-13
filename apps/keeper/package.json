@@ -8,7 +8,8 @@
     "preview": "tsx src/preview.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit -p .",
-    "media": "tsx src/media-cli.ts"
+    "media": "tsx src/media-cli.ts",
+    "run-all": "tsx src/run-all.ts"
   },
   "dependencies": {
     "@wtn/chain": "workspace:*",
