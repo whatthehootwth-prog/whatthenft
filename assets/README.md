@@ -45,5 +45,6 @@ Slots: `head` (hats, ears, head armour) · `face` (eye/cheek overlays) · `body`
 | INU | body | candidate: `sinu-8.smithii.near` |
 | NEARKAT | body, accessory | `kat.token0.near` ✓ |
 | CYBERNETIC | body, head, face, legs | not found · only tan fur supplied (previews show 4 more colours) |
+| BATMAN | head (cowl), accessory (cape), legs (utility belt) | not found · token contract still to be provided |
 
 Nothing is `approvedForMint` yet: each meme needs its token confirmed and written art/name permission.

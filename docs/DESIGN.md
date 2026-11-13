@@ -61,7 +61,7 @@ Minimum text size 14px (12px only for table footnotes ≥ 4.5:1 contrast).
 - **Button**: `primary` (orange, ink 3px border, 4px hard shadow), `secondary` (cream), `ink` (ink bg, cream text), `danger` (red), `ghost`. States: hover (shadow 6px, −1px translate), active (shadow 0, +2px translate), focus-visible (3px cyan outline offset 3px), disabled (muted stripe pattern + `aria-disabled` + **visible reason text below**), loading (label replaced by "Waiting for wallet…" text; width locked). Min tap target 44×44.
 - **Panel**: CLEAR card = paper bg, 3px ink border, radius 14px, 5px hard shadow. LOUD sticker = rotated ±2°, uneven radius `14px 10px 16px 9px` (site value).
 - **Chip** (state chip above), **Amount** (value + unit + optional fiat-free secondary; never abbreviates below 6 significant digits on CLEAR surfaces), **AddressMono** (truncates middle with copy button and explorer link; full value in `title` + accessible label).
-- **Receipt** (cost breakdown): two-column table, ink rules, totals row double rule, every line has a source note (e.g. "from season config", "live Rhea quote 08:10:57 UTC").
+- **Receipt** (cost breakdown): two-column table, ink rules, totals row double rule, every line has a source note (e.g. "from season config", "live RHEA quote 08:10:57 UTC").
 - **Stepper** (order status): vertical; each step = state + timestamp + tx link; current step pulses opacity only.
 - **Alert**: info (cyan rule), warning (yellow), error (red). Always text + icon, never color alone.
 - **Modal**: focus-trapped, Esc closes (except while a transaction is being signed), labelled by heading, returns focus.

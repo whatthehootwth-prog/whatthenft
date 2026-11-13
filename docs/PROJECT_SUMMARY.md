@@ -1,7 +1,7 @@
 # WHAT THE NFT?! — Project Summary
 
 > **One owl. Too many memes.**
-> A NEAR NFT collection where every NFT is a mutant WTH owl stitched together from meme-community body parts — and each NFT holds a **real bag of those meme tokens**, bought on Rhea at mint.
+> A NEAR NFT collection where every NFT is a mutant WTH owl stitched together from meme-community body parts — and each NFT holds a **real bag of those meme tokens**, bought on RHEA at mint.
 
 _Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing deployed yet._
 
@@ -15,8 +15,8 @@ _Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing
 | Buyback treasury contract (`contracts/buyback`) | ✅ Built · 14/14 tests pass · compiles (185 KB) · **not deployed** |
 | Keeper bot (`apps/keeper`) | ✅ Built · 12/12 tests · live read-only preview works on mainnet data |
 | Shared economics/traits logic (`packages/domain`) | ✅ 32/32 tests |
-| Chain helpers (`packages/chain`) | ✅ RPC, Rhea quotes, token registry, season draft |
-| Art pipeline (`packages/assets`) | ✅ 14 meme folders organised, manifests, web-ready layers |
+| Chain helpers (`packages/chain`) | ✅ RPC, RHEA quotes, token registry, season draft |
+| Art pipeline (`packages/assets`) | ✅ 15 meme folders organised (incl. BATMAN), manifests, web-ready layers |
 | Website (`apps/web`) | ✅ Homepage, Marketplace, My Collection, WTH is this?!, Mint, Treasury, Risk, Terms |
 | Marketplace contract (`contracts/market`) | ✅ Built · 9/9 tests · compiles (215 KB) · **not deployed** · pages switch to live data when configured |
 | NFT image compositor + IPFS pinning | ❌ Not built |
@@ -24,7 +24,7 @@ _Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing
 | Mainnet season config with real memes | ❌ Only WTH + NEARKAT have verified token contracts |
 | Audit / legal review | ❌ Not done |
 
-**Network today:** website set to `testnet`, no contract connected. The only mainnet interaction so far has been **read-only** (token metadata, holder balances, Rhea quotes). No transactions have been sent and no real money has moved.
+**Network today:** website set to `testnet`, no contract connected. The only mainnet interaction so far has been **read-only** (token metadata, holder balances, RHEA quotes). No transactions have been sent and no real money has moved.
 
 ---
 
@@ -37,7 +37,7 @@ _Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing
 - Seasonal, capped drops. **Season 01 "Meme Genesis" = 111 mutants.**
 - Part of the **WHAT THE HOOT?! ($WTH)** universe; WTH always gets a guaranteed share of every bag.
 
-**Why it fits a meme track:** meme culture (13 meme communities mashed into one character) + real on-chain meme-token utility on NEAR (Rhea swaps, verified token custody, tradable token-backed NFTs).
+**Why it fits a meme track:** meme culture (14 meme communities mashed into one character) + real on-chain meme-token utility on NEAR (RHEA swaps, verified token custody, tradable token-backed NFTs).
 
 ---
 
@@ -47,7 +47,7 @@ _Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing
  Mint (pay NEAR)
    │  NEAR randomness in a LATER block picks 6 parts + rarity (nobody can choose or re-roll)
    ▼
- Buy the bag  ── contract wraps NEAR → buys each meme token on Rhea (min_out from on-chain quote)
+ Buy the bag  ── contract wraps NEAR → buys each meme token on RHEA (min_out from on-chain quote)
    │            ── re-reads its own token balance → credits only what verifiably arrived
    ▼
  NFT minted (only after every leg is funded — "no bag, no NFT")
@@ -116,10 +116,10 @@ Treasury (buyback contract) receives: 5% of mints + 50% of royalties (plain NEAR
    │
    │  keeper checks every few minutes
    ▼
-Spendable NEAR worth ≥ $20?  (Rhea on-chain NEAR/USDC + CoinGecko must agree within 10%)
+Spendable NEAR worth ≥ $20?  (RHEA on-chain NEAR/USDC + CoinGecko must agree within 10%)
    │ yes
    ▼
-buy(): wrap NEAR → on-chain Rhea quote → swap with min_out (3% default, 10% hard cap)
+buy(): wrap NEAR → on-chain RHEA quote → swap with min_out (3% default, 10% hard cap)
        → credit only verified WTH → unwrap unused wNEAR
    ▼
 Snapshot $WTH holders (FastNEAR top list, every balance re-read on-chain)
@@ -136,17 +136,17 @@ start_round(sha256, total) → pay(≤20 per batch) × N → close_round()
 
 **Live preview (read-only, mainnet data):** 1,000 WTH would be split across **45** qualifying holders; 12.9 WTH rolls over. NEAR/USD sources agreed at ~$3.61.
 
-**$WTH token:** `wth-0b2227.launchpad.justhoot.near` (WHAT THE HOOT, 18 decimals), Rhea DCL pool `wrap.near|wth-0b2227.launchpad.justhoot.near|10000`.
+**$WTH token:** `wth-0b2227.launchpad.justhoot.near` (WHAT THE HOOT, 18 decimals), RHEA DCL pool `wrap.near|wth-0b2227.launchpad.justhoot.near|10000`.
 
 ---
 
 ## 6. Art system
 
-- **14 meme folders:** WTH (base) + HOODL, HOOTERS, OYSTER, THREE, MOONSHOT, RAEN, MALLACE, IDP, ROBINHOOT, QUANTUM CAT, INU, NEARKAT, CYBERNETIC.
+- **15 meme folders:** WTH (base) + HOODL, HOOTERS, OYSTER, THREE, MOONSHOT, RAEN, MALLACE, IDP, ROBINHOOT, QUANTUM CAT, INU, NEARKAT, CYBERNETIC, BATMAN (cowl · cape · utility belt).
 - Each part is a **transparent 1254×1254 layer** drawn in place on the WTH owl; stacking reproduces the founder previews exactly.
 - **Layer order:** behind → body → *skin markings* → legs → outfit → arms → head → face.
 - **Skin markings** (always directly on the body, under everything): NEAR emblem (NEARKAT outfit), pixel-3 tattoo (THREE face), cybernetic temple shell + cyber eye.
-- **Possible looks today:** 6 × 3 × 9 × 5 × 3 × 7 = **17,010** (grows with every new variant).
+- **Possible looks today:** 7 × 3 × 9 × 5 × 4 × 8 = **30,240** (grows with every new variant).
 - **Pipeline:** `pnpm --filter @wtn/assets organize` → `assets/memes/<meme>/{manifest.json, preview.png, slots/<slot>/NN-name.png}` + web WebPs in `apps/web/public/art/` + `apps/web/lib/art-registry.json`.
 - **Token readiness:** only **WTH** and **NEARKAT** (`kat.token0.near`) have verified token contracts; the other 12 are `null` until verified.
 - **Funny names:** generated from the actual parts (body = who it is, other parts add a word) — e.g. "CAPTAIN OUTLAW CYBORG", "DOGGO.EXE", "PROFESSOR SCHRÖDINGER".
@@ -160,7 +160,7 @@ start_round(sha256, total) → pay(≤20 per batch) × N → close_round()
 | `contracts/core` | Rust (near-sdk 5.30.1) NFT + vault + order engine |
 | `contracts/buyback` | Rust buyback treasury |
 | `packages/domain` | Exact bigint economics, allocation, trait derivation (shared test vectors with the contract), manifest schemas, executable-minimum engine |
-| `packages/chain` | RPC client, network registry (Rhea accounts, token routes), Rhea quotes, Season 01 draft |
+| `packages/chain` | RPC client, network registry (RHEA accounts, token routes), RHEA quotes, Season 01 draft |
 | `packages/assets` | Art organiser / validator (sharp) |
 | `apps/web` | Next.js 16 · React 19 · Tailwind 4 · NEAR wallet-selector 10 |
 | `apps/keeper` | Buyback keeper CLI + payout preview |
@@ -192,7 +192,7 @@ Card states: `FullyBackedLocked · Unlocked · Redeeming · RedeemedEmpty · Rel
 | **Marketplace** | Collection header (Floor, 24h volume, Total volume, Top sale, Listed, Owners — count-up), search, sort (price, rarity, recent, id), filters (rarity, meme crew, price range), card grid with BUY, load more, sticky **Activity** (live demo feed) / **Holders** tabs. **Demo data, labelled.** |
 | **My Collection** | Pokémon-style **binder**: 111 numbered pockets (owned cards in sleeves, others "?"), page turns, divider tabs (Full album / My cards / Locked / Unlocked / Listed / Empty), completion bar, sticky notes, card pop-out with bag mix, lock countdown and actions. **Demo data, labelled.** |
 | **WTH is this?!** | Animated adventure map: curvy marching-dots road through 6 stops (Mint → Real token bag → Trade → Withdraw → Where the money goes → Seasons), owl rider that **walks** as you scroll, blob illustrations, speech bubbles, pop-in cards, "One serious thing…" note linking Risk + Treasury. |
-| **Mint** | Price presets / custom amount, live quote from mainnet Rhea, full fee breakdown, pack-reveal animation. Works once a contract is connected. |
+| **Mint** | Price presets / custom amount, live quote from mainnet RHEA, full fee breakdown, pack-reveal animation. Works once a contract is connected. |
 | **Treasury / Risk / Terms / Status / Admin** | Rules and disclosures (auto-buyback + distribution described honestly, nothing promised), live account balances once deployed, admin season tools. |
 
 **Nav:** floating dark pill (WHAT THE HOOT style): Home · Marketplace · My Collection · WTH is this?! · Connect wallet · MINT NOW. No footer on any page.
@@ -246,7 +246,7 @@ Browser checks at 1440×900 and 375×812 for every redesigned page (no horizonta
 
 **I prepare**
 - [ ] Rebuild core WASM (5 tiers, 85/10/5, 3% 50/50) + publish checksum
-- [ ] Real Season 01 config (verified memes + Rhea routes only)
+- [ ] Real Season 01 config (verified memes + RHEA routes only)
 - [ ] NFT image compositor + IPFS pinning (`set_token_media`)
 - [ ] Order runner (keeper step or "continue" in the mint UI)
 - [ ] Remove/hide demo data on mainnet · switch site to `mainnet` · production build + hosting

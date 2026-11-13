@@ -101,7 +101,7 @@ export async function GET(req: Request) {
 
   const body = {
     generatedAt: new Date().toISOString(),
-    source: "mainnet Rhea pools (read-only quotes)",
+    source: "mainnet RHEA pools (read-only quotes)",
     season: { id: d.seasonId, name: d.name, status: d.status, maxSupply: d.maxSupply, lockDays: d.lockDays, wthSlotBps: d.wthSlotBps },
     base: s(base),
     split: { basket: s(split.basket), creator: s(split.creator), treasury: s(split.treasury), basketBps: d.fees.basketBps, creatorBps: d.fees.creatorBps, treasuryBps: d.fees.treasuryBps },

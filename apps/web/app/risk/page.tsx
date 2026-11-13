@@ -32,7 +32,7 @@ export default function RiskPage() {
         </ul>
         <h2>Smart-contract and custody risk</h2>
         <ul>
-          <li>Baskets are held by the WHAT THE NFT?! vault contract and attributed to each card on-chain. Bugs in this contract, NEAR, Rhea or a token contract could cause loss.</li>
+          <li>Baskets are held by the WHAT THE NFT?! vault contract and attributed to each card on-chain. Bugs in this contract, NEAR, RHEA or a token contract could cause loss.</li>
           <li>The contracts are <strong>not yet independently audited</strong>. Do not deposit more than you can afford to lose.</li>
           <li>Administrators cannot withdraw baskets, seize cards or change minted compositions, but they can pause new mints and swap routes, and configure future seasons.</li>
         </ul>

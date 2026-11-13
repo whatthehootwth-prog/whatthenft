@@ -7,22 +7,22 @@ All numbers below come from live, read-only mainnet reads made on 2026-11-07 ≈
 | Fact | Evidence |
 |---|---|
 | WTH = `wth-0b2227.launchpad.justhoot.near`, symbol `WTH`, 18 decimals, total supply ≈ 989,979,646.7 WTH | `ft_metadata`, `ft_total_supply` |
-| Primary liquidity: Rhea DCL pool `wrap.near\|wth-0b2227.launchpad.justhoot.near\|10000` (1% fee tier), state `Running` | `dclv2.ref-labs.near.get_pool`; also linked from whatthehoot.lol (dexscreener) |
-| Rhea classic pool #8915 exists but holds ≈ $1.37 TVL — unusable | `api.rhea.finance/list-top-pools` |
+| Primary liquidity: RHEA DCL pool `wrap.near\|wth-0b2227.launchpad.justhoot.near\|10000` (1% fee tier), state `Running` | `dclv2.ref-labs.near.get_pool`; also linked from whatthehoot.lol (dexscreener) |
+| RHEA classic pool #8915 exists but holds ≈ $1.37 TVL — unusable | `api.rhea.finance/list-top-pools` |
 | **NEAR Intents 1Click does NOT support WTH** (`tokenOut is not valid`) | `POST /v0/quote` dry |
 
-**Consequence:** the brief's preferred 1Click execution path cannot buy the core WTH allocation. The vault therefore swaps **directly on Rhea from the contract**, which is also the safer design for NEAR-native assets: the contract itself sets `min_out` from an on-chain quote and credits only its own verified balance delta (no off-chain solver trust, no deposit addresses). 1Click remains the adapter for Milestone C cross-chain assets. The 1Click base URL is `https://1click.chaindefuser.com` (the brief's docs link is correct; `chaindefuse.com` without the "r" does not resolve).
+**Consequence:** the brief's preferred 1Click execution path cannot buy the core WTH allocation. The vault therefore swaps **directly on RHEA from the contract**, which is also the safer design for NEAR-native assets: the contract itself sets `min_out` from an on-chain quote and credits only its own verified balance delta (no off-chain solver trust, no deposit addresses). 1Click remains the adapter for Milestone C cross-chain assets. The 1Click base URL is `https://1click.chaindefuser.com` (the brief's docs link is correct; `chaindefuse.com` without the "r" does not resolve).
 
 ## 2. Candidate NEAR memes (verified by full contract id)
 
-| Meme | Contract | Dec | Rhea route | Pool fee | 1Click |
+| Meme | Contract | Dec | RHEA route | Pool fee | 1Click |
 |---|---|---|---|---|---|
 | WTH | wth-0b2227.launchpad.justhoot.near | 18 | DCL 1% | 100 bps | ✗ not listed |
 | SHITZU | token.0xshitzu.near | 18 | v2 #4369 | 30 bps | ✓ |
 | BLACKDRAGON | blackdragon.tkn.near | 24 | v2 #4276 | 30 bps | ✓ |
 | JAMBO | jambo-1679.meme-cooking.near | 18 | v2 #6518 | 10 bps | ✓ |
 | KAT (NearKat) | kat.token0.near | 18 | v2 #5391 | 30 bps | ✓ |
-| PURGE | purge-558.meme-cooking.near | 18 | v2 #5650 | 10 bps | listed but **"No liquidity available"** on every dry quote, while the Rhea pool quotes fine |
+| PURGE | purge-558.meme-cooking.near | 18 | v2 #5650 | 10 bps | listed but **"No liquidity available"** on every dry quote, while the RHEA pool quotes fine |
 
 All six passed `ft_metadata` (symbol AND decimals match) and pool-pairing checks. Every token's NEP-145 storage minimum is 0.00125 NEAR (one-time per token for the vault).
 
@@ -40,7 +40,7 @@ Quotes (wNEAR → token) at the exact leg sizes a 0.1 NEAR mint produces (0.09 b
 
 (Impact excludes the pool fee, which is charged separately and recorded per card.)
 
-- Rhea has **no per-order minimum**; every leg of a 0.1 NEAR mint quotes with ≤1 bps impact.
+- RHEA has **no per-order minimum**; every leg of a 0.1 NEAR mint quotes with ≤1 bps impact.
 - The minimum engine (`getExecutableMintMinimum`, min leg 0.005 NEAR, max impact 300 bps) returns **0.1 NEAR executable** for WTH + each of SHITZU / BLACKDRAGON / JAMBO / KAT / PURGE.
 - **The real constraint at 0.1 NEAR is fixed execution cost, quoted separately:**
   - NFT + basket storage: **650 bytes = 0.0065 NEAR measured** in `contracts/core` tests (2-leg mint). Draft fee 0.009 NEAR leaves margin for 4 legs.
@@ -56,7 +56,7 @@ Largest WTH leg probed within 300 bps impact: 45 NEAR. A 50 NEAR season max is t
 
 | # | Item | Status |
 |---|---|---|
-| B1 | Testnet has no WTH or partner memes, and no WTH DCL pool. A real testnet E2E needs project-deployed test FTs + Rhea testnet pools (`ref-finance-101.testnet` / DCL testnet). | Needs a funded testnet account (the founder's) — not created by me |
+| B1 | Testnet has no WTH or partner memes, and no WTH DCL pool. A real testnet E2E needs project-deployed test FTs + RHEA testnet pools (`ref-finance-101.testnet` / DCL testnet). | Needs a funded testnet account (the founder's) — not created by me |
 | B2 | Founder art layers not supplied. Production mint must reject missing/placeholder art. | Waiting on assets |
 | B3 | Partner artwork / name rights unconfirmed for every partner meme. | `approvedForMint: false` everywhere |
 | B4 | Marketplace contract, buyback treasury contract, indexer, keeper bot | Milestone B |

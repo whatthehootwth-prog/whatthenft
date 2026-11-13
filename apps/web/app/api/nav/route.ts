@@ -35,5 +35,5 @@ export async function GET(req: Request) {
       }
     }),
   );
-  return NextResponse.json({ generatedAt: new Date().toISOString(), source: "mainnet Rhea pools", holdings: out }, { headers: { "cache-control": "no-store" } });
+  return NextResponse.json({ generatedAt: new Date().toISOString(), source: "mainnet RHEA pools", holdings: out }, { headers: { "cache-control": "no-store" } });
 }

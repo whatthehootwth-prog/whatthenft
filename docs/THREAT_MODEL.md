@@ -4,7 +4,7 @@ Assets at risk: basket tokens held by the vault (customer property), escrowed NE
 
 | Threat | Mitigation in code | Test |
 |---|---|---|
-| Admin/operator steals baskets | No function moves FT holdings except: owner-signed `redeem` (1 yocto, current owner only), swaps into season-frozen Rhea pools with on-chain-quoted `min_out`, recovery unwinds whose proceeds only refund `order.payer`. | `no_admin_path_moves_backed_funds_and_media_pins_once` |
+| Admin/operator steals baskets | No function moves FT holdings except: owner-signed `redeem` (1 yocto, current owner only), swaps into season-frozen RHEA pools with on-chain-quoted `min_out`, recovery unwinds whose proceeds only refund `order.payer`. | `no_admin_path_moves_backed_funds_and_media_pins_once` |
 | Operator changes rules mid-season | `update_season` only in Draft; `open_season` stores sha256(borsh(config)); live min only within frozen [floor, max]. | `season_is_immutable_once_open_and_capped` |
 | Seller redeems after selling | `redeem` checks `predecessor == owner_by_id`; ownership is the NFT standard's single source of truth in the same contract. | `sold_while_locked_buyer_inherits_full_claim_seller_cannot_redeem` |
 | Stale listing sells an emptied card | `redeem`/`reload` revoke all approvals; transfers & `nft_transfer_payout` blocked while Redeeming/Reloading. | `redemption_revokes_marketplace_approvals_…` |
@@ -22,4 +22,4 @@ Assets at risk: basket tokens held by the vault (customer property), escrowed NE
 | Metadata substitution | `set_token_media` once only, content-addressed URIs only, sha256 required. | media pin test |
 | Overflow | `overflow-checks = true` in release; checked add/sub on accounting. | split tests with u128 extremes |
 
-Open items before mainnet: independent audit; testnet integration with real Rhea pools (gas budgets, DCL `Swap` msg acceptance, output-transfer failure path into Rhea internal balance); keeper bot; multisig owner; storage-cost top-up monitoring for the contract account.
+Open items before mainnet: independent audit; testnet integration with real RHEA pools (gas budgets, DCL `Swap` msg acceptance, output-transfer failure path into RHEA internal balance); keeper bot; multisig owner; storage-cost top-up monitoring for the contract account.

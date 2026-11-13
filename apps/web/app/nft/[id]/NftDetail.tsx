@@ -222,7 +222,7 @@ export function NftDetail({ id }: { id: string }) {
                   </tbody>
                 </table>
                 <p className="mt-2 text-xs text-muted">
-                  What Rhea pools would pay right now for each full balance{nav ? ` (${utc(new Date(nav.at))})` : ""}. Not a guarantee — prices and liquidity move, and any missing quote makes the total UNAVAILABLE. This is separate from any sale price, which can include a speculative art premium.
+                  What RHEA pools would pay right now for each full balance{nav ? ` (${utc(new Date(nav.at))})` : ""}. Not a guarantee — prices and liquidity move, and any missing quote makes the total UNAVAILABLE. This is separate from any sale price, which can include a speculative art premium.
                 </p>
               </div>
             )}

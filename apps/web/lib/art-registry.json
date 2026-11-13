@@ -504,6 +504,53 @@
         "body",
         "legs"
       ]
+    },
+    {
+      "memeId": "batman",
+      "displayName": "BATMAN",
+      "color": "#5B6178",
+      "verifiedToken": null,
+      "layers": [
+        {
+          "slot": "head",
+          "variant": 0,
+          "name": "Cowl",
+          "src": "/art/batman/head-01.webp",
+          "behind": false,
+          "anchor": [
+            631,
+            439
+          ]
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "name": "Cape",
+          "src": "/art/batman/accessory-01.webp",
+          "behind": false,
+          "anchor": [
+            626,
+            890
+          ]
+        },
+        {
+          "slot": "legs",
+          "variant": 0,
+          "name": "Utility Belt",
+          "src": "/art/batman/legs-01.webp",
+          "behind": false,
+          "anchor": [
+            630,
+            992
+          ]
+        }
+      ],
+      "preview": "/art/batman/preview.webp",
+      "slots": [
+        "head",
+        "legs",
+        "accessory"
+      ]
     }
   ]
 }

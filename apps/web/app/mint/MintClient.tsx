@@ -195,7 +195,7 @@ export function MintClient() {
                   <span className="font-display text-base text-ink underline decoration-orange decoration-[3px] underline-offset-2">WTH + {q.state === "ok" ? q.data.tier.maxPartners : "1"}</span> meme{q.state === "ok" && q.data.tier.maxPartners > 1 ? "s" : ""} max
                 </li>
               </ul>
-              {q.state === "ok" && <p className="mt-2 text-xs text-ink/70">Includes a refundable reserve. Prices live from Rhea · {Math.round(q.ageMs / 1000)}s ago.</p>}
+              {q.state === "ok" && <p className="mt-2 text-xs text-ink/70">Includes a refundable reserve. Prices live from RHEA · {Math.round(q.ageMs / 1000)}s ago.</p>}
               {q.state === "loading" && <p className="mt-2 text-xs text-ink/70 dots">Checking live prices</p>}
             </div>
 

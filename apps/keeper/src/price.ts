@@ -16,11 +16,12 @@ const getJson = async (url: string, f: typeof fetch): Promise<unknown> => {
   return r.json();
 };
 
-export const refIndexer =
+/** RHEA indexer price API (the indexer still lives at its legacy domain). Not used by default: it served stale prices in testing. */
+export const rheaIndexer =
   (f: typeof fetch = fetch): PriceFetcher =>
   async () => {
     const j = (await getJson("https://indexer.ref.finance/get-token-price?token_id=wrap.near", f)) as { price?: string };
-    return { source: "ref-indexer", usd: Number(j.price) };
+    return { source: "rhea-indexer", usd: Number(j.price) };
   };
 
 export const coingecko =

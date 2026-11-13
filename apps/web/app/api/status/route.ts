@@ -34,7 +34,7 @@ export async function GET() {
       return `${t.length} tokens listed; WTH supported: ${t.some((x) => x.assetId.includes("wth-0b2227")) ? "yes" : "no"}`;
     }),
     ...SEASON_01_DRAFT.memes.map((m) =>
-      timed(`route-${m.memeId}`, `Rhea route ${m.memeId.toUpperCase()}`, async () => {
+      timed(`route-${m.memeId}`, `RHEA route ${m.memeId.toUpperCase()}`, async () => {
         const a = findAsset(MAINNET, m.memeId)!;
         const out = await rheaQuote(mainRpc, MAINNET, a.route, MAINNET.wrapNear, a.contractId, 10n ** 22n);
         if (out <= 0n) throw new Error("zero output — no liquidity");

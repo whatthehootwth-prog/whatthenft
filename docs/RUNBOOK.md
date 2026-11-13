@@ -31,7 +31,7 @@ Before mainnet use `cargo near build reproducible-wasm` and publish the sha256.
 ## Testnet deployment (Milestone A acceptance)
 
 1. Founder creates/funds testnet accounts (never paste keys into chat): `wtn-core.<you>.testnet`, `wtn-creator.<you>.testnet`, `wtn-treasury.<you>.testnet`, an owner (multisig recommended), a keeper.
-2. Deploy two test FTs (`wth-test`, `meme-test`) and create wNEAR pools on Rhea testnet (`ref-finance-101.testnet`; DCL testnet if available) — write the ids into `packages/chain/src/registry.ts` `TESTNET.assets`.
+2. Deploy two test FTs (`wth-test`, `meme-test`) and create wNEAR pools on RHEA testnet (`ref-finance-101.testnet`; DCL testnet if available) — write the ids into `packages/chain/src/registry.ts` `TESTNET.assets`.
 3. Deploy core: `near contract deploy wtn-core.<you>.testnet use-file contracts/res/wtn_core.wasm with-init-call new json-args '{"owner":"…","creator_account":"…","treasury_account":"…","wrap_near":"wrap.testnet","rhea_v2":"ref-finance-101.testnet","rhea_dcl":"<dcl testnet>"}' …`
 4. Fund the contract account for storage (≈5 NEAR testnet) and run `register_tokens` for wrap + both test FTs.
 5. Import art (`assets/memes/*`), publish season manifest, `create_season` (admin page or CLI), `open_season`.
@@ -47,7 +47,7 @@ Same as testnet with `wrap.near`, `v2.ref-finance.near`, `dclv2.ref-labs.near`, 
 - Every 5 min: `check_conservation` per token (or `/api/status`); alert on `conservation_violation` / `unknown`.
 - Watch events: `execution_anomaly`, `order_partial_recovery`, `leg_failed` attempt 3, `redeem_failed`, orders in `SwapsPending` > 10 min.
 - Contract account NEAR balance (storage headroom) < 2 NEAR → alert.
-- Route health: `/api/status` Rhea checks; auto-raise `set_current_min_base` or pause route when impact > ceiling.
+- Route health: `/api/status` RHEA checks; auto-raise `set_current_min_base` or pause route when impact > ceiling.
 
 ## Incident playbook
 
@@ -64,9 +64,9 @@ Same as testnet with `wrap.near`, `v2.ref-finance.near`, `dclv2.ref-labs.near`, 
 `treasury_account` at it (`set_revenue_accounts`), so it receives the 5% mint share and the
 treasury half of the 3% royalty as plain NEAR. `apps/keeper` is a small bot that presses its buttons.
 
-**Flow.** When spendable NEAR is worth ≥ $20 (Rhea on-chain NEAR/USDC quote and CoinGecko must
+**Flow.** When spendable NEAR is worth ≥ $20 (RHEA on-chain NEAR/USDC quote and CoinGecko must
 agree within 10%), the keeper calls `buy(amount)`: the contract wraps NEAR, takes an on-chain
-Rhea quote, swaps with `min_out = quote × (1 − max_slippage)`, credits only the WTH that verifiably
+RHEA quote, swaps with `min_out = quote × (1 − max_slippage)`, credits only the WTH that verifiably
 arrived, and unwraps unused wNEAR. The keeper then snapshots $WTH holders (FastNEAR top list,
 every balance re-read on-chain), splits the WTH pro-rata, writes `apps/keeper/rounds/<net>-round-N.json`,
 and calls `start_round(sha256, total)` → `pay(batch of ≤20)` × N → `close_round()`. Close reconciles

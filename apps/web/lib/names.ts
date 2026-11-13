@@ -25,6 +25,7 @@ const WORD: Record<string, Partial<Record<Slot, string[]>>> = {
   robinhoot: { head: ["Sherwood", "Feathered"], accessory: ["Caped", "Mysterious"], arms: ["Archer", "Sharpshooter"] },
   nearkat: { accessory: ["Certified", "On-Chain"] },
   cybernetic: { head: ["Armoured", "Titanium"], face: ["Laser-Eyed", "Cyber"], legs: ["Robo-Legged", "Bionic"] },
+  batman: { head: ["Masked", "Dark Knight"], accessory: ["Caped", "Brooding"], legs: ["Gadget-Belted", "Vigilante"] },
 };
 
 const FILLER = ["Sleepy", "Turbo", "Feral", "Cursed", "Spicy", "Wobbly", "Unhinged", "Crispy", "Sus", "Bonkers", "Chonky", "Shook"];

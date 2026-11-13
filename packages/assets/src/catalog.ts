@@ -148,4 +148,13 @@ export const CATALOG: CatalogMeme[] = [
     tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
     note: "Previews also show white/graphite/lavender/copper fur, but only the tan fur file was supplied.",
   },
+  {
+    memeId: "batman", displayName: "BATMAN", folder: "15-batman", preview: "15-batman.png",
+    parts: [
+      { slot: "head", src: "cowl.png", name: "Cowl" },
+      { slot: "accessory", src: "cape.png", name: "Cape" },
+      { slot: "legs", src: "utility-belt.png", name: "Utility Belt" },
+    ],
+    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+  },
 ];

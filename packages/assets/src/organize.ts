@@ -28,7 +28,7 @@ const REGISTRY = join(REPO, "apps/web/lib/art-registry.json");
 const COLORS: Record<string, string> = {
   wth: "#FF7A1A", hoodl: "#4A4A55", hooters: "#FF8A2A", oyster: "#F4B08A", three: "#19E6B0", moonshot: "#3E9D6B",
   raen: "#FF5A1F", mallace: "#E040FB", idp: "#E8B46A", robinhoot: "#5E7F35", "quantum-cat": "#7C4DFF", inu: "#D88B3C",
-  nearkat: "#C6FF3D", cybernetic: "#9BD94A",
+  nearkat: "#C6FF3D", cybernetic: "#9BD94A", batman: "#5B6178",
 };
 
 const kebab = (s: string) => s.toLowerCase().replace(/\+/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

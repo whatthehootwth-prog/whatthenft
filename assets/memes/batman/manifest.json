@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "memeId": "batman",
+  "displayName": "BATMAN",
+  "chain": "near",
+  "tokenContractId": null,
+  "tokenSymbol": null,
+  "tokenDecimals": null,
+  "tokenCandidates": [],
+  "notes": [],
+  "activeInSeasons": [
+    1
+  ],
+  "approvedForMint": false,
+  "commercialArtworkRightsConfirmed": false,
+  "artLicenseReference": null,
+  "slots": [
+    "head",
+    "legs",
+    "accessory"
+  ],
+  "minLiquidityNear": "500",
+  "maxSlippageBps": 200,
+  "canvas": {
+    "width": 1254,
+    "height": 1254
+  },
+  "anchors": {},
+  "layeringOverrides": {},
+  "notForProduction": false,
+  "layers": [
+    {
+      "slot": "head",
+      "variant": 0,
+      "name": "Cowl",
+      "file": "slots/head/01-cowl.png",
+      "sha256": "3631453380e8ad66941de89c387f9e1149d2b99000e8cd4430676aa6ad7e21ad",
+      "behind": false
+    },
+    {
+      "slot": "accessory",
+      "variant": 0,
+      "name": "Cape",
+      "file": "slots/accessory/01-cape.png",
+      "sha256": "584dada5f90f6098b5a298fbfe39ccd90d4ec7907b8117cc9ca4a2e11ce605f3",
+      "behind": false
+    },
+    {
+      "slot": "legs",
+      "variant": 0,
+      "name": "Utility Belt",
+      "file": "slots/legs/01-utility-belt.png",
+      "sha256": "96699993a0977dd46ca8f9b3cdb7ff0e3c9f27e0fa9225e98c93e92c52dc0ff6",
+      "behind": false
+    }
+  ]
+}

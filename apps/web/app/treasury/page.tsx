@@ -34,7 +34,7 @@ export default function TreasuryPage() {
             <li>Each mint: 10% of the base price to the WTH creator account, 5% to the WTH buyback treasury — paid only after the card is fully funded. The 85% basket belongs to the card, never to the project.</li>
             <li>Each native marketplace sale: 3% royalty, split 50% creator / 50% treasury.</li>
             <li>Treasury funds are kept separate from creator revenue and from customer baskets. The vault contract has no function that can move basket tokens to either account.</li>
-            <li>Automatic buyback: once the treasury holds at least $20 of NEAR (price from Rhea on-chain and CoinGecko, which must agree), the buyback contract swaps it for $WTH on Rhea — fixed pool, max slippage, per-buy cap, minimum interval, pause switch. The keeper that triggers it can never move NEAR.</li>
+            <li>Automatic buyback: once the treasury holds at least $20 of NEAR (price from RHEA on-chain and CoinGecko, which must agree), the buyback contract swaps it for $WTH on RHEA — fixed pool, max slippage, per-buy cap, minimum interval, pause switch. The keeper that triggers it can never move NEAR.</li>
             <li>Distribution: the bought $WTH is shared with $WTH holders in proportion to their balance (holders of at least 1,000 WTH; liquidity pools, custody and launchpad contracts excluded; payouts under 1 WTH roll over). Each round's holder snapshot is published and its sha256 is recorded on-chain.</li>
             <li>No buyback or distribution is promised at any size or time, and none is promised to move any price.</li>
           </ul>
