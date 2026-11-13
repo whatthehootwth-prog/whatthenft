@@ -29,7 +29,7 @@ Plan: test everything on **Contract A** (throwaway accounts, real money, tiny) �
 
 - [ ] Season 01 config with the chosen tokens (verify each token + RHEA pool on-chain)
 - [ ] Rebuild core WASM (5 tiers · 85/10/5 · 3% royalty 50/50 · fixed 1 NEAR) + checksums for core / market / buyback
-- [ ] NFT image compositor + IPFS pinning (`set_token_media`)
+- [x] NFT image compositor + IPFS pinning (`set_token_media`) — built; needs a Pinata API key (`PINATA_JWT`) and the keeper set as core operator
 - [ ] Order runner (keeper advances stuck mints; mint page "continue" button)
 - [ ] Keeper as a Railway cron service (buyback + order runner), dry-run by default
 - [ ] Railway config for the website; env-var template; production build check

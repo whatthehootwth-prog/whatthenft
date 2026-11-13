@@ -18,6 +18,8 @@ export interface ArtLayer {
   name: string;
   src: string;
   behind: boolean;
+  /** Printed on the owl (logo/tattoo/implant): right above the body, under every other part. */
+  skin?: boolean;
   anchor: [number, number];
 }
 
@@ -65,8 +67,7 @@ export function stackOf(spec: MutantSpec): ArtLayer[] {
 }
 
 /** Parts that sit on the owl itself, under every other part: NEAR emblem, pixel-3 tattoo, cybernetic temple shell + cyber eye. */
-const SKIN = new Set(["/art/nearkat/accessory-01.webp", "/art/three/face-01.webp", "/art/cybernetic/head-01.webp", "/art/cybernetic/face-01.webp"]);
-const isSkin = (l: ArtLayer) => SKIN.has(l.src);
+const isSkin = (l: ArtLayer) => !!l.skin;
 
 /** Which meme actually provides each slot (a pick without art for that slot falls back to WTH). */
 export function providers(spec: MutantSpec): SlotProviders {

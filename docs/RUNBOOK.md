@@ -122,3 +122,22 @@ near contract deploy <market>.near use-file contracts/target/near/wtn_market/wtn
 Then set `NEXT_PUBLIC_MARKET_CONTRACT=<market>.near` — the Marketplace and My Collection pages switch from demo data to live data automatically (both env vars required).
 
 **Season 01 pricing:** fixed 1 NEAR per mint (`targetBase = maxBase = 1 NEAR`), so every owl is WTH + up to 2 partner memes. The season stays open until all 111 are minted (`mintWindowDays = 3650`; the contract requires an end date); the owner can still pause minting.
+
+## NFT images (compose → IPFS → on-chain)
+
+`apps/keeper` composes each minted NFT's image from the ORIGINAL art layers, in exactly the
+website's order (behind → body → skin markings → legs → outfit → arms → head → face), on a
+background tinted from the body meme. Output is a deterministic 1254×1254 PNG (≈0.8–1.4 MB), so
+re-runs always produce the same IPFS CID. It is pinned with **Pinata** and recorded on-chain via
+`core.set_token_media(token_id, "ipfs://<cid>", sha256)` — media is immutable once set.
+
+Setup: create a Pinata account → API key (JWT) → store as `PINATA_JWT` in Railway (never in git or chat).
+Make the keeper an operator on core: `set_operator(<keeper>, true)` from the owner account.
+
+```bash
+pnpm --filter @wtn/keeper media --samples 6        # render random owls to apps/keeper/samples/ (offline)
+CORE_CONTRACT=<core> pnpm --filter @wtn/keeper media     # dry run for minted tokens without an image
+CORE_CONTRACT=<core> PINATA_JWT=... KEEPER_ACCOUNT=... KEEPER_PRIVATE_KEY=... pnpm --filter @wtn/keeper media --send
+```
+Skin markings (NEAR emblem, pixel-3 tattoo, cybernetic shell + eye) are flagged `skin: true` in
+`packages/assets/src/catalog.ts`; both the website and the compositor read that flag from the art registry.

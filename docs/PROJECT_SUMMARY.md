@@ -19,7 +19,7 @@ _Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing
 | Art pipeline (`packages/assets`) | ✅ 15 meme folders organised (incl. BATMAN), manifests, web-ready layers |
 | Website (`apps/web`) | ✅ Homepage, Marketplace, My Collection, WTH is this?!, Mint, Treasury, Risk, Terms |
 | Marketplace contract (`contracts/market`) | ✅ Built · 9/9 tests · compiles (215 KB) · **not deployed** · pages switch to live data when configured |
-| NFT image compositor + IPFS pinning | ❌ Not built |
+| NFT image compositor + IPFS pinning | ✅ Built in keeper (compose from original layers → Pinata → `set_token_media`) · needs Pinata key |
 | Order runner (advances mint steps) | ❌ Not built (contract supports it; anyone can trigger) |
 | Mainnet season config with real memes | ✅ 12 memes verified with RHEA routes (OYSTER, QCAT, NINU lack pools) · partner approval flags pending |
 | Audit / legal review | ❌ Not done |

@@ -23,6 +23,8 @@ export interface CatalogPart {
   name: string;
   /** Drawn behind the owl body (e.g. a quiver on the back). */
   behind?: boolean;
+  /** Printed on the owl itself (logo/tattoo/implant): drawn right above the body, under every other part. */
+  skin?: boolean;
 }
 
 export interface CatalogMeme {
@@ -78,7 +80,7 @@ export const CATALOG: CatalogMeme[] = [
     memeId: "three", displayName: "THREE", folder: "04-three", preview: "04-three.png",
     parts: [
       { slot: "body", src: "mint-skin-one-planted-foot.png", name: "Mint Fur (Wave)" },
-      { slot: "face", src: "pixel-three-tattoo.png", name: "Pixel 3 Tattoo" },
+      { slot: "face", src: "pixel-three-tattoo.png", name: "Pixel 3 Tattoo", skin: true },
     ],
     tokenContractId: "three-de86d6.launchpad.justhoot.near", tokenSymbol: "THREE", tokenDecimals: 18, tokenCandidates: [],
   },
@@ -135,7 +137,7 @@ export const CATALOG: CatalogMeme[] = [
     memeId: "nearkat", displayName: "NEARKAT", folder: "12-nearkat", preview: "12-nearkat.png",
     parts: [
       { slot: "body", src: "meerkat-skin.png", name: "Meerkat Fur" },
-      { slot: "accessory", src: "near-protocol-emblem.png", name: "NEAR Emblem" },
+      { slot: "accessory", src: "near-protocol-emblem.png", name: "NEAR Emblem", skin: true },
     ],
     tokenContractId: "nearkat-630f25.nearlytrade.near", tokenSymbol: "NEARKAT", tokenDecimals: 18, tokenCandidates: [],
     note: "Token verified on-chain 2026-11-07 (ft_metadata KAT/18, Rhea v2 pool 5391).",
@@ -144,8 +146,8 @@ export const CATALOG: CatalogMeme[] = [
     memeId: "cybernetic", displayName: "IMEME", folder: "13-cybernetic", preview: "13-cybernetic-tan.png",
     parts: [
       { slot: "body", src: "tan-skin-D9AD87.png", name: "Tan Fur" },
-      { slot: "head", src: "temple-armor.png", name: "Temple Armour" },
-      { slot: "face", src: "cyber-eye.png", name: "Cyber Eye" },
+      { slot: "head", src: "temple-armor.png", name: "Temple Armour", skin: true },
+      { slot: "face", src: "cyber-eye.png", name: "Cyber Eye", skin: true },
       { slot: "legs", src: "robotic-left-foot.png", name: "Robotic Foot" },
     ],
     tokenContractId: "imeme-2.v2-launchpad.justhoot.near", tokenSymbol: "IMEME", tokenDecimals: 18, tokenCandidates: [],

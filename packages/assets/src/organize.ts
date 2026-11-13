@@ -50,6 +50,7 @@ async function organizeMeme(m: CatalogMeme) {
   const dir = join(MEMES, m.memeId);
   const layers = [] as { slot: string; variant: number; name: string; file: string; sha256: string; behind: boolean }[];
   const counters: Record<string, number> = {};
+  const skinFiles = new Set<string>();
   for (const p of m.parts) {
     const v = counters[p.slot] ?? 0;
     counters[p.slot] = v + 1;
@@ -58,6 +59,7 @@ async function organizeMeme(m: CatalogMeme) {
     if (!move(join(MEMES, "parts", m.folder, p.src), dest)) throw new Error(`missing source for ${m.memeId}/${p.src}`);
     await checkLayer(dest);
     layers.push({ slot: p.slot, variant: v, name: p.name, file, sha256: sha(dest), behind: !!p.behind });
+    if (p.skin) skinFiles.add(file);
   }
   // previews: main preview + any extra variants for this meme number
   const prefix = m.folder.slice(0, 2);
@@ -100,7 +102,7 @@ async function organizeMeme(m: CatalogMeme) {
   // web copies
   const web = join(WEB_ART, m.memeId);
   mkdirSync(web, { recursive: true });
-  const webLayers = [] as { slot: string; variant: number; name: string; src: string; behind: boolean; anchor: [number, number] }[];
+  const webLayers = [] as { slot: string; variant: number; name: string; src: string; behind: boolean; skin: boolean; anchor: [number, number] }[];
   for (const l of layers) {
     const out = `${l.slot}-${String(l.variant + 1).padStart(2, "0")}.webp`;
     await sharp(join(dir, l.file)).webp({ quality: 88, alphaQuality: 100, effort: 5 }).toFile(join(web, out));
@@ -108,7 +110,7 @@ async function organizeMeme(m: CatalogMeme) {
     const b = info.bbox ?? { x: 0, y: 0, w: ART_CANVAS, h: ART_CANVAS };
     // body skins point at the belly; other parts at their visual centre
     const anchor: [number, number] = l.slot === "body" ? [627, 900] : [Math.round(b.x + b.w / 2), Math.round(b.y + b.h / 2)];
-    webLayers.push({ slot: l.slot, variant: l.variant, name: l.name, src: `/art/${m.memeId}/${out}`, behind: l.behind, anchor });
+    webLayers.push({ slot: l.slot, variant: l.variant, name: l.name, src: `/art/${m.memeId}/${out}`, behind: l.behind, skin: skinFiles.has(l.file), anchor });
   }
   let preview: string | null = null;
   if (existsSync(join(dir, "preview.png"))) {

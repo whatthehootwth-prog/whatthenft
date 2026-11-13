@@ -16,6 +16,9 @@ importers:
       near-api-js:
         specifier: 6.5.1
         version: 6.5.1(54f71d86ad09ccd0ed0cf4d1972dabc3)
+      sharp:
+        specifier: ^0.34.0
+        version: 0.34.5
     devDependencies:
       '@types/node':
         specifier: '24'

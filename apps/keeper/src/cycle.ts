@@ -30,7 +30,8 @@ export interface BuybackState {
 
 /** Anything that can call a change method (real NEAR account, or a dry-run recorder). */
 export interface Caller {
-  call(method: string, args: Record<string, unknown>, gasTgas: number): Promise<void>;
+  /** contractId defaults to the buyback contract. */
+  call(method: string, args: Record<string, unknown>, gasTgas: number, contractId?: string): Promise<void>;
 }
 
 export interface CycleOptions {
@@ -142,14 +143,16 @@ export async function runCycle(cfg: KeeperConfig, rpc: NearRpc, caller: Caller, 
 }
 
 /** Real signer (near-api-js). Waits for FINAL so the next step sees settled state. */
-export async function nearCaller(cfg: KeeperConfig): Promise<Caller> {
+export async function nearCaller(cfg: Pick<KeeperConfig, "network" | "rpcUrl" | "keeperAccount" | "keeperPrivateKey"> & { buybackContract?: string }): Promise<Caller> {
   if (!cfg.keeperAccount || !cfg.keeperPrivateKey) throw new Error("--send needs KEEPER_ACCOUNT and KEEPER_PRIVATE_KEY in the environment");
   const { Account, KeyPair, KeyPairSigner, providers } = await import("near-api-js");
   const url = cfg.rpcUrl ?? (cfg.network === "mainnet" ? "https://rpc.mainnet.near.org" : "https://rpc.testnet.near.org");
   const account = new Account(cfg.keeperAccount, new providers.JsonRpcProvider({ url }), new KeyPairSigner(KeyPair.fromString(cfg.keeperPrivateKey as `ed25519:${string}`)));
   return {
-    async call(method, args, gasTgas) {
-      await account.callFunction({ contractId: cfg.buybackContract, methodName: method, args, gas: BigInt(gasTgas) * TGAS, deposit: 0n, waitUntil: "FINAL" });
+    async call(method, args, gasTgas, contractId) {
+      const target = contractId ?? cfg.buybackContract;
+      if (!target) throw new Error("no target contract for " + method);
+      await account.callFunction({ contractId: target, methodName: method, args, gas: BigInt(gasTgas) * TGAS, deposit: 0n, waitUntil: "FINAL" });
     },
   };
 }
