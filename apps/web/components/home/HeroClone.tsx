@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { ArtMutant } from "@/components/ArtMutant";
 import { Decor } from "@/components/Decor";
-import { BARE, MEMES, SLOT_LABEL, SLOT_ORDER, layerFor, memeColor, memeLabel, mixFor, providers, type MutantSpec, type Pick, type Slot } from "@/lib/art";
+import { BARE, MINTABLE, SLOT_LABEL, SLOT_ORDER, layerFor, memeColor, memeLabel, mixFor, providers, type MutantSpec, type Pick, type Slot } from "@/lib/art";
 import { PRESETS } from "@/lib/presets";
 import { PartCallouts } from "@/components/home/PartCallouts";
 import { TIERS, rollShowcaseTier } from "@/lib/rarity";
@@ -23,7 +23,7 @@ const OPTIONS: Record<Slot, Pick[]> = Object.fromEntries(
     s,
     [
       ...(s === "body" ? [] : [BARE]),
-      ...MEMES.flatMap((m) => m.layers.filter((l) => l.slot === s).map((l) => ({ memeId: m.memeId, variant: l.variant }))),
+      ...MINTABLE.flatMap((m) => m.layers.filter((l) => l.slot === s).map((l) => ({ memeId: m.memeId, variant: l.variant }))),
     ],
   ]),
 ) as Record<Slot, Pick[]>;
@@ -112,7 +112,7 @@ export function HeroClone() {
 
   // Preload every layer so swaps never flash an empty part.
   useEffect(() => {
-    for (const m of MEMES) for (const l of m.layers) new Image().src = l.src;
+    for (const m of MINTABLE) for (const l of m.layers) new Image().src = l.src;
   }, []);
 
   useEffect(() => {

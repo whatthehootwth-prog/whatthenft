@@ -3,9 +3,9 @@
   "memeId": "mallace",
   "displayName": "MALLACE",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "mallace.v2-launchpad.justhoot.near",
+  "tokenSymbol": "MALLACE",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [],
   "activeInSeasons": [

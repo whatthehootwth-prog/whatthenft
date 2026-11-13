@@ -7,9 +7,11 @@
   "tokenSymbol": null,
   "tokenDecimals": null,
   "tokenCandidates": [
-    "sinu-8.smithii.near"
+    "ninu-4.nearlytrade.near"
   ],
-  "notes": [],
+  "notes": [
+    "NINU: only thin RHEA v2 pools (#8721 ~2.9 NEAR, 10% fee, 17% impact) — not usable. Token confirmed by founder; needs a NEAR liquidity pool before it can join a season."
+  ],
   "activeInSeasons": [
     1
   ],

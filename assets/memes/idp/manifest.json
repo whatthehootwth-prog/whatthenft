@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "memeId": "idp",
-  "displayName": "IDP",
+  "displayName": "IKP",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "ikp.v2-launchpad.justhoot.near",
+  "tokenSymbol": "IKP",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [
     "Artwork includes the ICP infinity logo — check brand permission."

@@ -3,8 +3,8 @@
   "memeId": "nearkat",
   "displayName": "NEARKAT",
   "chain": "near",
-  "tokenContractId": "kat.token0.near",
-  "tokenSymbol": "KAT",
+  "tokenContractId": "nearkat-630f25.nearlytrade.near",
+  "tokenSymbol": "NEARKAT",
   "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [

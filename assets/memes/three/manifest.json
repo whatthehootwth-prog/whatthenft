@@ -3,9 +3,9 @@
   "memeId": "three",
   "displayName": "THREE",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "three-de86d6.launchpad.justhoot.near",
+  "tokenSymbol": "THREE",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [],
   "activeInSeasons": [

@@ -6,8 +6,12 @@
   "tokenContractId": null,
   "tokenSymbol": null,
   "tokenDecimals": null,
-  "tokenCandidates": [],
-  "notes": [],
+  "tokenCandidates": [
+    "oyster.v2-launchpad.justhoot.near"
+  ],
+  "notes": [
+    "OYSTER: no wNEAR pool on RHEA (DCL or v2) as of 2026-11-13. Token confirmed by founder; needs a NEAR liquidity pool before it can join a season."
+  ],
   "activeInSeasons": [
     1
   ],

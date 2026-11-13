@@ -3,12 +3,10 @@
   "memeId": "raen",
   "displayName": "RAEN",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
-  "tokenCandidates": [
-    "raen-608.meme-cooking.near"
-  ],
+  "tokenContractId": "raen-e1328c.launchpad.justhoot.near",
+  "tokenSymbol": "RAEN",
+  "tokenDecimals": 18,
+  "tokenCandidates": [],
   "notes": [],
   "activeInSeasons": [
     1

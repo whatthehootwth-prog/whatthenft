@@ -42,7 +42,7 @@
       "memeId": "hoodl",
       "displayName": "HOODL",
       "color": "#4A4A55",
-      "verifiedToken": null,
+      "verifiedToken": "hoodl-95275b.launchpad.justhoot.near",
       "layers": [
         {
           "slot": "body",
@@ -89,7 +89,7 @@
       "memeId": "hooters",
       "displayName": "HOOTERS",
       "color": "#FF8A2A",
-      "verifiedToken": null,
+      "verifiedToken": "hooters-f5dd7a.launchpad.justhoot.near",
       "layers": [
         {
           "slot": "accessory",
@@ -159,7 +159,7 @@
       "memeId": "three",
       "displayName": "THREE",
       "color": "#19E6B0",
-      "verifiedToken": null,
+      "verifiedToken": "three-de86d6.launchpad.justhoot.near",
       "layers": [
         {
           "slot": "body",
@@ -194,7 +194,7 @@
       "memeId": "moonshot",
       "displayName": "MOONSHOT",
       "color": "#3E9D6B",
-      "verifiedToken": null,
+      "verifiedToken": "moonshot.v2-launchpad.justhoot.near",
       "layers": [
         {
           "slot": "head",
@@ -241,7 +241,7 @@
       "memeId": "raen",
       "displayName": "RAEN",
       "color": "#FF5A1F",
-      "verifiedToken": null,
+      "verifiedToken": "raen-e1328c.launchpad.justhoot.near",
       "layers": [
         {
           "slot": "body",
@@ -264,7 +264,7 @@
       "memeId": "mallace",
       "displayName": "MALLACE",
       "color": "#E040FB",
-      "verifiedToken": null,
+      "verifiedToken": "mallace.v2-launchpad.justhoot.near",
       "layers": [
         {
           "slot": "body",
@@ -285,9 +285,9 @@
     },
     {
       "memeId": "idp",
-      "displayName": "IDP",
+      "displayName": "IKP",
       "color": "#E8B46A",
-      "verifiedToken": null,
+      "verifiedToken": "ikp.v2-launchpad.justhoot.near",
       "layers": [
         {
           "slot": "accessory",
@@ -322,7 +322,7 @@
       "memeId": "robinhoot",
       "displayName": "ROBINHOOT",
       "color": "#5E7F35",
-      "verifiedToken": null,
+      "verifiedToken": "robinhoot-2.v2-launchpad.justhoot.near",
       "layers": [
         {
           "slot": "head",
@@ -415,7 +415,7 @@
       "memeId": "nearkat",
       "displayName": "NEARKAT",
       "color": "#C6FF3D",
-      "verifiedToken": "kat.token0.near",
+      "verifiedToken": "nearkat-630f25.nearlytrade.near",
       "layers": [
         {
           "slot": "body",
@@ -448,9 +448,9 @@
     },
     {
       "memeId": "cybernetic",
-      "displayName": "CYBERNETIC",
+      "displayName": "IMEME",
       "color": "#9BD94A",
-      "verifiedToken": null,
+      "verifiedToken": "imeme-2.v2-launchpad.justhoot.near",
       "layers": [
         {
           "slot": "body",
@@ -509,7 +509,7 @@
       "memeId": "batman",
       "displayName": "BATMAN",
       "color": "#5B6178",
-      "verifiedToken": null,
+      "verifiedToken": "batman-4.nearlytrade.near",
       "layers": [
         {
           "slot": "head",

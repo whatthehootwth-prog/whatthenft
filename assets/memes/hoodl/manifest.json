@@ -3,9 +3,9 @@
   "memeId": "hoodl",
   "displayName": "HOODL",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "hoodl-95275b.launchpad.justhoot.near",
+  "tokenSymbol": "HOODL",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [],
   "activeInSeasons": [

@@ -7,10 +7,11 @@
   "tokenSymbol": null,
   "tokenDecimals": null,
   "tokenCandidates": [
-    "qcat-3.nearlytrade.near",
-    "qcat-2223.meme-cooking.near"
+    "qcat-3.nearlytrade.near"
   ],
-  "notes": [],
+  "notes": [
+    "QCAT: only RHEA v2 pool #8930 (~6.5 NEAR, 9% fee, 8.7% impact at 0.68 NEAR) — not usable. Token confirmed by founder; needs a NEAR liquidity pool before it can join a season."
+  ],
   "activeInSeasons": [
     1
   ],

@@ -3,9 +3,9 @@
   "memeId": "hooters",
   "displayName": "HOOTERS",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "hooters-f5dd7a.launchpad.justhoot.near",
+  "tokenSymbol": "HOOTERS",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [
     "HOOTERS is a registered trademark — needs permission before public minting."

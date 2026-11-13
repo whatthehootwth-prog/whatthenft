@@ -34,7 +34,9 @@ export interface ArtMeme {
 export const CANVAS: number = registry.canvas;
 export const MEMES: ArtMeme[] = registry.memes as ArtMeme[];
 export const MEME = new Map(MEMES.map((m) => [m.memeId, m]));
-export const PARTNERS = MEMES.filter((m) => m.memeId !== "wth");
+/** Memes that can actually be minted: WTH + partners with a verified token and RHEA route. */
+export const MINTABLE = MEMES.filter((m) => m.memeId === "wth" || !!m.verifiedToken);
+export const PARTNERS = MINTABLE.filter((m) => m.memeId !== "wth");
 
 export const memeLabel = (id: string) => (id === "wth" ? "WTH" : MEME.get(id)?.displayName ?? id.toUpperCase());
 export const memeColor = (id: string) => MEME.get(id)?.color ?? "#FFF4DC";
@@ -105,7 +107,7 @@ export function previewSpec(seed: number): MutantSpec {
   const rnd = () => ((x = (x ^ (x << 13)) >>> 0), (x = (x ^ (x >>> 17)) >>> 0), (x = (x ^ (x << 5)) >>> 0), x / 4294967296);
   const out = spec({});
   for (const s of SLOT_ORDER) {
-    const opts = MEMES.flatMap((m) => m.layers.filter((l) => l.slot === s).map((l) => P(m.memeId, l.variant)));
+    const opts = MINTABLE.flatMap((m) => m.layers.filter((l) => l.slot === s).map((l) => P(m.memeId, l.variant)));
     if (opts.length && (s === "body" || rnd() < 0.62)) out[s] = opts[Math.floor(rnd() * opts.length)]!;
   }
   return out;

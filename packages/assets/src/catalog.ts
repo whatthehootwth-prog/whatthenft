@@ -54,7 +54,7 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "head", src: "ear-tips.png", name: "Ear Tips" },
       { slot: "arms", src: "wings-holding-token.png", name: "Wings Holding Token" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "hoodl-95275b.launchpad.justhoot.near", tokenSymbol: "HOODL", tokenDecimals: 18, tokenCandidates: [],
   },
   {
     memeId: "hooters", displayName: "HOOTERS", folder: "02-hooters", preview: "02-hooters.png",
@@ -62,7 +62,7 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "accessory", src: "bikini-top.png", name: "Bikini Top" },
       { slot: "legs", src: "bikini-bottom.png", name: "Bikini Bottom" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "hooters-f5dd7a.launchpad.justhoot.near", tokenSymbol: "HOOTERS", tokenDecimals: 18, tokenCandidates: [],
     note: "HOOTERS is a registered trademark — needs permission before public minting.",
   },
   {
@@ -71,7 +71,8 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "head", src: "pearl-hat.png", name: "Pearl Hat" },
       { slot: "accessory", src: "chest-shells.png", name: "Chest Shells" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: ["oyster.v2-launchpad.justhoot.near"],
+    note: "OYSTER: no wNEAR pool on RHEA (DCL or v2) as of 2026-11-13. Token confirmed by founder; needs a NEAR liquidity pool before it can join a season.",
   },
   {
     memeId: "three", displayName: "THREE", folder: "04-three", preview: "04-three.png",
@@ -79,7 +80,7 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "body", src: "mint-skin-one-planted-foot.png", name: "Mint Fur (Wave)" },
       { slot: "face", src: "pixel-three-tattoo.png", name: "Pixel 3 Tattoo" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "three-de86d6.launchpad.justhoot.near", tokenSymbol: "THREE", tokenDecimals: 18, tokenCandidates: [],
   },
   {
     memeId: "moonshot", displayName: "MOONSHOT", folder: "05-moonshot", preview: "05-moonshot.png",
@@ -88,25 +89,25 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "accessory", src: "bandana.png", name: "Bandana" },
       { slot: "arms", src: "wing-and-revolver.png", name: "Wing + Revolver" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: ["moon.token0.near", "nmoon.tkn.near"],
+    tokenContractId: "moonshot.v2-launchpad.justhoot.near", tokenSymbol: "MOONSHOT", tokenDecimals: 18, tokenCandidates: [],
   },
   {
     memeId: "raen", displayName: "RAEN", folder: "06-raen", preview: "06-raen.png",
     parts: [{ slot: "body", src: "orange-skin.png", name: "Raen Orange" }],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: ["raen-608.meme-cooking.near"],
+    tokenContractId: "raen-e1328c.launchpad.justhoot.near", tokenSymbol: "RAEN", tokenDecimals: 18, tokenCandidates: [],
   },
   {
     memeId: "mallace", displayName: "MALLACE", folder: "07-mallace", preview: "07-mallace.png",
     parts: [{ slot: "body", src: "gradient-skin.png", name: "Gradient Fur" }],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "mallace.v2-launchpad.justhoot.near", tokenSymbol: "MALLACE", tokenDecimals: 18, tokenCandidates: [],
   },
   {
-    memeId: "idp", displayName: "IDP", folder: "08-idp", preview: "08-idp.png",
+    memeId: "idp", displayName: "IKP", folder: "08-idp", preview: "08-idp.png",
     parts: [
       { slot: "accessory", src: "cardboard-apron.png", name: "Cardboard Apron" },
       { slot: "arms", src: "flag-and-wing.png", name: "Flag + Wing" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "ikp.v2-launchpad.justhoot.near", tokenSymbol: "IKP", tokenDecimals: 18, tokenCandidates: [],
     note: "Artwork includes the ICP infinity logo — check brand permission.",
   },
   {
@@ -116,17 +117,19 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "accessory", src: "mantle.png", name: "Mantle" },
       { slot: "arms", src: "quiver.png", name: "Quiver", behind: true },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "robinhoot-2.v2-launchpad.justhoot.near", tokenSymbol: "ROBINHOOT", tokenDecimals: 18, tokenCandidates: [],
   },
   {
     memeId: "quantum-cat", displayName: "QUANTUM CAT", folder: "10-quantum-cat", preview: "10-quantum-cat.png",
     parts: [{ slot: "body", src: "split-cat-skeleton-skin.png", name: "Alive/Dead Split" }],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: ["qcat-3.nearlytrade.near", "qcat-2223.meme-cooking.near"],
+    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: ["qcat-3.nearlytrade.near"],
+    note: "QCAT: only RHEA v2 pool #8930 (~6.5 NEAR, 9% fee, 8.7% impact at 0.68 NEAR) — not usable. Token confirmed by founder; needs a NEAR liquidity pool before it can join a season.",
   },
   {
     memeId: "inu", displayName: "INU", folder: "11-inu", preview: "11-inu.png",
     parts: [{ slot: "body", src: "shiba-skin.png", name: "Shiba Fur" }],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: ["sinu-8.smithii.near"],
+    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: ["ninu-4.nearlytrade.near"],
+    note: "NINU: only thin RHEA v2 pools (#8721 ~2.9 NEAR, 10% fee, 17% impact) — not usable. Token confirmed by founder; needs a NEAR liquidity pool before it can join a season.",
   },
   {
     memeId: "nearkat", displayName: "NEARKAT", folder: "12-nearkat", preview: "12-nearkat.png",
@@ -134,18 +137,18 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "body", src: "meerkat-skin.png", name: "Meerkat Fur" },
       { slot: "accessory", src: "near-protocol-emblem.png", name: "NEAR Emblem" },
     ],
-    tokenContractId: "kat.token0.near", tokenSymbol: "KAT", tokenDecimals: 18, tokenCandidates: [],
+    tokenContractId: "nearkat-630f25.nearlytrade.near", tokenSymbol: "NEARKAT", tokenDecimals: 18, tokenCandidates: [],
     note: "Token verified on-chain 2026-11-07 (ft_metadata KAT/18, Rhea v2 pool 5391).",
   },
   {
-    memeId: "cybernetic", displayName: "CYBERNETIC", folder: "13-cybernetic", preview: "13-cybernetic-tan.png",
+    memeId: "cybernetic", displayName: "IMEME", folder: "13-cybernetic", preview: "13-cybernetic-tan.png",
     parts: [
       { slot: "body", src: "tan-skin-D9AD87.png", name: "Tan Fur" },
       { slot: "head", src: "temple-armor.png", name: "Temple Armour" },
       { slot: "face", src: "cyber-eye.png", name: "Cyber Eye" },
       { slot: "legs", src: "robotic-left-foot.png", name: "Robotic Foot" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "imeme-2.v2-launchpad.justhoot.near", tokenSymbol: "IMEME", tokenDecimals: 18, tokenCandidates: [],
     note: "Previews also show white/graphite/lavender/copper fur, but only the tan fur file was supplied.",
   },
   {
@@ -155,6 +158,6 @@ export const CATALOG: CatalogMeme[] = [
       { slot: "accessory", src: "cape.png", name: "Cape" },
       { slot: "legs", src: "utility-belt.png", name: "Utility Belt" },
     ],
-    tokenContractId: null, tokenSymbol: null, tokenDecimals: null, tokenCandidates: [],
+    tokenContractId: "batman-4.nearlytrade.near", tokenSymbol: "BATMAN", tokenDecimals: 18, tokenCandidates: [],
   },
 ];

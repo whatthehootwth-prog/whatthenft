@@ -3,9 +3,9 @@
   "memeId": "robinhoot",
   "displayName": "ROBINHOOT",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "robinhoot-2.v2-launchpad.justhoot.near",
+  "tokenSymbol": "ROBINHOOT",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [],
   "activeInSeasons": [

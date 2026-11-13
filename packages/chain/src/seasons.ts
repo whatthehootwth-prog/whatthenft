@@ -3,7 +3,8 @@ import { DEFAULT_ALLOCATION_RULE, DEFAULT_MINT_FEES, DEFAULT_RARITY_BPS, DEFAULT
 /**
  * Season 01 "MEME GENESIS" — DRAFT proposal, NOT an open season.
  * Used before contracts are deployed to show live executability of the proposed pool.
- * Partner art rights are unconfirmed, so no partner is approved for minting yet.
+ * 12 memes with verified tokens + deep RHEA DCL pools. approvedForMint stays false until the founder
+ * confirms partner art/name permission. OYSTER, QCAT and NINU are excluded (no usable wNEAR route).
  * The on-chain season (once created + opened) always supersedes this file.
  */
 export interface DraftMeme {
@@ -45,10 +46,17 @@ export const SEASON_01_DRAFT = {
   /** Rough network gas the minter's own wallet pays for the mint tx (300 Tgas attached, ~25 Tgas burnt). */
   estMintTxGas: parseNear("0.003"),
   memes: [
-    { memeId: "wth", weight: 0, slots: ["head", "face", "body", "arms", "legs", "accessory"], approvedForMint: false, artSupplied: false },
-    { memeId: "shitzu", weight: 30, slots: ["head", "face", "body", "arms", "legs", "accessory"], approvedForMint: false, artSupplied: false },
-    { memeId: "blackdragon", weight: 25, slots: ["head", "face", "body", "arms", "legs", "accessory"], approvedForMint: false, artSupplied: false },
-    { memeId: "jambo", weight: 25, slots: ["head", "face", "body", "arms", "legs", "accessory"], approvedForMint: false, artSupplied: false },
-    { memeId: "kat", weight: 20, slots: ["head", "face", "body", "arms", "legs", "accessory"], approvedForMint: false, artSupplied: false },
+    { memeId: "wth", weight: 0, slots: ["head","face","body","arms","legs","accessory"], approvedForMint: false, artSupplied: true },
+    { memeId: "nearkat", weight: 10, slots: ["body","accessory"], approvedForMint: false, artSupplied: true },
+    { memeId: "hoodl", weight: 10, slots: ["head","body","arms"], approvedForMint: false, artSupplied: true },
+    { memeId: "hooters", weight: 10, slots: ["legs","accessory"], approvedForMint: false, artSupplied: true },
+    { memeId: "three", weight: 10, slots: ["face","body"], approvedForMint: false, artSupplied: true },
+    { memeId: "moonshot", weight: 10, slots: ["head","arms","accessory"], approvedForMint: false, artSupplied: true },
+    { memeId: "raen", weight: 10, slots: ["body"], approvedForMint: false, artSupplied: true },
+    { memeId: "mallace", weight: 10, slots: ["body"], approvedForMint: false, artSupplied: true },
+    { memeId: "idp", weight: 10, slots: ["arms","accessory"], approvedForMint: false, artSupplied: true },
+    { memeId: "robinhoot", weight: 10, slots: ["head","arms","accessory"], approvedForMint: false, artSupplied: true },
+    { memeId: "cybernetic", weight: 10, slots: ["head","face","body","legs"], approvedForMint: false, artSupplied: true },
+    { memeId: "batman", weight: 10, slots: ["head","legs","accessory"], approvedForMint: false, artSupplied: true },
   ] satisfies DraftMeme[],
 };

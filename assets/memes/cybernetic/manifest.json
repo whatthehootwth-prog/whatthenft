@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "memeId": "cybernetic",
-  "displayName": "CYBERNETIC",
+  "displayName": "IMEME",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "imeme-2.v2-launchpad.justhoot.near",
+  "tokenSymbol": "IMEME",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [
     "Previews also show white/graphite/lavender/copper fur, but only the tan fur file was supplied."

@@ -21,7 +21,7 @@ _Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing
 | Marketplace contract (`contracts/market`) | ✅ Built · 9/9 tests · compiles (215 KB) · **not deployed** · pages switch to live data when configured |
 | NFT image compositor + IPFS pinning | ❌ Not built |
 | Order runner (advances mint steps) | ❌ Not built (contract supports it; anyone can trigger) |
-| Mainnet season config with real memes | ❌ Only WTH + NEARKAT have verified token contracts |
+| Mainnet season config with real memes | ✅ 12 memes verified with RHEA routes (OYSTER, QCAT, NINU lack pools) · partner approval flags pending |
 | Audit / legal review | ❌ Not done |
 
 **Network today:** website set to `testnet`, no contract connected. The only mainnet interaction so far has been **read-only** (token metadata, holder balances, RHEA quotes). No transactions have been sent and no real money has moved.
@@ -146,9 +146,9 @@ start_round(sha256, total) → pay(≤20 per batch) × N → close_round()
 - Each part is a **transparent 1254×1254 layer** drawn in place on the WTH owl; stacking reproduces the founder previews exactly.
 - **Layer order:** behind → body → *skin markings* → legs → outfit → arms → head → face.
 - **Skin markings** (always directly on the body, under everything): NEAR emblem (NEARKAT outfit), pixel-3 tattoo (THREE face), cybernetic temple shell + cyber eye.
-- **Possible looks today:** 7 × 3 × 9 × 5 × 4 × 8 = **30,240** (grows with every new variant).
+- **Possible looks today:** 7 × 3 × 9 × 5 × 4 × 8 = 30,240 with all art; **17,640 mintable** with the 12 routable memes (grows with every new variant).
 - **Pipeline:** `pnpm --filter @wtn/assets organize` → `assets/memes/<meme>/{manifest.json, preview.png, slots/<slot>/NN-name.png}` + web WebPs in `apps/web/public/art/` + `apps/web/lib/art-registry.json`.
-- **Token readiness:** only **WTH** and **NEARKAT** (`kat.token0.near`) have verified token contracts; the other 12 are `null` until verified.
+- **Token readiness (verified 2026-11-13):** **12 mintable** — WTH, NEARKAT, HOODL, HOOTERS, THREE, MOONSHOT, RAEN, MALLACE, IKP, ROBINHOOT, IMEME, BATMAN (all RHEA DCL 1% pools, < 0.05% impact at 0.68 NEAR). OYSTER, QCAT, NINU excluded until they get a usable wNEAR pool.
 - **Funny names:** generated from the actual parts (body = who it is, other parts add a word) — e.g. "CAPTAIN OUTLAW CYBORG", "DOGGO.EXE", "PROFESSOR SCHRÖDINGER".
 
 ---

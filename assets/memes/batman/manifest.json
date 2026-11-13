@@ -3,9 +3,9 @@
   "memeId": "batman",
   "displayName": "BATMAN",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
+  "tokenContractId": "batman-4.nearlytrade.near",
+  "tokenSymbol": "BATMAN",
+  "tokenDecimals": 18,
   "tokenCandidates": [],
   "notes": [],
   "activeInSeasons": [

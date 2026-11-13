@@ -29,22 +29,22 @@ Slots: `head` (hats, ears, head armour) · `face` (eye/cheek overlays) · `body`
 
 ## Season 01 status (2026-11-09)
 
-| Meme | Slots supplied | Token |
-|---|---|---|
-| WTH | body (base) | `wth-0b2227.launchpad.justhoot.near` ✓ |
-| HOODL | body, head, arms | not found |
-| HOOTERS | accessory, legs | not found · trademark permission needed |
-| OYSTER | head, accessory | not found |
-| THREE | body, face | not found |
-| MOONSHOT | head, accessory, arms | candidates: `moon.token0.near`, `nmoon.tkn.near` (tiny liquidity) |
-| RAEN | body | candidate: `raen-608.meme-cooking.near` (~$3.2k liquidity) |
-| MALLACE | body | not found |
-| IDP | accessory, arms | not found · ICP logo permission |
-| ROBINHOOT | head, accessory, arms (quiver behind) | not found |
-| QUANTUM CAT | body | candidates: `qcat-3.nearlytrade.near`, `qcat-2223.meme-cooking.near` (tiny) |
-| INU | body | candidate: `sinu-8.smithii.near` |
-| NEARKAT | body, accessory | `kat.token0.near` ✓ |
-| CYBERNETIC | body, head, face, legs | not found · only tan fur supplied (previews show 4 more colours) |
-| BATMAN | head (cowl), accessory (cape), legs (utility belt) | not found · token contract still to be provided |
+| Meme | Slots supplied | Token (verified 2026-11-13) | RHEA route |
+|---|---|---|---|
+| WTH | body (base) | `wth-0b2227.launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| HOODL | body, head, arms | `hoodl-95275b.launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| HOOTERS | accessory, legs | `hooters-f5dd7a.launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| OYSTER | head, accessory | `oyster.v2-launchpad.justhoot.near` (token ok) | ✗ no wNEAR pool |
+| THREE | body, face | `three-de86d6.launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| MOONSHOT | head, accessory, arms | `moonshot.v2-launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| RAEN | body | `raen-e1328c.launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| MALLACE | body | `mallace.v2-launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| IKP (folder `idp`) | accessory, arms | `ikp.v2-launchpad.justhoot.near` ✓ (INDERNED KEPUTER) | DCL 1% ✓ |
+| ROBINHOOT | head, accessory, arms (quiver behind) | `robinhoot-2.v2-launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| QUANTUM CAT | body | `qcat-3.nearlytrade.near` (token ok) | ✗ only v2 #8930: ~6.5 NEAR, 9% fee |
+| INU | body | `ninu-4.nearlytrade.near` (token ok) | ✗ only v2 #8721: ~2.9 NEAR, 10% fee |
+| NEARKAT | body, accessory | `nearkat-630f25.nearlytrade.near` ✓ | DCL 1% ✓ |
+| IMEME (folder `cybernetic`) | body, head, face, legs | `imeme-2.v2-launchpad.justhoot.near` ✓ | DCL 1% ✓ |
+| BATMAN | head (cowl), accessory (cape), legs (utility belt) | `batman-4.nearlytrade.near` ✓ | DCL 1% ✓ |
 
 Nothing is `approvedForMint` yet: each meme needs its token confirmed and written art/name permission.

@@ -3,13 +3,10 @@
   "memeId": "moonshot",
   "displayName": "MOONSHOT",
   "chain": "near",
-  "tokenContractId": null,
-  "tokenSymbol": null,
-  "tokenDecimals": null,
-  "tokenCandidates": [
-    "moon.token0.near",
-    "nmoon.tkn.near"
-  ],
+  "tokenContractId": "moonshot.v2-launchpad.justhoot.near",
+  "tokenSymbol": "MOONSHOT",
+  "tokenDecimals": 18,
+  "tokenCandidates": [],
   "notes": [],
   "activeInSeasons": [
     1
