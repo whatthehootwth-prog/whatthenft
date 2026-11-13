@@ -13,7 +13,7 @@ import { NearRpc, type Network } from "@wtn/chain";
 import { REPO_ROOT, loadArt } from "./compose";
 import { loadConfig } from "./config";
 import { dryRunCaller, nearCaller, runCycle } from "./cycle";
-import { pinataPinner, runMediaCycle } from "./media";
+import { pinataJson, pinataPinner, runMediaCycle } from "./media";
 import { runOrderCycle } from "./orders";
 
 const send = process.argv.includes("--send");
@@ -60,7 +60,7 @@ await step("media", async () => {
 
 await step("buyback", async () => {
   if (!env.BUYBACK_CONTRACT) return log("buyback: skipped (no BUYBACK_CONTRACT)");
-  await runCycle(loadConfig(env), rpc, caller, { send, roundsDir: join(REPO_ROOT, "apps/keeper/rounds"), log: (m) => log(`buyback: ${m}`) });
+  await runCycle(loadConfig(env), rpc, caller, { send, roundsDir: join(REPO_ROOT, "apps/keeper/rounds"), publish: env.PINATA_JWT ? pinataJson(env.PINATA_JWT) : undefined, log: (m) => log(`buyback: ${m}`) });
 });
 
 if (failed) process.exitCode = 1;

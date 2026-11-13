@@ -9,7 +9,7 @@ Plan: test everything on **Contract A** (throwaway accounts, real money, tiny) �
 
 ## Phase 0 — Decisions & prep (you)
 
-- [ ] **Meme tokens for Season 01.** Either send the exact NEAR token contract for each meme, or choose **WTH + NEARKAT only** for Season 01 (safest; more memes in Season 2).
+- [x] **Meme tokens for Season 01.** Done: 12 verified with deep RHEA pools (OYSTER, QCAT, NINU excluded until they have pools).
 - [ ] **Account names** — pick a root you control, e.g. `whatthenft.near`:
 
 | Role | Contract A (test) | Contract B (real) |
@@ -27,12 +27,12 @@ Plan: test everything on **Contract A** (throwaway accounts, real money, tiny) �
 
 ## Phase 1 — Final build work (Claude)
 
-- [ ] Season 01 config with the chosen tokens (verify each token + RHEA pool on-chain)
-- [ ] Rebuild core WASM (5 tiers · 85/10/5 · 3% royalty 50/50 · fixed 1 NEAR) + checksums for core / market / buyback
+- [x] Season 01 config with the 12 verified tokens + RHEA routes (approval flags pending your partner-permission OK)
+- [x] Rebuilt core / market / buyback WASM + checksums → `contracts/CHECKSUMS.md`
 - [x] NFT image compositor + IPFS pinning (`set_token_media`) — built; needs a Pinata API key (`PINATA_JWT`) and the keeper set as core operator
 - [x] Order runner (keeper advances every in-progress mint; mint page already has "Continue my order")
 - [x] Keeper all-in-one run for Railway cron: `run-all --send` (orders → images → buyback), dry-run by default
-- [ ] Railway config for the website; env-var template; production build check
+- [x] Railway config for website + keeper cron, env templates, production build passes → `docs/DEPLOY_RAILWAY.md`
 - [ ] Remove leftover demo-only bits for production (demo labels hide automatically once contracts are set)
 
 ## Phase 2 — Contract A: live test with real money

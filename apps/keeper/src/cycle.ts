@@ -43,6 +43,8 @@ export interface CycleOptions {
   now?: () => number;
   /** Injected fetch for the holder indexer (tests). */
   fetchImpl?: typeof fetch;
+  /** Publish the round snapshot somewhere permanent (IPFS); returns a URI. Containers lose local files. */
+  publish?: (name: string, json: string) => Promise<string>;
 }
 
 export async function runCycle(cfg: KeeperConfig, rpc: NearRpc, caller: Caller, o: CycleOptions): Promise<{ bought: boolean; distributed: boolean }> {
@@ -123,7 +125,9 @@ export async function runCycle(cfg: KeeperConfig, rpc: NearRpc, caller: Caller, 
   const hash = snapshotHash(doc);
   mkdirSync(o.roundsDir, { recursive: true });
   const file = join(o.roundsDir, o.send ? `${cfg.network}-round-${roundId}.json` : `${cfg.network}-dry-run-latest.json`);
-  writeFileSync(file, JSON.stringify({ sha256: hash, ...JSON.parse(canonical(doc)) }, null, 2));
+  const body = JSON.stringify({ sha256: hash, ...JSON.parse(canonical(doc)) }, null, 2);
+  writeFileSync(file, body);
+  if (o.send && o.publish) log(`snapshot published: ${await o.publish(`wtn-buyback-${cfg.network}-round-${roundId}`, body)}`);
   log(`snapshot written: ${file} (sha256 ${hash})`);
   for (const p of a.payouts.slice(0, 10)) log(`  ${p.account_id.padEnd(40)} ${fmt(p.amount, WTH_DECIMALS, 2)} WTH`);
   if (a.payouts.length > 10) log(`  … and ${a.payouts.length - 10} more`);

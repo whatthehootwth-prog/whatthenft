@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "buildCommand": "pnpm install --frozen-lockfile",
+    "watchPatterns": ["apps/keeper/**", "packages/**", "assets/**", "apps/web/lib/art-registry.json", "pnpm-lock.yaml"]
+  },
+  "deploy": {
+    "startCommand": "pnpm --filter @wtn/keeper run-all --send",
+    "cronSchedule": "*/5 * * * *",
+    "restartPolicyType": "NEVER"
+  }
+}

@@ -35,6 +35,21 @@ export const pinataPinner =
     return j.IpfsHash;
   };
 
+/** Pin a JSON document (e.g. a buyback round snapshot) to IPFS through Pinata. Returns ipfs://CID. */
+export const pinataJson =
+  (jwt: string, f: typeof fetch = fetch) =>
+  async (name: string, json: string): Promise<string> => {
+    const form = new FormData();
+    form.append("file", new Blob([json], { type: "application/json" }), `${name}.json`);
+    form.append("pinataMetadata", JSON.stringify({ name }));
+    form.append("pinataOptions", JSON.stringify({ cidVersion: 1 }));
+    const r = await f("https://api.pinata.cloud/pinning/pinFileToIPFS", { method: "POST", headers: { Authorization: `Bearer ${jwt}` }, body: form, signal: AbortSignal.timeout(60_000) });
+    if (!r.ok) throw new Error(`Pinata → HTTP ${r.status}: ${(await r.text()).slice(0, 200)}`);
+    const j = (await r.json()) as { IpfsHash?: string };
+    if (!j.IpfsHash) throw new Error("Pinata returned no CID");
+    return `ipfs://${j.IpfsHash}`;
+  };
+
 export interface MediaOptions {
   coreContract: string;
   send: boolean;

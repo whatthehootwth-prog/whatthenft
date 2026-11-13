@@ -1,0 +1,14 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "buildCommand": "pnpm install --frozen-lockfile && pnpm --filter @wtn/web build",
+    "watchPatterns": ["apps/web/**", "packages/**", "pnpm-lock.yaml"]
+  },
+  "deploy": {
+    "startCommand": "pnpm --filter @wtn/web exec next start -H 0.0.0.0 -p $PORT",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 120,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 5
+  }
+}
