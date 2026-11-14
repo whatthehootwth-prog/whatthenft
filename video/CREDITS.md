@@ -6,7 +6,7 @@ Everything in the trailer is free to use, needed no account or API key, and is l
 
 | Track | Artist | Source | Licence |
 |---|---|---|---|
-| Dirty Thinkin' (used, ~120 BPM, enters on the 4 s drop) | Michael Ramir C. | https://assets.mixkit.co/music/989/989.mp3 · page: https://mixkit.co/free-stock-music/mood/energetic/ | [Mixkit Stock Music Free License](https://mixkit.co/license/#musicFree) |
+| Dirty Thinkin' (used, ~120 BPM, enters on the 3.5 s drop, 16.5 s into the track) | Michael Ramir C. | https://assets.mixkit.co/music/989/989.mp3 · page: https://mixkit.co/free-stock-music/mood/energetic/ | [Mixkit Stock Music Free License](https://mixkit.co/license/#musicFree) |
 | Punked Up Fun (alternative, downloaded, not used) | Ahjay Stelino | https://assets.mixkit.co/music/47/47.mp3 | same |
 | Sounds Good (alternative, downloaded, not used) | Michael Ramir C. | https://assets.mixkit.co/music/1077/1077.mp3 | same |
 
@@ -58,21 +58,24 @@ Each file is at `https://assets.mixkit.co/active_storage/sfx/<#>/<#>-preview.mp3
 ## Voice-over
 
 - **Model:** Kokoro-82M (`onnx-community/Kokoro-82M-v1.0-ONNX`), **Apache-2.0**. It runs locally on the CPU through [kokoro-js](https://github.com/hexgrad/kokoro) 1.2.1 (Apache-2.0).
-- **Voice: `am_fenrir`.** am_fenrir, am_michael and am_onyx were all generated with the same three lines (`public/audio/vo-compare/`) and measured:
-  - am_fenrir has the widest pitch range (~13 semitones vs ~8 and ~6.5) and the fastest delivery, which suits a high-energy trailer.
-  - am_onyx was the flattest.
-  - To switch voices, run `VOICE=am_michael npm run tts && npm run vo`.
+- **Voice: `am_puck`, raised 1 semitone with formants preserved.**
+  - All ten male Kokoro voices read the same hype lines at 1.1× (`public/audio/vo-compare/`; the first round of fenrir / michael / onyx is in `vo-compare-v1/`).
+  - am_puck is the punchiest of Kokoro's top-quality male voices: the most loudness swing and the fastest delivery, with a deep ~113 Hz voice.
+  - The rubberband pitch shift (+1 semitone, formants preserved) keeps the deep chest and makes the read a touch brighter and more excited. Change it with `PITCH_SEMIS`.
+  - Lines are read at 1.05–1.2× with exclamation marks for energy. WTH is read as "What the Hoot".
+  - To switch voices, run `VOICE=am_fenrir npm run tts && npm run vo`.
 - **Processing** (`scripts/process-vo.mjs`, ffmpeg):
   1. trim silence
-  2. high-pass at 75 Hz
-  3. +3 dB body at 140 Hz
-  4. −2.5 dB mud cut at 320 Hz
-  5. +3 dB presence at 3.5 kHz
-  6. +2 dB air at 9 kHz
-  7. de-ess
-  8. 3.5:1 compression
-  9. light tanh saturation
-  10. −16 LUFS per phrase
+  2. pitch +1 semitone, formants preserved (rubberband)
+  3. high-pass at 80 Hz
+  4. +3 dB body at 140 Hz
+  5. −2.5 dB mud cut at 320 Hz
+  6. +4 dB presence at 3.2 kHz
+  7. +2 dB air at 9 kHz
+  8. de-ess
+  9. 5:1 fast compression
+  10. tanh saturation (more drive for an aggressive edge)
+  11. −16 LUFS per phrase
 - **In the mix:** the music ducks to about 30% under every line, and the final master is two-pass loudnorm at −14 LUFS / −1 dBTP.
 
 ## Fonts (Google Fonts, SIL Open Font License 1.1)

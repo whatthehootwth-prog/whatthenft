@@ -108,9 +108,9 @@ const PartLock: React.FC<{ t: number }> = ({ t }) => {
           </div>
         ) : null}
         {t > 35.45 ? (
-          <div style={{ position: "absolute", left: 60, top: 175, transform: `scale(${1 + (1 - pop(t, 35.45, { damping: 12, stiffness: 300 })) * 2}) rotate(-9deg)`, opacity: Math.min(1, (t - 35.45) * 8) }}>
+          <div style={{ position: "absolute", left: 150, top: 300, transform: `scale(${1 + (1 - pop(t, 35.45, { damping: 12, stiffness: 300 })) * 2}) rotate(-9deg)`, opacity: Math.min(1, (t - 35.45) * 8) }}>
             <div style={{ border: `12px solid ${C.red}`, borderRadius: 20, padding: "6px 26px", background: "rgba(255,251,240,0.85)" }}>
-              <Ink size={104} color={C.red} stroke={6} shadow={0}>30 DAYS LOCKED</Ink>
+              <Ink size={96} color={C.red} stroke={6} shadow={0}>30 DAYS LOCKED</Ink>
             </div>
           </div>
         ) : null}

@@ -7,7 +7,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 import ffmpeg from "ffmpeg-static";
 
 const [src = "out/trailer-raw.mp4", dst = "out/what-the-nft-trailer.mp4"] = process.argv.slice(2);
-const TARGET = "I=-14:TP=-1.0:LRA=11";
+const TARGET = "I=-14:TP=-1.5:LRA=11";
 /** stereo + gentle brickwall (-3 dBFS) so loudnorm can apply one linear gain instead of pumping */
 const PRE = "aformat=channel_layouts=stereo,alimiter=limit=0.708:attack=3:release=60:level=false";
 

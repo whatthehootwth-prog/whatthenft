@@ -16,19 +16,22 @@ const raw = JSON.parse(readFileSync(join(ROOT, "src/vo-raw.json"), "utf8"));
 const OUT = join(ROOT, "public/audio/vo");
 mkdirSync(OUT, { recursive: true });
 
+/** +1 semitone with formants preserved: same deep chest, a touch brighter and more excited (PITCH_SEMIS env to change). */
+const SEMIS = Number(process.env.PITCH_SEMIS ?? 1);
 const CHAIN = [
   "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.03",
   "areverse",
   "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.08",
   "areverse",
-  "highpass=f=75",
+  `rubberband=pitch=${Math.pow(2, SEMIS / 12).toFixed(5)}:formant=preserved:transients=crisp:detector=compound:window=short`,
+  "highpass=f=80",
   "lowshelf=f=140:g=3",
   "equalizer=f=320:t=q:w=1.2:g=-2.5",
-  "equalizer=f=3500:t=q:w=1:g=3",
+  "equalizer=f=3200:t=q:w=1:g=4",
   "highshelf=f=9000:g=2",
   "deesser=i=0.4",
-  "acompressor=threshold=-20dB:ratio=3.5:attack=4:release=90:makeup=3",
-  "volume=1.35,asoftclip=type=tanh,volume=0.74",
+  "acompressor=threshold=-24dB:ratio=5:attack=2:release=70:makeup=5",
+  "volume=1.7,asoftclip=type=tanh,volume=0.6",
   "aresample=48000",
   "loudnorm=I=-16:TP=-1.5:LRA=7",
   "aresample=48000",

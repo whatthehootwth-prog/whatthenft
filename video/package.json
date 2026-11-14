@@ -16,8 +16,7 @@
     "master": "node scripts/master.mjs out/trailer-raw.mp4 out/what-the-nft-trailer.mp4",
     "vo-track": "node scripts/vo-track.mjs",
     "srt": "node scripts/srt.mjs",
-    "render": "npm run render:raw && npm run master && npm run vo-track && npm run srt",
-    "teaser": "node -e \"require('fs').copyFileSync('out/what-the-nft-trailer.mp4','public/footage/trailer-master.mp4')\" && remotion render src/index.ts Teaser out/teaser-raw.mp4 --codec=h264 --crf=18 --audio-codec=aac --audio-bitrate=320k && node scripts/master.mjs out/teaser-raw.mp4 out/what-the-nft-teaser-9x16.mp4"
+    "render": "npm run render:raw && npm run master && npm run vo-track && npm run srt"
   },
   "dependencies": {
     "@remotion/cli": "4.0.543",

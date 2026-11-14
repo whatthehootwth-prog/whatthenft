@@ -57,8 +57,8 @@ export const S5Rarity: React.FC = () => {
         );
       })}
       {t >= 45.75 && t < 46.75 ? (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 440, display: "flex", justifyContent: "center", transform: `scale(${pop(t, 45.75)})` }}>
-          <Ink size={170} color={C.cream} shadowColor={C.hot}>AND…</Ink>
+        <div style={{ position: "absolute", left: 0, right: 0, top: 120, zIndex: 20, display: "flex", justifyContent: "center", transform: `scale(${pop(t, 45.75)})` }}>
+          <Ink size={220} color={C.cream} shadowColor={C.hot} shadow={16}>AND…</Ink>
         </div>
       ) : null}
       {/* sparkles for mythic */}

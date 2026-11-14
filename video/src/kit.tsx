@@ -2,10 +2,10 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, OffthreadVideo, random, Sequence, spring, staticFile, useCurrentFrame } from "remotion";
 import { C, DISPLAY, MONO, SANS } from "./brand";
-import { FPS, f } from "./timeline";
+import { FPS, f, toDesign, toVideo } from "./timeline";
 
-/** Absolute video time in seconds (scenes are not wrapped in time-shifting Sequences). */
-export const useT = () => useCurrentFrame() / FPS;
+/** Design-clock time in seconds (see KNOTS in timeline.ts). Scenes are not wrapped in time-shifting Sequences. */
+export const useT = () => toDesign(useCurrentFrame() / FPS);
 
 /** Spring that starts at `at` seconds. */
 export const pop = (t: number, at: number, cfg: Partial<{ damping: number; stiffness: number; mass: number }> = {}) =>
@@ -169,7 +169,9 @@ export const BrowserFrame: React.FC<{
   label?: string;
   style?: React.CSSProperties;
   rate?: number;
-}> = ({ clip, from, start = 0, width, label = "WHAT THE NFT?! · PRE-LAUNCH BUILD", style, rate = 1 }) => {
+  zoom?: number;
+  origin?: string;
+}> = ({ clip, from, start = 0, width, label = "WHAT THE NFT?! · PRE-LAUNCH BUILD", style, rate = 1, zoom = 1, origin = "50% 50%" }) => {
   const h = (width * 9) / 16;
   return (
     <div style={{ position: "absolute", width, borderRadius: 26, border: `8px solid ${C.ink}`, background: C.ink, boxShadow: `18px 18px 0 ${C.ink}`, overflow: "hidden", ...style }}>
@@ -182,8 +184,8 @@ export const BrowserFrame: React.FC<{
         </div>
       </div>
       <div style={{ width: "100%", height: h, position: "relative", overflow: "hidden", background: C.page }}>
-        <Sequence from={f(from)} layout="none">
-          <OffthreadVideo src={staticFile(`footage/${clip}.mp4`)} trimBefore={f(start)} playbackRate={rate} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <Sequence from={f(toVideo(from))} layout="none">
+          <OffthreadVideo src={staticFile(`footage/${clip}.mp4`)} trimBefore={f(start)} playbackRate={rate} muted style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${zoom})`, transformOrigin: origin }} />
         </Sequence>
       </div>
     </div>

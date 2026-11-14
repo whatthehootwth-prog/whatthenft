@@ -158,8 +158,8 @@ const MixBar: React.FC<{ t: number; x: number; y: number; w: number; start: numb
 const Equation: React.FC<{ t: number }> = ({ t }) => {
   const boxes = [
     { s: 25.0, title: "RANDOM\nPARTS", bg: C.pink, color: C.cream, x: 340 },
-    { s: 26.0, title: "MEME\nTOKENS", bg: C.aqua, color: C.ink, x: 960 },
-    { s: 27.0, title: "NFT\nBAG", bg: C.yellow, color: C.ink, x: 1580 },
+    { s: 26.0, title: "MEME\nTOKENS", bg: C.aqua, color: C.cream, x: 960 },
+    { s: 27.0, title: "NFT\nBAG", bg: C.yellow, color: C.cream, x: 1580 },
   ];
   return (
     <AbsoluteFill>

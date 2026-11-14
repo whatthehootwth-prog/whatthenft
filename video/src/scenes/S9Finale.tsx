@@ -1,7 +1,7 @@
-/** 83.5–90 s — group portrait, the owl blinks, "WHAT THE NFT?! NOT ANOTHER BORING JPEG!", tagline + link. */
+/** 83.5–90 s — group portrait, the owl blinks, "WHAT THE NFT?! NOT ANOTHER BORING JPEG!", link once it exists. */
 import React from "react";
 import { AbsoluteFill } from "remotion";
-import { C, MONO } from "../brand";
+import { C } from "../brand";
 import { at, Burst, Character, Halftone, Ink, pop, shakeAll, Sticker, Tag, useT } from "../exports";
 import { Mutant } from "../mutant";
 import { HOOK_SPEC } from "./S1Hook";
@@ -63,16 +63,12 @@ export const S9Finale: React.FC<{ url: string | null }> = ({ url }) => {
           <Sticker bg={C.pink} color={C.cream} size={82}>NOT ANOTHER BORING JPEG!</Sticker>
         </div>
       ) : null}
-      {/* tagline + link */}
-      {t >= 87.6 ? (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 950, display: "flex", justifyContent: "center", gap: 18, transform: `scale(${pop(t, 87.6)})` }}>
-          <Tag size={26} bg={C.ink} color={C.cream}>Mutant owls · real meme bags · built on NEAR</Tag>
-          <Tag size={26} bg={C.cream} color={C.ink}>{url ?? "Season 01 · coming soon"}</Tag>
+      {/* official link, only once one exists (render with --props='{"url":"…"}') */}
+      {url && t >= 87.6 ? (
+        <div style={{ position: "absolute", left: 0, right: 0, top: 960, display: "flex", justifyContent: "center", transform: `scale(${pop(t, 87.6)})` }}>
+          <Tag size={30} bg={C.ink} color={C.cream}>{url}</Tag>
         </div>
       ) : null}
-      <div style={{ position: "absolute", left: 0, right: 0, bottom: 14, textAlign: "center", fontFamily: MONO, fontSize: 17, color: C.ink, opacity: at(t, [87.9, 88.3], [0, 0.85]) }}>
-        Pre-launch preview: contracts not yet on mainnet · meme tokens are volatile and can go to zero · not financial advice
-      </div>
     </AbsoluteFill>
   );
 };

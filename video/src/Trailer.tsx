@@ -11,7 +11,7 @@ import { S6Market } from "./scenes/S6Market";
 import { S7Econ } from "./scenes/S7Econ";
 import { S8Next } from "./scenes/S8Next";
 import { S9Finale } from "./scenes/S9Finale";
-import { f, MUSIC, musicGain, SCENES, SFX, VO } from "./timeline";
+import { f, MUSIC, musicGain, SCENES, SFX, toVideo, VO } from "./timeline";
 
 export type TrailerProps = { url: string | null };
 
@@ -60,7 +60,7 @@ export const Trailer: React.FC<TrailerProps> = ({ url }) => {
         </Sequence>
       ))}
       {SFX.map(([s, id, vol], i) => (
-        <Sequence key={`${id}${i}`} from={f(s)} name={`sfx ${id}`}>
+        <Sequence key={`${id}${i}`} from={f(toVideo(s))} name={`sfx ${id}`}>
           <Audio src={staticFile(`audio/sfx/${id}.mp3`)} volume={vol} />
         </Sequence>
       ))}
