@@ -29,3 +29,4 @@ video/public/footage/
 video/public/art/
 video/.cache/
 video/src/art-registry.json
+video/.tts/

@@ -45,10 +45,10 @@ export const S1Hook: React.FC = () => {
           {/* line 2 slams */}
           <div style={{ position: "absolute", top: 470, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
             <div style={{ transform: `scale(${t >= 2.45 ? 1 + (1 - pop(t, 2.45, { damping: 14, stiffness: 260 })) * 2 : 0})`, opacity: t >= 2.45 ? 1 : 0 }}>
-              <Ink size={130} color={C.cream} shadowColor={C.orange}>COULD BUY</Ink>
+              <Ink size={120} color={C.cream} shadowColor={C.orange}>COULD SUPPORT THE</Ink>
             </div>
             <div style={{ transform: `scale(${t >= 2.9 ? 1 + (1 - pop(t, 2.9, { damping: 10, stiffness: 240 })) * 2.6 : 0}) rotate(-3deg)`, opacity: t >= 2.9 ? 1 : 0 }}>
-              <Ink size={300} color={C.yellow} shadowColor={C.hot} shadow={16}>MEMES?!</Ink>
+              <Ink size={150} color={C.yellow} shadowColor={C.hot} shadow={12}>MEME ECOSYSTEM?!</Ink>
             </div>
           </div>
           {/* the crashers rush in from every side */}

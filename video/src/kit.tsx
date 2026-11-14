@@ -171,7 +171,7 @@ export const BrowserFrame: React.FC<{
   rate?: number;
   zoom?: number;
   origin?: string;
-}> = ({ clip, from, start = 0, width, label = "WHAT THE NFT?! · PRE-LAUNCH BUILD", style, rate = 1, zoom = 1, origin = "50% 50%" }) => {
+}> = ({ clip, from, start = 0, width, label = "WHAT THE NFT?!", style, rate = 1, zoom = 1, origin = "50% 50%" }) => {
   const h = (width * 9) / 16;
   return (
     <div style={{ position: "absolute", width, borderRadius: 26, border: `8px solid ${C.ink}`, background: C.ink, boxShadow: `18px 18px 0 ${C.ink}`, overflow: "hidden", ...style }}>

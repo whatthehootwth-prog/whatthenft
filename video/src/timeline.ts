@@ -15,7 +15,9 @@ import cues from "./cues.json";
 export const FPS = 30;
 export const W = 1920;
 export const H = 1080;
-export const DURATION_S = 75;
+const MARK = cues.marks as Record<string, number>;
+/** Video length follows the end mark in cues.json (whole seconds). */
+export const DURATION_S = Math.round(MARK.end!);
 export const f = (s: number) => Math.round(s * FPS);
 
 export const SCENES = {
@@ -31,11 +33,14 @@ export const SCENES = {
 } as const;
 export const CUTS = [6, 14, 29, 41, 51, 61, 75, 83.5]; // design time
 
-const CUE = cues as Record<string, number>;
+const CUE = cues.vo as Record<string, number>;
 export const VO = vo.map((v) => ({ id: v.id, text: v.text, seconds: v.seconds, at: CUE[v.id]!, end: CUE[v.id]! + v.seconds }));
 export const cue = (id: string) => CUE[id]!;
 
-export const MUSIC = { file: "audio/music/dirty-thinkin.mp3", at: 3.5, trim: 16.5, base: 0.56, duck: 0.17, fadeOut: [74.0, 75.0] as const };
+const TRACK_END = 86.5; // the track's final hit
+const rawTrim = TRACK_END - (MARK.end! - 1.5 - MARK.drop!);
+const trim = 2.5 + Math.round((rawTrim - 2.5) / 2) * 2; // keep the 2 s bar grid (downbeats at 2.5 + 2k)
+export const MUSIC = { file: "audio/music/dirty-thinkin.mp3", at: MARK.drop!, trim, base: 0.56, duck: 0.17, fadeOut: [MARK.end! - 1, MARK.end!] as const };
 
 /** Music gain at video time t: ducks under every VO line (fast attack, slower release), fades at the end. */
 export function musicGain(t: number) {
@@ -46,25 +51,32 @@ export function musicGain(t: number) {
     if (t >= a - 0.1 && t <= b + 0.35) k = t < a ? (t - (a - 0.1)) / 0.1 : t > b ? 1 - (t - b) / 0.35 : 1;
     g = Math.min(g, MUSIC.base - (MUSIC.base - MUSIC.duck) * Math.max(0, Math.min(1, k)));
   }
-  // the breakdown (≈49–56 s) is already quiet: lift it a touch so it still reads under the voice
-  if (t > 48.9 && t < 56.1) g *= 1.25;
+  // the track's breakdown (62–69 s into the file) is already quiet: lift it a touch so it still reads under the voice
+  const bk0 = MUSIC.at + (62 - MUSIC.trim), bk1 = MUSIC.at + (69 - MUSIC.trim);
+  if (t > bk0 && t < bk1) g *= 1.25;
   const [fa, fb] = MUSIC.fadeOut;
   if (t > fa) g *= Math.max(0, 1 - (t - fa) / (fb - fa));
   return g;
 }
 
 /** design time → video time knots ([design, video]) */
-export const KNOTS: [number, number][] = [
-  [0, 0], [0.35, 0.3], [2.45, 2.1], [4.0, 3.5],
-  [6.0, 5.0], [6.35, 5.3], [8.25, 7.2], [9.25, 8.1], [10.5, 9.1],
-  [14.0, 11.0], [14.4, 11.3], [18.9, 14.8], [21.6, 17.2], [24.6, 19.9],
-  [29.0, 23.0], [29.3, 23.3], [33.8, 27.5], [34.6, 28.0], [37.4, 30.1], [38.8, 31.3],
-  [41.0, 33.0], [41.5, 33.4], [42.5, 34.1], [43.5, 34.8], [44.5, 35.5], [45.75, 36.6], [46.75, 37.4], [48.1, 38.6],
-  [51.0, 40.5], [52.0, 41.0], [54.4, 42.6], [56.0, 44.0], [56.8, 44.6],
-  [61.0, 48.5], [61.5, 49.0], [64.3, 51.4], [67.4, 54.0], [70.7, 56.4],
-  [75.0, 60.0], [75.3, 60.3], [77.3, 62.0], [79.4, 63.9], [80.2, 64.6], [81.95, 66.2],
-  [83.5, 67.5], [84.2, 68.2], [85.75, 69.7], [90.0, 75.0],
-];
+/** Where each voice line and scene mark sits on the 90 s design clock the scenes are animated on. */
+const DESIGN_VO: Record<string, number> = {
+  s1a: 0.35, s1b: 2.45, s2a: 6.35, s2b: 8.25, s2c: 9.25, s2d: 10.5, s3a: 14.4, s3b: 18.9, s3c: 21.6,
+  s4a: 29.3, s4b: 34.6, s4c: 37.4, s4d: 38.8, s5a: 41.5, s5b: 42.5, s5c: 43.5, s5d: 44.5, s5e: 45.75, s5f: 46.75,
+  s6a: 52.0, s6b: 54.4, s6c: 56.8, s7a: 61.5, s7b: 64.3, s7c: 67.4, s7d: 70.7,
+  s8a: 75.3, s8b: 77.3, s8c: 79.4, s8d: 80.2, s8e: 81.95, s9a: 84.2, s9b: 85.75,
+};
+const DESIGN_MARK: Record<string, number> = {
+  drop: 4.0, reveal: 6.0, core: 14.0, equation: 24.6, bag: 29.0, split: 33.8, rarity: 41.0, row: 48.1,
+  market: 51.0, swap: 56.0, econ: 61.0, next: 75.0, finale: 83.5, end: 90.0,
+};
+/** design time → video time knots ([design, video]), built from cues.json so retiming = editing cues.json only */
+export const KNOTS: [number, number][] = ([
+  [0, 0] as [number, number],
+  ...Object.entries(DESIGN_VO).map(([id, d]) => [d, CUE[id]!] as [number, number]),
+  ...Object.entries(DESIGN_MARK).map(([id, d]) => [d, MARK[id]!] as [number, number]),
+]).sort((p, q) => p[0] - q[0]) as [number, number][];
 const lerpKnots = (x: number, a: 0 | 1, b: 0 | 1) => {
   const k = KNOTS;
   if (x <= k[0]![a]) return k[0]![b];

@@ -57,16 +57,18 @@ Each file is at `https://assets.mixkit.co/active_storage/sfx/<#>/<#>-preview.mp3
 
 ## Voice-over
 
-- **Model:** Kokoro-82M (`onnx-community/Kokoro-82M-v1.0-ONNX`), **Apache-2.0**. It runs locally on the CPU through [kokoro-js](https://github.com/hexgrad/kokoro) 1.2.1 (Apache-2.0).
-- **Voice: `am_puck`, raised 1 semitone with formants preserved.**
-  - All ten male Kokoro voices read the same hype lines at 1.1× (`public/audio/vo-compare/`; the first round of fenrir / michael / onyx is in `vo-compare-v1/`).
-  - am_puck is the punchiest of Kokoro's top-quality male voices: the most loudness swing and the fastest delivery, with a deep ~113 Hz voice.
-  - The rubberband pitch shift (+1 semitone, formants preserved) keeps the deep chest and makes the read a touch brighter and more excited. Change it with `PITCH_SEMIS`.
-  - Lines are read at 1.05–1.2× with exclamation marks for energy. WTH is read as "What the Hoot".
-  - To switch voices, run `VOICE=am_fenrir npm run tts && npm run vo`.
+- **Model:** [Chatterbox](https://github.com/resemble-ai/chatterbox) 0.1.7 by Resemble AI, **MIT licence**. It runs locally on the CPU from `video/.tts` (set up with `npm run setup-tts`), with no account or key.
+  - Chatterbox embeds Resemble's inaudible Perth watermark in every generated line, marking it as AI-generated. It is left on.
+- **Voice:** Chatterbox's built-in male voice, exaggeration 0.85, CFG 0.35. The project owner picked it by ear over a clone of the earlier Kokoro voice (`public/audio/vo-compare-cb/`).
+  - The first two cuts used Kokoro-82M (Apache-2.0, `am_fenrir` then `am_puck`). It reads too calmly for a hype trailer. It is still used for the optional clone reference (`npm run tts:ref`, `public/audio/vo-ref.wav`).
+  - **Take selection:** every line gets 3–9 takes.
+    - Each take is transcribed with a local Whisper model (faster-whisper `base.en`, MIT).
+    - The most energetic take whose words match the script is kept.
+  - **Rarity chant:** it is read as one sentence and split at the pauses, because one-word lines are unstable.
+  - **Pronunciation:** WTH is read as "What the Hoot". ALL-CAPS words are de-capped before generation, because Chatterbox reads capitals as letters.
 - **Processing** (`scripts/process-vo.mjs`, ffmpeg):
   1. trim silence
-  2. pitch +1 semitone, formants preserved (rubberband)
+  2. optional pitch shift with formants preserved (rubberband; off by default)
   3. high-pass at 80 Hz
   4. +3 dB body at 140 Hz
   5. −2.5 dB mud cut at 320 Hz

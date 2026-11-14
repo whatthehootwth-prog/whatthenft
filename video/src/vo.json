@@ -2,199 +2,199 @@
   {
     "id": "s1a",
     "text": "What if... an N F T...",
-    "voice": "am_puck",
-    "seconds": 1.302
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.298
   },
   {
     "id": "s1b",
-    "text": "could buy MEMES?!",
-    "voice": "am_puck",
-    "seconds": 0.99
+    "text": "could support the MEME ECOSYSTEM?!",
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 2.094
   },
   {
     "id": "s2a",
     "text": "Meet, What the N F T!",
-    "voice": "am_puck",
-    "seconds": 1.233
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.549
   },
   {
     "id": "s2b",
     "text": "One owl!",
-    "voice": "am_puck",
-    "seconds": 0.709
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.881
   },
   {
     "id": "s2c",
     "text": "Too many memes!",
-    "voice": "am_puck",
-    "seconds": 0.829
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.841
   },
   {
     "id": "s2d",
     "text": "Absolutely ZERO chill!",
-    "voice": "am_puck",
-    "seconds": 1.256
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.989
   },
   {
     "id": "s3a",
     "text": "Every mutant is stitched together from different meme communities!",
-    "voice": "am_puck",
-    "seconds": 2.942
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 2.794
   },
   {
     "id": "s3b",
     "text": "And those parts don't just look ridiculous...",
-    "voice": "am_puck",
-    "seconds": 2.04
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.828
   },
   {
     "id": "s3c",
     "text": "They decide which REAL meme tokens get purchased!",
-    "voice": "am_puck",
-    "seconds": 2.392
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.884
   },
   {
     "id": "s4a",
     "text": "Eighty-five percent of the base mint price goes into real meme token purchases!",
-    "voice": "am_puck",
-    "seconds": 4.121
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 3.469
   },
   {
     "id": "s4b",
     "text": "The tokens stay locked for thirty days!",
-    "voice": "am_puck",
-    "seconds": 1.842
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.914
   },
   {
     "id": "s4c",
     "text": "But the N F T?",
-    "voice": "am_puck",
-    "seconds": 0.992
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.123
   },
   {
     "id": "s4d",
     "text": "You can still trade it!",
-    "voice": "am_puck",
-    "seconds": 1.084
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.048
   },
   {
     "id": "s5a",
     "text": "Common!",
-    "voice": "am_puck",
-    "seconds": 0.589
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.454
   },
   {
     "id": "s5b",
     "text": "Rare!",
-    "voice": "am_puck",
-    "seconds": 0.485
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.471
   },
   {
     "id": "s5c",
     "text": "Epic!",
-    "voice": "am_puck",
-    "seconds": 0.539
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.362
   },
   {
     "id": "s5d",
     "text": "Legendary!",
-    "voice": "am_puck",
-    "seconds": 0.751
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.618
   },
   {
     "id": "s5e",
     "text": "And...",
-    "voice": "am_puck",
-    "seconds": 0.621
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.475
   },
   {
     "id": "s5f",
     "text": "MYTHIC!",
-    "voice": "am_puck",
-    "seconds": 0.645
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.546
   },
   {
     "id": "s6a",
     "text": "Collect your freak!",
-    "voice": "am_puck",
-    "seconds": 0.88
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.006
   },
   {
     "id": "s6b",
     "text": "Show it off!",
-    "voice": "am_puck",
-    "seconds": 0.685
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.835
   },
   {
     "id": "s6c",
     "text": "And fill your collection book!",
-    "voice": "am_puck",
-    "seconds": 1.253
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.212
   },
   {
     "id": "s7a",
     "text": "And the madness supports What the Hoot!",
-    "voice": "am_puck",
-    "seconds": 1.535
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.984
   },
   {
     "id": "s7b",
     "text": "Ten percent of mint revenue goes to the creator!",
-    "voice": "am_puck",
-    "seconds": 2.251
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 2.127
   },
   {
     "id": "s7c",
     "text": "Five percent funds the What the Hoot treasury!",
-    "voice": "am_puck",
-    "seconds": 1.922
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.831
   },
   {
     "id": "s7d",
     "text": "Marketplace royalties contribute too!",
-    "voice": "am_puck",
-    "seconds": 1.838
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.947
   },
   {
     "id": "s8a",
     "text": "Season One! Meme Genesis!",
-    "voice": "am_puck",
-    "seconds": 1.473
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.551
   },
   {
     "id": "s8b",
     "text": "One hundred and eleven mutants!",
-    "voice": "am_puck",
-    "seconds": 1.572
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.681
   },
   {
     "id": "s8c",
     "text": "Next?",
-    "voice": "am_puck",
-    "seconds": 0.572
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 0.508
   },
   {
     "id": "s8d",
     "text": "More seasons! More meme crews!",
-    "voice": "am_puck",
-    "seconds": 1.422
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.993
   },
   {
     "id": "s8e",
     "text": "And cross-chain CHAOS!",
-    "voice": "am_puck",
-    "seconds": 1.146
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.817
   },
   {
     "id": "s9a",
     "text": "What the N F T!",
-    "voice": "am_puck",
-    "seconds": 1.027
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.096
   },
   {
     "id": "s9b",
     "text": "Not another boring J PEG!",
-    "voice": "am_puck",
-    "seconds": 1.666
+    "voice": "chatterbox(default, exag=0.85, cfg=0.35)",
+    "seconds": 1.449
   }
 ]

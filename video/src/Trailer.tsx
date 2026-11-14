@@ -43,12 +43,6 @@ export const Trailer: React.FC<TrailerProps> = ({ url }) => {
       {WIPES.map(([s, c]) => (
         <Wipe key={s} at={s} colors={c} />
       ))}
-      {/* standing disclosure */}
-      {t > 6.3 && t < SCENES.finale[0] ? (
-        <div style={{ position: "absolute", right: 26, top: 22, opacity: 0.92 }}>
-          <Tag size={16} bg={C.ink} color={C.yellow}>Pre-launch preview · not yet on mainnet</Tag>
-        </div>
-      ) : null}
 
       {/* audio */}
       <Sequence from={f(MUSIC.at)} name="music">

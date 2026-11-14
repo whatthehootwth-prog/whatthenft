@@ -16,8 +16,8 @@ const raw = JSON.parse(readFileSync(join(ROOT, "src/vo-raw.json"), "utf8"));
 const OUT = join(ROOT, "public/audio/vo");
 mkdirSync(OUT, { recursive: true });
 
-/** +1 semitone with formants preserved: same deep chest, a touch brighter and more excited (PITCH_SEMIS env to change). */
-const SEMIS = Number(process.env.PITCH_SEMIS ?? 1);
+/** Optional pitch shift with formants preserved (PITCH_SEMIS, default 0: the Chatterbox voice is used as generated). */
+const SEMIS = Number(process.env.PITCH_SEMIS ?? 0);
 const CHAIN = [
   "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.03",
   "areverse",

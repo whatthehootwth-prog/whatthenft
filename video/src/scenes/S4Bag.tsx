@@ -23,7 +23,7 @@ const Part85: React.FC<{ t: number }> = ({ t }) => {
     <AbsoluteFill style={{ transform: `translate(${sh.x}px, ${sh.y}px)` }}>
       <Burst a={C.aqua} b="#7af0ff" rays={24} spin={-9} cx={420} cy={480} />
       <Halftone opacity={0.07} />
-      <BrowserFrame clip="mint" from={29.0} start={2.6} width={1000} label="MINT PAGE · PRE-LAUNCH BUILD" style={{ left: 860, top: 190, transform: `translateX(${(1 - frameIn) * 1200}px) rotate(${2.5 - frameIn * 0.5}deg)` }} />
+      <BrowserFrame clip="mint" from={29.0} start={2.6} width={1000} label="MINT PAGE" style={{ left: 860, top: 190, transform: `translateX(${(1 - frameIn) * 1200}px) rotate(${2.5 - frameIn * 0.5}deg)` }} />
       <div style={{ position: "absolute", left: 1480, top: 140, transform: `scale(${pop(t, 29.6)}) rotate(5deg)` }}>
         <Sticker bg={C.yellow} size={34}>FIXED 1 NEAR</Sticker>
       </div>

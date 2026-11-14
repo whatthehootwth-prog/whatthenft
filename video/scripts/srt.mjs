@@ -5,12 +5,13 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const vo = JSON.parse(readFileSync(join(ROOT, "src/vo.json"), "utf8"));
-const cues = JSON.parse(readFileSync(join(ROOT, "src/cues.json"), "utf8"));
+const CUES = JSON.parse(readFileSync(join(ROOT, "src/cues.json"), "utf8"));
+const cues = CUES.vo;
 
 /** Written forms (the TTS script spells some words phonetically). */
 const TEXT = {
   s1a: "What if… an NFT…",
-  s1b: "could buy MEMES?!",
+  s1b: "could support the meme ecosystem?",
   s2a: "Meet WHAT THE NFT?!",
   s4a: "85% of the base mint price goes into real meme token purchases.",
   s4c: "But the NFT?",

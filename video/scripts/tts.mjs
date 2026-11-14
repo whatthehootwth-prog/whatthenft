@@ -15,50 +15,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 export const VO_VOICE = process.env.VOICE ?? "am_puck";
 
 /** Script, phrase by phrase. `speed` > 1 is faster. Spelled-out text where needed for pronunciation. */
-export const PHRASES = [
-  // 1 — hook
-  { id: "s1a", text: "What if... an N F T...", speed: 1.0 },
-  { id: "s1b", text: "could buy MEMES?!", speed: 1.05 },
-  // 2 — reveal
-  { id: "s2a", text: "Meet, What the N F T!", speed: 1.08 },
-  { id: "s2b", text: "One owl!", speed: 1.08 },
-  { id: "s2c", text: "Too many memes!", speed: 1.1 },
-  { id: "s2d", text: "Absolutely ZERO chill!", speed: 1.1 },
-  // 3 — core mechanic
-  { id: "s3a", text: "Every mutant is stitched together from different meme communities!", speed: 1.18 },
-  { id: "s3b", text: "And those parts don't just look ridiculous...", speed: 1.15 },
-  { id: "s3c", text: "They decide which REAL meme tokens get purchased!", speed: 1.14 },
-  // 4 — bag + lock
-  { id: "s4a", text: "Eighty-five percent of the base mint price goes into real meme token purchases!", speed: 1.2 },
-  { id: "s4b", text: "The tokens stay locked for thirty days!", speed: 1.14 },
-  { id: "s4c", text: "But the N F T?", speed: 1.08 },
-  { id: "s4d", text: "You can still trade it!", speed: 1.12 },
-  // 5 — rarity
-  { id: "s5a", text: "Common!", speed: 1.12 },
-  { id: "s5b", text: "Rare!", speed: 1.12 },
-  { id: "s5c", text: "Epic!", speed: 1.12 },
-  { id: "s5d", text: "Legendary!", speed: 1.12 },
-  { id: "s5e", text: "And...", speed: 1.0 },
-  { id: "s5f", text: "MYTHIC!", speed: 1.0 },
-  // 6 — marketplace + collection
-  { id: "s6a", text: "Collect your freak!", speed: 1.12 },
-  { id: "s6b", text: "Show it off!", speed: 1.12 },
-  { id: "s6c", text: "And fill your collection book!", speed: 1.12 },
-  // 7 — WTH economy (WTH is read as "What the Hoot")
-  { id: "s7a", text: "And the madness supports What the Hoot!", speed: 1.12 },
-  { id: "s7b", text: "Ten percent of mint revenue goes to the creator!", speed: 1.18 },
-  { id: "s7c", text: "Five percent funds the What the Hoot treasury!", speed: 1.16 },
-  { id: "s7d", text: "Marketplace royalties contribute too!", speed: 1.16 },
-  // 8 — what's next
-  { id: "s8a", text: "Season One! Meme Genesis!", speed: 1.1 },
-  { id: "s8b", text: "One hundred and eleven mutants!", speed: 1.15 },
-  { id: "s8c", text: "Next?", speed: 1.05 },
-  { id: "s8d", text: "More seasons! More meme crews!", speed: 1.15 },
-  { id: "s8e", text: "And cross-chain CHAOS!", speed: 1.1 },
-  // 9 — finale
-  { id: "s9a", text: "What the N F T!", speed: 1.05 },
-  { id: "s9b", text: "Not another boring J PEG!", speed: 1.08 },
-];
+/** Script lives in src/script.json (shared with scripts/tts_chatterbox.py). */
+export const PHRASES = JSON.parse(readFileSync(join(ROOT, "src/script.json"), "utf8"));
 
 const COMPARE = ["What if... an N F T... could buy MEMES?!", "Every mutant is stitched together from different meme communities.", "Common! Rare! Epic! Legendary! And... MYTHIC!"];
 

@@ -38,11 +38,6 @@ export const S2Reveal: React.FC = () => {
       {t > 7.8 ? (
         <BrowserFrame clip="home" from={7.9} start={4.0} width={1180} style={{ left: 690, top: 150, transform: `translateX(${(1 - frameIn) * 1400}px) rotate(${2 - frameIn * 3.5}deg)` }} />
       ) : null}
-      {t > 8.2 ? (
-        <div style={{ position: "absolute", left: 1420, top: 108, transform: `scale(${pop(t, 8.6)}) rotate(3deg)` }}>
-          <Tag size={22} bg={C.lime} color={C.ink}>Real site · pre-launch build</Tag>
-        </div>
-      ) : null}
       {/* the three beats */}
       <div style={{ position: "absolute", left: 70, top: 470, display: "flex", flexDirection: "column", gap: 34, alignItems: "flex-start" }}>
         {[
@@ -55,7 +50,6 @@ export const S2Reveal: React.FC = () => {
           </div>
         ))}
       </div>
-      <div style={{ position: "absolute", left: 74, bottom: 46, fontFamily: MONO, fontSize: 20, color: C.ink, opacity: t > 8.4 ? 0.75 : 0 }}>Footage: production build of the site, running locally</div>
     </AbsoluteFill>
   );
 };

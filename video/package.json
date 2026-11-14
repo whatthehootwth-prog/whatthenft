@@ -5,8 +5,7 @@
   "description": "WHAT THE NFT?! official trailer (Remotion). Standalone: not part of the pnpm workspace.",
   "scripts": {
     "fetch-audio": "node scripts/fetch-audio.mjs",
-    "voices": "node scripts/tts.mjs --compare",
-    "tts": "node scripts/tts.mjs",
+    "tts": "node scripts/run-py.mjs scripts/tts_chatterbox.py",
     "vo": "node scripts/process-vo.mjs",
     "record": "node scripts/record.mjs",
     "prep": "node scripts/prep-art.mjs",
@@ -16,7 +15,11 @@
     "master": "node scripts/master.mjs out/trailer-raw.mp4 out/what-the-nft-trailer.mp4",
     "vo-track": "node scripts/vo-track.mjs",
     "srt": "node scripts/srt.mjs",
-    "render": "npm run render:raw && npm run master && npm run vo-track && npm run srt"
+    "render": "npm run render:raw && npm run master && npm run vo-track && npm run srt",
+    "setup-tts": "node scripts/setup-tts.mjs",
+    "tts:ref": "node scripts/tts.mjs",
+    "tts:rarity": "node scripts/run-py.mjs scripts/tts_chatterbox.py --rarity",
+    "use-vo": "node scripts/use-vo.mjs default"
   },
   "dependencies": {
     "@remotion/cli": "4.0.543",
