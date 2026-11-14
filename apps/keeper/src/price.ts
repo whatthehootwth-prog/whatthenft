@@ -1,5 +1,5 @@
 /**
- * NEAR/USD price for the "$20" trigger. Two independent sources must agree, otherwise we don't act:
+ * NEAR/USD price for the buyback USD trigger (THRESHOLD_USD, default $3). Two independent sources must agree, otherwise we don't act:
  * a wrong price could trigger a buyback far too early (or never).
  */
 

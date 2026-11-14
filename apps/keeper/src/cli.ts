@@ -6,7 +6,7 @@
  *   pnpm --filter @wtn/keeper buyback --send          # execute one cycle (needs KEEPER_ACCOUNT + KEEPER_PRIVATE_KEY)
  *   pnpm --filter @wtn/keeper buyback --send --watch 5   # run every 5 minutes
  *
- * Env: NETWORK, BUYBACK_CONTRACT, WTH_TOKEN (testnet), KEEPER_ACCOUNT, KEEPER_PRIVATE_KEY, THRESHOLD_USD (20),
+ * Env: NETWORK, BUYBACK_CONTRACT, WTH_TOKEN (testnet), KEEPER_ACCOUNT, KEEPER_PRIVATE_KEY, THRESHOLD_USD (3),
  *      MIN_HOLDING_WTH (1000), MIN_PAYOUT_WTH (1), EXCLUDE (comma list), RPC_URL, MAX_PRICE_DIVERGENCE (0.1)
  */
 import { fileURLToPath } from "node:url";

@@ -35,7 +35,7 @@ const STOPS: Stop[] = [
     body: (
       <>
         <p>Your mutant&apos;s body parts determine which meme tokens go into its bag.</p>
-        <p><strong>85% of your base mint price buys real tokens</strong>, including a guaranteed 20% WTH allocation.</p>
+        <p><strong>85% of your base mint price buys real tokens</strong>, including a guaranteed 20% WTH allocation. Most meme tokens take their own 1.5–3% fee on the DEX buy.</p>
       </>
     ),
     art: (

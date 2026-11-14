@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SEASON_01_PRICE_NEAR } from "@wtn/chain";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { ArtMutant } from "@/components/ArtMutant";
 import { Decor } from "@/components/Decor";
@@ -290,7 +291,7 @@ function SeasonStats({ live }: { live: SeasonLive }) {
       ]
     : [
         { k: "Supply", v: "111" },
-        { k: "Price", v: "1 NEAR" },
+        { k: "Price", v: `${SEASON_01_PRICE_NEAR} NEAR` },
       ];
   const isLive = live.state === "ok" && !live.paused && live.phase === "live";
   return (

@@ -1,8 +1,8 @@
 {
   "config": {
     "name": "TEST · not for sale",
-    "mint_start_ns": "1794680761665000000",
-    "mint_end_ns": "1794939961665000000",
+    "mint_start_ns": "1794684921683000000",
+    "mint_end_ns": "1794944121683000000",
     "max_supply": 2,
     "target_base": "200000000000000000000000",
     "min_base_floor": "200000000000000000000000",
@@ -11,10 +11,6 @@
     "tiers": [
       {
         "min_base": "0",
-        "max_partners": 1
-      },
-      {
-        "min_base": "1000000000000000000000000",
         "max_partners": 2
       },
       {

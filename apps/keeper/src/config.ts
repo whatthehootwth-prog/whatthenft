@@ -43,7 +43,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): KeeperConfig {
     wthToken,
     keeperAccount,
     keeperPrivateKey: env.KEEPER_PRIVATE_KEY,
-    thresholdUsd: Number(env.THRESHOLD_USD ?? 20),
+    thresholdUsd: Number(env.THRESHOLD_USD ?? 3),
     minHolding: BigInt(env.MIN_HOLDING_WTH ?? 1000) * ONE_WTH,
     minPayout: BigInt(env.MIN_PAYOUT_WTH ?? 1) * ONE_WTH,
     exclude: Array.from(new Set([...DEFAULT_EXCLUDE, wthToken, buybackContract, ...(keeperAccount ? [keeperAccount] : []), ...extra])),

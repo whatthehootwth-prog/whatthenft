@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { SEASON_01_PRICE_NEAR } from "@wtn/chain";
 import { parseNear } from "@wtn/domain";
 import { Reveal } from "@/components/mint/Reveal";
 import { ArtMutant } from "@/components/ArtMutant";
@@ -15,8 +16,8 @@ import { useQuote } from "@/lib/useQuote";
 import { useSeasonLive } from "@/lib/useSeason";
 import { useWallet } from "@/lib/wallet";
 
-/** Every mint is exactly 1 NEAR (Season 01 fixed price). */
-const MINT_PRICE = "1";
+/** Every Season 01 mint has the same fixed base price. */
+const MINT_PRICE = SEASON_01_PRICE_NEAR;
 const QUOTE_MAX_AGE_MS = 60_000;
 
 export function MintClient() {
@@ -175,7 +176,7 @@ export function MintClient() {
             {/* price (fixed) */}
             <div className="mt-6 flex items-center justify-between gap-3 rounded-2xl border-[3px] border-ink bg-cream px-4 py-3">
               <span className="font-display text-xl">Price per mutant</span>
-              <span className="font-display text-2xl">1 NEAR</span>
+              <span className="font-display text-2xl">{MINT_PRICE} NEAR</span>
             </div>
 
             {/* the essentials */}
@@ -196,6 +197,7 @@ export function MintClient() {
                 </li>
               </ul>
               {q.state === "ok" && <p className="mt-2 text-xs text-ink/70">Includes a refundable reserve. Prices live from RHEA · {Math.round(q.ageMs / 1000)}s ago.</p>}
+              <p className="mt-1 text-xs text-ink/70">Most meme tokens take their own 1.5–3% fee when bought on the DEX (the token&apos;s fee, not ours), so your bag lands a little under 85%.</p>
               {q.state === "loading" && <p className="mt-2 text-xs text-ink/70 dots">Checking live prices</p>}
             </div>
 

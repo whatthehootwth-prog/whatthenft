@@ -31,7 +31,7 @@ export const S8Next: React.FC = () => {
           <Ink size={110} color={C.cream}>MUTANTS</Ink>
         </div>
         <div style={{ position: "absolute", left: 0, right: 0, top: 720, display: "flex", justifyContent: "center", opacity: at(t, [78.0, 78.4], [0, 1]) }}>
-          <Tag size={26} bg={C.cream} color={C.ink}>Fixed 1 NEAR · open until sold out · 12 meme crews</Tag>
+          <Tag size={26} bg={C.cream} color={C.ink}>Fixed 0.3 NEAR · open until sold out · 12 meme crews</Tag>
         </div>
         {/* crew parade */}
         <div style={{ position: "absolute", top: 790, left: 0, display: "flex", gap: 30, transform: `translateX(${1920 - (t - 75.2) * 520}px)` }}>

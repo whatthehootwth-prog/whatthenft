@@ -129,7 +129,7 @@ near contract call-function as-transaction core.whatthenft.near close_season fil
   - `PINATA_JWT`: from Pinata → API Keys. Mark it **sealed**.
 - **Domain:** Railway → web → Settings → Networking → Custom Domain → `nft.whatthehoot.lol`. Then at the DNS provider for `whatthehoot.lol`, add the CNAME record Railway shows (name `nft`, DNS-only / grey cloud).
 
-## 6. Launch Season 01 (MEME GENESIS: 1 NEAR, 30-day lock, 111, open until sold out)
+## 6. Launch Season 01 (MEME GENESIS: 0.3 NEAR, WTH + up to 2 partners, 30-day lock, 111, open until sold out)
 Regenerate so the start time is "now", then create (season **2**) and open:
 ```bash
 pnpm --filter @wtn/keeper deploy-plan

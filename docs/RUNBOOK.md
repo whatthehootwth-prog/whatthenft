@@ -121,7 +121,7 @@ near contract deploy <market>.near use-file contracts/target/near/wtn_market/wtn
 ```
 Then set `NEXT_PUBLIC_MARKET_CONTRACT=<market>.near` — the Marketplace and My Collection pages switch from demo data to live data automatically (both env vars required).
 
-**Season 01 pricing:** fixed 1 NEAR per mint (`targetBase = maxBase = 1 NEAR`), so every owl is WTH + up to 2 partner memes. The season stays open until all 111 are minted (`mintWindowDays = 3650`; the contract requires an end date); the owner can still pause minting.
+**Season 01 pricing:** fixed 0.3 NEAR per mint (`SEASON_01_PRICE_NEAR`, `targetBase = maxBase`), and the tier table gives every owl WTH + up to 2 partner memes. Most meme tokens take their own 1.5–3% fee on DEX transfers; core tolerates it per token (`set_transfer_fees`, synced by the keeper every run). The season stays open until all 111 are minted (`mintWindowDays = 3650`; the contract requires an end date); the owner can still pause minting.
 
 ## NFT images (compose → IPFS → on-chain)
 

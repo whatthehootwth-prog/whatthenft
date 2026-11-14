@@ -1,8 +1,9 @@
 /**
  * One keeper run — what the Railway cron executes every few minutes:
+ *   0. token fees     (sync live transfer fees, release fee-only stuck legs)  — needs CORE_CONTRACT
  *   1. order runner   (finish every in-progress mint, push stuck refunds)   — needs CORE_CONTRACT
  *   2. NFT images     (compose → IPFS → set_token_media)                     — needs CORE_CONTRACT + PINATA_JWT
- *   3. WTH buyback    ($20 trigger → buy → pay $WTH holders)                — needs BUYBACK_CONTRACT
+ *   3. WTH buyback    ($3 trigger → buy → pay $WTH holders)                 — needs BUYBACK_CONTRACT
  * Each part is skipped (with a log line) when its settings are missing. Dry run unless --send.
  *
  *   pnpm --filter @wtn/keeper run-all            # dry run
@@ -13,6 +14,7 @@ import { NearRpc, type Network } from "@wtn/chain";
 import { REPO_ROOT, loadArt } from "./compose";
 import { loadConfig } from "./config";
 import { dryRunCaller, nearCaller, runCycle } from "./cycle";
+import { runFeeSync } from "./fees";
 import { pinataJson, pinataPinner, runMediaCycle } from "./media";
 import { runOrderCycle } from "./orders";
 
@@ -39,6 +41,12 @@ async function step(name: string, fn: () => Promise<void>) {
 }
 
 const core = env.CORE_CONTRACT;
+await step("fees", async () => {
+  if (!core) return log("fees: skipped (no CORE_CONTRACT)");
+  const r = await runFeeSync(rpc, caller, { coreContract: core, send, log: (m) => log(`fees: ${m}`) });
+  log(`fees: ${r.updated.length} updated · ${r.accepted.length} legs released`);
+});
+
 await step("orders", async () => {
   if (!core) return log("orders: skipped (no CORE_CONTRACT)");
   const r = await runOrderCycle(rpc, caller, { coreContract: core, send, log: (m) => log(`orders: ${m}`) });

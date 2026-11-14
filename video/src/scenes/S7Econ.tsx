@@ -71,7 +71,7 @@ export const S7Econ: React.FC = () => {
           </svg>
           {/* source coin */}
           <div style={{ position: "absolute", left: SRC.x - 110, top: SRC.y - 110, transform: `scale(${pop(t, 63.5, { damping: 8 })}) rotate(${Math.sin(t * 3) * 6}deg)` }}>
-            <Coin size={220} color={C.yellow} text="1 NEAR" textSize={0.19} />
+            <Coin size={220} color={C.yellow} text="0.3 NEAR" textSize={0.17} />
           </div>
           <div style={{ position: "absolute", left: SRC.x - 110, top: SRC.y + 130, width: 220, textAlign: "center", fontFamily: MONO, fontWeight: 700, fontSize: 22, color: C.cream, opacity: at(t, [63.7, 64], [0, 1]) }}>EVERY MINT</div>
           {/* split boxes */}

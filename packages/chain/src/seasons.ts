@@ -15,6 +15,9 @@ export interface DraftMeme {
   artSupplied: boolean;
 }
 
+/** Season 01 fixed mint price (base, in NEAR). Chosen 2026-11-15: cheap enough to go viral, big enough for a real bag. */
+export const SEASON_01_PRICE_NEAR = "0.3";
+
 export const SEASON_01_DRAFT = {
   seasonId: 1,
   name: "MEME GENESIS",
@@ -23,14 +26,14 @@ export const SEASON_01_DRAFT = {
   /** Open until sold out: the window just has to be far in the future (contract requires an end). */
   mintWindowDays: 3650,
   lockDays: 30,
-  /** Fixed price: every mint is exactly 1 NEAR. */
-  targetBase: parseNear("1"),
-  maxBase: parseNear("1"),
+  /** Fixed price: every mint is exactly SEASON_01_PRICE_NEAR. */
+  targetBase: parseNear(SEASON_01_PRICE_NEAR),
+  maxBase: parseNear(SEASON_01_PRICE_NEAR),
   minLeg: parseNear("0.005"),
   maxPriceImpactBps: 300,
   tiers: [
-    { minBase: 0n, maxPartners: 1 },
-    { minBase: parseNear("1"), maxPartners: 2 },
+    // 0.3 NEAR already gets WTH + up to 2 partners (smallest leg ≈ 0.02 NEAR, well above minLeg)
+    { minBase: 0n, maxPartners: 2 },
     { minBase: parseNear("5"), maxPartners: 3 },
   ],
   fees: DEFAULT_MINT_FEES,

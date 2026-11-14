@@ -117,7 +117,7 @@ function fakeChain(state: Partial<BuybackState>, balances: Record<string, bigint
   return { s, calls, rpc, caller, fetchImpl };
 }
 
-const cfg = { ...loadConfig({ NETWORK: "testnet", BUYBACK_CONTRACT: "buyback.testnet", WTH_TOKEN: "wth.testnet", MIN_HOLDING_WTH: "1000" }), exclude: ["pool.testnet", "buyback.testnet"] };
+const cfg = { ...loadConfig({ NETWORK: "testnet", BUYBACK_CONTRACT: "buyback.testnet", WTH_TOKEN: "wth.testnet", MIN_HOLDING_WTH: "1000", THRESHOLD_USD: "20" }), exclude: ["pool.testnet", "buyback.testnet"] };
 const at = (usd: number) => [async () => ({ source: "a", usd }), async () => ({ source: "b", usd })];
 
 describe("keeper cycle", () => {

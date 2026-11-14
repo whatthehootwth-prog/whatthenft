@@ -25,7 +25,7 @@ const Part85: React.FC<{ t: number }> = ({ t }) => {
       <Halftone opacity={0.07} />
       <BrowserFrame clip="mint" from={29.0} start={2.6} width={1000} label="MINT PAGE" style={{ left: 860, top: 190, transform: `translateX(${(1 - frameIn) * 1200}px) rotate(${2.5 - frameIn * 0.5}deg)` }} />
       <div style={{ position: "absolute", left: 1480, top: 140, transform: `scale(${pop(t, 29.6)}) rotate(5deg)` }}>
-        <Sticker bg={C.yellow} size={34}>FIXED 1 NEAR</Sticker>
+        <Sticker bg={C.yellow} size={34}>FIXED 0.3 NEAR</Sticker>
       </div>
       <div style={{ position: "absolute", left: 80, top: 210, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
         <div style={{ transform: `scale(${pop(t, 29.3)}) rotate(-4deg)`, transformOrigin: "left center" }}>
@@ -80,7 +80,7 @@ const PartLock: React.FC<{ t: number }> = ({ t }) => {
       <div style={{ position: "absolute", left: 830, top: 255, width: 860, transform: `scale(${panelIn})`, transformOrigin: "left center" }}>
         <div style={{ borderRadius: 30, background: C.paper, border: `8px solid ${C.ink}`, boxShadow: `16px 16px 0 ${C.ink}`, padding: "30px 38px" }}>
           <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 24, color: C.muted, letterSpacing: "0.12em" }}>BAG INSIDE · BOUGHT AT MINT</div>
-          <div style={{ fontFamily: DISPLAY, fontSize: 110, color: C.ink, lineHeight: 1.05 }}>0.85 NEAR</div>
+          <div style={{ fontFamily: DISPLAY, fontSize: 110, color: C.ink, lineHeight: 1.05 }}>0.255 NEAR</div>
           <div style={{ display: "flex", height: 34, border: `5px solid ${C.ink}`, borderRadius: 12, overflow: "hidden", marginTop: 6 }}>
             {mix.map((m) => (
               <div key={m.id} style={{ width: `${m.pct}%`, background: m.color, borderRight: `4px solid ${C.ink}` }} />

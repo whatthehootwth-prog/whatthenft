@@ -68,14 +68,14 @@ If a swap route fails **before** anything is bought, the minter is refunded. Par
 ## 4. Economics (launch settings)
 
 ### Price
-**Fixed 1 NEAR per mint.** Every owl is WTH + up to 2 partner memes. Wallet pays ~1.039 NEAR (1 + 0.009 storage + 0.03 refundable reserve).
+**Fixed 0.3 NEAR per mint.** Every owl is WTH + up to 2 partner memes. Wallet pays ~0.339 NEAR (0.3 + 0.009 storage + 0.03 refundable reserve).
 
 ### Mint split (of the base price)
 | Share | Goes to | On a 0.1 NEAR mint |
 |---|---|---|
-| **85%** | The NFT's meme-token bag (owned by whoever holds the NFT) | **0.85** (at 1 NEAR) |
-| **10%** | Creator (you) — paid only after the NFT is fully funded | **0.10** |
-| **5%** | Buyback treasury — paid only after full funding | **0.05** |
+| **85%** | The NFT's meme-token bag (owned by whoever holds the NFT) | **0.255** (at 0.3 NEAR; most meme tokens then take their own 1.5–3% DEX fee) |
+| **10%** | Creator (you) — paid only after the NFT is fully funded | **0.03** |
+| **5%** | Buyback treasury — paid only after full funding | **0.015** |
 
 Charged **on top** of the base (never taken from the bag): storage fee **0.009 NEAR**, retry reserve **0.03 NEAR** (unused part refunded), advance fee **0.01 NEAR**, network gas (~0.003). A 0.1 mint attaches ~0.15 NEAR and nets ~0.12–0.13.
 
@@ -85,7 +85,7 @@ Charged **on top** of the base (never taken from the bag): storage fee **0.009 N
 ### Bag allocation (which tokens, how much)
 - **WTH core:** 20% of every bag, always.
 - **Remaining 80%** follows the parts, by slot weight: head 20% · face 10% · body 25% · arms 10% · legs 10% · outfit 25%. A slot whose partner has no art falls back to WTH.
-- **Price tiers** limit partner count: < 1 NEAR → WTH + 1 partner · ≥ 1 NEAR → 2 · ≥ 5 NEAR → 3.
+- **Price tiers** limit partner count: < 5 NEAR → WTH + up to 2 partners · ≥ 5 NEAR → 3.
 - 30% chance any slot stays WTH even if a partner has art (`wthSlotBps = 3000`).
 - Every token purchase (leg) must be ≥ **0.005 NEAR**; max price impact 3%. Compositions that can't meet this are re-drawn; final fallback is all-WTH.
 
@@ -105,7 +105,7 @@ Charged **on top** of the base (never taken from the bag): storage fee **0.009 N
 Rolled on-chain, independent of the parts. The homepage showcase card uses boosted display odds (15/20/25/22/18) **for display only**.
 
 ### Season 01 parameters
-111 supply · **open until sold out** (end date set 10 years out; owner can pause) · 30-day lock · **fixed 1 NEAR** · rules, fees and odds **frozen on-chain** when a season opens. Old seasons stay tradable; new memes arrive in new seasons.
+111 supply · **open until sold out** (end date set 10 years out; owner can pause) · 30-day lock · **fixed 0.3 NEAR** · rules, fees and odds **frozen on-chain** when a season opens. Old seasons stay tradable; new memes arrive in new seasons.
 
 ---
 

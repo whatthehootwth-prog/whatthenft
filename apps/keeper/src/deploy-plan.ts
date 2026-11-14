@@ -9,7 +9,7 @@
  *   core-init.json, market-init.json, buyback-init.json   init args
  *   register-a.json, register-b.json                      core storage registration on wNEAR + the 12 tokens (≤10 per call)
  *   season-test.json          hidden test season: 0.2 NEAR, 10-minute lock, max 2
- *   season-01.json            MEME GENESIS: fixed 1 NEAR, 30-day lock, 111, open until sold out
+ *   season-01.json            MEME GENESIS: fixed SEASON_01_PRICE_NEAR (0.3), 30-day lock, 111, open until sold out
  */
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
