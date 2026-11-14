@@ -1,0 +1,14 @@
+{
+  "owner": "whatthenft.near",
+  "keeper": "keeper.whatthenft.near",
+  "wrap_near": "wrap.near",
+  "rhea_dcl": "dclv2.ref-labs.near",
+  "wth": "wth-0b2227.launchpad.justhoot.near",
+  "pool_id": "wrap.near|wth-0b2227.launchpad.justhoot.near|10000",
+  "limits": {
+    "max_slippage_bps": 300,
+    "max_spend_per_buy": "5000000000000000000000000",
+    "min_buy_interval_ns": "3600000000000",
+    "reserve": "50000000000000000000000"
+  }
+}

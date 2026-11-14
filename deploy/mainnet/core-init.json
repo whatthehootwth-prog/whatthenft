@@ -1,0 +1,8 @@
+{
+  "owner": "whatthenft.near",
+  "creator_account": "whatthenft.near",
+  "treasury_account": "buyback.whatthenft.near",
+  "wrap_near": "wrap.near",
+  "rhea_v2": "v2.ref-finance.near",
+  "rhea_dcl": "dclv2.ref-labs.near"
+}

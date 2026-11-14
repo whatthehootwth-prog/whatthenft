@@ -11,7 +11,7 @@ No server to manage. Contracts run on NEAR; Railway only hosts the site and the 
 
 ## 1. Create the project
 
-1. Push this repo to a **private** GitHub repo (you push — I never push).
+1. Push this repo to GitHub (public is fine: no secrets are tracked; you push, I never push).
 2. Railway → **New Project → Deploy from GitHub repo** → pick the repo. This creates the first service; rename it `web`.
 3. In the project, **+ New → GitHub Repo** → same repo again → rename it `keeper`.
 4. For each service: **Settings → Config-as-code → Config file path**:
@@ -29,14 +29,14 @@ Rules:
 - `NEXT_PUBLIC_*` values are baked into the site at **build** time → after changing them, **redeploy** `web`.
 - Mark `KEEPER_PRIVATE_KEY` and `PINATA_JWT` as **sealed** secrets. Never commit them, never paste them in chat.
 - Use a **function-call access key** for the keeper (limited to the core + buyback contracts), not a full-access key.
-- While testing Contract A, point the variables at the `t1…` accounts; for launch, switch them to the real accounts.
+- Real accounts: core `core.whatthenft.near`, market `market.whatthenft.near`, buyback `buyback.whatthenft.near`, keeper `keeper.whatthenft.near`.
 
 Until `NEXT_PUBLIC_CORE_CONTRACT` / `NEXT_PUBLIC_MARKET_CONTRACT` are set, the site shows its labelled demo data.
 
 ## 3. Domain
 
 web → **Settings → Networking → Custom Domain** → enter your domain → add the CNAME record Railway shows at your DNS provider (Cloudflare DNS works; set the record to **DNS only / grey cloud** at first so Railway can issue the certificate).
-Keep the Contract A test on Railway's generated `*.up.railway.app` URL; attach the real domain only for Contract B.
+Domain: `nft.whatthehoot.lol` (CNAME `nft` → the target Railway shows).
 
 ## 4. Check it's working
 

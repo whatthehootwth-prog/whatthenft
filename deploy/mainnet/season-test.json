@@ -1,0 +1,281 @@
+{
+  "config": {
+    "name": "TEST · not for sale",
+    "mint_start_ns": "1794680761665000000",
+    "mint_end_ns": "1794939961665000000",
+    "max_supply": 2,
+    "target_base": "200000000000000000000000",
+    "min_base_floor": "200000000000000000000000",
+    "max_base": "200000000000000000000000",
+    "min_leg": "5000000000000000000000",
+    "tiers": [
+      {
+        "min_base": "0",
+        "max_partners": 1
+      },
+      {
+        "min_base": "1000000000000000000000000",
+        "max_partners": 2
+      },
+      {
+        "min_base": "5000000000000000000000000",
+        "max_partners": 3
+      }
+    ],
+    "lock_ns": "600000000000",
+    "fees": {
+      "basket_bps": 8500,
+      "creator_bps": 1000,
+      "treasury_bps": 500
+    },
+    "royalty": {
+      "royalty_bps": 300,
+      "creator_share_bps": 5000
+    },
+    "allocation": {
+      "core_wth_bps": 2000,
+      "slot_weights_bps": [
+        2000,
+        1000,
+        2500,
+        1000,
+        1000,
+        2500
+      ]
+    },
+    "rarity_bps": [
+      6000,
+      2500,
+      1000,
+      400,
+      100
+    ],
+    "wth_slot_bps": 3000,
+    "memes": [
+      {
+        "meme_id": "wth",
+        "token": "wth-0b2227.launchpad.justhoot.near",
+        "weight": 0,
+        "slot_variants": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "nearkat",
+        "token": "nearkat-630f25.nearlytrade.near",
+        "weight": 10,
+        "slot_variants": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "nearkat-630f25.nearlytrade.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "hoodl",
+        "token": "hoodl-95275b.launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "hoodl-95275b.launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "hooters",
+        "token": "hooters-f5dd7a.launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "hooters-f5dd7a.launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "three",
+        "token": "three-de86d6.launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "three-de86d6.launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "moonshot",
+        "token": "moonshot.v2-launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "moonshot.v2-launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "raen",
+        "token": "raen-e1328c.launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "raen-e1328c.launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "mallace",
+        "token": "mallace.v2-launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "mallace.v2-launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "idp",
+        "token": "ikp.v2-launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "ikp.v2-launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "robinhoot",
+        "token": "robinhoot-2.v2-launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "robinhoot-2.v2-launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "cybernetic",
+        "token": "imeme-2.v2-launchpad.justhoot.near",
+        "weight": 10,
+        "slot_variants": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          0
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "imeme-2.v2-launchpad.justhoot.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      },
+      {
+        "meme_id": "batman",
+        "token": "batman-4.nearlytrade.near",
+        "weight": 10,
+        "slot_variants": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "route": {
+          "kind": "RheaDcl",
+          "pool_id": "batman-4.nearlytrade.near|wrap.near|10000"
+        },
+        "max_slippage_bps": 200
+      }
+    ],
+    "reserve": {
+      "storage_per_mint": "9000000000000000000000",
+      "retry_reserve": "30000000000000000000000",
+      "advance_fee": "10000000000000000000000"
+    },
+    "manifest_hash": "b4b56f4ead207beb19b966c91bde4305ff06ff4e1887927239a986f351a253c1",
+    "media_base_uri": "ipfs://",
+    "reload_enabled": true
+  }
+}

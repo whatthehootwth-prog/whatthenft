@@ -1,0 +1,442 @@
+{
+  "schema": "wtn-season-manifest/1",
+  "collection": "WHAT THE NFT?!",
+  "season": {
+    "id": 1,
+    "name": "MEME GENESIS",
+    "maxSupply": 111,
+    "priceNear": "1",
+    "lockDays": 30,
+    "openUntilSoldOut": true
+  },
+  "rules": {
+    "fees": {
+      "basketBps": 8500,
+      "creatorBps": 1000,
+      "treasuryBps": 500
+    },
+    "royalty": {
+      "royaltyBps": 300,
+      "creatorShareOfRoyaltyBps": 5000
+    },
+    "allocation": {
+      "coreWthBps": 2000,
+      "slotWeightsBps": {
+        "head": 2000,
+        "face": 1000,
+        "body": 2500,
+        "arms": 1000,
+        "legs": 1000,
+        "accessory": 2500
+      }
+    },
+    "rarityBps": [
+      6000,
+      2500,
+      1000,
+      400,
+      100
+    ],
+    "rarityIsCosmetic": true,
+    "slotOrder": [
+      "head",
+      "face",
+      "body",
+      "arms",
+      "legs",
+      "accessory"
+    ]
+  },
+  "memes": [
+    {
+      "memeId": "wth",
+      "symbol": "WTH",
+      "token": "wth-0b2227.launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "wrap.near|wth-0b2227.launchpad.justhoot.near|10000"
+      },
+      "slotVariants": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "art": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "file": "slots/body/01-classic-wth.png",
+          "sha256": "9fe861a55332f842c97571ee0a68822de9e48c6c976d7af689bda1862e0b6edd"
+        }
+      ]
+    },
+    {
+      "memeId": "nearkat",
+      "symbol": "NEARKAT",
+      "token": "nearkat-630f25.nearlytrade.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "nearkat-630f25.nearlytrade.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "art": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "file": "slots/body/01-meerkat-fur.png",
+          "sha256": "c78d0d0d95d602dde858a37dda94fb0a7f41e0cdded0b77f5a7aed0b4deffdd7"
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "file": "slots/accessory/01-near-emblem.png",
+          "sha256": "027a8ce5f097671581b21f01dbcca9c695adfb793eee415fce806ace656a2240"
+        }
+      ]
+    },
+    {
+      "memeId": "hoodl",
+      "symbol": "HOODL",
+      "token": "hoodl-95275b.launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "hoodl-95275b.launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        1,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "art": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "file": "slots/body/01-charcoal-fur.png",
+          "sha256": "1432e7593d935d2b9dd4863850b01b607a612290d9d74152183914e93324bdac"
+        },
+        {
+          "slot": "head",
+          "variant": 0,
+          "file": "slots/head/01-ear-tips.png",
+          "sha256": "f7d69789076c79d65c4fda9785a54c50065e138f1cb957819caa8dffce86f787"
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "file": "slots/arms/01-wings-holding-token.png",
+          "sha256": "d93ed651add72ebf29b8f382cb27588c7ebfcdb594cc2635ec811aee08cb708d"
+        }
+      ]
+    },
+    {
+      "memeId": "hooters",
+      "symbol": "HOOTERS",
+      "token": "hooters-f5dd7a.launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "hooters-f5dd7a.launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "art": [
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "file": "slots/accessory/01-bikini-top.png",
+          "sha256": "289102d766caaf670ed4cecd459fd36cd6542854d35d8d14136939e58c5fa7da"
+        },
+        {
+          "slot": "legs",
+          "variant": 0,
+          "file": "slots/legs/01-bikini-bottom.png",
+          "sha256": "0afd74249e070a04b45d5c0f0c68cf98b0b7a21a982ca1e3eab67c57599a556a"
+        }
+      ]
+    },
+    {
+      "memeId": "three",
+      "symbol": "THREE",
+      "token": "three-de86d6.launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "three-de86d6.launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "art": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "file": "slots/body/01-mint-fur-wave.png",
+          "sha256": "dd476ecd7450fbb3c9fc717ad38c11dbc014730689771da6ccf4246320302cf2"
+        },
+        {
+          "slot": "face",
+          "variant": 0,
+          "file": "slots/face/01-pixel-3-tattoo.png",
+          "sha256": "e1fb953b28510b4560f9508cf4a14020548447acecca06e3bcf5cb3ad2ddf4ab"
+        }
+      ]
+    },
+    {
+      "memeId": "moonshot",
+      "symbol": "MOONSHOT",
+      "token": "moonshot.v2-launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "moonshot.v2-launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "art": [
+        {
+          "slot": "head",
+          "variant": 0,
+          "file": "slots/head/01-cowboy-hat.png",
+          "sha256": "afff305183414027cd349a3793af3354c786cc3f78ef6622d30780870c7bb7d5"
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "file": "slots/accessory/01-bandana.png",
+          "sha256": "b209a9f1aff827febe1b3a8a42bb71f54dedf9df0978770f7e1070b975c447b5"
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "file": "slots/arms/01-wing-and-revolver.png",
+          "sha256": "96518def4b243201e29c085fd7e858fa0def236a55ac6d7fefa647ea6e67339a"
+        }
+      ]
+    },
+    {
+      "memeId": "raen",
+      "symbol": "RAEN",
+      "token": "raen-e1328c.launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "raen-e1328c.launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "art": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "file": "slots/body/01-raen-orange.png",
+          "sha256": "1ed894b456361c754feb1812d6a06595c21c2cc3241bf2fde70609b297db4e43"
+        }
+      ]
+    },
+    {
+      "memeId": "mallace",
+      "symbol": "MALLACE",
+      "token": "mallace.v2-launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "mallace.v2-launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "art": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "file": "slots/body/01-gradient-fur.png",
+          "sha256": "f4449f54a8dd1a68396a5d5f83c37cea8368b08209a07652f5382fa43638419f"
+        }
+      ]
+    },
+    {
+      "memeId": "idp",
+      "symbol": "IKP",
+      "token": "ikp.v2-launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "ikp.v2-launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "art": [
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "file": "slots/accessory/01-cardboard-apron.png",
+          "sha256": "3205f738e34cf64f576b0ee120508d45b72384601db93f1bc08f7014edf19b02"
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "file": "slots/arms/01-flag-and-wing.png",
+          "sha256": "5c00989b2b1e069d94534f400041b229f6f4a1ed10d59166aa269cbf123bba2a"
+        }
+      ]
+    },
+    {
+      "memeId": "robinhoot",
+      "symbol": "ROBINHOOT",
+      "token": "robinhoot-2.v2-launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "robinhoot-2.v2-launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "art": [
+        {
+          "slot": "head",
+          "variant": 0,
+          "file": "slots/head/01-archer-hat.png",
+          "sha256": "c9ce75d14abba3f8e2d72ff0cd84473991489730fb62dcaeaeaae4b619e49835"
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "file": "slots/accessory/01-mantle.png",
+          "sha256": "4f830d1190b79dc0314844fead4ef1064d561a83d4226b864bf6e7d816f2168d"
+        },
+        {
+          "slot": "arms",
+          "variant": 0,
+          "file": "slots/arms/01-quiver.png",
+          "sha256": "b7636dae89636e3b55f68a1a28486be07e567e7c57d4559b74ca4c6267ef298c"
+        }
+      ]
+    },
+    {
+      "memeId": "cybernetic",
+      "symbol": "IMEME",
+      "token": "imeme-2.v2-launchpad.justhoot.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "imeme-2.v2-launchpad.justhoot.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "art": [
+        {
+          "slot": "body",
+          "variant": 0,
+          "file": "slots/body/01-tan-fur.png",
+          "sha256": "c0ef358b9e9ca41d6a2616df96a0d5c3dad1f7b6e09a0f7c78ad823189a25255"
+        },
+        {
+          "slot": "head",
+          "variant": 0,
+          "file": "slots/head/01-temple-armour.png",
+          "sha256": "511d4e76b53884450704f4a3d3d11b1ad7b8b87730ad24c17cb2fa97c80abde7"
+        },
+        {
+          "slot": "face",
+          "variant": 0,
+          "file": "slots/face/01-cyber-eye.png",
+          "sha256": "7cbe94eb689f42fce2b1626072fdf6df21aa8becd2d6d1f5675b00178f842f4c"
+        },
+        {
+          "slot": "legs",
+          "variant": 0,
+          "file": "slots/legs/01-robotic-foot.png",
+          "sha256": "36b0eaec9b73ee007b158e46e4a7b75c5306e582271db98b43dca9465b8fb91f"
+        }
+      ]
+    },
+    {
+      "memeId": "batman",
+      "symbol": "BATMAN",
+      "token": "batman-4.nearlytrade.near",
+      "route": {
+        "kind": "rhea-dcl",
+        "poolId": "batman-4.nearlytrade.near|wrap.near|10000"
+      },
+      "slotVariants": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "art": [
+        {
+          "slot": "head",
+          "variant": 0,
+          "file": "slots/head/01-cowl.png",
+          "sha256": "3631453380e8ad66941de89c387f9e1149d2b99000e8cd4430676aa6ad7e21ad"
+        },
+        {
+          "slot": "accessory",
+          "variant": 0,
+          "file": "slots/accessory/01-cape.png",
+          "sha256": "584dada5f90f6098b5a298fbfe39ccd90d4ec7907b8117cc9ca4a2e11ce605f3"
+        },
+        {
+          "slot": "legs",
+          "variant": 0,
+          "file": "slots/legs/01-utility-belt.png",
+          "sha256": "96699993a0977dd46ca8f9b3cdb7ff0e3c9f27e0fa9225e98c93e92c52dc0ff6"
+        }
+      ]
+    }
+  ]
+}
