@@ -7,7 +7,12 @@ export const dynamic = "force-dynamic";
 const rpc = new NearRpc({ network: "mainnet", urls: (process.env.QUOTE_RPC_URLS ?? "").split(",").filter(Boolean) });
 const verifyCache = new Map<string, { at: number; v: AssetVerification }>();
 const quoteCache = new Map<string, { at: number; body: unknown }>();
+/** Last fully executable answer per amount, served while a refresh fails (public RPCs rate-limit). */
+const lastGood = new Map<string, { at: number; body: unknown }>();
 const VERIFY_TTL = 10 * 60_000;
+/** Failed verifications (often just an RPC hiccup) are retried soon instead of disabling a meme for 10 min. */
+const VERIFY_FAIL_TTL = 15_000;
+const STALE_OK = 50_000;
 const QUOTE_TTL = 15_000;
 const QUOTE_MAX_AGE = 60_000;
 
@@ -15,7 +20,7 @@ const s = (v: bigint | null | undefined) => (v === null || v === undefined ? nul
 
 async function verified(memeId: string) {
   const c = verifyCache.get(memeId);
-  if (c && Date.now() - c.at < VERIFY_TTL) return c.v;
+  if (c && Date.now() - c.at < (c.v.metadataOk && c.v.pool?.ok ? VERIFY_TTL : VERIFY_FAIL_TTL)) return c.v;
   const a = findAsset(MAINNET, memeId)!;
   const v = await verifyAsset(rpc, MAINNET, a);
   verifyCache.set(memeId, { at: Date.now(), v });
@@ -44,8 +49,8 @@ export async function GET(req: Request) {
   const quotes: ProbeQuote[] = [];
   const perMeme: unknown[] = [];
 
-  await Promise.all(
-    d.memes.map(async (m) => {
+  // small batches: 12 pools × several RPC reads at once trips public rate limits
+  const runMeme = async (m: (typeof d.memes)[number]) => {
       const asset = findAsset(MAINNET, m.memeId);
       if (!asset) {
         perMeme.push({ memeId: m.memeId, error: "not in verified registry" });
@@ -77,8 +82,8 @@ export async function GET(req: Request) {
         maxShareBps: maxShare,
         quotes: qs.map((q) => ({ amountIn: s(q.amountIn), amountOut: s(q.amountOut), priceImpactBps: q.priceImpactBps, quotedAt: q.quotedAt, provider: q.provider, error: q.error ?? null })),
       });
-    }),
-  );
+  };
+  for (let i = 0; i < d.memes.length; i += 4) await Promise.all(d.memes.slice(i, i + 4).map(runMeme));
 
   memes.sort((a, b) => d.memes.findIndex((m) => m.memeId === a.memeId) - d.memes.findIndex((m) => m.memeId === b.memeId));
   const minimum = getExecutableMintMinimum({
@@ -123,6 +128,11 @@ export async function GET(req: Request) {
     check,
     memes: perMeme.sort((a, b) => d.memes.findIndex((m) => m.memeId === (a as { memeId: string }).memeId) - d.memes.findIndex((m) => m.memeId === (b as { memeId: string }).memeId)),
   };
+  if (check.ok) lastGood.set(key, { at: Date.now(), body });
+  else {
+    const good = lastGood.get(key);
+    if (good && Date.now() - good.at < STALE_OK) return NextResponse.json(good.body, { headers: { "cache-control": "no-store" } });
+  }
   quoteCache.set(key, { at: Date.now(), body });
   return NextResponse.json(body, { headers: { "cache-control": "no-store" } });
 }

@@ -13,7 +13,8 @@ export function toBase64(s: string): string {
 }
 
 export const DEFAULT_RPCS: Record<Network, string[]> = {
-  mainnet: ["https://free.rpc.fastnear.com", "https://near.lava.build", "https://rpc.mainnet.near.org"],
+  // near.lava.build was discontinued (2026); these three answered view calls on 2026-11-15.
+  mainnet: ["https://rpc.mainnet.fastnear.com", "https://free.rpc.fastnear.com", "https://rpc.mainnet.near.org"],
   testnet: ["https://test.rpc.fastnear.com", "https://neart.lava.build", "https://rpc.testnet.near.org"],
 };
 
@@ -28,6 +29,8 @@ export interface RpcOptions {
   urls?: string[];
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
+  /** Extra passes over all endpoints after a short pause (public RPCs rate-limit bursts). Default 2. */
+  retries?: number;
 }
 
 export class NearRpc {
@@ -44,6 +47,9 @@ export class NearRpc {
 
   async call<T>(method: string, params: unknown): Promise<T> {
     const attempts: { url: string; error: string }[] = [];
+    const passes = 1 + (this.opts.retries ?? 2);
+    for (let pass = 0; pass < passes; pass++) {
+      if (pass > 0) await new Promise((r) => setTimeout(r, 400 * pass + Math.random() * 300));
     for (const url of this.urls) {
       try {
         const res = await this.f(url, {
@@ -68,6 +74,7 @@ export class NearRpc {
         if (e instanceof RpcError) throw e;
         attempts.push({ url, error: e instanceof Error ? e.message : String(e) });
       }
+    }
     }
     throw new RpcError(`All ${this.urls.length} RPC endpoints failed for ${method}`, attempts);
   }
