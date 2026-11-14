@@ -75,7 +75,7 @@ export function MintClient() {
   if (!CORE_CONTRACT) blockers.push(`Minting isn't open: the contracts aren't deployed on ${NETWORK} yet.`);
   else if (live.state === "error") blockers.push(`Can't read the contract right now (${live.message}).`);
   else if (live.state === "none") blockers.push("No season exists yet.");
-  else if (live.state === "ok" && live.phase !== "live") blockers.push(`Season ${live.season.id} is ${{ draft: "not open yet", upcoming: "not open yet", ended: "over", closed: "closed", "sold-out": "sold out", live: "" }[live.phase]}.`);
+  else if (live.state === "ok" && live.phase !== "live") blockers.push(`${live.season.config.name} is ${{ draft: "not open yet", upcoming: "not open yet", ended: "over", closed: "closed", "sold-out": "sold out", live: "" }[live.phase]}.`);
   if (live.state === "ok" && live.paused) blockers.push("Minting is paused right now. Existing cards and redemptions are unaffected.");
   if (parsed === null) blockers.push("Pick an amount.");
   if (q.state === "error") blockers.push(`Live prices are unavailable (${q.message}).`);

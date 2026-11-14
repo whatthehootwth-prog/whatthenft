@@ -12,8 +12,8 @@ export const Root: React.FC = () => (
       fps={FPS}
       width={W}
       height={H}
-      // Set the official link once it exists, e.g. --props='{"url":"whatthenft.xyz"}'. Until then the end card shows no link.
-      defaultProps={{ url: null } satisfies TrailerProps}
+      // End-card link (override with --props='{"url":"…"}').
+      defaultProps={{ url: "nft.whatthehoot.lol" } satisfies TrailerProps}
     />
   </>
 );

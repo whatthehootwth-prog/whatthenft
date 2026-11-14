@@ -1,8 +1,8 @@
 {
   "config": {
     "name": "MEME GENESIS",
-    "mint_start_ns": "1794684921683000000",
-    "mint_end_ns": "2110044921683000000",
+    "mint_start_ns": "1794688976358000000",
+    "mint_end_ns": "2110048976358000000",
     "max_supply": 111,
     "target_base": "300000000000000000000000",
     "min_base_floor": "300000000000000000000000",
