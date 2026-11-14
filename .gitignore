@@ -20,3 +20,12 @@ neardev/
 
 # local editor/agent config
 .claude/
+
+# trailer workspace (generated media + deps; reproducible via scripts)
+video/node_modules/
+video/out/
+video/public/audio/
+video/public/footage/
+video/public/art/
+video/.cache/
+video/src/art-registry.json

@@ -1,0 +1,39 @@
+{
+  "name": "wtn-trailer",
+  "private": true,
+  "type": "module",
+  "description": "WHAT THE NFT?! official trailer (Remotion). Standalone: not part of the pnpm workspace.",
+  "scripts": {
+    "fetch-audio": "node scripts/fetch-audio.mjs",
+    "voices": "node scripts/tts.mjs --compare",
+    "tts": "node scripts/tts.mjs",
+    "vo": "node scripts/process-vo.mjs",
+    "record": "node scripts/record.mjs",
+    "prep": "node scripts/prep-art.mjs",
+    "studio": "remotion studio src/index.ts",
+    "stills": "node scripts/stills.mjs",
+    "render:raw": "remotion render src/index.ts Trailer out/trailer-raw.mp4 --codec=h264 --crf=17 --audio-codec=aac --audio-bitrate=320k",
+    "master": "node scripts/master.mjs out/trailer-raw.mp4 out/what-the-nft-trailer.mp4",
+    "vo-track": "node scripts/vo-track.mjs",
+    "srt": "node scripts/srt.mjs",
+    "render": "npm run render:raw && npm run master && npm run vo-track && npm run srt",
+    "teaser": "node -e \"require('fs').copyFileSync('out/what-the-nft-trailer.mp4','public/footage/trailer-master.mp4')\" && remotion render src/index.ts Teaser out/teaser-raw.mp4 --codec=h264 --crf=18 --audio-codec=aac --audio-bitrate=320k && node scripts/master.mjs out/teaser-raw.mp4 out/what-the-nft-teaser-9x16.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.543",
+    "@remotion/google-fonts": "4.0.543",
+    "@remotion/media-utils": "4.0.543",
+    "ffmpeg-static": "^5.2.0",
+    "kokoro-js": "1.2.1",
+    "playwright": "1.65.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.543",
+    "@remotion/bundler": "4.0.543",
+    "@remotion/renderer": "4.0.543"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}

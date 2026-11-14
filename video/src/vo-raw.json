@@ -1,0 +1,233 @@
+[
+  {
+    "id": "s1a",
+    "text": "What if... an N F T...",
+    "speed": 0.92,
+    "voice": "am_fenrir",
+    "seconds": 2.2
+  },
+  {
+    "id": "s1b",
+    "text": "could buy MEMES?!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.7
+  },
+  {
+    "id": "s2a",
+    "text": "Meet, What the N F T!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 2.025
+  },
+  {
+    "id": "s2b",
+    "text": "One owl.",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.3
+  },
+  {
+    "id": "s2c",
+    "text": "Too many memes.",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.5
+  },
+  {
+    "id": "s2d",
+    "text": "Absolutely zero chill.",
+    "speed": 1.02,
+    "voice": "am_fenrir",
+    "seconds": 2.025
+  },
+  {
+    "id": "s3a",
+    "text": "Every mutant is stitched together from different meme communities.",
+    "speed": 1.08,
+    "voice": "am_fenrir",
+    "seconds": 3.775
+  },
+  {
+    "id": "s3b",
+    "text": "And those parts don't just look ridiculous.",
+    "speed": 1.08,
+    "voice": "am_fenrir",
+    "seconds": 2.675
+  },
+  {
+    "id": "s3c",
+    "text": "They decide which real meme tokens get purchased!",
+    "speed": 1.06,
+    "voice": "am_fenrir",
+    "seconds": 3.25
+  },
+  {
+    "id": "s4a",
+    "text": "Eighty-five percent of the base mint price goes into real meme token purchases.",
+    "speed": 1.1,
+    "voice": "am_fenrir",
+    "seconds": 5.275
+  },
+  {
+    "id": "s4b",
+    "text": "The tokens stay locked for thirty days.",
+    "speed": 1.04,
+    "voice": "am_fenrir",
+    "seconds": 2.7
+  },
+  {
+    "id": "s4c",
+    "text": "But the N F T?",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.725
+  },
+  {
+    "id": "s4d",
+    "text": "You can still trade it!",
+    "speed": 1.02,
+    "voice": "am_fenrir",
+    "seconds": 1.75
+  },
+  {
+    "id": "s5a",
+    "text": "Common!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.175
+  },
+  {
+    "id": "s5b",
+    "text": "Rare!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.075
+  },
+  {
+    "id": "s5c",
+    "text": "Epic!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.075
+  },
+  {
+    "id": "s5d",
+    "text": "Legendary!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.4
+  },
+  {
+    "id": "s5e",
+    "text": "And...",
+    "speed": 0.9,
+    "voice": "am_fenrir",
+    "seconds": 1.3
+  },
+  {
+    "id": "s5f",
+    "text": "MYTHIC!",
+    "speed": 0.95,
+    "voice": "am_fenrir",
+    "seconds": 1.2
+  },
+  {
+    "id": "s6a",
+    "text": "Collect your freak.",
+    "speed": 1.02,
+    "voice": "am_fenrir",
+    "seconds": 1.5
+  },
+  {
+    "id": "s6b",
+    "text": "Show it off.",
+    "speed": 1.02,
+    "voice": "am_fenrir",
+    "seconds": 1.225
+  },
+  {
+    "id": "s6c",
+    "text": "Trade the entire bag!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.75
+  },
+  {
+    "id": "s7a",
+    "text": "And the madness supports W T H!",
+    "speed": 1.02,
+    "voice": "am_fenrir",
+    "seconds": 2.825
+  },
+  {
+    "id": "s7b",
+    "text": "Ten percent of mint revenue goes to the creator.",
+    "speed": 1.08,
+    "voice": "am_fenrir",
+    "seconds": 3.15
+  },
+  {
+    "id": "s7c",
+    "text": "Five percent funds the W T H treasury.",
+    "speed": 1.06,
+    "voice": "am_fenrir",
+    "seconds": 3.35
+  },
+  {
+    "id": "s7d",
+    "text": "Marketplace royalties contribute too.",
+    "speed": 1.06,
+    "voice": "am_fenrir",
+    "seconds": 2.725
+  },
+  {
+    "id": "s8a",
+    "text": "Season One. Meme Genesis.",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 2.425
+  },
+  {
+    "id": "s8b",
+    "text": "One hundred and eleven mutants.",
+    "speed": 1.04,
+    "voice": "am_fenrir",
+    "seconds": 2.375
+  },
+  {
+    "id": "s8c",
+    "text": "Next?",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.075
+  },
+  {
+    "id": "s8d",
+    "text": "More seasons. More meme crews.",
+    "speed": 1.06,
+    "voice": "am_fenrir",
+    "seconds": 2.275
+  },
+  {
+    "id": "s8e",
+    "text": "And cross-chain chaos!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 1.925
+  },
+  {
+    "id": "s9a",
+    "text": "What the N F T!",
+    "speed": 0.98,
+    "voice": "am_fenrir",
+    "seconds": 1.775
+  },
+  {
+    "id": "s9b",
+    "text": "Not another boring J PEG!",
+    "speed": 1,
+    "voice": "am_fenrir",
+    "seconds": 2.525
+  }
+]
