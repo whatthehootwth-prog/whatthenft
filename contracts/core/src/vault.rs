@@ -228,6 +228,8 @@ impl Contract {
         let quote = env::promise_result_checked(1, 512).ok().and_then(|v| crate::order::parse_quote(&v));
         let cfg = self.seasons.get(&o.season_id).unwrap().config.clone();
         let meme = cfg.memes.iter().find(|m| m.token == l.token).unwrap().clone();
+        // The DEX only receives `acquired` minus the token's transfer fee, so size min_out on that.
+        let quote = quote.map(|q| min_received(&l.token, q));
         let (before, min_out) = match (before, quote) {
             (Some(b), Some(q)) if q * (BPS - meme.max_slippage_bps as u128) / BPS > 0 => (b.0, q * (BPS - meme.max_slippage_bps as u128) / BPS),
             _ => {
@@ -305,6 +307,35 @@ impl Contract {
         };
         self.save_order(o);
         ok
+    }
+
+    /// Operator tool for a leg frozen only because the token took its transfer fee: if what
+    /// arrived covers the DEX-guaranteed min_out minus the token's fee tolerance, mark the leg
+    /// done and let the order continue. Moves no funds; a larger shortfall stays frozen.
+    pub fn accept_fee_shortfall(&mut self, order_id: U64, leg: u8) -> bool {
+        self.assert_operator();
+        let id = order_id.0;
+        let idx = leg as usize;
+        let mut o = self.order(id);
+        let l = o.legs.get(idx).cloned().expect("leg");
+        require!(o.status == OrderStatus::PartialExecutionRecovery && l.spent && l.status == LegStatus::Failed, "Leg is not in anomaly state");
+        require!(crate::transfer_fee_bps(&l.token) > 0, "No transfer fee set for this token (set_transfer_fees first)");
+        require!(l.min_out.0 > 0 && l.acquired.0 > 0 && l.acquired.0 >= crate::min_received(&l.token, l.min_out.0), "Shortfall is larger than the token's transfer fee");
+        o.legs[idx].status = LegStatus::Done;
+        o.legs[idx].last_error = None;
+        self.busy.remove(&l.token);
+        emit("fee_shortfall_accepted", json!({ "order_id": order_id, "leg": idx, "token": l.token, "acquired": l.acquired, "min_out": l.min_out }));
+        let all_done = o.legs.iter().all(|x| x.status == LegStatus::Done);
+        let pending_others = o.legs.iter().any(|x| x.status == LegStatus::Pending || (x.status == LegStatus::Failed && !x.spent));
+        if all_done || pending_others {
+            o.status = OrderStatus::SwapsPending;
+            o.note = None;
+        }
+        self.save_order(o);
+        if all_done {
+            self.internal_finalize(id);
+        }
+        true
     }
 
     /// Operator tool for an execution anomaly: attribute the vault's UNCLAIMED surplus of

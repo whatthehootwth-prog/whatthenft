@@ -370,6 +370,49 @@ impl Contract {
     pub fn is_route_paused(&self, token: AccountId) -> bool {
         self.route_paused.contains(&token)
     }
+
+    // ───────────────── token transfer fees ─────────────────
+    // Some meme tokens (e.g. Justhoot launchpad tokens) take a fee on every transfer, so the vault
+    // receives less than the DEX paid out. The tolerance per token lives under its own raw storage
+    // key (no change to the contract's state layout). A shortfall beyond it still freezes the order.
+
+    /// Operator: set the transfer-fee tolerance (bps, max 10%) for one or more tokens.
+    pub fn set_transfer_fees(&mut self, fees: Vec<TokenFee>) {
+        self.assert_operator();
+        require!(!fees.is_empty() && fees.len() <= 20, "1..20 entries");
+        for f in fees {
+            require!(f.bps <= MAX_TRANSFER_FEE_BPS, "transfer fee tolerance above 10%");
+            env::storage_write(&transfer_fee_key(&f.token), &f.bps.to_le_bytes());
+            emit("transfer_fee_set", json!({ "token": f.token, "bps": f.bps }));
+        }
+    }
+
+    pub fn get_transfer_fee_bps(&self, token: AccountId) -> u16 {
+        transfer_fee_bps(&token)
+    }
+}
+
+pub const MAX_TRANSFER_FEE_BPS: u16 = 1_000;
+
+#[near(serializers = [json])]
+#[derive(Clone, Debug)]
+pub struct TokenFee {
+    pub token: AccountId,
+    pub bps: u16,
+}
+
+fn transfer_fee_key(token: &AccountId) -> Vec<u8> {
+    [b"tfee:".as_slice(), token.as_bytes()].concat()
+}
+
+/// Transfer-fee tolerance for `token` in bps (0 when unset).
+pub fn transfer_fee_bps(token: &AccountId) -> u16 {
+    env::storage_read(&transfer_fee_key(token)).and_then(|v| v.try_into().ok()).map(u16::from_le_bytes).unwrap_or(0)
+}
+
+/// What the vault must at least receive when the DEX guaranteed `min_out` of a fee-charging token.
+pub fn min_received(token: &AccountId, min_out: u128) -> u128 {
+    min_out * (types::BPS - transfer_fee_bps(token) as u128) / types::BPS
 }
 
 pub fn validate_season(c: &SeasonConfig, wrap_near: &AccountId) {

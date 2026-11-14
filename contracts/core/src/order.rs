@@ -565,7 +565,8 @@ impl Contract {
                 self.leg_attempt_failed(id, idx, "swap rejected by pool (slippage/liquidity); wNEAR refunded".into());
                 false
             }
-            (Some(u), Some(a)) if u == l.amount_in.0 && a >= before.0.saturating_add(l.min_out.0) => {
+            // DEX guaranteed min_out; a fee-charging token may deliver up to its transfer fee less.
+            (Some(u), Some(a)) if u == l.amount_in.0 && a >= before.0.saturating_add(min_received(&l.token, l.min_out.0)) => {
                 let acquired = a - before.0;
                 o.legs[idx].acquired = U128(acquired);
                 o.legs[idx].status = LegStatus::Done;

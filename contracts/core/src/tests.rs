@@ -459,6 +459,71 @@ fn anomaly_freezes_order_and_keeps_mutex_until_reconcile() {
     assert_eq!(o.legs[0].status, LegStatus::Done);
 }
 
+/// Leg 0 of a fresh order: DEX quote 1000 (min_out = 980 at 2% slippage), vault receives `got`.
+fn fee_leg(h: &mut H, got: u128) -> (u64, bool) {
+    h.env(ALICE, h.required(100 * MILLI), 300, vec![]);
+    let id = h.c.mint(1, U128(100 * MILLI)).0;
+    h.reveal_and_wrap(id);
+    h.start_leg(id, KEEPER);
+    h.env(VAULT, 0, 300, vec![H::json_result(U128(0)), H::json_result(U128(1000))]);
+    let _ = h.c.on_leg_prepared(U64(id), 0);
+    let amt = h.c.get_order(U64(id)).unwrap().legs[0].amount_in;
+    h.env(VAULT, 0, 300, vec![H::json_result(U128(got))]);
+    let ok = h.c.on_leg_verified(U64(id), 0, U128(0), Some(amt), Ok(U128(got)));
+    (id, ok)
+}
+
+#[test]
+fn transfer_fee_token_settles_when_tolerance_is_set() {
+    let mut h = H::new();
+    h.setup_season(10);
+    let min_out = h.c.get_season(1).unwrap().config.memes[0].max_slippage_bps as u128;
+    assert_eq!(min_out, 200, "test assumes 2% slippage");
+    h.env(OWNER, 0, 300, vec![]);
+    h.c.set_transfer_fees(vec![TokenFee { token: acc(WTH), bps: 300 }]);
+    assert_eq!(h.c.get_transfer_fee_bps(acc(WTH)), 300);
+    // DEX paid >= 980, the token kept 3%: 951 arrives (980 × 0.97 = 950.6) → accepted
+    let (id, ok) = fee_leg(&mut h, 951);
+    assert!(ok);
+    let o = h.c.get_order(U64(id)).unwrap();
+    assert_eq!(o.legs[0].status, LegStatus::Done);
+    assert_eq!(o.legs[0].acquired.0, 951);
+    assert!(!h.c.busy.contains(&acc(WTH)));
+}
+
+#[test]
+fn fee_shortfall_freezes_then_operator_accepts_within_fee_only() {
+    let mut h = H::new();
+    h.setup_season(10);
+    // no tolerance yet: 960 < 980 → anomaly, order frozen
+    let (id, ok) = fee_leg(&mut h, 960);
+    assert!(!ok);
+    assert_eq!(h.c.get_order(U64(id)).unwrap().status, OrderStatus::PartialExecutionRecovery);
+    // accepting needs a fee set
+    h.env(OWNER, 0, 300, vec![]);
+    assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| h.c.accept_fee_shortfall(U64(id), 0))).is_err());
+    // a 1% tolerance doesn't cover a 2% shortfall
+    h.env(OWNER, 0, 300, vec![]);
+    h.c.set_transfer_fees(vec![TokenFee { token: acc(WTH), bps: 100 }]);
+    h.env(OWNER, 0, 300, vec![]);
+    assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| h.c.accept_fee_shortfall(U64(id), 0))).is_err());
+    // non-operators can't set fees or accept
+    h.env(ALICE, 0, 300, vec![]);
+    assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| h.c.set_transfer_fees(vec![TokenFee { token: acc(WTH), bps: 300 }]))).is_err());
+    // 3% covers it → leg done, mutex released, the order continues with its other legs
+    h.env(OWNER, 0, 300, vec![]);
+    h.c.set_transfer_fees(vec![TokenFee { token: acc(WTH), bps: 300 }]);
+    h.env(OWNER, 0, 300, vec![]);
+    assert!(h.c.accept_fee_shortfall(U64(id), 0));
+    let o = h.c.get_order(U64(id)).unwrap();
+    assert_eq!(o.legs[0].status, LegStatus::Done);
+    assert!(!h.c.busy.contains(&acc(WTH)));
+    assert!(o.status == OrderStatus::SwapsPending || o.status == OrderStatus::FullyBackedLocked);
+    // tolerance is capped at 10%
+    h.env(OWNER, 0, 300, vec![]);
+    assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| h.c.set_transfer_fees(vec![TokenFee { token: acc(WTH), bps: 1001 }]))).is_err());
+}
+
 // ───────────────────────── ownership, redemption, marketplace ─────────────────────────
 
 #[test]
