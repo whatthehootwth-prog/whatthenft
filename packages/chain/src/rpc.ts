@@ -37,7 +37,9 @@ export class NearRpc {
   constructor(readonly opts: RpcOptions) {
     this.urls = opts.urls?.length ? opts.urls : DEFAULT_RPCS[opts.network];
     this.timeoutMs = opts.timeoutMs ?? 12_000;
-    this.f = opts.fetchImpl ?? fetch;
+    // Wrap instead of storing `fetch` directly: browsers throw "Illegal invocation" when the native
+    // fetch is called as a method of another object (`this.f(...)`). Node doesn't care.
+    this.f = opts.fetchImpl ?? ((input, init) => fetch(input, init));
   }
 
   async call<T>(method: string, params: unknown): Promise<T> {

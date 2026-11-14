@@ -35,7 +35,7 @@ export const S6Market: React.FC = () => {
         ))}
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 34, display: "flex", justifyContent: "center", opacity: at(t, [51.6, 52.0], [0, 1]) }}>
-        <Tag size={22} bg={C.ink} color={C.cream}>Marketplace contract built &amp; tested · goes live at launch · listings shown are demo data</Tag>
+        <Tag size={22} bg={C.ink} color={C.cream}>Marketplace contract live on NEAR mainnet · listings shown here are demo data</Tag>
       </div>
     </AbsoluteFill>
   );

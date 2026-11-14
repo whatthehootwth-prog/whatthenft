@@ -109,13 +109,13 @@ export const S7Econ: React.FC = () => {
           ) : null}
           {t > 72.6 ? (
             <div style={{ position: "absolute", left: 1390, top: 520, transform: `scale(${1 + (1 - pop(t, 72.6, { damping: 12, stiffness: 300 })) * 1.6}) rotate(-8deg)`, opacity: Math.min(1, (t - 72.6) * 8) }}>
-              <Sticker bg={C.pink} color={C.cream} size={30}>DESIGNED · ACTIVATES AT LAUNCH</Sticker>
+              <Sticker bg={C.pink} color={C.cream} size={30}>LIVE ON MAINNET · KICKS IN AT $3</Sticker>
             </div>
           ) : null}
         </>
       ) : null}
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 26, display: "flex", justifyContent: "center", opacity: at(t, [64, 64.5], [0, 1]) }}>
-        <Tag size={20} bg="#000" color={C.fog}>Split coded in the contracts (built &amp; tested, not yet deployed) · not an investment · no returns promised</Tag>
+        <Tag size={20} bg="#000" color={C.fog}>Split coded in the contracts on NEAR mainnet · not an investment · no returns promised</Tag>
       </div>
     </AbsoluteFill>
   );
