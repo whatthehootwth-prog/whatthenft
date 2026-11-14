@@ -51,7 +51,7 @@ impl Contract {
     /// Revokes every marketplace approval first so a stale listing can never sell an
     /// emptied card. Receiver must be storage-registered on each FT (UI checks this).
     #[payable]
-    pub fn redeem(&mut self, token_id: String, receiver_id: Option<AccountId>, tokens: Option<Vec<AccountId>>) -> Promise {
+    pub fn redeem(&mut self, token_id: String, receiver_id: Option<AccountId>, tokens: Option<Vec<AccountId>>) {
         assert_one_yocto();
         let owner = self.tokens.owner_by_id.get(&token_id).expect("Unknown token");
         require!(env::predecessor_account_id() == owner, "Only the current NFT owner can redeem");
@@ -73,21 +73,18 @@ impl Contract {
         self.token_info.insert(token_id.clone(), info);
         self.revoke_all_approvals(&token_id);
         let me = env::current_account_id();
-        let mut all: Option<Promise> = None;
+        // One detached transfer→callback chain per token: the NEAR runtime forbids returning a joint
+        // promise, and each `on_redeem_transfer` settles its own token (success or rollback).
         for (t, amt) in selected.iter() {
-            let p = ext_ft::ext(t.clone())
+            ext_ft::ext(t.clone())
                 .with_attached_deposit(NearToken::from_yoctonear(1))
                 .with_static_gas(G_FT_TRANSFER)
                 .ft_transfer(receiver.clone(), U128(*amt), Some(format!("WHAT THE NFT?! redeem #{}", token_id)))
-                .then(Self::ext(me.clone()).with_static_gas(G_REDEEM_CB).on_redeem_transfer(token_id.clone(), t.clone(), U128(*amt), receiver.clone()));
-            all = Some(match all {
-                None => p,
-                Some(prev) => prev.and(p),
-            });
+                .then(Self::ext(me.clone()).with_static_gas(G_REDEEM_CB).on_redeem_transfer(token_id.clone(), t.clone(), U128(*amt), receiver.clone()))
+                .detach();
         }
         let sel: Vec<_> = selected.iter().map(|(t, a)| json!({ "token": t, "amount": U128(*a) })).collect();
         emit("redeem_started", json!({ "token_id": token_id, "owner": owner, "receiver": receiver, "holdings": sel }));
-        all.unwrap()
     }
 
     #[private]

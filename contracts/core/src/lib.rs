@@ -221,23 +221,20 @@ impl Contract {
     }
 
     /// Register this vault's storage on FT contracts (paid from contract balance).
-    pub fn register_tokens(&mut self, tokens: Vec<AccountId>, deposit_each: U128) -> Promise {
+    /// Each registration is its own detached chain (the NEAR runtime forbids returning a joint promise);
+    /// `on_registered` records each result.
+    pub fn register_tokens(&mut self, tokens: Vec<AccountId>, deposit_each: U128) {
         self.assert_operator();
         require!(!tokens.is_empty() && tokens.len() <= 10, "1..10 tokens");
         require!(deposit_each.0 <= NearToken::from_millinear(100).as_yoctonear(), "deposit too large");
-        let mut p: Option<Promise> = None;
         for t in tokens {
-            let call = ext::ext_ft::ext(t.clone())
+            ext::ext_ft::ext(t.clone())
                 .with_attached_deposit(NearToken::from_yoctonear(deposit_each.0))
                 .with_static_gas(ext::G_STORAGE_DEPOSIT)
                 .storage_deposit(Some(env::current_account_id()), Some(true))
-                .then(Self::ext(env::current_account_id()).with_static_gas(ext::G_CALLBACK_SMALL).on_registered(t));
-            p = Some(match p {
-                None => call,
-                Some(prev) => prev.and(call),
-            });
+                .then(Self::ext(env::current_account_id()).with_static_gas(ext::G_CALLBACK_SMALL).on_registered(t))
+                .detach();
         }
-        p.unwrap()
     }
 
     #[private]

@@ -311,7 +311,7 @@ impl Buyback {
     }
 
     /// Send one batch of payouts from the open round. Attach ~300 Tgas.
-    pub fn pay(&mut self, batch: Vec<Payout>) -> Promise {
+    pub fn pay(&mut self, batch: Vec<Payout>) {
         self.assert_keeper();
         require!(!self.paused, "paused");
         require!(!batch.is_empty() && batch.len() <= MAX_BATCH, "batch must have 1..=20 payouts");
@@ -324,16 +324,14 @@ impl Buyback {
         let id = round.id;
         self.round = Some(round);
         let memo = format!("WTH buyback round {}", id);
-        let mut it = batch.into_iter();
-        let first = it.next().unwrap();
-        let mut p = ext_ft::ext(self.wth.clone()).with_attached_deposit(one_yocto()).with_static_gas(G_FT_TRANSFER).ft_transfer(first.account_id.clone(), first.amount, Some(memo.clone()));
-        let mut accounts = vec![json!({ "account_id": first.account_id, "amount": first.amount })];
-        for x in it {
+        // One detached transfer per holder (the NEAR runtime forbids returning a joint promise).
+        // Failed transfers roll over: close_round reconciles from the real WTH balance.
+        let mut accounts = vec![];
+        for x in batch {
             accounts.push(json!({ "account_id": x.account_id, "amount": x.amount }));
-            p = p.and(ext_ft::ext(self.wth.clone()).with_attached_deposit(one_yocto()).with_static_gas(G_FT_TRANSFER).ft_transfer(x.account_id, x.amount, Some(memo.clone())));
+            ext_ft::ext(self.wth.clone()).with_attached_deposit(one_yocto()).with_static_gas(G_FT_TRANSFER).ft_transfer(x.account_id, x.amount, Some(memo.clone())).detach();
         }
         emit("round_paid", json!({ "round": id, "sum": U128(sum), "payouts": accounts }));
-        p
     }
 
     /// Close the round once its pay() transactions are final. Reconciles from the real WTH balance:
@@ -405,7 +403,7 @@ impl Buyback {
     /// Owner-only escape hatch, ONLY while paused (e.g. after an unverifiable swap or a migration).
     /// Every use is logged on-chain.
     #[payable]
-    pub fn emergency_withdraw(&mut self, receiver_id: AccountId, near_amount: U128, wth_amount: U128) -> Option<Promise> {
+    pub fn emergency_withdraw(&mut self, receiver_id: AccountId, near_amount: U128, wth_amount: U128) {
         self.assert_owner();
         require!(env::attached_deposit() == one_yocto(), "attach exactly 1 yoctoNEAR");
         require!(self.paused && !self.busy, "pause first");
@@ -413,18 +411,13 @@ impl Buyback {
         require!(wth_amount.0 <= self.wth_unallocated, "WTH above unallocated");
         self.wth_unallocated -= wth_amount.0;
         emit("emergency_withdraw", json!({ "receiver": receiver_id, "near": near_amount, "wth": wth_amount }));
-        let mut p: Option<Promise> = None;
+        // Separate detached promises (the NEAR runtime forbids returning a joint promise).
         if near_amount.0 > 0 {
-            p = Some(Promise::new(receiver_id.clone()).transfer(NearToken::from_yoctonear(near_amount.0)));
+            Promise::new(receiver_id.clone()).transfer(NearToken::from_yoctonear(near_amount.0)).detach();
         }
         if wth_amount.0 > 0 {
-            let t = ext_ft::ext(self.wth.clone()).with_attached_deposit(one_yocto()).with_static_gas(G_FT_TRANSFER).ft_transfer(receiver_id, wth_amount, Some("emergency".into()));
-            p = Some(match p {
-                Some(x) => x.and(t),
-                None => t,
-            });
+            ext_ft::ext(self.wth.clone()).with_attached_deposit(one_yocto()).with_static_gas(G_FT_TRANSFER).ft_transfer(receiver_id, wth_amount, Some("emergency".into())).detach();
         }
-        p
     }
 
     // ───────────── internal ─────────────
