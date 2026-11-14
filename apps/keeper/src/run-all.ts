@@ -31,6 +31,16 @@ let failed = false;
 
 log(`keeper run · ${network} · ${send ? "LIVE" : "dry run"}`);
 
+// Each 300 Tgas advance_order needs ~0.3 NEAR reserved up front (refunded after); warn before it bites.
+if (env.KEEPER_ACCOUNT) {
+  try {
+    const bal = Number(BigInt((await rpc.viewAccount(env.KEEPER_ACCOUNT)).amount) / 10n ** 20n) / 1e4;
+    log(`keeper balance ${bal.toFixed(4)} NEAR${bal < 0.4 ? " ⚠ LOW: top up (each order step reserves ~0.3 NEAR of gas)" : ""}`);
+  } catch (e) {
+    log(`keeper balance unreadable: ${e instanceof Error ? e.message : String(e)}`);
+  }
+}
+
 async function step(name: string, fn: () => Promise<void>) {
   try {
     await fn();
@@ -71,4 +81,6 @@ await step("buyback", async () => {
   await runCycle(loadConfig(env), rpc, caller, { send, roundsDir: join(REPO_ROOT, "apps/keeper/rounds"), publish: env.PINATA_JWT ? pinataJson(env.PINATA_JWT) : undefined, log: (m) => log(`buyback: ${m}`) });
 });
 
-if (failed) process.exitCode = 1;
+log(failed ? "run finished with errors" : "run finished");
+// Exit explicitly: Railway skips the next cron run while a previous one is still alive.
+process.exit(failed ? 1 : 0);
