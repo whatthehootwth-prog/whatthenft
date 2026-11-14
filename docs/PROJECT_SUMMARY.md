@@ -3,7 +3,7 @@
 > **One owl. Too many memes.**
 > A NEAR NFT collection where every NFT is a mutant WTH owl stitched together from meme-community body parts — and each NFT holds a **real bag of those meme tokens**, bought on RHEA at mint.
 
-_Status as of 11 Nov 2026 · latest commit `baad986` · branch `main` · nothing deployed yet._
+> **Historical snapshot (11 Nov 2026, before deployment).** This file records the pre-launch plan and is kept for history. Since then the contracts have been deployed to NEAR mainnet, the full lifecycle was verified and Season 01 opened at 0.3 NEAR. For the current state, read the [README](../README.md), [SYSTEM.md](SYSTEM.md) and [MAINNET_VERIFICATION.md](MAINNET_VERIFICATION.md).
 
 ---
 

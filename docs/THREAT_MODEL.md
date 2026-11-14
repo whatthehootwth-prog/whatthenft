@@ -1,4 +1,4 @@
-# Threat model — wtn-core (Milestone A)
+# Threat model — wtn-core
 
 Assets at risk: basket tokens held by the vault (customer property), escrowed NEAR/wNEAR for in-flight orders, creator/treasury fees, NFT ownership, randomness fairness.
 
@@ -22,4 +22,11 @@ Assets at risk: basket tokens held by the vault (customer property), escrowed NE
 | Metadata substitution | `set_token_media` once only, content-addressed URIs only, sha256 required. | media pin test |
 | Overflow | `overflow-checks = true` in release; checked add/sub on accounting. | split tests with u128 extremes |
 
-Open items before mainnet: independent audit; testnet integration with real RHEA pools (gas budgets, DCL `Swap` msg acceptance, output-transfer failure path into RHEA internal balance); keeper bot; multisig owner; storage-cost top-up monitoring for the contract account.
+Added after mainnet testing (2026-11-15):
+
+| Threat | Mitigation in code | Test |
+|---|---|---|
+| Fee-on-transfer meme tokens deliver less than the DEX paid | Per-token transfer-fee tolerance (`set_transfer_fees`, operator, max 10%); swaps accepted at ≥ min_out − fee; larger shortfalls still freeze the order; `accept_fee_shortfall` only releases fee-sized shortfalls; keeper syncs live fees | `transfer_fee_token_settles_when_tolerance_is_set`, `fee_shortfall_freezes_then_operator_accepts_within_fee_only` |
+| Runtime rejects returned joint promises (multi-token redeem / payouts fail) | Every transfer is its own detached promise with its own callback | verified on mainnet (13-token registration, 2-token redemption) |
+
+**Status:** mainnet integration with real RHEA pools done (DCL `Swap` accepted, gas budgets confirmed, fee-on-transfer handled); keeper live; AI-assisted security review by Claude and ChatGPT completed. **Open:** independent professional audit; multisig owner (`propose_owner` / `accept_owner` available); storage top-up monitoring for contract accounts.

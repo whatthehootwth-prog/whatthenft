@@ -1,5 +1,7 @@
 # Technical feasibility & risk assessment — 2026-11-07
 
+> **Pre-launch research (7 Nov 2026), kept for reference.** Several points here have since been resolved on mainnet: routes, token selection, minimum price and randomness. For the live configuration, see [MAINNET_VERIFICATION.md](MAINNET_VERIFICATION.md) and [ECONOMICS.md](ECONOMICS.md).
+
 All numbers below come from live, read-only mainnet reads made on 2026-11-07 ≈08:00–08:55 UTC (`pnpm feasibility`, raw data in `docs/feasibility-snapshot.json`). Nothing was signed and no funds moved. Re-run before any season opens: liquidity changes.
 
 ## 1. Where WTH actually trades

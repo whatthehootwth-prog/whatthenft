@@ -5,7 +5,7 @@
 
 This is the single, complete reference for how the project works: product, architecture, smart contracts, economy, keeper bot, website, art, deployment, live mainnet evidence, security and operations.
 
-_Status as of **2026-11-15**: contracts **live on NEAR mainnet**, full end-to-end test passed on mainnet, **Season 01 created** (opens when the owner calls `open_season`). Website: **https://nft.whatthehoot.lol**._
+_Status as of **2026-11-15**: contracts **live on NEAR mainnet**, full end-to-end test passed on mainnet, **Season 01 open** (opened 2026-11-14 20:50 UTC; first mints completed, one finished automatically by the keeper). Website: **https://nft.whatthehoot.lol**. Transaction-level evidence: [MAINNET_VERIFICATION.md](MAINNET_VERIFICATION.md)._
 
 > **Hackathon project.** Built by Claude (AI). The smart contracts had an **AI security audit by Claude and ChatGPT**; that is **not** a professional audit. Meme tokens are volatile and can go to zero. Not financial advice.
 
@@ -661,6 +661,8 @@ Hidden test season (on-chain season 1, 0.2 NEAR, 10-minute lock), run on **2026-
 | Close | Test season closed (1 minted) |
 | NFT image | Keeper composed NFT #1 (WTH owl + HOOTERS bikini), pinned `ipfs://bafybeia5fbaqetgy7unyt24tmkroyaprz3sledd4xfmr3lcdupn6dmlg4q`, set on-chain |
 | Website | Production build against mainnet: mint page and marketplace read live data |
+
+**Season 01** (on-chain season 2, opened 2026-11-14 20:50:59 UTC): order #2 bought 46,522 WTH + 4,598 THREE; order #3 bought 25,583 WTH + 53,122 ROBINHOOT + 9,954 HOODL and was completed by the keeper, which also pinned its artwork. Full list with links: [MAINNET_VERIFICATION.md](MAINNET_VERIFICATION.md).
 
 Reference transactions (NEAR explorer):
 - **Swap with transfer fee:** `F1AeUsbRn32AQ9hYaK27UYKVrtXtGp4RsZHxyGnwZNRM`
