@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SEASON_01_PRICE_NEAR } from "@wtn/chain";
+import { MintNowLink } from "@/components/HackathonNotice";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { ArtMutant } from "@/components/ArtMutant";
 import { Decor } from "@/components/Decor";
@@ -184,9 +185,9 @@ export function HeroClone() {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
           <span className="intro-pop" style={{ "--d": "950ms" } as CSSProperties}>
-            <Link href="/mint" className="btn-mad !min-h-[66px] !px-10 !text-[1.6rem]">
+            <MintNowLink className="btn-mad !min-h-[66px] !px-10 !text-[1.6rem]">
               MINT NOW
-            </Link>
+            </MintNowLink>
           </span>
           <span className="intro-pop" style={{ "--d": "1050ms" } as CSSProperties}>
             <Link href="/wth" className="btn-pop !min-h-[66px] !px-9 !text-[1.2rem]">

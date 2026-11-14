@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { MintNowLink } from "@/components/HackathonNotice";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { ArtMutant } from "@/components/ArtMutant";
@@ -387,9 +388,9 @@ export function WthRoadmap() {
             <h2 className="mad-title mt-4 text-[clamp(2.2rem,5vw,3.6rem)] [--ts:#fff]">THAT&apos;S IT. REALLY.</h2>
             <p className="lead mx-auto mt-3 max-w-md">Now go hatch something ridiculous.</p>
             <div className="mt-7 flex flex-wrap justify-center gap-4">
-              <Link href="/mint" className="btn-mad">
+              <MintNowLink className="btn-mad">
                 MINT NOW
-              </Link>
+              </MintNowLink>
               <Link href="/marketplace" className="btn-pop">
                 BROWSE FREAKS
               </Link>

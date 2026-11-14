@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SEASON_01_PRICE_NEAR } from "@wtn/chain";
 import { parseNear } from "@wtn/domain";
 import { Reveal } from "@/components/mint/Reveal";
+import { useHackathonGate } from "@/components/HackathonNotice";
 import { ArtMutant } from "@/components/ArtMutant";
 import { OrderTracker } from "@/components/OrderTracker";
 import { Alert } from "@/components/ui";
@@ -22,6 +23,7 @@ const QUOTE_MAX_AGE_MS = 60_000;
 
 export function MintClient() {
   const { accountId, connect, call } = useWallet();
+  const notice = useHackathonGate();
   const live = useSeasonLive();
   const season = live.state === "ok" ? live.season : null;
   const [amount] = useState(MINT_PRICE);
@@ -264,7 +266,7 @@ export function MintClient() {
                   CONNECT WALLET
                 </button>
               ) : (
-                <button type="button" className="btn-mad w-full" disabled={!canMint || submitting} aria-disabled={!canMint || submitting} aria-describedby="mint-why" onClick={mint}>
+                <button type="button" className="btn-mad w-full" disabled={!canMint || submitting} aria-disabled={!canMint || submitting} aria-describedby="mint-why" onClick={() => notice.guard(mint)}>
                   {submitting ? "CHECK YOUR WALLET…" : "MINT NOW!"}
                 </button>
               )}
@@ -291,6 +293,7 @@ export function MintClient() {
       </div>
 
       {revealOpen && settled && <Reveal order={settled} season={season} onClose={() => setRevealOpen(false)} />}
+      {notice.modal}
     </div>
   );
 }

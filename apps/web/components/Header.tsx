@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { MintNowLink } from "@/components/HackathonNotice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -66,13 +67,12 @@ export function Header() {
               </>
             )}
           </button>
-          <Link
-            href="/mint"
+          <MintNowLink
             className="relative hidden min-h-11 items-center gap-2 rounded-xl border-[3px] border-ink bg-orange px-5 font-display text-[1.15rem] tracking-wide text-ink shadow-[0_0_0_3px_#ff7a1a] transition hover:-translate-y-0.5 hover:bg-sun hover:shadow-[0_0_0_3px_#ffe14d] sm:inline-flex"
           >
             <span className="size-2 rounded-full bg-ink/60" aria-hidden="true" />
             MINT NOW
-          </Link>
+          </MintNowLink>
           <button type="button" className="inline-flex size-11 items-center justify-center rounded-xl bg-orange lg:hidden" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((o) => !o)}>
             <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
             <svg width="20" height="16" viewBox="0 0 20 16" aria-hidden="true">
@@ -99,9 +99,9 @@ export function Header() {
             ))}
           </ul>
           <div className="mx-auto mt-8 max-w-md">
-            <Link href="/mint" className="btn-mad w-full">
+            <MintNowLink className="btn-mad w-full" onNavigate={() => setOpen(false)}>
               MINT NOW
-            </Link>
+            </MintNowLink>
             <button type="button" onClick={() => (accountId ? disconnect() : connect())} disabled={!ready} className="btn-pop mt-4 w-full">
               {accountId ? "Disconnect" : "Connect wallet"}
             </button>
